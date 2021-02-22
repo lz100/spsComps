@@ -1,4 +1,4 @@
-# spsComps <img src="https://github.com/lz100/spsComps/blob/master/img/sps_spscomps.png?raw=true" align="right" height="139" />
+# spsComps <img src="https://github.com/lz100/spsComps/blob/master/img/spscomps.png?raw=true" align="right" height="139" />
 
 The {[systemPipeShiny](https://github.com/systemPipeR/systemPipeShiny)} (SPS) framework comes with many UI and server 
 components. However, installing the whole framework is heavy and takes some time. If you 
