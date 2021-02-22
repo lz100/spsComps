@@ -1,0 +1,15 @@
+title: spsComps
+
+navbar:
+  components:
+    home:
+      text: SPS Home
+      icon: "fa fa-home"
+      href: https://systempipe.org/sps/
+    articles: ~
+    intro: ~
+
+authors:
+   Le Zhang:
+     href: https://lezhang.me/
+

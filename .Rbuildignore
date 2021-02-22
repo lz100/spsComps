@@ -1,0 +1,10 @@
+^\.Rproj\.user$
+^.github
+^docs
+.*Rproj$
+.*tar.gz
+^img
+^_pkgdown\.yml
+^index\.md
+^.*\.Rproj$
+^inst/depend$
