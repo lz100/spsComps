@@ -5,6 +5,8 @@ components. However, installing the whole framework is heavy and takes some time
 would like to use UI and server components in your own Shiny apps, but do not want to 
 install the whole framework, just install {spsComps}. 
 
+**View the online demo**: https://lezhang.shinyapps.io/spsComps
+
 ## Install
 
 Install release version from CRAN:
