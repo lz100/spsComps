@@ -8,3 +8,4 @@
 ^index\.md
 ^.*\.Rproj$
 ^inst/depend$
+^examples$
