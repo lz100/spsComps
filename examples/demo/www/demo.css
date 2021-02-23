@@ -1,0 +1,52 @@
+
+html {font-size:10px;)}
+
+
+.text-main {
+  font-size: 2rem;
+}
+
+.text-minor {
+  font-size: 1.5rem;
+}
+
+
+.home-logo {
+  display: block;
+  margin: 0 auto;
+  height: 200px;
+  -webkit-box-reflect: below -10px -webkit-gradient(linear, right top, right bottom, from(transparent), color-stop(40%, transparent), to(rgba(255, 255, 255, 0.1)));
+}
+
+/* table in markdown */
+.desc-table table {
+  margin: 0 auto;
+}
+
+.desc-table thead {
+  border-bottom: 2px solid #9e9e9e;
+}
+
+.desc-table th:not(:first-of-type) {
+  border-left: 1px solid #9e9e9e;
+}
+
+.desc-table th {
+  padding: 0 5px;
+}
+
+.desc-table td:not(:first-of-type) {
+  border-left: 1px solid #9e9e9e;
+}
+
+.desc-table td {
+  padding: 0 5px;
+}
+
+.desc-table tbody td {
+  padding: 5px 0;
+}
+
+.desc-table tr:nth-child(even) {
+      background-color: rgb(243 243 243);
+}

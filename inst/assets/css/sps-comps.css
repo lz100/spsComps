@@ -201,7 +201,11 @@ spsComps CSS Styles
   opacity: 0.5;
 }
 
-.powerby-link:hover {
+.powerby-link:not(.nohover):hover {
+  opacity: 1;
+}
+
+.powerby-link.nohover {
   opacity: 1;
 }
 

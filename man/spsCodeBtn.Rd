@@ -10,6 +10,7 @@ spsCodeBtn(
   language = "r",
   label = "",
   title = "Code to Reproduce",
+  show_span = FALSE,
   tool_tip = "Show Code",
   placement = "bottom",
   icon = "code",
@@ -31,6 +32,9 @@ to see options}
 \item{label}{string, label to display on the button}
 
 \item{title}{string, title of the modal or collapse}
+
+\item{show_span}{bool, use the \verb{<span>} tag to show a little label of the
+left of the button? The span text will use text from \code{tool_tip}}
 
 \item{tool_tip}{string, what tooltip to display when hover on the button}
 

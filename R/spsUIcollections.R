@@ -41,7 +41,7 @@ clearableTextInput <- function(
         tags$label(label, `for` = inputId),
         tags$span(
             class = "form-control text-input-clearable",
-            style = "background-color: #f5f5f5;",
+            style = "background-color: #fff;",
             tags$input(
                 id = inputId,
                 type = "text",
@@ -79,7 +79,7 @@ clearableTextInput <- function(
 #'         textInputGroup("id2", "right", right_text = "b"),
 #'         textInputGroup("id3", "both", left_text = "$", right_text = ".00"),
 #'         textInputGroup("id4", "none"),
-#'         textInputGroup("id4", "icon", left_text = icon("home")),
+#'         textInputGroup("id5", "icon", left_text = icon("home")),
 #'     )
 #'
 #'     server <- function(input, output, session) {
@@ -158,29 +158,28 @@ textInputGroup <-function(
 #'
 #' @examples
 #' if(interactive()){
-#'     texts <- c("p1", "p2", "p3", "p4", "p5")
-#'     hrefs <- c("https://unsplash.it/1200/768.jpg?image=251",
-#'                "https://unsplash.it/1200/768.jpg?image=252",
-#'                "#",
-#'                "https://unsplash.it/1200/768.jpg?image=254",
-#'                "https://unsplash.it/1200/768.jpg?image=255")
-#'     images <- c("https://unsplash.it/600.jpg?image=251",
-#'                 "https://unsplash.it/600.jpg?image=252",
-#'                 "https://unsplash.it/600.jpg?image=253",
-#'                 "https://unsplash.it/600.jpg?image=254",
-#'                 "https://unsplash.it/600.jpg?image=255")
-#'     library(shiny)
+#'   texts <- c("p1", "p2", "", "p4", "p5")
+#'   hrefs <- c("https://unsplash.it/1200/768.jpg?image=251",
+#'              "https://unsplash.it/1200/768.jpg?image=252",
+#'              "",
+#'              "https://unsplash.it/1200/768.jpg?image=254",
+#'              "https://unsplash.it/1200/768.jpg?image=255")
+#'   images <- c("https://unsplash.it/600.jpg?image=251",
+#'               "https://unsplash.it/600.jpg?image=252",
+#'               "https://unsplash.it/600.jpg?image=253",
+#'               "https://unsplash.it/600.jpg?image=254",
+#'               "https://unsplash.it/600.jpg?image=255")
+#'   library(shiny)
 #'
-#'     ui <- fluidPage(
-#'         useSps(),
-#'         gallery(texts = texts, hrefs = hrefs, images = images)
-#'     )
+#'   ui <- fluidPage(
+#'     gallery(texts = texts, hrefs = hrefs, images = images)
+#'   )
 #'
-#'     server <- function(input, output, session) {
+#'   server <- function(input, output, session) {
 #'
-#'     }
+#'   }
 #'
-#'     shinyApp(ui, server)
+#'   shinyApp(ui, server)
 #' }
 gallery <- function(texts,
                     hrefs,
@@ -594,10 +593,11 @@ hexLogo <- function(id, title="", hex_img, hex_link = "" ,
              'fill="url(#{id}-hex)" stroke="var(--primary)"',
              'stroke-width="2"/></a>')
     }
-    footer_link <- if(!emptyIsFalse(footer_link)) '' else footer_link
+    footer_link <- if(!emptyIsFalse(footer_link)) '' else glue('href="{footer_link}"')
+    footer_class <- if(emptyIsFalse(footer_link)) 'powerby-link' else 'powerby-link nohover'
     footer_text <- if(!emptyIsFalse(footer)) ''
-    else glue('<text x=10 y=115><a class="powerby-link"',
-              'href="{footer_link}" target="_blank">{footer}</a></text>')
+    else glue('<text x=10 y=115><a class="{footer_class}"',
+              '{footer_link} target="_blank">{footer}</a></text>')
     tagList(
         HTML(glue('
         <div id="{id}" class="hex-container">
@@ -1043,11 +1043,14 @@ spsGoTop <- function(
 #' @description Developers often wants to show their code in a shiny app.
 #' This function creates a button that when clicked, a modal or collapse
 #' hidden element will show up to display your code.
+#'
 #' @param id element ID
 #' @param code code you want to display, in a character string or vector.
 #' @param label string, label to display on the button
 #' @param title string, title of the modal or collapse
 #' @param tool_tip string, what tooltip to display when hover on the button
+#' @param show_span bool, use the `<span>` tag to show a little label of the
+#' left of the button? The span text will use text from `tool_tip`
 #' @param placement string, where to display the tooltip
 #' @param icon string, value to pass into the [shiny::icon()] function, icon
 #' of the button
@@ -1169,6 +1172,7 @@ spsCodeBtn <- function(
     language = "r",
     label = "",
     title="Code to Reproduce",
+    show_span = FALSE,
     tool_tip = "Show Code",
     placement = "bottom",
     icon = "code",
@@ -1181,6 +1185,8 @@ spsCodeBtn <- function(
     shape <- match.arg(shape, c("rect", "circular"))
     size <- match.arg(size, c("large", "medium", "small"))
     display <- match.arg(display, c("modal", "collapse"))
+    stopifnot(is.logical(show_span))
+
     b_radius <- if (shape == "rect"){
         btn_style <- glue(
             .open = '@{', .close = '}@',
@@ -1202,6 +1208,7 @@ spsCodeBtn <- function(
     }
     btn <- div(
         style = "display: inline-block",
+        if (show_span) tags$span(tool_tip, class = "text-bold", style = "padding-right: 5px;") else "",
         actionButton(
             inputId = id,
             label = label,

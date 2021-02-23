@@ -51,28 +51,27 @@ Similar to \code{hrefs}, for the \code{texts}, use \code{""} to  occupy space
 }
 \examples{
 if(interactive()){
-    texts <- c("p1", "p2", "p3", "p4", "p5")
-    hrefs <- c("https://unsplash.it/1200/768.jpg?image=251",
-               "https://unsplash.it/1200/768.jpg?image=252",
-               "#",
-               "https://unsplash.it/1200/768.jpg?image=254",
-               "https://unsplash.it/1200/768.jpg?image=255")
-    images <- c("https://unsplash.it/600.jpg?image=251",
-                "https://unsplash.it/600.jpg?image=252",
-                "https://unsplash.it/600.jpg?image=253",
-                "https://unsplash.it/600.jpg?image=254",
-                "https://unsplash.it/600.jpg?image=255")
-    library(shiny)
+  texts <- c("p1", "p2", "", "p4", "p5")
+  hrefs <- c("https://unsplash.it/1200/768.jpg?image=251",
+             "https://unsplash.it/1200/768.jpg?image=252",
+             "",
+             "https://unsplash.it/1200/768.jpg?image=254",
+             "https://unsplash.it/1200/768.jpg?image=255")
+  images <- c("https://unsplash.it/600.jpg?image=251",
+              "https://unsplash.it/600.jpg?image=252",
+              "https://unsplash.it/600.jpg?image=253",
+              "https://unsplash.it/600.jpg?image=254",
+              "https://unsplash.it/600.jpg?image=255")
+  library(shiny)
 
-    ui <- fluidPage(
-        useSps(),
-        gallery(texts = texts, hrefs = hrefs, images = images)
-    )
+  ui <- fluidPage(
+    gallery(texts = texts, hrefs = hrefs, images = images)
+  )
 
-    server <- function(input, output, session) {
+  server <- function(input, output, session) {
 
-    }
+  }
 
-    shinyApp(ui, server)
+  shinyApp(ui, server)
 }
 }
