@@ -5,8 +5,9 @@ header <- dashboardHeader(
 
 sidebar <- dashboardSidebar(
   sidebarMenu(
+    menuItem("Buttons", tabName = "buttons", icon = icon("square")),
     menuItem("Image Display", tabName = "images", icon = icon("images")),
-    menuItem("Text Control", tabName = "text", icon = icon("font")),
+    menuItem("Input Control", tabName = "text", icon = icon("font")),
     menuItem("Welcome", tabName = "welcome", icon = icon("star"))
   )
 )
@@ -19,7 +20,8 @@ body <- dashboardBody(
   tabItems(
     tabItem(tabName = "welcome", uiWelcome("welcome")),
     tabItem(tabName = "text", uiText("text")),
-    tabItem(tabName = "images", uiImages("images"))
+    tabItem(tabName = "images", uiImages("images")),
+    tabItem(tabName = "buttons", uiButtons("buttons"))
   )
 )
 

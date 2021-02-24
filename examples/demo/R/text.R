@@ -110,6 +110,77 @@ uiText <- function(id) {
               textInputGroup("id5", "icon", left_text = icon("home"))
               '
             )
+        ),
+        box(
+          title = "textButton", solidHeader = TRUE, status = "primary", width = 12,
+          div(
+            class = "text-minor",
+            markdown(
+            '
+            Text input group and an action button attach to the end.
+            ')
+            ),
+          textButton(textId = ns("tbtn_default"), label = "default"),
+          textButton(
+            textId = "tbtn-icon",
+            label = "change icon and color",
+            btn_icon = icon("home"),
+            class = "btn-warning" # pass to the button
+          ),
+          textButton(
+            textId = ns("tbtn_style"),
+            label = "change styles",
+            style = "color: red; border: 2px dashed green;"
+          ),
+          textButton(
+            textId = ns("tbtn_submit"),
+            label = "interact with shiny server",
+            btn_label = "Submit",
+            placeholder = "type and submit",
+            class = "btn-primary"),
+          verbatimTextOutput(ns("tbtn_submit_out")),
+            spsCodeBtn(
+              ns("code_textButton"),
+              show_span = TRUE,
+              '
+              library(shiny)
+
+              ui <- fluidPage(
+                column(
+                  6,
+                  textButton(textId = "tbtn_default", label = "default"),
+                  textButton(
+                    textId = "tbtn-icon",
+                    label = "change icon and color",
+                    btn_icon = icon("home"),
+                    class = "btn-warning" # pass to the button
+                  ),
+                  textButton(
+                    textId = "tbtn_style",
+                    label = "change styles",
+                    style = "color: red; border: 2px dashed green;"
+                  ),
+                  textButton(
+                    textId = "tbtn_submit",
+                    label = "interact with shiny server",
+                    btn_label = "Submit",
+                    placeholder = "type and submit",
+                    class = "btn-primary"),
+                  verbatimTextOutput("tbtn_submit_out")
+                )
+              )
+
+              server <- function(input, output, session) {
+                # watch for the button ID "tbtn_submit" + "_btn"
+                observeEvent(input$tbtn_submit_btn, {
+                  output$tbtn_submit_out <- renderPrint(isolate(input$tbtn_submit))
+                })
+
+              }
+
+              shinyApp(ui, server)
+              '
+            )
         )
       )
     )
@@ -121,6 +192,10 @@ serverText <- function(id) {
     id,
     function(input, output, session) {
       output$text_clear_out <- renderPrint(input$text_clear)
+      output$tbtn_submit_out <- renderPrint("")
+      observeEvent(input$tbtn_submit_btn, {
+        output$tbtn_submit_out <- renderPrint(isolate(input$tbtn_submit))
+      })
     }
   )
 }

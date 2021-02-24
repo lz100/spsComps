@@ -28,7 +28,7 @@ uiImages <- function(id) {
             optional.
             ')
           ),
-          gallery(texts = texts, hrefs = hrefs, images = images),
+          gallery(texts = texts, hrefs = hrefs, images = images, title = "Default gallery"),
           spsCodeBtn(
             ns("code_gallery"),
             show_span = TRUE,
@@ -57,13 +57,54 @@ uiImages <- function(id) {
             shinyApp(ui, server)
             '
           ),
+          spsHr(),
           p(class = "text-minor", "You can change images sizes to control how many to display in a row"),
-          gallery(texts = texts, hrefs = hrefs, images = images, image_frame_size = 2),
+          gallery(texts = texts, hrefs = hrefs, images = images, image_frame_size = 2, title = "Photo size"),
           spsCodeBtn(
             ns("code_gallery_small"),
             show_span = TRUE,
             '
+            # get image and link in the default example
             gallery(texts = texts, hrefs = hrefs, images = images, image_frame_size = 2)
+            '
+          ),
+          spsHr(),
+          div(class = "text-minor",
+            markdown(
+              '
+              Photos can be enlarged on click, default is inline. If
+              you turn on the `enlarge = TRUE` option, clicking will no longer
+              jump to the link, but enlarge the photo. Only the caption below
+              the photo contains the link in this case.
+              '
+            )
+          ),
+          gallery(texts = texts, hrefs = hrefs, images = images, enlarge = TRUE, title = "Inline enlarge"),
+          spsCodeBtn(
+            ns("code_gallery_inline"),
+            show_span = TRUE,
+            '
+            # get image and link in the default example
+            gallery(texts = texts, hrefs = hrefs, images = images, enlarge = TRUE, title = "Inline enlarge")
+            '
+          ),
+          spsHr(),
+          p(class = "text-minor", "Use a modal pop-up to display images, good for very large photos"),
+          gallery(
+            texts = texts, hrefs = hrefs, images = images,
+            enlarge = TRUE, title = "Modal enlarge",
+            enlarge_method = "modal"
+          ),
+          spsCodeBtn(
+            ns("code_gallery_modal"),
+            show_span = TRUE,
+            '
+            # get image and link in the default example
+            gallery(
+            texts = texts, hrefs = hrefs, images = images,
+            enlarge = TRUE, title = "Modal enlarge",
+            enlarge_method = "modal"
+            )
             '
           )
         )
@@ -76,7 +117,7 @@ uiImages <- function(id) {
             class = "text-minor",
             markdown(
             '
-              Create hexagon logo(s). `hexLogo()` generates a single hexagon,
+              Create responsive hexagon logo(s). `hexLogo()` generates a single hexagon,
               and `hexPanel()` generates a panel of hex logos. If there is no
               link attach to the logo or footer, there will be no hover effect.
             ')

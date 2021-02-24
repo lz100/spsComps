@@ -1,5 +1,7 @@
 ####### Some internal shiny utils
 
+#' @importFrom utils packageVersion
+NULL
 
 # can't import shiny internal function, gives warnings, so rewrite here
 reactiveStop <- function(message = "\r              ", class = NULL){
@@ -10,3 +12,6 @@ reactiveStop <- function(message = "\r              ", class = NULL){
     )
     stop(cond)
 }
+
+
+utils::globalVariables(c("."))

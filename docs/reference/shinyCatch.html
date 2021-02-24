@@ -126,7 +126,8 @@ with other code blocks. This function is designed to handle these issues.</p>
   <span class='va'>expr</span>,
   position <span class='op'>=</span> <span class='st'>"bottom-right"</span>,
   blocking_level <span class='op'>=</span> <span class='st'>"none"</span>,
-  shiny <span class='op'>=</span> <span class='cn'>TRUE</span>
+  shiny <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  prefix <span class='op'>=</span> <span class='st'>"SPS"</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -145,80 +146,109 @@ c("top-right", "top-center", "top-left","top-full-width", "bottom-right",
     <tr>
       <th>blocking_level</th>
       <td><p>what level you want to block the execution, one
-of "error", "warning", "message"</p></td>
+of "error", "warning", "message", default is "none", do not block following
+code execution.</p></td>
     </tr>
     <tr>
       <th>shiny</th>
-      <td><p>bool, It is also possible to use without a shiny session. Only
-shows on console log, works very similar as <code><a href='https://rdrr.io/r/base/conditions.html'>tryCatch()</a></code> and can block at
+      <td><p>bool, only show message on console log but not in Shiny app
+when it is <code>FALSE</code>. Useful if you want to keep the exception only to the server
+and hide from your users. You do not need to set it to <code>FALSE</code> when purely work
+outside shiny, it will automatically detect if you are working in a Shiny
+environment or not.</p></td>
+    </tr>
+    <tr>
+      <th>prefix</th>
+      <td><p>character, what prefix to display on console for the log, e.g.
+for error, the default will be displayed as "SPS-ERROR". You can make your own
+prefix, like <code>prefix = "MY"</code>, then, it will be "MY-ERROR". Use <code>""</code> if you do not
+want any prefix, like <code>prefix = ""</code>, then, it will just be "ERROR".
 multiple levels</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>see description</p>
+    <p>see description and details</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Show error, warning, message by a toastr bar on client end and
-also log the text on backend console. It will return original value if not
-blocking at "warning", "message" level, and return <code>NULL</code> at error level.
-If blocks at <code>error</code>, function will be stopped and other code in the same
-reactive context will be blocked. If blocks at <code>warning</code> level, warning and
-error will be blocked; <code>message</code> level blocks all 3 levels. The blocking works
+    
+<ul>
+<li><p>The blocking works
 similar to shiny's <code><a href='https://rdrr.io/pkg/shiny/man/req.html'>shiny::req()</a></code> and <code><a href='https://rdrr.io/pkg/shiny/man/validate.html'>shiny::validate()</a></code>.
 If anything inside fails, it will
-block the rest of the code in your reactive expression domain.</p>
-<p>Messages will be displayed for 3s, 5s for warnings and errors will never
-go away on UI unless users' mouse hover on the bar or manually close it.</p>
+block the rest of the code in your reactive expression domain.</p></li>
+<li><p>It will show error, warning, message by a toastr bar on client end and
+also log the text on server console depending on the <code>blocking_level</code>
+(dual-end logging).</p></li>
+<li><p>If blocks at <code>error</code> level, function will be stopped and other code in the same
+reactive context will be blocked.</p></li>
+<li><p>If blocks at <code>warning</code> level, warning and
+error will be blocked.</p></li>
+<li><p><code>message</code> level blocks all 3 levels.</p></li>
+<li><p>If <code>blocking_level</code> is other than these 3, no exceptions will be block, and
+if there is any error, <code>NULL</code> will return and following code will continue to
+run.</p></li>
+<li><p>To have the message displayed on shiny, <code><a href='spsDepend.html'>spsDepend("toastr")</a></code> must be added
+in UI if you are working on you own app not under SPS framework, see examples.</p></li>
+<li><p>Messages will be displayed for 3s, 5s for warnings and errors will never
+go away on UI unless users' mouse hover on the bar or manually close it.</p></li>
+</ul>
+
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span><span class='op'>{</span>
     <span class='va'>ui</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/shiny/man/fluidPage.html'>fluidPage</a></span><span class='op'>(</span>
-        <span class='fu'>useSps</span><span class='op'>(</span><span class='op'>)</span>,
-        <span class='fu'><a href='https://rdrr.io/pkg/shiny/man/actionButton.html'>actionButton</a></span><span class='op'>(</span><span class='st'>"btn1"</span>,<span class='st'>"error and blocking"</span><span class='op'>)</span>,
-        <span class='fu'><a href='https://rdrr.io/pkg/shiny/man/actionButton.html'>actionButton</a></span><span class='op'>(</span><span class='st'>"btn2"</span>,<span class='st'>"error no blocking"</span><span class='op'>)</span>,
-        <span class='fu'><a href='https://rdrr.io/pkg/shiny/man/actionButton.html'>actionButton</a></span><span class='op'>(</span><span class='st'>"btn3"</span>,<span class='st'>"warning but still returns value"</span><span class='op'>)</span>,
-        <span class='fu'><a href='https://rdrr.io/pkg/shiny/man/actionButton.html'>actionButton</a></span><span class='op'>(</span><span class='st'>"btn4"</span>,<span class='st'>"warning but blocking returns"</span><span class='op'>)</span>,
-        <span class='fu'><a href='https://rdrr.io/pkg/shiny/man/actionButton.html'>actionButton</a></span><span class='op'>(</span><span class='st'>"btn5"</span>,<span class='st'>"message"</span><span class='op'>)</span>,
-
-        <span class='fu'><a href='https://rdrr.io/pkg/shiny/man/textOutput.html'>textOutput</a></span><span class='op'>(</span><span class='st'>"text"</span><span class='op'>)</span>
+        <span class='fu'><a href='spsDepend.html'>spsDepend</a></span><span class='op'>(</span><span class='st'>"toastr"</span><span class='op'>)</span>,
+        <span class='fu'><a href='https://rdrr.io/pkg/htmltools/man/builder.html'>h4</a></span><span class='op'>(</span><span class='st'>"Run this example on your own computer to better understand exception
+           catch and dual-end logging"</span>, class <span class='op'>=</span> <span class='st'>"text-center"</span><span class='op'>)</span>,
+        <span class='fu'><a href='https://rdrr.io/pkg/shiny/man/column.html'>column</a></span><span class='op'>(</span>
+            <span class='fl'>6</span>,
+            <span class='fu'><a href='https://rdrr.io/pkg/shiny/man/actionButton.html'>actionButton</a></span><span class='op'>(</span><span class='st'>"btn1"</span>,<span class='st'>"error and blocking"</span><span class='op'>)</span>,
+            <span class='fu'><a href='https://rdrr.io/pkg/shiny/man/actionButton.html'>actionButton</a></span><span class='op'>(</span><span class='st'>"btn2"</span>,<span class='st'>"error no blocking"</span><span class='op'>)</span>,
+            <span class='fu'><a href='https://rdrr.io/pkg/shiny/man/actionButton.html'>actionButton</a></span><span class='op'>(</span><span class='st'>"btn3"</span>,<span class='st'>"warning but still returns value"</span><span class='op'>)</span>,
+            <span class='fu'><a href='https://rdrr.io/pkg/shiny/man/actionButton.html'>actionButton</a></span><span class='op'>(</span><span class='st'>"btn4"</span>,<span class='st'>"warning but blocking returns"</span><span class='op'>)</span>,
+            <span class='fu'><a href='https://rdrr.io/pkg/shiny/man/actionButton.html'>actionButton</a></span><span class='op'>(</span><span class='st'>"btn5"</span>,<span class='st'>"message"</span><span class='op'>)</span>,
+        <span class='op'>)</span>,
+        <span class='fu'><a href='https://rdrr.io/pkg/shiny/man/column.html'>column</a></span><span class='op'>(</span>
+            <span class='fl'>6</span>,
+            <span class='fu'><a href='https://rdrr.io/pkg/shiny/man/textOutput.html'>verbatimTextOutput</a></span><span class='op'>(</span><span class='st'>"text"</span><span class='op'>)</span>
+        <span class='op'>)</span>
     <span class='op'>)</span>
     <span class='va'>server</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>input</span>, <span class='va'>output</span>, <span class='va'>session</span><span class='op'>)</span> <span class='op'>{</span>
         <span class='va'>fn_warning</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>{</span>
             <span class='kw'><a href='https://rdrr.io/r/base/warning.html'>warning</a></span><span class='op'>(</span><span class='st'>"this is a warning!"</span><span class='op'>)</span>
-            <span class='kw'><a href='https://rdrr.io/r/base/function.html'>return</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>)</span>
+            <span class='kw'><a href='https://rdrr.io/r/base/function.html'>return</a></span><span class='op'>(</span><span class='st'>"warning returns"</span><span class='op'>)</span>
         <span class='op'>}</span>
         <span class='fu'><a href='https://rdrr.io/pkg/shiny/man/observeEvent.html'>observeEvent</a></span><span class='op'>(</span><span class='va'>input</span><span class='op'>$</span><span class='va'>btn1</span>, <span class='op'>{</span>
             <span class='fu'>shinyCatch</span><span class='op'>(</span><span class='kw'><a href='https://rdrr.io/r/base/stop.html'>stop</a></span><span class='op'>(</span><span class='st'>"error with blocking"</span><span class='op'>)</span>, blocking_level <span class='op'>=</span> <span class='st'>"error"</span><span class='op'>)</span>
-            <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='st'>"You shouldn't see me"</span><span class='op'>)</span>
+            <span class='va'>output</span><span class='op'>$</span><span class='va'>text</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/shiny/man/renderPrint.html'>renderPrint</a></span><span class='op'>(</span><span class='st'>"You shouldn't see me"</span><span class='op'>)</span>
         <span class='op'>}</span><span class='op'>)</span>
         <span class='fu'><a href='https://rdrr.io/pkg/shiny/man/observeEvent.html'>observeEvent</a></span><span class='op'>(</span><span class='va'>input</span><span class='op'>$</span><span class='va'>btn2</span>, <span class='op'>{</span>
             <span class='fu'>shinyCatch</span><span class='op'>(</span><span class='kw'><a href='https://rdrr.io/r/base/stop.html'>stop</a></span><span class='op'>(</span><span class='st'>"error without blocking"</span><span class='op'>)</span><span class='op'>)</span>
-            <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='st'>"I am not blocked by error"</span><span class='op'>)</span>
+            <span class='va'>output</span><span class='op'>$</span><span class='va'>text</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/shiny/man/renderPrint.html'>renderPrint</a></span><span class='op'>(</span><span class='st'>"I am not blocked by error"</span><span class='op'>)</span>
         <span class='op'>}</span><span class='op'>)</span>
         <span class='fu'><a href='https://rdrr.io/pkg/shiny/man/observeEvent.html'>observeEvent</a></span><span class='op'>(</span><span class='va'>input</span><span class='op'>$</span><span class='va'>btn3</span>, <span class='op'>{</span>
             <span class='va'>return_value</span> <span class='op'>&lt;-</span> <span class='fu'>shinyCatch</span><span class='op'>(</span><span class='fu'>fn_warning</span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
-            <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>return_value</span><span class='op'>)</span>
+            <span class='va'>output</span><span class='op'>$</span><span class='va'>text</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/shiny/man/renderPrint.html'>renderPrint</a></span><span class='op'>(</span><span class='va'>return_value</span><span class='op'>)</span>
         <span class='op'>}</span><span class='op'>)</span>
         <span class='fu'><a href='https://rdrr.io/pkg/shiny/man/observeEvent.html'>observeEvent</a></span><span class='op'>(</span><span class='va'>input</span><span class='op'>$</span><span class='va'>btn4</span>, <span class='op'>{</span>
             <span class='va'>return_value</span> <span class='op'>&lt;-</span> <span class='fu'>shinyCatch</span><span class='op'>(</span><span class='fu'>fn_warning</span><span class='op'>(</span><span class='op'>)</span>, blocking_level <span class='op'>=</span> <span class='st'>"warning"</span><span class='op'>)</span>
             <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>return_value</span><span class='op'>)</span>
-            <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='st'>"other things"</span><span class='op'>)</span>
+            <span class='va'>output</span><span class='op'>$</span><span class='va'>text</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/shiny/man/renderPrint.html'>renderPrint</a></span><span class='op'>(</span><span class='st'>"other things"</span><span class='op'>)</span>
         <span class='op'>}</span><span class='op'>)</span>
         <span class='fu'><a href='https://rdrr.io/pkg/shiny/man/observeEvent.html'>observeEvent</a></span><span class='op'>(</span><span class='va'>input</span><span class='op'>$</span><span class='va'>btn5</span>, <span class='op'>{</span>
-            <span class='fu'>shinyCatch</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/message.html'>message</a></span><span class='op'>(</span><span class='st'>"message"</span><span class='op'>)</span><span class='op'>)</span>
+            <span class='fu'>shinyCatch</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/message.html'>message</a></span><span class='op'>(</span><span class='st'>"some message"</span><span class='op'>)</span><span class='op'>)</span>
         <span class='op'>}</span><span class='op'>)</span>
     <span class='op'>}</span>
     <span class='fu'><a href='https://rdrr.io/pkg/shiny/man/shinyApp.html'>shinyApp</a></span><span class='op'>(</span><span class='va'>ui</span>, <span class='va'>server</span><span class='op'>)</span>
 <span class='op'>}</span>
-<span class='co'>#outside shiny examples</span>
-<span class='fu'>shinyCatch</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/message.html'>message</a></span><span class='op'>(</span><span class='st'>"this message"</span><span class='op'>)</span>, shiny <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #0000BB;font-weight: bold;'>[SPS-INFO] 2021-02-21 14:39:33 this message
-#&gt; </span><span></div><div class='input'><span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span><span class='op'>{</span><span class='fu'>shinyCatch</span><span class='op'>(</span><span class='kw'><a href='https://rdrr.io/r/base/stop.html'>stop</a></span><span class='op'>(</span><span class='st'>"this error"</span><span class='op'>)</span>, shiny <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>; <span class='st'>"no block"</span><span class='op'>}</span>, silent <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #BB0000;font-weight: bold;'>[SPS-ERROR] 2021-02-21 14:39:33 this error</span><span></div><div class='output co'>#&gt; [1] "no block"</div><div class='input'><span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span><span class='op'>{</span><span class='fu'>shinyCatch</span><span class='op'>(</span><span class='kw'><a href='https://rdrr.io/r/base/stop.html'>stop</a></span><span class='op'>(</span><span class='st'>"this error"</span><span class='op'>)</span>, shiny <span class='op'>=</span> <span class='cn'>FALSE</span>, blocking_level <span class='op'>=</span> <span class='st'>"error"</span><span class='op'>)</span>
-    <span class='st'>"blocked"</span><span class='op'>}</span>, silent <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #BB0000;font-weight: bold;'>[SPS-ERROR] 2021-02-21 14:39:33 this error</span><span></div></span></pre>
+<span class='co'># outside shiny examples</span>
+<span class='fu'>shinyCatch</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/message.html'>message</a></span><span class='op'>(</span><span class='st'>"this message"</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span style='color: #0000BB;font-weight: bold;'>[SPS-INFO] 2021-02-23 23:15:16 this message
+#&gt; </span><span></div><div class='input'><span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span><span class='op'>{</span><span class='fu'>shinyCatch</span><span class='op'>(</span><span class='kw'><a href='https://rdrr.io/r/base/stop.html'>stop</a></span><span class='op'>(</span><span class='st'>"this error"</span><span class='op'>)</span><span class='op'>)</span>; <span class='st'>"no block"</span><span class='op'>}</span>, silent <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; </span><span style='color: #BB0000;font-weight: bold;'>[SPS-ERROR] 2021-02-23 23:15:16 this error</span><span></div><div class='output co'>#&gt; [1] "no block"</div><div class='input'><span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span><span class='op'>{</span><span class='fu'>shinyCatch</span><span class='op'>(</span><span class='kw'><a href='https://rdrr.io/r/base/stop.html'>stop</a></span><span class='op'>(</span><span class='st'>"this error"</span><span class='op'>)</span>, blocking_level <span class='op'>=</span> <span class='st'>"error"</span><span class='op'>)</span>; <span class='st'>"blocked"</span><span class='op'>}</span>, silent <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; </span><span style='color: #BB0000;font-weight: bold;'>[SPS-ERROR] 2021-02-23 23:15:16 this error</span><span></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

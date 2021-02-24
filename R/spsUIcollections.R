@@ -2,133 +2,6 @@
 # can be used outside SPS framework, like other shiny projects
 ## use on top of shiny
 
-#' A clearable text inputInput control
-#' @description An UI component with a "X" button in the end to clear the entire
-#' entered text. It works the same as `Textinput`.
-#'
-#' @param inputId ID
-#' @param label text label above
-#' @param value default value
-#' @param placeholder place holder text when value is empty
-#' @param style additional CSS styles you want to apply
-#' @return a shiny component
-#' @export
-#'
-#' @examples
-#' if(interactive()){
-#'
-#'     ui <- fluidPage(
-#'         clearableTextInput("input1", "This is a input box", style = "width: 50%;"),
-#'         verbatimTextOutput("out1")
-#'     )
-#'
-#'     server <- function(input, output, session) {
-#'         output$out1 <- renderPrint(input$input1)
-#'     }
-#'
-#'     shinyApp(ui, server)
-#' }
-clearableTextInput <- function(
-    inputId,
-    label = "",
-    value = "",
-    placeholder = "",
-    style = "width: 100%;") {
-
-    force(inputId)
-    tagList(tags$div(
-        style = style,
-        tags$label(label, `for` = inputId),
-        tags$span(
-            class = "form-control text-input-clearable",
-            style = "background-color: #fff;",
-            tags$input(
-                id = inputId,
-                type = "text",
-                value = value,
-                placeholder = placeholder
-            ),
-            HTML('<span class="glyphicon glyphicon-remove"></span>')
-            )
-        ),
-        tags$script(glue("clearText('{inputId}')")),
-        spsDepend("basic")
-    )
-}
-
-#' Bootstrap 3 text input group
-#' @description Text input group and custom widgets append to left ar/and right
-#' @param textId text box id
-#' @param label text label for this input group
-#' @param value default value for the text input
-#' @param placeholder default placeholder text for the text input if no value
-#' @param left_text text or icon add to the left side
-#' @param right_text text or icon add to the right side
-#' @param style additional style add to the group
-#'
-#' @return text input group component
-#' @details If no text is specified for both left and right, the return is almost
-#' identical to [clearableTextInput]
-#' @export
-#'
-#' @examples
-#' if(interactive()){
-#'
-#'     ui <- fluidPage(
-#'         textInputGroup("id1", "left", left_text = "a"),
-#'         textInputGroup("id2", "right", right_text = "b"),
-#'         textInputGroup("id3", "both", left_text = "$", right_text = ".00"),
-#'         textInputGroup("id4", "none"),
-#'         textInputGroup("id5", "icon", left_text = icon("home")),
-#'     )
-#'
-#'     server <- function(input, output, session) {
-#'
-#'     }
-#'
-#'     shinyApp(ui, server)
-#' }
-textInputGroup <-function(
-    textId,
-    label = "",
-    value = "",
-    placeholder = "enter text",
-    left_text = NULL,
-    right_text = NULL,
-    style = "width: 100%;"){
-
-    if (all(!emptyIsFalse(left_text), !emptyIsFalse(right_text))) {
-        form_style = "display: block;"
-    } else {
-        form_style = ""
-    }
-
-    div(
-        style = style,
-        tags$label(label, `for` = textId),
-        div(
-            class="input-group",
-            style = form_style,
-            if (emptyIsFalse(left_text)) tags$span(class="input-group-addon", left_text) else "",
-            tags$span(
-                class = "form-control text-input-clearable",
-                style = "width: 100%;",
-                tags$input(
-                    id = textId,
-                    type = "text",
-                    value = value,
-                    placeholder = placeholder
-                ),
-                HTML('<span class="glyphicon glyphicon-remove"></span>')
-            ),
-            tags$script(glue("clearText('{textId}')")),
-            if (emptyIsFalse(right_text)) tags$span(class="input-group-addon", right_text) else "",
-        ),
-        spsDepend("basic")
-    )
-}
-
-
 
 #' A shiny gallery component
 #' @description Create a gallery to display images or photos
@@ -144,15 +17,25 @@ textInputGroup <-function(
 #' Similar to `hrefs`, for the `texts`, use `""` to  occupy space
 #'
 #' @importFrom assertthat assert_that
+#'
 #' @param Id ID of this gallery
 #' @param title Title of gallery
 #' @param title_color Title color
 #' @param texts vector of labels under each image
 #' @param hrefs vector of links when each image is clicked
 #' @param image_frame_size integer, 1-12, this controls width. How large is each
-#' image. 12 is the whole width of the screen and 1 is 1/12 of the screen.
+#' image. 12 is the whole width of the screen and 1 is 1/12 of the screen. Consider
+#' numbers than can fully divide 12, like 1, 2, 3, 4, 6 or 12 (if you want only 1 image
+#' per row).
 #' @param images a vector of image sources, can be online urls or local resource paths.
-#' @param style additional CSS style you want to to the most outside component "div"
+#' @param enlarge bool,  when click on the image, enlarge
+#' it? If enlarge is enabled, click the photo will enlarge intead of jump to the link.
+#' Only the title below contains the link if enlarge is enabled.
+#' @param enlarge_method  how the photo is enlarged on click,
+#' one of "inline" -- within the gallery change the size of photo to 12, "modal" --
+#' display photo in a pop-up modal.
+#' @param style additional CSS style you want to add to the most outside component "div"
+#'
 #' @export
 #' @return a gallery component
 #'
@@ -172,7 +55,22 @@ textInputGroup <-function(
 #'   library(shiny)
 #'
 #'   ui <- fluidPage(
-#'     gallery(texts = texts, hrefs = hrefs, images = images)
+#'     column(
+#'       6,
+#'       gallery(texts = texts, hrefs = hrefs, images = images, title = "Default gallery"),
+#'       spsHr(),
+#'       gallery(texts = texts, hrefs = hrefs, images = images,
+#'               image_frame_size = 2, title = "Photo size"),
+#'       spsHr(),
+#'       gallery(texts = texts, hrefs = hrefs, images = images,
+#'               enlarge = TRUE, title = "Inline enlarge"),
+#'       spsHr(),
+#'       gallery(
+#'         texts = texts, hrefs = hrefs, images = images,
+#'         enlarge = TRUE, title = "Modal enlarge",
+#'         enlarge_method = "modal"
+#'       )
+#'     )
 #'   )
 #'
 #'   server <- function(input, output, session) {
@@ -188,19 +86,56 @@ gallery <- function(texts,
                     title = "Gallery",
                     title_color = "#0275d8",
                     image_frame_size = 4,
+                    enlarge = FALSE,
+                    enlarge_method = c("inline", "modal"),
                     style = ""){
 
     if (is.null(Id)) Id <- glue("gallery{sample(1000000:9999999, 1)}")
     assertthat::assert_that(is.character(texts))
     assertthat::assert_that(is.character(hrefs))
     assertthat::assert_that(is.character(images))
+    image_frame_size <- as.integer(image_frame_size)
+    stopifnot(image_frame_size > 0 && image_frame_size <=12)
+    stopifnot(is.logical(enlarge))
     assertthat::assert_that(
         length(texts) == length(hrefs) & length(hrefs) == length(images),
         msg = "texts, hrefs and images must have the same length")
+    enlarge_method <- match.arg(enlarge_method, c("inline", "modal"))
+
     texts[texts == ""] <- "&nbsp;"
+    hrefs_clean <- hrefs
+    img_ids <- paste0(Id, "-", seq_len(length(hrefs)))
     hrefs[hrefs != ""] <- glue('href="{hrefs[hrefs != ""]}"')
     href_hover <- rep("", length(hrefs))
     href_hover[hrefs == ""] <- "gallery-nohover"
+
+    gallery_div <- if(enlarge && enlarge_method == "inline") {
+      HTML(glue('
+      <div class="col-sm-{image_frame_size} sps-tab-link inline-enlarge" style="right: 1px;">
+        <img src="{images}" class="img-gallery {href_hover}" height=300 width=400 style="width: 100%;">
+        <a {hrefs}><p class="text-center h4">{texts}</p></a>
+      </div>
+      '))
+    } else if (enlarge) {
+      HTML(glue('
+      <div  id={img_ids} class="col-sm-{image_frame_size} sps-tab-link" style="right: 1px;">
+        <img
+          src="{images}" class="img-gallery {href_hover}"
+          height=300 width=400
+          style="width: 100%;"
+          onclick=galEnlarge("#{img_ids}")
+        >
+        <a {hrefs}><p class="text-center h4">{texts}</p></a>
+      </div>
+      '))
+    } else {
+      HTML(glue('
+      <a {hrefs} class="col-sm-{image_frame_size} sps-tab-link" style="right: 1px;">
+        <img src="{images}" class="img-gallery {href_hover}" height=300 width=400 style="width: 100%;">
+        <p class="text-center h4">{texts}</p>
+      </a>
+      '))
+    }
 
     div(
         id = Id, class = "col sps-gallery",
@@ -210,13 +145,23 @@ gallery <- function(texts,
           title),
         div(
             class = "row", style = "  margin: 10px;",
-            HTML(glue('
-                <a {hrefs} class="col-sm-{image_frame_size} sps-tab-link" style="right: 1px;">
-                  <img src="{images}" class="img-gallery {href_hover}" height=300 width=400 style="width: 100%;">
-                  <p class="text-center h4">{texts}</p>
-                </a>
-             '))
+            gallery_div
         ),
+        if(enlarge && enlarge_method == "modal") {
+          singleton(
+            div(
+              id = "sps-gallery-modal",class = "gallery-modal",
+              onclick = "galModalClose()",
+              tags$span(
+                class="gallery-modal-close",
+                "X"
+              ),
+              tags$img(id="sps-gallery-modal-content", class="gallery-modal-content"),
+              div(class = "gallery-caption")
+            )
+          )
+        } else "",
+        tags$script(glue('fixGalHeight("{Id}")')),
         spsDepend("basic")
     )
 }
@@ -1052,8 +997,7 @@ spsGoTop <- function(
 #' @param show_span bool, use the `<span>` tag to show a little label of the
 #' left of the button? The span text will use text from `tool_tip`
 #' @param placement string, where to display the tooltip
-#' @param icon string, value to pass into the [shiny::icon()] function, icon
-#' of the button
+#' @param btn_icon icon, [shiny::icon()], icon of the button
 #' @param size string, one of "large", "medium", "small", only works for modal
 #' @param language string, what programming language is the code, use [shinyAce::getAceModes()]
 #' to see options
@@ -1175,7 +1119,7 @@ spsCodeBtn <- function(
     show_span = FALSE,
     tool_tip = "Show Code",
     placement = "bottom",
-    icon = "code",
+    btn_icon = icon("code"),
     display = c("modal", "collapse"),
     size = c("large", "medium", "small"),
     color = "black",
@@ -1212,7 +1156,7 @@ spsCodeBtn <- function(
         actionButton(
             inputId = id,
             label = label,
-            icon = icon(icon),
+            icon = btn_icon,
             `data-toggle`="tooltip",
             title = tool_tip,
             `data-placement` = placement,

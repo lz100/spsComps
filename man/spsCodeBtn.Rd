@@ -13,7 +13,7 @@ spsCodeBtn(
   show_span = FALSE,
   tool_tip = "Show Code",
   placement = "bottom",
-  icon = "code",
+  btn_icon = icon("code"),
   display = c("modal", "collapse"),
   size = c("large", "medium", "small"),
   color = "black",
@@ -40,8 +40,7 @@ left of the button? The span text will use text from \code{tool_tip}}
 
 \item{placement}{string, where to display the tooltip}
 
-\item{icon}{string, value to pass into the \code{\link[shiny:icon]{shiny::icon()}} function, icon
-of the button}
+\item{btn_icon}{icon, \code{\link[shiny:icon]{shiny::icon()}}, icon of the button}
 
 \item{display}{string, one of "modal", "collapse"}
 

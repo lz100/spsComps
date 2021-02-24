@@ -70,9 +70,17 @@ spsComps CSS Styles
   box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, 1);
 }
 
-/*for gallery */
+/* sps gallery */
 .sps-gallery a:hover{
-    text-decoration: none;
+  text-decoration: none;
+}
+
+.sps-gallery div[class^="col-sm-"] {
+  transition:500ms linear;
+}
+
+.sps-gallery div.sps-tab-link {
+  cursor: pointer;
 }
 
 .img-gallery{
@@ -88,6 +96,70 @@ spsComps CSS Styles
   opacity: 0.7;
   transition: opacity 0.5s;
 }
+
+.gallery-enlarge {
+  width: 100% !important;
+  transition:500ms linear;
+}
+
+.gallery-modal {
+  display: none;
+  position: fixed;
+  z-index: 1100;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.8);
+  transition: opacity 250ms linear;
+  opacity: 0;
+}
+
+.gallery-modal.modal-in{
+  transition: opacity 500ms linear;
+  opacity: 1;
+}
+
+.gallery-modal-content {
+  margin: auto;
+  display: block;
+  width: auto;
+  max-width: 80%;
+}
+
+#sps-gallery-modal .gallery-caption {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: white;
+  padding: 10px 0;
+  font-size: 3.5rem;
+  font-weight: 800;
+  height: 150px;
+}
+
+
+.gallery-modal-close {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #fff;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.gallery-modal-close:hover,
+.gallery-modal-close:focus {
+  color: #828282;
+  text-decoration: none;
+  cursor: pointer;
+}
+
 
 
 /*for sps hyperlink button  and tables*/

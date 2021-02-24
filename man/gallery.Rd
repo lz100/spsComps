@@ -12,6 +12,8 @@ gallery(
   title = "Gallery",
   title_color = "#0275d8",
   image_frame_size = 4,
+  enlarge = FALSE,
+  enlarge_method = c("inline", "modal"),
   style = ""
 )
 }
@@ -29,9 +31,19 @@ gallery(
 \item{title_color}{Title color}
 
 \item{image_frame_size}{integer, 1-12, this controls width. How large is each
-image. 12 is the whole width of the screen and 1 is 1/12 of the screen.}
+image. 12 is the whole width of the screen and 1 is 1/12 of the screen. Consider
+numbers than can fully divide 12, like 1, 2, 3, 4, 6 or 12 (if you want only 1 image
+per row).}
 
-\item{style}{additional CSS style you want to to the most outside component "div"}
+\item{enlarge}{bool,  when click on the image, enlarge
+it? If enlarge is enabled, click the photo will enlarge intead of jump to the link.
+Only the title below contains the link if enlarge is enabled.}
+
+\item{enlarge_method}{how the photo is enlarged on click,
+one of "inline" -- within the gallery change the size of photo to 12, "modal" --
+display photo in a pop-up modal.}
+
+\item{style}{additional CSS style you want to add to the most outside component "div"}
 }
 \value{
 a gallery component
@@ -65,7 +77,22 @@ if(interactive()){
   library(shiny)
 
   ui <- fluidPage(
-    gallery(texts = texts, hrefs = hrefs, images = images)
+    column(
+      6,
+      gallery(texts = texts, hrefs = hrefs, images = images, title = "Default gallery"),
+      spsHr(),
+      gallery(texts = texts, hrefs = hrefs, images = images,
+              image_frame_size = 2, title = "Photo size"),
+      spsHr(),
+      gallery(texts = texts, hrefs = hrefs, images = images,
+              enlarge = TRUE, title = "Inline enlarge"),
+      spsHr(),
+      gallery(
+        texts = texts, hrefs = hrefs, images = images,
+        enlarge = TRUE, title = "Modal enlarge",
+        enlarge_method = "modal"
+      )
+    )
   )
 
   server <- function(input, output, session) {
