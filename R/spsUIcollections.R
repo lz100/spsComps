@@ -718,6 +718,7 @@ tabTitle <- function(title, ...){
 #' @examples
 #' if(interactive()){
 #'     library(shiny)
+#'     library(magrittr)
 #'     ui <- fluidPage(
 #'         column(2),
 #'         column(

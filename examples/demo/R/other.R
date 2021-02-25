@@ -49,6 +49,7 @@ uiOther <- function(id) {
             show_span = TRUE,
             '
             library(shiny)
+            library(magrittr)
             ui <- fluidPage(
                 column(2),
                 column(

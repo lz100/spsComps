@@ -40,6 +40,7 @@ additional trigger method, default "hover". Original method only works with
 \examples{
 if(interactive()){
     library(shiny)
+    library(magrittr)
     ui <- fluidPage(
         column(2),
         column(

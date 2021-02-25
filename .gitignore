@@ -43,4 +43,5 @@ vignettes/*.pdf
 
 .github/r-depends.rds
 
+*rsconnect
 
