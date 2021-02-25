@@ -65,7 +65,8 @@ pgPaneUI <-function(
                                           )
         )
     } %>% {
-        div(class = "tab-pane", id = glue("{pane_id}-pg-container"),
+        div(class = "tab-pane sps-pg-panel", id = glue("{pane_id}-pg-container"),
+            style = glue('top: {top}; right: {right}'),
             absolutePanel(
                 top = top, right = right, draggable = TRUE, width = "310",
                 height = "auto", class = "control-panel", cursor = "inherit",
@@ -97,9 +98,6 @@ pgPaneUI <-function(
 #' A draggable progress panel
 #' @description  Creates a panel that displays multiple progress items.
 #' Use [pgPaneUI] on UI side and use `pgPaneUpdate` to update it.
-#' The UI only
-#' renders correctly inside [shinydashboard::dashboardPage()] or
-#' [shinydashboardPlus::dashboardPagePlus()].
 #'
 #' A overall progress is automatically calculated on the bottom.
 #' @param pane_id Progress panel main ID, use `ns` wrap it on `pgPaneUI` but not

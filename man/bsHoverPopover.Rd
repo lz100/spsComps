@@ -55,7 +55,20 @@ if(interactive()){
                     title = "title b",
                     content = "popover works on a link",
                     placement = "bottom"
-                )
+                ),
+            div(
+              tags$b("general element"),
+              style =
+                '
+              height: 100px;
+              background-color: cornflowerblue;
+            '
+            ) \%>\%
+              bsHoverPopover(
+                title = "general element",
+                content = "popover works on a 'div'",
+                placement = "right"
+              )
         )
 
     )

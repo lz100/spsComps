@@ -321,6 +321,7 @@ spsComps CSS Styles
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow-y: auto;
 }
 
 .sps-timestamp {
@@ -380,6 +381,27 @@ spsComps CSS Styles
   color: #5cb85c;
 }
 
+.sps-timeline::-webkit-scrollbar-track
+{
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  border-radius: 10px;
+  background-color: #fff;
+}
+
+.sps-timeline::-webkit-scrollbar
+{
+  width: auto;
+  background-color: #fff;
+  height: 8px;
+}
+
+.sps-timeline::-webkit-scrollbar-thumb
+{
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+  background-color: #c9c9c9;
+}
+
 /*go top button*/
 .sps-gotop {
   background-color: #fff;
@@ -406,8 +428,11 @@ spsComps CSS Styles
 }
 
 
-/*code display*/
-
+/*progress panel*/
+.sps-pg-panel {
+  position: fixed;
+  z-index: 100;
+}
 
 
 

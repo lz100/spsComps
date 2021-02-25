@@ -68,50 +68,51 @@ go away on UI unless users' mouse hover on the bar or manually close it.
 }
 \examples{
 if(interactive()){
-    ui <- fluidPage(
-        spsDepend("toastr"),
-        h4("Run this example on your own computer to better understand exception
+  ui <- fluidPage(
+    spsDepend("toastr"),
+    h4("Run this example on your own computer to better understand exception
            catch and dual-end logging", class = "text-center"),
-        column(
-            6,
-            actionButton("btn1","error and blocking"),
-            actionButton("btn2","error no blocking"),
-            actionButton("btn3","warning but still returns value"),
-            actionButton("btn4","warning but blocking returns"),
-            actionButton("btn5","message"),
-        ),
-        column(
-            6,
-            verbatimTextOutput("text")
-        )
+    column(
+      6,
+      actionButton("btn1","error and blocking"),
+      actionButton("btn2","error no blocking"),
+      actionButton("btn3","warning but still returns value"),
+      actionButton("btn4","warning but blocking returns"),
+      actionButton("btn5","message"),
+    ),
+    column(
+      6,
+      verbatimTextOutput("text")
     )
-    server <- function(input, output, session) {
-        fn_warning <- function() {
-            warning("this is a warning!")
-            return("warning returns")
-        }
-        observeEvent(input$btn1, {
-            shinyCatch(stop("error with blocking"), blocking_level = "error")
-            output$text <- renderPrint("You shouldn't see me")
-        })
-        observeEvent(input$btn2, {
-            shinyCatch(stop("error without blocking"))
-            output$text <- renderPrint("I am not blocked by error")
-        })
-        observeEvent(input$btn3, {
-            return_value <- shinyCatch(fn_warning())
-            output$text <- renderPrint(return_value)
-        })
-        observeEvent(input$btn4, {
-            return_value <- shinyCatch(fn_warning(), blocking_level = "warning")
-            print(return_value)
-            output$text <- renderPrint("other things")
-        })
-        observeEvent(input$btn5, {
-            shinyCatch(message("some message"))
-        })
+  )
+  server <- function(input, output, session) {
+    fn_warning <- function() {
+      warning("this is a warning!")
+      return("warning returns")
     }
-    shinyApp(ui, server)
+    observeEvent(input$btn1, {
+      shinyCatch(stop("error with blocking"), blocking_level = "error")
+      output$text <- renderPrint("You shouldn't see me")
+    })
+    observeEvent(input$btn2, {
+      shinyCatch(stop("error without blocking"))
+      output$text <- renderPrint("I am not blocked by error")
+    })
+    observeEvent(input$btn3, {
+      return_value <- shinyCatch(fn_warning())
+      output$text <- renderPrint("warning and blocked")
+    })
+    observeEvent(input$btn4, {
+      return_value <- shinyCatch(fn_warning(), blocking_level = "warning")
+      print(return_value)
+      output$text <- renderPrint("other things")
+    })
+    observeEvent(input$btn5, {
+      shinyCatch(message("some message"))
+      output$text <- renderPrint("some message")
+    })
+  }
+  shinyApp(ui, server)
 }
 # outside shiny examples
 shinyCatch(message("this message"))

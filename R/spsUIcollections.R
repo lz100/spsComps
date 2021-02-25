@@ -42,16 +42,16 @@
 #' @examples
 #' if(interactive()){
 #'   texts <- c("p1", "p2", "", "p4", "p5")
-#'   hrefs <- c("https://unsplash.it/1200/768.jpg?image=251",
-#'              "https://unsplash.it/1200/768.jpg?image=252",
+#'   hrefs <- c("https://github.com/lz100/spsComps/blob/master/img/1.jpg?raw=true",
+#'              "https://github.com/lz100/spsComps/blob/master/img/2.jpg?raw=true",
 #'              "",
-#'              "https://unsplash.it/1200/768.jpg?image=254",
-#'              "https://unsplash.it/1200/768.jpg?image=255")
-#'   images <- c("https://unsplash.it/600.jpg?image=251",
-#'               "https://unsplash.it/600.jpg?image=252",
-#'               "https://unsplash.it/600.jpg?image=253",
-#'               "https://unsplash.it/600.jpg?image=254",
-#'               "https://unsplash.it/600.jpg?image=255")
+#'              "https://github.com/lz100/spsComps/blob/master/img/4.jpg?raw=true",
+#'              "https://github.com/lz100/spsComps/blob/master/img/5.jpg?raw=true")
+#'   images <- c("https://github.com/lz100/spsComps/blob/master/img/1.jpg?raw=true",
+#'               "https://github.com/lz100/spsComps/blob/master/img/2.jpg?raw=true",
+#'               "https://github.com/lz100/spsComps/blob/master/img/3.jpg?raw=true",
+#'               "https://github.com/lz100/spsComps/blob/master/img/4.jpg?raw=true",
+#'               "https://github.com/lz100/spsComps/blob/master/img/5.jpg?raw=true")
 #'   library(shiny)
 #'
 #'   ui <- fluidPage(
@@ -733,7 +733,20 @@ tabTitle <- function(title, ...){
 #'                     title = "title b",
 #'                     content = "popover works on a link",
 #'                     placement = "bottom"
-#'                 )
+#'                 ),
+#'             div(
+#'               tags$b("general element"),
+#'               style =
+#'                 '
+#'               height: 100px;
+#'               background-color: cornflowerblue;
+#'             '
+#'             ) %>%
+#'               bsHoverPopover(
+#'                 title = "general element",
+#'                 content = "popover works on a 'div'",
+#'                 placement = "right"
+#'               )
 #'         )
 #'
 #'     )
@@ -870,9 +883,7 @@ spsLoader <- function(id=NULL){
 #'             style = "border: 1px black solid; background-color: red;",
 #'             p("This block's is not matched with others")
 #'         ),
-#'         heightMatcher("a", "b"),
-#'         spsDepend("basic", css = FALSE),
-#'         spsDepend("basic", js = FALSE)
+#'         heightMatcher("a", "b")
 #'     )
 #'
 #'     server <- function(input, output, session) {
@@ -1017,9 +1028,9 @@ spsGoTop <- function(
 #'
 #' @examples
 #' if(interactive()){
-#'     library(shiny)
-#'     code <-
-#'         '
+#'   library(shiny)
+#'   my_code <-
+#'     '
 #'     # load package and data
 #'     library(ggplot2)
 #'     data(mpg, package="ggplot2")
@@ -1034,8 +1045,8 @@ spsGoTop <- function(
 #'            x="cty",
 #'            title="Jittered Points")
 #'     '
-#'     html_code <-
-#'         '
+#'   html_code <-
+#'     '
 #'     <!DOCTYPE html>
 #'     <html>
 #'     <body>
@@ -1047,68 +1058,68 @@ spsGoTop <- function(
 #'     </body>
 #'     </html>
 #'     '
-#'     ui <- fluidPage(
-#'         fluidRow(
-#'             column(
-#'                 6,
-#'                 h3("Display by modal"),
-#'                 column(
-#'                     6, h4("default"),
-#'                     spsCodeBtn(id = "a", code)
-#'                 ),
-#'                 column(
-#'                     6, h4("change color and shape"),
-#'                     spsCodeBtn(
-#'                         id = "b", c(code, code),
-#'                         color = "red", shape = "circular")
-#'                 )
-#'             ),
-#'             column(
-#'                 6,
-#'                 h3("Display by collapse"),
-#'                 column(
-#'                     6, h4("collapse"),
-#'                     spsCodeBtn(id = "c", code, display = "collapse")
-#'                 ),
-#'                 column(
-#'                     6, h4("different programming language"),
-#'                     spsCodeBtn(
-#'                         id = "d", html_code,
-#'                         language = "html", display = "collapse")
-#'                 )
-#'             )
+#'   ui <- fluidPage(
+#'     fluidRow(
+#'       column(
+#'         6,
+#'         h3("Display by modal"),
+#'         column(
+#'           6, h4("default"),
+#'           spsCodeBtn(id = "a", my_code)
 #'         ),
-#'         fluidRow(
-#'             column(
-#'                 6,
-#'                 h3("Update code"),
-#'                 spsCodeBtn(
-#'                     "update-code",
-#'                     "# No code here",
-#'                     display = "collapse"
-#'                 ),
-#'                 actionButton("update", "change code in the left `spsCodeBtn`"),
-#'                 actionButton("changeback", "change it back")
-#'             )
+#'         column(
+#'           6, h4("change color and shape"),
+#'           spsCodeBtn(
+#'             id = "b", c(my_code, my_code),
+#'             color = "red", shape = "circular")
 #'         )
+#'       ),
+#'       column(
+#'         6,
+#'         h3("Display by collapse"),
+#'         column(
+#'           6, h4("collapse"),
+#'           spsCodeBtn(id = "c", my_code, display = "collapse")
+#'         ),
+#'         column(
+#'           6, h4("different programming language"),
+#'           spsCodeBtn(
+#'             id = "d", html_code,
+#'             language = "html", display = "collapse")
+#'         )
+#'       )
+#'     ),
+#'     fluidRow(
+#'       column(
+#'         6,
+#'         h3("Update code"),
+#'         spsCodeBtn(
+#'           "update-code",
+#'           "# No code here",
+#'           display = "collapse"
+#'         ),
+#'         actionButton("update", "change code in the left `spsCodeBtn`"),
+#'         actionButton("changeback", "change it back")
+#'       )
 #'     )
+#'   )
 #'
-#'     server <- function(input, output, session) {
-#'         observeEvent(input$update, {
-#'             shinyAce::updateAceEditor(
-#'                 session, editorId = "update-code-ace",
-#'                 value = "# code has changed!\n 1+1"
-#'             )
-#'         })
-#'         observeEvent(input$changeback, {
-#'             shinyAce::updateAceEditor(
-#'                 session, editorId = "update-code-ace",
-#'                 value = "# No code here"
-#'             )
-#'         })
-#'     }
+#'   server <- function(input, output, session) {
+#'     observeEvent(input$update, {
+#'       shinyAce::updateAceEditor(
+#'         session, editorId = "update-code-ace",
+#'         value = "# code has changed!\n 1+1"
+#'       )
+#'     })
+#'     observeEvent(input$changeback, {
+#'       shinyAce::updateAceEditor(
+#'         session, editorId = "update-code-ace",
+#'         value = "# No code here"
+#'       )
+#'     })
+#'   }
 #'
-#'     shinyApp(ui, server)
+#'   shinyApp(ui, server)
 #' }
 spsCodeBtn <- function(
     id,

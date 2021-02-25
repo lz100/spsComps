@@ -52,9 +52,6 @@ HTML elements
 \description{
 Creates a panel that displays multiple progress items.
 Use \link{pgPaneUI} on UI side and use \code{pgPaneUpdate} to update it.
-The UI only
-renders correctly inside \code{\link[shinydashboard:dashboardPage]{shinydashboard::dashboardPage()}} or
-\code{\link[shinydashboardPlus:dashboardPagePlus]{shinydashboardPlus::dashboardPagePlus()}}.
 
 A overall progress is automatically calculated on the bottom.
 }

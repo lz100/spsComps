@@ -49,7 +49,7 @@ want to update}
 returns a shiny component
 }
 \description{
-This time time is horizontal, use \strong{spsTimeline} to define it and
+This timeline is horizontal, use \strong{spsTimeline} to define it and
 use \strong{updateSpsTimeline} on server to update it.
 }
 \details{

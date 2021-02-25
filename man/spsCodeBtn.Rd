@@ -71,9 +71,9 @@ examples.
 }
 \examples{
 if(interactive()){
-    library(shiny)
-    code <-
-        '
+  library(shiny)
+  my_code <-
+    '
     # load package and data
     library(ggplot2)
     data(mpg, package="ggplot2")
@@ -88,8 +88,8 @@ if(interactive()){
            x="cty",
            title="Jittered Points")
     '
-    html_code <-
-        '
+  html_code <-
+    '
     <!DOCTYPE html>
     <html>
     <body>
@@ -101,67 +101,67 @@ if(interactive()){
     </body>
     </html>
     '
-    ui <- fluidPage(
-        fluidRow(
-            column(
-                6,
-                h3("Display by modal"),
-                column(
-                    6, h4("default"),
-                    spsCodeBtn(id = "a", code)
-                ),
-                column(
-                    6, h4("change color and shape"),
-                    spsCodeBtn(
-                        id = "b", c(code, code),
-                        color = "red", shape = "circular")
-                )
-            ),
-            column(
-                6,
-                h3("Display by collapse"),
-                column(
-                    6, h4("collapse"),
-                    spsCodeBtn(id = "c", code, display = "collapse")
-                ),
-                column(
-                    6, h4("different programming language"),
-                    spsCodeBtn(
-                        id = "d", html_code,
-                        language = "html", display = "collapse")
-                )
-            )
+  ui <- fluidPage(
+    fluidRow(
+      column(
+        6,
+        h3("Display by modal"),
+        column(
+          6, h4("default"),
+          spsCodeBtn(id = "a", my_code)
         ),
-        fluidRow(
-            column(
-                6,
-                h3("Update code"),
-                spsCodeBtn(
-                    "update-code",
-                    "# No code here",
-                    display = "collapse"
-                ),
-                actionButton("update", "change code in the left `spsCodeBtn`"),
-                actionButton("changeback", "change it back")
-            )
+        column(
+          6, h4("change color and shape"),
+          spsCodeBtn(
+            id = "b", c(my_code, my_code),
+            color = "red", shape = "circular")
         )
+      ),
+      column(
+        6,
+        h3("Display by collapse"),
+        column(
+          6, h4("collapse"),
+          spsCodeBtn(id = "c", my_code, display = "collapse")
+        ),
+        column(
+          6, h4("different programming language"),
+          spsCodeBtn(
+            id = "d", html_code,
+            language = "html", display = "collapse")
+        )
+      )
+    ),
+    fluidRow(
+      column(
+        6,
+        h3("Update code"),
+        spsCodeBtn(
+          "update-code",
+          "# No code here",
+          display = "collapse"
+        ),
+        actionButton("update", "change code in the left `spsCodeBtn`"),
+        actionButton("changeback", "change it back")
+      )
     )
+  )
 
-    server <- function(input, output, session) {
-        observeEvent(input$update, {
-            shinyAce::updateAceEditor(
-                session, editorId = "update-code-ace",
-                value = "# code has changed!\n 1+1"
-            )
-        })
-        observeEvent(input$changeback, {
-            shinyAce::updateAceEditor(
-                session, editorId = "update-code-ace",
-                value = "# No code here"
-            )
-        })
-    }
+  server <- function(input, output, session) {
+    observeEvent(input$update, {
+      shinyAce::updateAceEditor(
+        session, editorId = "update-code-ace",
+        value = "# code has changed!\n 1+1"
+      )
+    })
+    observeEvent(input$changeback, {
+      shinyAce::updateAceEditor(
+        session, editorId = "update-code-ace",
+        value = "# No code here"
+      )
+    })
+  }
 
-    shinyApp(ui, server)
+  shinyApp(ui, server)
 }
 }

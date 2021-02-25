@@ -1,7 +1,7 @@
 # credits to Abhi Sharma @ https://codepen.io/abhisharma2/pen/vEKWVo/
 
 #' A shiny timeline component
-#' @description This time time is horizontal, use **spsTimeline** to define it and
+#' @description This timeline is horizontal, use **spsTimeline** to define it and
 #' use **updateSpsTimeline** on server to update it.
 #' @param id html ID of the timeline if you are using shiny modules:
 #' use namespace function to create the ID but DO NOT use namespace function

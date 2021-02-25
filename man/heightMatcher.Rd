@@ -43,9 +43,7 @@ if(interactive()){
             style = "border: 1px black solid; background-color: red;",
             p("This block's is not matched with others")
         ),
-        heightMatcher("a", "b"),
-        spsDepend("basic", css = FALSE),
-        spsDepend("basic", js = FALSE)
+        heightMatcher("a", "b")
     )
 
     server <- function(input, output, session) {

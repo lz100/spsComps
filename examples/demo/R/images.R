@@ -3,16 +3,16 @@
 uiImages <- function(id) {
   ns <- NS(id)
   texts <- c("p1", "p2", "", "p4", "p5")
-  hrefs <- c("https://unsplash.it/1200/768.jpg?image=251",
-             "https://unsplash.it/1200/768.jpg?image=252",
+  hrefs <- c("https://github.com/lz100/spsComps/blob/master/img/1.jpg?raw=true",
+             "https://github.com/lz100/spsComps/blob/master/img/2.jpg?raw=true",
              "",
-             "https://unsplash.it/1200/768.jpg?image=254",
-             "https://unsplash.it/1200/768.jpg?image=255")
-  images <- c("https://unsplash.it/600.jpg?image=251",
-              "https://unsplash.it/600.jpg?image=252",
-              "https://unsplash.it/600.jpg?image=253",
-              "https://unsplash.it/600.jpg?image=254",
-              "https://unsplash.it/600.jpg?image=255")
+             "https://github.com/lz100/spsComps/blob/master/img/4.jpg?raw=true",
+             "https://github.com/lz100/spsComps/blob/master/img/5.jpg?raw=true")
+  images <- c("https://github.com/lz100/spsComps/blob/master/img/1.jpg?raw=true",
+              "https://github.com/lz100/spsComps/blob/master/img/2.jpg?raw=true",
+              "https://github.com/lz100/spsComps/blob/master/img/3.jpg?raw=true",
+              "https://github.com/lz100/spsComps/blob/master/img/4.jpg?raw=true",
+              "https://github.com/lz100/spsComps/blob/master/img/5.jpg?raw=true")
   fluidRow(
       tabTitle("Display images and logos"),
       column(
@@ -34,16 +34,16 @@ uiImages <- function(id) {
             show_span = TRUE,
             '
             texts <- c("p1", "p2", "", "p4", "p5")
-            hrefs <- c("https://unsplash.it/1200/768.jpg?image=251",
-                       "https://unsplash.it/1200/768.jpg?image=252",
+            hrefs <- c("https://github.com/lz100/spsComps/blob/master/img/1.jpg?raw=true",
+                       "https://github.com/lz100/spsComps/blob/master/img/2.jpg?raw=true",
                        "",
-                       "https://unsplash.it/1200/768.jpg?image=254",
-                       "https://unsplash.it/1200/768.jpg?image=255")
-            images <- c("https://unsplash.it/600.jpg?image=251",
-                        "https://unsplash.it/600.jpg?image=252",
-                        "https://unsplash.it/600.jpg?image=253",
-                        "https://unsplash.it/600.jpg?image=254",
-                        "https://unsplash.it/600.jpg?image=255")
+                       "https://github.com/lz100/spsComps/blob/master/img/4.jpg?raw=true",
+                       "https://github.com/lz100/spsComps/blob/master/img/5.jpg?raw=true")
+            images <- c("https://github.com/lz100/spsComps/blob/master/img/1.jpg?raw=true",
+                        "https://github.com/lz100/spsComps/blob/master/img/2.jpg?raw=true",
+                        "https://github.com/lz100/spsComps/blob/master/img/3.jpg?raw=true",
+                        "https://github.com/lz100/spsComps/blob/master/img/4.jpg?raw=true",
+                        "https://github.com/lz100/spsComps/blob/master/img/5.jpg?raw=true")
             library(shiny)
 
             ui <- fluidPage(

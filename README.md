@@ -3,7 +3,7 @@
 The {[systemPipeShiny](https://github.com/systemPipeR/systemPipeShiny)} (SPS) framework comes with many UI and server 
 components. However, installing the whole framework is heavy and takes some time. If you 
 would like to use UI and server components from SPS in your own Shiny apps, but do not want to 
-install the whole framework, just install {spsComps}. 
+install the whole framework, just install {spsComps} (systemPipeShiny Components). 
 
 **View the online demo**: https://lezhang.shinyapps.io/spsComps
 

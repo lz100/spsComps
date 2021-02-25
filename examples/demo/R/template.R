@@ -6,25 +6,22 @@ uiXx <- function(id) {
       tabTitle(""),
       column(
         6,
-        column(
-          6,
-          box(
-            title = "XXX", solidHeader = TRUE, status = "primary", width = 12,
-            div(
-              class = "text-minor",
-              markdown(
+        box(
+          title = "XXX", solidHeader = TRUE, status = "primary", width = 12,
+          div(
+            class = "text-minor",
+            markdown(
               '
 
               ')
-            ),
-            ##xxx
-            spsCodeBtn(
-              ns("code_"),
-              show_span = TRUE,
-              '
+          ),
+          ##xxx
+          spsCodeBtn(
+            ns("code_"),
+            show_span = TRUE,
+            '
 
               '
-            )
           )
         )
       ),
