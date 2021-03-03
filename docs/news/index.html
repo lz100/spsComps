@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>A clearable text inputInput control — clearableTextInput • spsComps</title>
+<title>Changelog • spsComps</title>
 
 
 <!-- jquery -->
@@ -39,9 +39,7 @@
 
 
 
-<meta property="og:title" content="A clearable text inputInput control — clearableTextInput" />
-<meta property="og:description" content="An UI component with a &quot;X&quot; button in the end to clear the entire
-entered text. It works the same as Textinput." />
+<meta property="og:title" content="Changelog" />
 
 
 
@@ -60,7 +58,7 @@ entered text. It works the same as Textinput." />
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-reference-topic">
+    <div class="container template-news">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -113,74 +111,67 @@ entered text. It works the same as Textinput." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>A clearable text inputInput control</h1>
-    <small class="dont-index">Source: <a href='https://github.com/lz100/spsComps/blob/master/R/inputs.R'><code>R/inputs.R</code></a></small>
-    <div class="hidden name"><code>clearableTextInput.Rd</code></div>
+      <h1 data-toc-skip>Changelog <small></small></h1>
+      <small>Source: <a href='https://github.com/lz100/spsComps/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div class="ref-description">
-    <p>An UI component with a "X" button in the end to clear the entire
-entered text. It works the same as <code>Textinput</code>.</p>
-    </div>
-
-    <pre class="usage"><span class='fu'>clearableTextInput</span><span class='op'>(</span>
-  <span class='va'>inputId</span>,
-  label <span class='op'>=</span> <span class='st'>""</span>,
-  value <span class='op'>=</span> <span class='st'>""</span>,
-  placeholder <span class='op'>=</span> <span class='st'>""</span>,
-  style <span class='op'>=</span> <span class='st'>"width: 100%;"</span>
-<span class='op'>)</span></pre>
-
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>inputId</th>
-      <td><p>ID</p></td>
-    </tr>
-    <tr>
-      <th>label</th>
-      <td><p>text label above</p></td>
-    </tr>
-    <tr>
-      <th>value</th>
-      <td><p>default value</p></td>
-    </tr>
-    <tr>
-      <th>placeholder</th>
-      <td><p>place holder text when value is empty</p></td>
-    </tr>
-    <tr>
-      <th>style</th>
-      <td><p>additional CSS styles you want to apply</p></td>
-    </tr>
-    </table>
-
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>a shiny component</p>
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span><span class='op'>{</span>
-
-    <span class='va'>ui</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/shiny/man/fluidPage.html'>fluidPage</a></span><span class='op'>(</span>
-        <span class='fu'>clearableTextInput</span><span class='op'>(</span><span class='st'>"input1"</span>, <span class='st'>"This is a input box"</span>, style <span class='op'>=</span> <span class='st'>"width: 50%;"</span><span class='op'>)</span>,
-        <span class='fu'><a href='https://rdrr.io/pkg/shiny/man/textOutput.html'>verbatimTextOutput</a></span><span class='op'>(</span><span class='st'>"out1"</span><span class='op'>)</span>
-    <span class='op'>)</span>
-
-    <span class='va'>server</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>input</span>, <span class='va'>output</span>, <span class='va'>session</span><span class='op'>)</span> <span class='op'>{</span>
-        <span class='va'>output</span><span class='op'>$</span><span class='va'>out1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/shiny/man/renderPrint.html'>renderPrint</a></span><span class='op'>(</span><span class='va'>input</span><span class='op'>$</span><span class='va'>input1</span><span class='op'>)</span>
-    <span class='op'>}</span>
-
-    <span class='fu'><a href='https://rdrr.io/pkg/shiny/man/shinyApp.html'>shinyApp</a></span><span class='op'>(</span><span class='va'>ui</span>, <span class='va'>server</span><span class='op'>)</span>
-<span class='op'>}</span>
-</div></pre>
+    <div id="spscomps-0109" class="section level1">
+<h1 class="page-header" data-toc-text="0.1.0.9">
+<a href="#spscomps-0109" class="anchor"></a>spsComps 0.1.0.9<small> Unreleased </small>
+</h1>
+<div id="bug-fix" class="section level2">
+<h2 class="hasAnchor">
+<a href="#bug-fix" class="anchor"></a>Bug fix</h2>
+<ul>
+<li>fix links in shiny demo</li>
+</ul>
+</div>
+</div>
+    <div id="spscomps-01" class="section level1">
+<h1 class="page-header" data-toc-text="0.1">
+<a href="#spscomps-01" class="anchor"></a>spsComps 0.1<small> Unreleased </small>
+</h1>
+<div id="major" class="section level2">
+<h2 class="hasAnchor">
+<a href="#major" class="anchor"></a>Major</h2>
+<ul>
+<li>Migrated from systemPipeShiny</li>
+</ul>
+</div>
+<div id="new-features" class="section level2">
+<h2 class="hasAnchor">
+<a href="#new-features" class="anchor"></a>New features</h2>
+<ul>
+<li>
+<p>Enhanced <code>gallery</code> arguments.</p>
+<ul>
+<li>Now allow users to enlarge pictures in 2 different ways.</li>
+</ul>
+</li>
+<li><p>New <code>textButton</code>, text input group with button</p></li>
+<li><p>New <code>textInputGroup</code>, text input group with icon or text on both ends</p></li>
+<li>
+<p>Better <em>hover</em> effects on hrefTab, hrefTable, gallery, hexLogo, hexPanel</p>
+<ul>
+<li>hover effect change when there is no link attached to the item.</li>
+</ul>
+</li>
+<li><p>New arguments in <strong><code>updateSpsTimeline</code></strong> to allow users update up/down text in <code>spsTimeline</code>.</p></li>
+<li><p><code>pgPaneUI</code> no longer needs to work inside <code><a href="https://rdrr.io/pkg/shinydashboard/man/dashboardPage.html">shinydashboard::dashboardPage()</a></code>, dependencies automatically added when calls this function.</p></li>
+<li><p>New <code>spsCodeBtn</code> function to create a button to show code in Shiny by a modal or a collapse element.</p></li>
+<li><p>More styles and arguments added to <code>spsGoTop</code> button.</p></li>
+<li><p>Rewrite some part of <code>spsValidate</code>, now it no longer requires users to return <code>TRUE</code> in the end of the expression. Anything returns at the end of the expression will be accepted. The way to fail the validation is to create error inside expression.</p></li>
+</ul>
+</div>
+</div>
   </div>
+
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>
     </nav>
   </div>
+
 </div>
 
 
