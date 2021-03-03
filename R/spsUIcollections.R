@@ -237,10 +237,9 @@ hrefTab <- function(label_texts,
     if (length(bg_colors) > 1) assert_that(length(label_texts) == length(bg_colors))
     if (length(text_colors) > 1) assert_that(length(label_texts) == length(text_colors))
 
-    hrefs[hrefs != ""] <- glue('href="{hrefs[hrefs != ""]}"')
     href_hover <- rep("", length(hrefs))
     href_hover[hrefs == ""] <- "nohover"
-
+    hrefs[hrefs == ""] <- "javascript:null;"
     div(
         id = Id, class = "col", ... ,
         p(class = "h4",
@@ -249,7 +248,7 @@ hrefTab <- function(label_texts,
         div(
             HTML(glue('
             <a
-              {hrefs}
+              href="{hrefs}"
               class="href-button sps-tab-link {href_hover}"
               style="background-color: {bg_colors}; color: {text_colors};"
              >
@@ -414,12 +413,12 @@ hrefTable <- function(item_titles,
         )
     btns <- mapply(
         function(label, href, bg_color, text_color) {
-            href[href != ""] <- glue('href="{href[href != ""]}"')
             href_hover <- rep("", length(href))
             href_hover[href == ""] <- "nohover"
+            href[href == ""] <- "javascript:null;"
             glue('
             <a
-              {href}
+              href="{href}"
               class="href-button {href_hover} sps-tab-link"
               style="background-color: {bg_color}; color: {text_color};"
             >

@@ -3,6 +3,7 @@
 ## Bug fix
 
 -   fix links in shiny demo
+-   fix `hrefTab` and `hrefTable` incompatible with Rmarkdown by replacing the \<a\> tag `href` from none to `javascript:null;`.
 
 # spsComps 0.1
 
