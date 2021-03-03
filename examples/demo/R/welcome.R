@@ -19,7 +19,7 @@ uiWelcome <- function(id) {
 
     <br>
 
-    For more details, read the documents on [our website](https://systempipe.org/sps/dev/ui/).
+    For more details, read the documents on [our website](https://systempipe.org/sps/dev/spscomps/).
 
     <p class="text-primary">If you <b >like</b> this package, remember to give us a
     <a href="https://github.com/lz100/spsComps"> star<i class="fa fa-star text-red"></i> on github.</a>
