@@ -24,10 +24,8 @@ if (!requireNamespace("spsComps", quietly=TRUE))
 
 ## User manual 
 
-Read details of these components on our website
+Read details of these components on our [website](https://systempipe.org/sps/dev/spscomps/)
 
-- [UI](https://systempipe.org/sps/dev/ui/)
-- [server](https://systempipe.org/sps/dev/server/)
 
 ## Other packages in systemPipeShiny
 
