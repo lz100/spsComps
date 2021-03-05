@@ -56,7 +56,7 @@ pgPaneUI <-function(
                                           shinydashboardPlus::timelineLabel(
                                               id = glue("{pane_id}-pg-label"),
                                               "Ready",
-                                              color = "orange"),
+                                              status = "orange"),
                                           div(style = "margin-left: 60px; margin-right: 15px;",
                                               shinyWidgets::progressBar(
                                                   glue("{pane_id}-pg-all"), striped = TRUE,
