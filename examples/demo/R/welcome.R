@@ -38,7 +38,6 @@ uiWelcome <- function(id) {
 
     ')
     )
-
   )
 }
 

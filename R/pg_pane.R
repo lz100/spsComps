@@ -50,20 +50,23 @@ pgPaneUI <-function(
                 )
         )
     }) %>% {
-        shinydashboardPlus::timelineBlock(reversed = FALSE,
-                                          id = glue("{pane_id}-timeline"),
-                                          .,
-                                          shinydashboardPlus::timelineLabel(
-                                              id = glue("{pane_id}-pg-label"),
-                                              "Ready",
-                                              status = "orange"),
-                                          div(style = "margin-left: 60px; margin-right: 15px;",
-                                              shinyWidgets::progressBar(
-                                                  glue("{pane_id}-pg-all"), striped = TRUE,
-                                                  status = "primary", 0
-                                              )
-                                          )
+
+      tags$ul(
+        class="timeline",
+        id = glue("{pane_id}-timeline"),
+        .,
+        tags$li(
+          class="time-label",
+          tags$span(id=glue("{pane_id}-pg-label"), class="bg-orange", "Ready")
+        ),
+        div(style = "margin-left: 60px; margin-right: 15px;",
+            shinyWidgets::progressBar(
+              glue("{pane_id}-pg-all"), striped = TRUE,
+              status = "primary", 0
+            )
         )
+      )
+
     } %>% {
         div(class = "tab-pane sps-pg-panel", id = glue("{pane_id}-pg-container"),
             style = glue('top: {top}; right: {right}'),

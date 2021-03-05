@@ -5,6 +5,10 @@
 -   fix links in shiny demo
 -   fix `hrefTab` and `hrefTable` incompatible with Rmarkdown by replacing the \<a\> tag `href` from none to `javascript:null;`.
 
+## Other
+
+-   remove `shinydashboardPlus`. The 2.0.0 update breaks `progressPanel` entirely, rewrite it by ourselves.
+
 # spsComps 0.1
 
 ## Major
