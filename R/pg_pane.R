@@ -1,5 +1,4 @@
 #' @rdname pgPaneUpdate
-#' @importFrom shinydashboardPlus timelineBlock timelineLabel
 #' @importFrom shinyWidgets progressBar
 #'
 #' @param titles labels to display for each progress, must have the same length
