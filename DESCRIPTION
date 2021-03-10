@@ -1,7 +1,7 @@
 Package: spsComps
 Title: 'systemPipeShiny' UI and Server Components
-Version: 0.1.0.9
-Date: 2021-03-02
+Version: 0.1.9.99
+Date: 2021-03-08
 Authors@R: c(person(given = "Le", family = "Zhang", role = c("aut", "cre"), email = "lezhang100@gmail.com"))
 Description: The systemPipeShiny (SPS) framework comes with many UI and server components. However, installing the whole framework is heavy and takes some time. If you would like to use UI and server components from SPS in your own Shiny apps, but do not want to install the whole framework, just install this package.
 Depends:
@@ -19,13 +19,12 @@ Imports:
     shinytoastr,
     shinyAce,
     htmltools,
-    shinydashboard,
-    shinyjqui,
     vroom,
     dplyr,
     utils
 Suggests:
-    testthat
+    testthat,
+    shinyjqui
 License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: true

@@ -1,4 +1,14 @@
-# spsComps 0.1.0.9
+# spsComps 0.2.0
+
+## New features
+
+-   `animateIcon`: create font-awesome icons with animations!
+
+-   `animateUI`, `animateServer`: add animations to any HTML/Shiny element, one is called from the UI, one is called from the server side.
+
+-   `animationRemove`: remove animations of an element, call from server only.
+
+# spsComps 0.1.1
 
 ## Bug fix
 
@@ -7,7 +17,8 @@
 
 ## Other
 
--   remove `shinydashboardPlus`. The 2.0.0 update breaks `progressPanel` entirely, rewrite it by ourselves.
+-   Remove `shinydashboardPlus` dependency. The 2.0.0 update breaks `progressPanel` entirely, rewrite it by ourselves.
+-   Remove `shinydashboard` dependency. Rewrite the CSS by myself to reduce dependency.
 
 # spsComps 0.1
 
@@ -25,7 +36,7 @@
 
 -   New `textInputGroup`, text input group with icon or text on both ends
 
--   Better *hover* effects on hrefTab, hrefTable, gallery, hexLogo, hexPanel
+-   Better *hover* effects on `hrefTab`, `hrefTable`, gallery, `hexLogo`, `hexPanel`
 
     -   hover effect change when there is no link attached to the item.
 

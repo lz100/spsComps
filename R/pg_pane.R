@@ -72,7 +72,7 @@ pgPaneUI <-function(
             absolutePanel(
                 top = top, right = right, draggable = TRUE, width = "310",
                 height = "auto", class = "control-panel", cursor = "inherit",
-                style = "background-color: white; z-index:999;",
+                style = "background-color: rgb(253, 253, 253); z-index:999;",
                 fluidRow(
                     column(3),
                     column(7, h4(title_main)),
@@ -87,8 +87,7 @@ pgPaneUI <-function(
                 div(class = if(opened) "collapse in" else "collapse",
                     id = glue("{pane_id}-pg-collapse"), .)
             ),
-            spsDepend("shinydashboard", js = FALSE),
-            spsDepend("AdminLTE", js = FALSE),
+            spsDepend("basic", js = FALSE),
             spsDepend("update_pg"),
             spsDepend("font-awesome"),
             spsDepend("bttn"),

@@ -57,7 +57,8 @@ if(interactive()){
 
   server <- function(input, output, session) {
     observeEvent(input$check_random_pkg, {
-      shinyCheckPkg(session, cran_pkg = c("pkg1", "pkg2"), bioc_pkg = "bioxxx", github = "user1/pkg1")
+      shinyCheckPkg(session, cran_pkg = c("pkg1", "pkg2"),
+                    bioc_pkg = "bioxxx", github = "user1/pkg1")
     })
     observeEvent(input$check_shiny, {
       spsValidate(verbose = FALSE, {

@@ -23,8 +23,7 @@ Mostly used in SPS internal development
 For \code{dep}, current options are:
 \itemize{
 \item basic: spsComps basic css and js
-\item shinydashboard: shinydashboard package, css and js
-\item AdminLTE: shinydashboard package, often used together with "shinydashboard", css and js
+\item css_loading: for css loaders
 \item update_pg: spsComps \link{pgPaneUpdate} function required, js only
 \item update_timeline: spsComps \link{spsTimeline} function required, js only
 \item font-awesome: font-awesome, css only
@@ -32,12 +31,12 @@ For \code{dep}, current options are:
 \item toastr: comes from shinytoastr package, toastr.js, css and js
 \item pop-tip: enable enhanced bootstrap popover and tips, required for \link{bsHoverPopover} function
 \item gotop: required by \link{spsGoTop} function
+\item animation:  some animations for icons and other elements
 }
 }
 \examples{
 spsDepend("basic")
-# shinydashboard has both js and css and if we only want to use css:
-spsDepend("shinydashboard", css = FALSE)
+spsDepend("font-awesome")
 # Then add it to your shiny app
 if(interactive()){
     library(shiny)

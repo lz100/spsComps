@@ -8,8 +8,7 @@
 #' @details For `dep`, current options are:
 #'
 #' - basic: spsComps basic css and js
-#' - shinydashboard: shinydashboard package, css and js
-#' - AdminLTE: shinydashboard package, often used together with "shinydashboard", css and js
+#' - css_loading: for css loaders
 #' - update_pg: spsComps [pgPaneUpdate] function required, js only
 #' - update_timeline: spsComps [spsTimeline] function required, js only
 #' - font-awesome: font-awesome, css only
@@ -17,14 +16,14 @@
 #' - toastr: comes from shinytoastr package, toastr.js, css and js
 #' - pop-tip: enable enhanced bootstrap popover and tips, required for [bsHoverPopover] function
 #' - gotop: required by [spsGoTop] function
+#' - animation:  some animations for icons and other elements
 #'
 #' @return [htmltools::htmlDependency] object
 #' @export
 #'
 #' @examples
 #' spsDepend("basic")
-#' # shinydashboard has both js and css and if we only want to use css:
-#' spsDepend("shinydashboard", css = FALSE)
+#' spsDepend("font-awesome")
 #' # Then add it to your shiny app
 #' if(interactive()){
 #'     library(shiny)
@@ -64,41 +63,27 @@ spsDepend <- function(dep, js = TRUE, css = TRUE) {
                     if (css) css_file else NULL
                 )
             },
-            "shinydashboard" = {
-                js_file <- htmltools::htmlDependency(
-                    name = "shinydashboard-js",
-                    version = packageVersion("shinydashboard"),
-                    src = c(file = system.file(package = "shinydashboard")),
-                    script = "shinydashboard.js"
-                )
-                css_file <- htmltools::htmlDependency(
-                    name = "shinydashboard-css",
-                    version = packageVersion("shinydashboard"),
-                    src = c(file = system.file(package = "shinydashboard")),
-                    stylesheet = "shinydashboard.css"
-                )
-                list(
-                    if (js) js_file else NULL,
-                    if (css) css_file else NULL
-                )
-            },
-            "AdminLTE" = {
-                js_file <- htmltools::htmlDependency(
-                    name = "AdminLTE-js",
-                    version = "2.0.6",
-                    src = c(file = system.file("AdminLTE", package = "shinydashboard")),
-                    script = "app.min.js",
-                )
-                css_file <- htmltools::htmlDependency(
-                    name = "AdminLTE-css",
-                    version = "2.0.6",
-                    src = c(file = system.file("AdminLTE", package = "shinydashboard")),
-                    stylesheet = "AdminLTE.css"
-                )
-                list(
-                    if (js) js_file else NULL,
-                    if (css) css_file else NULL
-                )
+            "css_loading" = {
+              js_file <- htmltools::htmlDependency(
+                name = "spsLoading-js",
+                version = packageVersion("spsComps"),
+                package = "spsComps",
+                src = c(href = "spsComps", file = "assets"),
+                script = "js/sps_cssloader.js",
+                all_files = FALSE
+              )
+              css_file <- htmltools::htmlDependency(
+                name = "spsLoading-css",
+                version = packageVersion("spsComps"),
+                package = "spsComps",
+                src = c(href = "spsComps", file = "assets"),
+                stylesheet = "css/css_loader.css",
+                all_files = FALSE
+              )
+              list(
+                if (js) js_file else NULL,
+                if (css) css_file else NULL
+              )
             },
             "update_pg" = htmltools::htmlDependency(
                 name = "sps-update-pg",
@@ -147,6 +132,26 @@ spsDepend <- function(dep, js = TRUE, css = TRUE) {
                 src = c(href = "spsComps", file = system.file("assets", package = "spsComps")),
                 script = "js/sps_gotop.js",
                 all_files = FALSE
-            )
+            ),
+            "animation" = {
+              js_file <- htmltools::htmlDependency(
+                name = "spsComps-animation",
+                version = packageVersion("spsComps"),
+                src = c(href = "spsComps", file = system.file("assets", package = "spsComps")),
+                script = "js/sps_animation.js",
+                all_files = FALSE
+              )
+              css_file <- htmltools::htmlDependency(
+                name = "font-awesome-animation",
+                version = '1.1.1',
+                src = c(href = "spsComps", file = system.file("assets", package = "spsComps")),
+                stylesheet = "css/font-awesome-animation.min.css",
+                all_files = FALSE
+              )
+              list(
+                if (js) js_file else NULL,
+                if (css) css_file else NULL
+              )
+            }
     )
 }
