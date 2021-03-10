@@ -45,39 +45,41 @@ If you don't specify any animation, it will work the same as the original
 requires an icon as input.
 }
 \examples{
-library(shiny)
+if(interactive()){
+  library(shiny)
 
-ui <- fluidPage(
-  style = "text-align: center;",
-  tags$label("same as original icon function"), br(),
-  animateIcon("home"),  br(),
-  tags$label("Change animation and color"), br(),
-  animateIcon(
-    name = "home", animation = "horizontal", speed = "slow", color ="red"
-  ), br(),
-  tags$label("work in a button"), br(),
-  actionButton(
-    "a", "a", icon = animateIcon("spinner", "spin", "fast")
-  ), br(),
-  tags$label("hover your mouse on the next one"), br(),
-  animateIcon(
-    name = "wrench", animation = "wrench", hover = TRUE, color ="green"
-  ), br(),
-  tags$label("change size"), br(),
-  animateIcon("home"),
-  animateIcon("home", size = "xs"),
-  animateIcon("home", size = "sm"),
-  animateIcon("home", size = "lg"),
-  animateIcon("home", size = "2x"),
-  animateIcon("home", size = "3x"),
-  animateIcon("home", size = "5x"),
-  animateIcon("home", size = "7x"),
-  animateIcon("home", size = "10x")
-)
+  ui <- fluidPage(
+    style = "text-align: center;",
+    tags$label("same as original icon function"), br(),
+    animateIcon("home"),  br(),
+    tags$label("Change animation and color"), br(),
+    animateIcon(
+      name = "home", animation = "horizontal", speed = "slow", color ="red"
+    ), br(),
+    tags$label("work in a button"), br(),
+    actionButton(
+      "a", "a", icon = animateIcon("spinner", "spin", "fast")
+    ), br(),
+    tags$label("hover your mouse on the next one"), br(),
+    animateIcon(
+      name = "wrench", animation = "wrench", hover = TRUE, color ="green"
+    ), br(),
+    tags$label("change size"), br(),
+    animateIcon("home"),
+    animateIcon("home", size = "xs"),
+    animateIcon("home", size = "sm"),
+    animateIcon("home", size = "lg"),
+    animateIcon("home", size = "2x"),
+    animateIcon("home", size = "3x"),
+    animateIcon("home", size = "5x"),
+    animateIcon("home", size = "7x"),
+    animateIcon("home", size = "10x")
+  )
 
-server <- function(input, output, session) {
+  server <- function(input, output, session) {
 
+  }
+
+  shinyApp(ui, server)
 }
-
-shinyApp(ui, server)
 }

@@ -87,74 +87,76 @@ see examples.
 }
 }
 \examples{
-library(shiny)
+if(interactive()){
+  library(shiny)
 
-ui <- fluidPage(
-  spsDepend("animation"),
-  column(
-    6,
-    h3("Adding animations from UI"),
-    tags$label("to a button"), br(),
-    actionButton("btn1", "random button"), br(),
-    animateUI("btn1", animation = "ring"),
-    tags$label("to some text"), br(),
-    p(id = "mytext", class = "text-red", "some move text"), br(),
-    animateUI("mytext", animation = "horizontal", speed = "fast"),
-    tags$label("on hover, move mouse on the red thumb"), br(),
-    actionButton(
-      "btn2", "",
-      icon = icon(id = "myicon", "thumbs-o-up"),
-      style = "color: red; boarder: initial; border-color: transparent;"
-    ), br(),
-    animateUI("btn2", animation = "bounce", speed = "fast", hover = TRUE),
-    tags$label("on a plot"), br(),
-    plotOutput("plot1"),
-    animateUI("plot1", animation = "float", speed = "fast")
-  ),
-  column(
-    6,
-    h3("Adding/removing animations from server"),
-    tags$label("use a button to control"), br(),
-    actionButton("btn3", "animate itself"),
-    actionButton("btn4", "stop animation"), br(),
-    tags$label("advanced selector in for complex group"), br(),
-    sliderInput(
-      "myslider",
-      label = "animating if less than 5",
-      value = 0,
-      min = 0, max = 10,
-      step = 1
+  ui <- fluidPage(
+    spsDepend("animation"),
+    column(
+      6,
+      h3("Adding animations from UI"),
+      tags$label("to a button"), br(),
+      actionButton("btn1", "random button"), br(),
+      animateUI("btn1", animation = "ring"),
+      tags$label("to some text"), br(),
+      p(id = "mytext", class = "text-red", "some move text"), br(),
+      animateUI("mytext", animation = "horizontal", speed = "fast"),
+      tags$label("on hover, move mouse on the red thumb"), br(),
+      actionButton(
+        "btn2", "",
+        icon = icon(id = "myicon", "thumbs-o-up"),
+        style = "color: red; boarder: initial; border-color: transparent;"
+      ), br(),
+      animateUI("btn2", animation = "bounce", speed = "fast", hover = TRUE),
+      tags$label("on a plot"), br(),
+      plotOutput("plot1"),
+      animateUI("plot1", animation = "float", speed = "fast")
     ),
-    sliderInput(
-      "myslider2",  min = 0, max = 10, value = 10,
-      label = "this one will not be selected"
+    column(
+      6,
+      h3("Adding/removing animations from server"),
+      tags$label("use a button to control"), br(),
+      actionButton("btn3", "animate itself"),
+      actionButton("btn4", "stop animation"), br(),
+      tags$label("advanced selector in for complex group"), br(),
+      sliderInput(
+        "myslider",
+        label = "animating if less than 5",
+        value = 0,
+        min = 0, max = 10,
+        step = 1
+      ),
+      sliderInput(
+        "myslider2",  min = 0, max = 10, value = 10,
+        label = "this one will not be selected"
+      )
     )
   )
-)
 
-server <- function(input, output, session) {
-  output$plot1 <- renderPlot(plot(1:10, 10:1))
-  observeEvent(input$myslider, {
-    if (input$myslider <= 5) {
-      animateServer(
-        # the slider container does not has the ID, it is inside
-        selector = ".shiny-input-container:has(#myslider)",
-        animation = "horizontal", speed = "slow", isID = FALSE
-      )
-    } else {
-      animationRemove(
-        selector = ".shiny-input-container:has(#myslider)",
-        isID = FALSE
-      )
-    }
-  })
-  observeEvent(input$btn3, {
-    animateServer("btn3", animation = "flash", speed = "slow")
-  })
-  observeEvent(input$btn4, {
-    animationRemove("btn3")
-  })
+  server <- function(input, output, session) {
+    output$plot1 <- renderPlot(plot(1:10, 10:1))
+    observeEvent(input$myslider, {
+      if (input$myslider <= 5) {
+        animateServer(
+          # the slider container does not has the ID, it is inside
+          selector = ".shiny-input-container:has(#myslider)",
+          animation = "horizontal", speed = "slow", isID = FALSE
+        )
+      } else {
+        animationRemove(
+          selector = ".shiny-input-container:has(#myslider)",
+          isID = FALSE
+        )
+      }
+    })
+    observeEvent(input$btn3, {
+      animateServer("btn3", animation = "flash", speed = "slow")
+    })
+    observeEvent(input$btn4, {
+      animationRemove("btn3")
+    })
+  }
+
+  shinyApp(ui, server)
 }
-
-shinyApp(ui, server)
 }
