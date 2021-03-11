@@ -1,10 +1,14 @@
 # SPS add HTML dependency functions
 
 #' Add commonly used HTML dependencies
-#' @description Mostly used in SPS internal development
+#' @description Mostly used in SPS internal development or add dependencies for
+#' some server end functions. For most UI functions, the dependency has been automatically
+#' attached for you.
 #' @param dep dependency names, see details
 #' @param js bool, use only javascript from this resource if there are both js and css files?
 #' @param css bool, use only CSS from this resource if there are both js and css files?
+#' @param listing bool, if your `dep` is invalid, list all options? `FALSE` will
+#' mute it.
 #' @details For `dep`, current options are:
 #'
 #' - basic: spsComps basic css and js
@@ -16,12 +20,16 @@
 #' - toastr: comes from shinytoastr package, toastr.js, css and js
 #' - pop-tip: enable enhanced bootstrap popover and tips, required for [bsHoverPopover] function
 #' - gotop: required by [spsGoTop] function
-#' - animation:  some animations for icons and other elements
+#' - animation:  required for animation related functions to add animations
+#' for icons and other elements
 #'
 #' @return [htmltools::htmlDependency] object
 #' @export
 #'
 #' @examples
+#' # list all options
+#' spsDepend("")
+#' # try some options
 #' spsDepend("basic")
 #' spsDepend("font-awesome")
 #' # Then add it to your shiny app
@@ -39,7 +47,12 @@
 #'
 #'     shinyApp(ui, server)
 #' }
-spsDepend <- function(dep, js = TRUE, css = TRUE) {
+spsDepend <- function(dep, js = TRUE, css = TRUE, listing = TRUE) {
+    stopifnot(is.character(dep) && length(dep) == 1)
+    stopifnot(is.logical(js) && length(js) == 1)
+    stopifnot(is.logical(css) && length(css) == 1)
+    stopifnot(is.logical(listing) && length(listing) == 1)
+
     switch (dep,
             "basic" = {
                 js_file <- htmltools::htmlDependency(
@@ -152,6 +165,48 @@ spsDepend <- function(dep, js = TRUE, css = TRUE) {
                 if (js) js_file else NULL,
                 if (css) css_file else NULL
               )
+            },
+            "css-loader" = {
+              js_file <- htmltools::htmlDependency(
+                name = "spsComps-css-loader-js",
+                version = packageVersion("spsComps"),
+                src = c(href = "spsComps", file = system.file("assets", package = "spsComps")),
+                script = "js/sps_cssloader.js",
+                all_files = FALSE
+              )
+              css_file <- htmltools::htmlDependency(
+                name = "spsComps-css-loader-css",
+                version = packageVersion("spsComps"),
+                src = c(href = "spsComps", file = system.file("assets", package = "spsComps")),
+                stylesheet = "css/css_loader.css",
+                all_files = FALSE
+              )
+              list(
+                if (js) js_file else NULL,
+                if (css) css_file else NULL
+              )
+            },
+            {
+              if (listing) {
+                msg(glue::glue('Dependency "{dep}" not found.'), level = "warning")
+                cat(glue::glue(
+                  '
+                - basic: spsComps basic css and js
+                - css_loading: for css loaders
+                - update_pg: spsComps [pgPaneUpdate] function required, js only
+                - update_timeline: spsComps [spsTimeline] function required, js only
+                - font-awesome: font-awesome, css only
+                - bttn: comes from shinyWidgets package, bttn.css, css only
+                - toastr: comes from shinytoastr package, toastr.js, css and js
+                - pop-tip: enable enhanced bootstrap popover and tips, required for [bsHoverPopover] function
+                - gotop: required by [spsGoTop] function
+                - animation:  required for animation related functions to add animations
+                for icons and other elements
+                \n'
+                ))
+              } else {
+                  invisible(NULL)
+              }
             }
     )
 }

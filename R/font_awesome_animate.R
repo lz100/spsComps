@@ -102,7 +102,7 @@ animateIcon <- function(
 #' @param alert bool, for [animationRemove] only: if the component is not found or it
 #' does not contain any animation or the animation is not added by spsComps,
 #' alert on UI? More like for debugging purposes.
-#' @return
+#' @return see details
 #' @details
 #' - animateUI: use on the UI side, which means add the animation when UI loads
 #' complete.

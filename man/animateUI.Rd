@@ -55,7 +55,7 @@ does not contain any animation or the animation is not added by spsComps,
 alert on UI? More like for debugging purposes.}
 }
 \value{
-
+see details
 }
 \description{
 Add animation to a HTML or component and remove it
