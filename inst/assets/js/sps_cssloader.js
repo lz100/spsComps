@@ -418,5 +418,5 @@ function chooseLoader(id, type, color, width, height){
       </style>
       `
   }
-  return types[type] || '<div>not found</div>';
+  return types[type] || '<div>type not found</div>';
 }

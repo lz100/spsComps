@@ -8,6 +8,8 @@
 
 -   `animationRemove`: remove animations of an element, call from server only.
 
+-   `cssLoader`: creates 12 different loaders to indicate busy status.
+
 # spsComps 0.1.1
 
 ## Bug fix
