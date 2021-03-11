@@ -71,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">spsComps</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.9.99</span>
       </span>
     </div>
 
@@ -115,9 +115,23 @@
       <small>Source: <a href='https://github.com/lz100/spsComps/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="spscomps-0109" class="section level1">
-<h1 class="page-header" data-toc-text="0.1.0.9">
-<a href="#spscomps-0109" class="anchor"></a>spsComps 0.1.0.9<small> Unreleased </small>
+    <div id="spscomps-020" class="section level1">
+<h1 class="page-header" data-toc-text="0.2.0">
+<a href="#spscomps-020" class="anchor"></a>spsComps 0.2.0<small> Unreleased </small>
+</h1>
+<div id="new-features" class="section level2">
+<h2 class="hasAnchor">
+<a href="#new-features" class="anchor"></a>New features</h2>
+<ul>
+<li><p><code>animateIcon</code>: create font-awesome icons with animations!</p></li>
+<li><p><code>animateUI</code>, <code>animateServer</code>: add animations to any HTML/Shiny element, one is called from the UI, one is called from the server side.</p></li>
+<li><p><code>animationRemove</code>: remove animations of an element, call from server only.</p></li>
+</ul>
+</div>
+</div>
+    <div id="spscomps-011" class="section level1">
+<h1 class="page-header" data-toc-text="0.1.1">
+<a href="#spscomps-011" class="anchor"></a>spsComps 0.1.1<small> 2021-03-09 </small>
 </h1>
 <div id="bug-fix" class="section level2">
 <h2 class="hasAnchor">
@@ -125,6 +139,14 @@
 <ul>
 <li>fix links in shiny demo</li>
 <li>fix <code>hrefTab</code> and <code>hrefTable</code> incompatible with Rmarkdown by replacing the &lt;a&gt; tag <code>href</code> from none to <code>javascript:null;</code>.</li>
+</ul>
+</div>
+<div id="other" class="section level2">
+<h2 class="hasAnchor">
+<a href="#other" class="anchor"></a>Other</h2>
+<ul>
+<li>Remove <code>shinydashboardPlus</code> dependency. The 2.0.0 update breaks <code>progressPanel</code> entirely, rewrite it by ourselves.</li>
+<li>Remove <code>shinydashboard</code> dependency. Rewrite the CSS by myself to reduce dependency.</li>
 </ul>
 </div>
 </div>
@@ -139,9 +161,9 @@
 <li>Migrated from systemPipeShiny</li>
 </ul>
 </div>
-<div id="new-features" class="section level2">
+<div id="new-features-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-features" class="anchor"></a>New features</h2>
+<a href="#new-features-1" class="anchor"></a>New features</h2>
 <ul>
 <li>
 <p>Enhanced <code>gallery</code> arguments.</p>
@@ -152,7 +174,7 @@
 <li><p>New <code>textButton</code>, text input group with button</p></li>
 <li><p>New <code>textInputGroup</code>, text input group with icon or text on both ends</p></li>
 <li>
-<p>Better <em>hover</em> effects on hrefTab, hrefTable, gallery, hexLogo, hexPanel</p>
+<p>Better <em>hover</em> effects on <code>hrefTab</code>, <code>hrefTable</code>, gallery, <code>hexLogo</code>, <code>hexPanel</code></p>
 <ul>
 <li>hover effect change when there is no link attached to the item.</li>
 </ul>

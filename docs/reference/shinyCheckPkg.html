@@ -78,7 +78,7 @@ pakcage and pop up warnings will prevent app to crash." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">spsComps</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.9.99</span>
       </span>
     </div>
 
@@ -191,7 +191,8 @@ pakcage and pop up warnings will prevent app to crash.</p>
 
   <span class='va'>server</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>input</span>, <span class='va'>output</span>, <span class='va'>session</span><span class='op'>)</span> <span class='op'>{</span>
     <span class='fu'><a href='https://rdrr.io/pkg/shiny/man/observeEvent.html'>observeEvent</a></span><span class='op'>(</span><span class='va'>input</span><span class='op'>$</span><span class='va'>check_random_pkg</span>, <span class='op'>{</span>
-      <span class='fu'>shinyCheckPkg</span><span class='op'>(</span><span class='va'>session</span>, cran_pkg <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"pkg1"</span>, <span class='st'>"pkg2"</span><span class='op'>)</span>, bioc_pkg <span class='op'>=</span> <span class='st'>"bioxxx"</span>, github <span class='op'>=</span> <span class='st'>"user1/pkg1"</span><span class='op'>)</span>
+      <span class='fu'>shinyCheckPkg</span><span class='op'>(</span><span class='va'>session</span>, cran_pkg <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"pkg1"</span>, <span class='st'>"pkg2"</span><span class='op'>)</span>,
+                    bioc_pkg <span class='op'>=</span> <span class='st'>"bioxxx"</span>, github <span class='op'>=</span> <span class='st'>"user1/pkg1"</span><span class='op'>)</span>
     <span class='op'>}</span><span class='op'>)</span>
     <span class='fu'><a href='https://rdrr.io/pkg/shiny/man/observeEvent.html'>observeEvent</a></span><span class='op'>(</span><span class='va'>input</span><span class='op'>$</span><span class='va'>check_shiny</span>, <span class='op'>{</span>
       <span class='fu'><a href='spsValidate.html'>spsValidate</a></span><span class='op'>(</span>verbose <span class='op'>=</span> <span class='cn'>FALSE</span>, <span class='op'>{</span>
