@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">spsComps</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.9.99</span>
       </span>
     </div>
 
@@ -147,8 +147,7 @@
 
     <p>For <code>dep</code>, current options are:</p><ul>
 <li><p>basic: spsComps basic css and js</p></li>
-<li><p>shinydashboard: shinydashboard package, css and js</p></li>
-<li><p>AdminLTE: shinydashboard package, often used together with "shinydashboard", css and js</p></li>
+<li><p>css_loading: for css loaders</p></li>
 <li><p>update_pg: spsComps <a href='pgPaneUI.html'>pgPaneUpdate</a> function required, js only</p></li>
 <li><p>update_timeline: spsComps <a href='spsTimeline.html'>spsTimeline</a> function required, js only</p></li>
 <li><p>font-awesome: font-awesome, css only</p></li>
@@ -156,6 +155,7 @@
 <li><p>toastr: comes from shinytoastr package, toastr.js, css and js</p></li>
 <li><p>pop-tip: enable enhanced bootstrap popover and tips, required for <a href='bsHoverPopover.html'>bsHoverPopover</a> function</p></li>
 <li><p>gotop: required by <a href='spsGoTop.html'>spsGoTop</a> function</p></li>
+<li><p>animation:  some animations for icons and other elements</p></li>
 </ul>
 
 
@@ -164,7 +164,7 @@
 </div><div class='output co'>#&gt; [[1]]
 #&gt; List of 10
 #&gt;  $ name      : chr "spsComps-js"
-#&gt;  $ version   : chr "0.1.0.9"
+#&gt;  $ version   : chr "0.1.9.99"
 #&gt;  $ src       :List of 2
 #&gt;   ..$ href: chr "spsComps"
 #&gt;   ..$ file: chr "assets"
@@ -180,7 +180,7 @@
 #&gt; [[2]]
 #&gt; List of 10
 #&gt;  $ name      : chr "spsComps-css"
-#&gt;  $ version   : chr "0.1.0.9"
+#&gt;  $ version   : chr "0.1.9.99"
 #&gt;  $ src       :List of 2
 #&gt;   ..$ href: chr "spsComps"
 #&gt;   ..$ file: chr "assets"
@@ -192,25 +192,21 @@
 #&gt;  $ package   : chr "spsComps"
 #&gt;  $ all_files : logi FALSE
 #&gt;  - attr(*, "class")= chr "html_dependency"
-#&gt; </div><div class='input'><span class='co'># shinydashboard has both js and css and if we only want to use css:</span>
-<span class='fu'>spsDepend</span><span class='op'>(</span><span class='st'>"shinydashboard"</span>, css <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+#&gt; </div><div class='input'><span class='fu'>spsDepend</span><span class='op'>(</span><span class='st'>"font-awesome"</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; [[1]]
 #&gt; List of 10
-#&gt;  $ name      : chr "shinydashboard-js"
-#&gt;  $ version   : chr "0.7.1"
+#&gt;  $ name      : chr "font-awesome"
+#&gt;  $ version   : chr "5.13.0"
 #&gt;  $ src       :List of 1
-#&gt;   ..$ file: chr "/home/runner/work/_temp/Library/shinydashboard"
+#&gt;   ..$ file: chr "www/shared/fontawesome"
 #&gt;  $ meta      : NULL
-#&gt;  $ script    : chr "shinydashboard.js"
-#&gt;  $ stylesheet: NULL
+#&gt;  $ script    : NULL
+#&gt;  $ stylesheet: chr [1:2] "css/all.min.css" "css/v4-shims.min.css"
 #&gt;  $ head      : NULL
 #&gt;  $ attachment: NULL
-#&gt;  $ package   : NULL
+#&gt;  $ package   : chr "shiny"
 #&gt;  $ all_files : logi TRUE
 #&gt;  - attr(*, "class")= chr "html_dependency"
-#&gt; 
-#&gt; [[2]]
-#&gt; NULL
 #&gt; </div><div class='input'><span class='co'># Then add it to your shiny app</span>
 <span class='kw'>if</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span><span class='op'>{</span>
     <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://shiny.rstudio.com/'>shiny</a></span><span class='op'>)</span>
