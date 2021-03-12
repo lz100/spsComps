@@ -21,7 +21,8 @@ Imports:
     htmltools,
     vroom,
     dplyr,
-    utils
+    utils,
+    R6
 Suggests:
     testthat,
     shinyjqui

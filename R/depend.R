@@ -22,6 +22,7 @@
 #' - gotop: required by [spsGoTop] function
 #' - animation:  required for animation related functions to add animations
 #' for icons and other elements
+#' - css-loader: required for loader functions
 #'
 #' @return [htmltools::htmlDependency] object
 #' @export
@@ -202,6 +203,7 @@ spsDepend <- function(dep, js = TRUE, css = TRUE, listing = TRUE) {
                 - gotop: required by [spsGoTop] function
                 - animation:  required for animation related functions to add animations
                 for icons and other elements
+                - css-loader: required for loader functions
                 \n'
                 ))
               } else {

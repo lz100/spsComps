@@ -1,6 +1,6 @@
 
 
-#' Create a variety of CSS loaders
+#' Create a variety of CSS loaders on UI
 #' @description CSS loaders can improve user experience by adding a small
 #' animation icon to a HTML element. spsComps provides you 12 different
 #' looking CSS loaders. Unlike other Shiny packages, you have full control
@@ -95,34 +95,14 @@ cssLoader <- function(
   is_icon = FALSE,
   ...
 ) {
-  stopifnot(is.character(type) && length(type) == 1)
-  stopifnot(is.character(id) && length(id) == 1)
-  stopifnot(is.character(height) && length(height) == 1)
-  stopifnot(is.character(width) && length(width) == 1)
-  stopifnot(is.character(color) && length(color) == 1)
-  stopifnot(is.numeric(opacity) && opacity >=0 && opacity <= 1)
-  stopifnot(is.logical(inline) && length(inline) == 1)
-  stopifnot(is.logical(is_icon) && length(is_icon) == 1)
 
-  if (id == "") id <- paste0('spsloader-', glue::glue_collapse(sample(9, 7)))
-
+  type <- .validateLoader(
+    type = type, id = id, height = height, width = width, color = color,
+    opacity = opacity, inline = inline, is_icon = is_icon
+  )
+  if (id == "") id <- paste0('spsloader-', glue::glue_collapse(sample(9, 9)))
   element <- if (is_icon) tags$i else tags$div
   display <- if (inline) "inline-block" else "block"
-
-  type <- match.arg(type, c(
-    "circle",
-    "dual-ring",
-    "facebook",
-    "heart",
-    "ring",
-    "roller",
-    "default",
-    "ellipsis",
-    "grid",
-    "hourglass",
-    "ripple",
-    "spinner"
-  ))
 
   element(
     id = id,
@@ -143,3 +123,159 @@ cssLoader <- function(
     ...
   )
 }
+
+.validateLoader <- function(
+  type = "default",
+  id = "",
+  height = "1.5rem",
+  width = height,
+  color = "#337ab7",
+  opacity = 1,
+  inline = FALSE,
+  is_icon = FALSE,
+  isID = TRUE
+) {
+
+  stopifnot(is.character(type) && length(type) == 1)
+  stopifnot(is.character(id) && length(id) == 1)
+  stopifnot(is.character(height) && length(height) == 1)
+  stopifnot(is.character(width) && length(width) == 1)
+  stopifnot(is.character(color) && length(color) == 1)
+  stopifnot(is.numeric(opacity) && opacity >=0 && opacity <= 1)
+  stopifnot(is.logical(inline) && length(inline) == 1)
+  stopifnot(is.logical(is_icon) && length(is_icon) == 1)
+  stopifnot(is.logical(isID) && length(isID) == 1)
+
+  match.arg(type, c(
+    "circle",
+    "dual-ring",
+    "facebook",
+    "heart",
+    "ring",
+    "roller",
+    "default",
+    "ellipsis",
+    "grid",
+    "hourglass",
+    "ripple",
+    "spinner"
+  ))
+}
+
+########################### Server side funcs #############################
+
+addLoader <- R6::R6Class(
+  classname = "spsComps_loader",
+  public = list(
+    initialize = function(
+      target_selector = "",
+      isID = TRUE,
+      type = "default",
+      id = "",
+      height = NULL,
+      width = height,
+      color = "#337ab7",
+      opacity = 1,
+      method = "replace",
+      block = TRUE,
+      center = TRUE,
+      bg_color = "#eee",
+      footer = NULL,
+      z_index = 2000,
+      alert = FALSE,
+      session = shiny::getDefaultReactiveDomain()
+    ){
+      if(!inherits(session, c("ShinySession", "session_proxy")))
+        stop("Cannot find current Shiny session")
+
+      stopifnot(is.character(target_selector) && length(target_selector) == 1)
+      stopifnot(is.character(bg_color) && length(bg_color) == 1)
+      stopifnot(is.logical(alert) && length(alert) == 1)
+      stopifnot(is.logical(center) && length(center) == 1)
+      stopifnot(is.numeric(z_index) && length(z_index) == 1)
+      if(!is.null(footer)) stopifnot(inherits(footer, "shiny.tag") && length(footer) == 3)
+      if(!is.null(height)) stopifnot(is.character(height) && length(height) == 1)
+      if(!is.null(width)) stopifnot(is.character(width) && length(width) == 1)
+
+      type <- .validateLoader(
+        type = type, id = id, color = color,
+        opacity = opacity, isID = isID
+      )
+
+      method <- match.arg(method, c("replace", "inline", "full_screen"))
+      if ((method == "full_screen") && (is.null(height) || is.null(width)))
+        stop("Loader: height and width cannot by NULL for full screen method.")
+
+      selector <- if(isID) {
+        paste0("#", if(inherits(session, "session_proxy")) session$ns(target_selector) else target_selector)
+      } else {
+        target_selector
+      }
+      id <- if (id == "") paste0('spsloader-', glue::glue_collapse(sample(9, 9))) else id
+
+      footer <- if(method != "inline") htmltools::doRenderTags(footer) else NULL
+      z_index <- floor(z_index)
+
+      session$sendCustomMessage('sps-add-loader', message = list(
+        selector = selector,
+        id = id,
+        type = type,
+        height = height,
+        width = width,
+        method = method,
+        color = color,
+        opacity = opacity,
+        block = block,
+        center = center,
+        footer = footer,
+        zIndex = z_index,
+        bgColor = bg_color,
+        alert = alert
+      ))
+
+      private$selector <- selector
+      private$id <- paste0(id, "-container")
+      private$block <- block
+      private$method <- method
+      private$session <- session
+
+    },
+    show = function(alert = FALSE){
+      shinyCatch({
+        if(!is.logical(alert) || length(alert) != 1)
+          stop("Alert needs to be TRUE or FALSE")
+      }, blocking_level = "error")
+
+      private$session$sendCustomMessage('sps-toggle-loader', message = list(
+        selector = private$selector,
+        id = private$id,
+        state = "show",
+        method = private$method,
+        block = private$block,
+        alert = alert
+      ))
+    },
+    hide = function(alert = FALSE){
+      shinyCatch({
+        if(!is.logical(alert) || length(alert) != 1)
+          stop("Alert needs to be TRUE or FALSE")
+      }, blocking_level = "error")
+
+      private$session$sendCustomMessage('sps-toggle-loader', message = list(
+        selector = private$selector,
+        id = private$id,
+        state = "hide",
+        method = private$method,
+        block = private$block,
+        alert = alert
+      ))
+    }
+  ),
+  private = list(
+    selector = NULL,
+    id = NULL,
+    block = NULL,
+    method = NULL,
+    session = NULL
+  )
+)

@@ -1,5 +1,5 @@
 
-
+// get loader div
 function chooseLoader(id, type, color, width, height){
   var types = {
     //
@@ -420,3 +420,184 @@ function chooseLoader(id, type, color, width, height){
   }
   return types[type] || '<div>type not found</div>';
 }
+
+
+Shiny.addCustomMessageHandler('sps-add-loader', function(data) {
+  // selector,id ,type ,height ,width ,method , bgColor,
+  // color ,opacity ,block , center, footer, zIndex, alert
+  //get element
+  var el = data.method !== 'full_screen' ? $(data.selector) : $(document);
+  if (el.length != 1) {
+    if (data.alert) alert("Loader: Cannot find element or more than one match");
+    throw new Error("Loader: Cannot find element or more than one match");
+  }
+  var el_height = el.height(); el_width = el.width();
+  var el_short = el_height > el_width ? el_width : el_height;
+  var loader_divider = el_short < 100 || (data.height && data.width)? 10 : 20;
+  var loader_height = data.height ? data.height : `${(el_short - 5)/loader_divider}rem`;
+  var loader_width = data.width ? data.width :`${(el_short - 5)/loader_divider}rem`;
+
+  if (el_height <= 0 || el_width <= 0) {
+    if (data.alert) alert("Loader: element does not have height or width");
+    throw new Error("Loader: element does not have height or width");
+  }
+
+  switch (data.method) {
+  case 'replace':
+    loaderReplace(
+      el, data.id,
+      loader_height,
+      loader_width,
+      data.opacity,
+      data.center,
+      data.block,
+      data.footer
+    );
+    break;
+  case 'inline':
+    loaderInline(
+      el, data.id,
+      loader_height,
+      loader_width,
+      data.opacity,
+      data.center
+    );
+    break;
+  case 'full_screen':
+    loaderFullscreen(
+      data.id, loader_width, loader_height,
+      data.opacity, data.center, data.block,
+      data.footer, data.zIndex, data.bgColor
+    );
+    break;
+  }
+
+  var loader = chooseLoader(
+    data.id, data.type, data.color,
+    loader_height,
+    loader_width,
+  );
+  $(`#${data.id}`).prepend(loader);
+
+});
+
+function loaderReplace(el, id, loader_height, loader_width, opacity, center, block, footer) {
+  var newEl = el.clone().empty();
+  newEl.attr('id', `${id}-container`);
+  newEl.attr('is-inline', el.css('display').includes('inline') ? true : false);
+  newEl.css({display: 'none', opacity: opacity});
+  if (block) newEl.attr('disabled','disabled');
+
+  var newEl_height = el.attr("height") ? `${el.attr("height")}px` : el.css("height")
+  var newEl_width = el.attr("width") ? `${el.attr("width")}px` : el.css("width")
+  newEl.css({height: newEl_height, width: newEl_width})
+
+  newEl.prepend(
+    `
+    <div id=${id} style="height: ${loader_height}; width: ${loader_width}; display: block; opacity: 1; margin: ${center? 'auto' : '0'};">
+    <div id=${id}-footer>
+    </div>
+    `);
+  el.after(newEl);
+  if (footer) $(`#${id}-footer`).append($(footer).css('text-align', 'center'));
+}
+
+
+function loaderInline(el, id, loader_height, loader_width, opacity, center) {
+  var newEl = $('<div></div>');
+  newEl.attr('id', `${id}-container`);
+  newEl.attr('is-inline', 'true');
+  newEl.css({
+    display: 'none',
+    verticalAlign: `${center? 'middle' : 'initial'}`,
+    opacity: opacity
+  });
+
+  newEl.prepend(
+    `
+    <div id=${id} style="height: ${loader_height}; width: ${loader_width}; display: inline; opacity: ${opacity}; margin: 0;">
+    </div>
+    `);
+  el.prepend(newEl);
+}
+
+function loaderFullscreen(
+  id, loader_width, loader_height,
+  opacity, center, block, footer,
+  zIndex, bgColor
+  ) {
+  var newEl = $('<div></div>');
+  newEl.attr('id', `${id}-container`);
+  newEl.attr('is-inline', 'false');
+  newEl.css({display: 'none'});
+  if (block) newEl.attr('disabled','disabled');
+  newEl.css({
+    height: '100vh',
+    width: '100vw',
+    zIndex: zIndex,
+    backgroundColor: bgColor,
+    opacity: opacity,
+    position: 'absolute',
+    top: 0
+  })
+
+  newEl.prepend(
+    `
+    <div id=${id} style="height: ${loader_height}; width: ${loader_width}; display: block; opacity: 1; margin: ${center? 'auto' : '0'};">
+    <div id=${id}-footer>
+    </div>
+    `);
+
+  $('body').append(newEl);
+  if (footer) $(`#${id}-footer`).append($(footer).css('text-align', 'center'));
+
+}
+
+Shiny.addCustomMessageHandler('sps-toggle-loader', function(data) {
+  //selector,id ,state, method, alert
+  var el = $(data.selector);
+  if (el.length != 1) {
+    if (data.alert) alert("Loader: Cannot find target element or more than one match");
+    throw new Error("Loader: Cannot find target element or more than one match");
+  }
+  var loader = $(`#${data.id}`);
+  if (loader.length != 1 && data.method != "full_screen") {
+    if (data.alert) alert("Loader: Cannot find loader or more than one match");
+    throw new Error("Loader: Cannot find loader or more than one match");
+  }
+
+  if(data.state == "show") {
+    switch(data.method) {
+      case "replace":
+        el.hide();
+      break;
+      case "inline":
+        if (data.block) {
+          el.attr('disabled','disabled')
+            .find("input, button, textarea, select, a[download]")
+            .attr('disabled','disabled');
+        };
+      break;
+      case "full_screen":
+      break;
+    }
+    loader.css('display', loader.attr('is-inline') == "true" ? 'inline-flex' : 'flex');
+  }
+  if(data.state == "hide") {
+    loader.hide();
+    switch(data.method) {
+      case "replace":
+        el.show();
+      break;
+      case "inline":
+        el.removeAttr('disabled')
+          .find("input, button, textarea, select, a[download]")
+          .removeAttr('disabled');
+      break;
+      case "full_screen":
+      break;
+    }
+  }
+})
+
+
