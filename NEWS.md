@@ -10,6 +10,12 @@
 
 -   `cssLoader`: creates 12 different loaders to indicate busy status.
 
+-   `shinyCatch`: now has this argument `trace_back`. It will log detailed traceback information on console if enabled. Similar to Rstudio's built-in traceback, it shows the function calls and file+line number if there is any.
+
+## Bug fix 
+
+-   `bsHoverPopover` now works on `body` tag instead of within the target element so that it will not be hidden if the parent of target has some overflow settings.
+
 # spsComps 0.1.1
 
 ## Bug fix

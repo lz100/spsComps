@@ -42,6 +42,12 @@
 #' and hide from your users. You do not need to set it to `FALSE` when purely work
 #' outside shiny, it will automatically detect if you are working in a Shiny
 #' environment or not.
+#' @param trace_back bool, added since spsComps 0.2, if the expression is blocked
+#' or has errors, cat the full trace back? It will display called functions
+#' and code source file and line number if possible. Default follows the
+#' SPS `spsOption("traceback")` setting. You can set it by running `spsOption("traceback", TRUE)`.
+#' If you do not set it, it will be `FALSE`. or you can just manually set it
+#' for each individual `shinyCatch` call `shinyCatch({...}, trace_back = TRUE)`.
 #' @param prefix character, what prefix to display on console for the log, e.g.
 #' for error, the default will be displayed as "SPS-ERROR". You can make your own
 #' prefix, like `prefix = "MY"`, then, it will be "MY-ERROR". Use `""` if you do not
@@ -104,90 +110,120 @@
 #' try({shinyCatch(stop("this error")); "no block"}, silent = TRUE)
 #' try({shinyCatch(stop("this error"), blocking_level = "error"); "blocked"}, silent = TRUE)
 shinyCatch <- function(
-    expr,
-    position = "bottom-right",
-    blocking_level = "none",
-    shiny = TRUE,
-    prefix = "SPS"
-    ) {
+  expr,
+  position = "bottom-right",
+  blocking_level = "none",
+  shiny = TRUE,
+  prefix = "SPS",
+  trace_back = spsOption("traceback")
+) {
 
-    assert_that(is.logical(shiny))
-    assert_that(all(is.character(prefix), length(prefix) == 1))
-    prefix <- paste0(prefix, if (prefix == "") " " else "-")
-    shiny <- all(!is.null(getDefaultReactiveDomain()), shiny)
-    toastr_actions <- list(
-        message = function(m) {
-            msg(m$message, paste0(prefix, "INFO"), "blue")
-            if(shiny) shinytoastr::toastr_info(message = remove_ANSI(m$message),
-                        position = position, closeButton = TRUE,
-                        timeOut = 3000, preventDuplicates = TRUE)
-        },
-        warning = function(m) {
-            msg(m$message, paste0(prefix, "WARNING"), "orange")
-            if(shiny) shinytoastr::toastr_warning(
-                message = remove_ANSI(m$message),
-                position = position, closeButton = TRUE,
-                timeOut = 5000, preventDuplicates = TRUE)
-        },
-        error = function(m) {
-            msg(m$message, paste0(prefix, "ERROR"), "red")
-            if(shiny) shinytoastr::toastr_error(
-                    message = remove_ANSI(m$message), position = position,
-                    closeButton = TRUE, timeOut = 0, preventDuplicates = TRUE,
-                    title = "There is an error", hideDuration = 300)
-        }
-    )
-    switch(tolower(blocking_level),
-           "error" = tryCatch(
-               suppressMessages(suppressWarnings(withCallingHandlers(
-                   expr,
-                   message = function(m) toastr_actions$message(m),
-                   warning = function(m) toastr_actions$warning(m)
-               ))),
-               error = function(m) {
-                   toastr_actions$error(m)
-                   reactiveStop(class = "validation")
-               }),
-           "warning" = tryCatch(
-               suppressMessages(withCallingHandlers(
-                   expr,
-                   message = function(m) toastr_actions$message(m)
-               )),
-               warning = function(m) {
-                   toastr_actions$warning(m)
-                   reactiveStop(class = "validation")
-                   },
-               error = function(m) {
-                   if(!is.empty(m$message)) toastr_actions$error(m)
-                   reactiveStop(class = "validation")
-               }),
-           "message" = tryCatch(
-               expr,
-               message = function(m) {
-                   message = toastr_actions$message(m)
-                   reactiveStop(class = "validation")
-                   },
-               warning = function(m) {
-                   toastr_actions$warning(m)
-                   reactiveStop(class = "validation")
-                   },
-               error = function(m) {
-                   if(!is.empty(m$message)) toastr_actions$error(m)
-                   reactiveStop(class = "validation")
-               }),
-           tryCatch(
-               suppressMessages(suppressWarnings(withCallingHandlers(
-                   expr,
-                   message = function(m) toastr_actions$message(m),
-                   warning = function(m) toastr_actions$warning(m)
-               ))),
-               error = function(m) {
-                   toastr_actions$error(m)
-                   return(NULL)
-               }
-           )
-    )
+  assert_that(is.logical(shiny))
+  assert_that(all(is.character(prefix), length(prefix) == 1))
+  prefix <- paste0(prefix, if (prefix == "") " " else "-")
+  shiny <- all(!is.null(getDefaultReactiveDomain()), shiny)
+  toastr_actions <- list(
+    message = function(m) {
+      msg(m$message, paste0(prefix, "INFO"), "blue")
+      if(shiny) shinytoastr::toastr_info(message = remove_ANSI(m$message),
+                                         position = position, closeButton = TRUE,
+                                         timeOut = 3000, preventDuplicates = TRUE)
+    },
+    warning = function(m) {
+      msg(m$message, paste0(prefix, "WARNING"), "orange")
+      if(shiny) shinytoastr::toastr_warning(
+        message = remove_ANSI(m$message),
+        position = position, closeButton = TRUE,
+        timeOut = 5000, preventDuplicates = TRUE)
+    },
+    error = function(m) {
+      msg(m$message, paste0(prefix, "ERROR"), "red")
+      if(shiny) shinytoastr::toastr_error(
+        message = remove_ANSI(m$message), position = position,
+        closeButton = TRUE, timeOut = 0, preventDuplicates = TRUE,
+        title = "There is an error", hideDuration = 300)
+    }
+  )
+  switch(tolower(blocking_level),
+         "error" = tryCatch(
+           suppressMessages(suppressWarnings(withCallingHandlers(
+             expr,
+             message = function(m) toastr_actions$message(m),
+             warning = function(m) toastr_actions$warning(m),
+             error = function(m) if(trace_back) printTraceback(sys.calls())
+           ))),
+           error = function(m) {
+             toastr_actions$error(m)
+             reactiveStop(class = "validation")
+           }),
+         "warning" = tryCatch(
+           suppressMessages(withCallingHandlers(
+             expr,
+             message = function(m) toastr_actions$message(m),
+             error = function(m) if(trace_back) printTraceback(sys.calls())
+           )),
+           warning = function(m) {
+             toastr_actions$warning(m)
+             reactiveStop(class = "validation")
+           },
+           error = function(m) {
+             if(!is.empty(m$message)) toastr_actions$error(m)
+             reactiveStop(class = "validation")
+           }),
+         "message" = tryCatch(
+           withCallingHandlers(
+             expr,
+             error = function(m) if(trace_back) printTraceback(sys.calls())
+           ),
+           message = function(m) {
+             toastr_actions$message(m)
+             reactiveStop(class = "validation")
+           },
+           warning = function(m) {
+             toastr_actions$warning(m)
+             reactiveStop(class = "validation")
+           },
+           error = function(m) {
+             if(!is.empty(m$message)) toastr_actions$error(m)
+             reactiveStop(class = "validation")
+           }),
+         tryCatch(
+           suppressMessages(suppressWarnings(withCallingHandlers(
+             expr,
+             message = function(m) toastr_actions$message(m),
+             warning = function(m) toastr_actions$warning(m),
+             error = function(m) if(trace_back) printTraceback(sys.calls())
+           ))),
+           error = function(m) {
+             toastr_actions$error(m)
+             return(NULL)
+           }
+         )
+  )
 }
+
+# print error trace back
+printTraceback <- function(calls){
+  calls <- calls[-length(calls): (-length(calls) + 2)]
+  trace_files <- findTraceFile(calls)
+  paste0(
+    crayon::green$bold(seq_along(calls)), ". ",
+    as.character(calls), " ",
+    crayon::blue$bold(trace_files)
+  ) %>% cat(sep = "\n")
+}
+
+# find errors trace back file and line
+findTraceFile <- function(calls) {
+  lapply(calls, function(ca) {
+    if (!is.null(srcref <- attr(ca, "srcref"))) {
+      srcfile <- attr(srcref, "srcfile")
+      glue('{srcfile$filename}#{srcref[1]}')
+    } else ""
+  })
+}
+
+
 
 #' Validate expressions
 #' @description this function is used on server side to usually validate input

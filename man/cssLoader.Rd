@@ -2,7 +2,7 @@
 % Please edit documentation in R/css_loader.R
 \name{cssLoader}
 \alias{cssLoader}
-\title{Create a variety of CSS loaders}
+\title{Create a variety of CSS loaders on UI}
 \usage{
 cssLoader(
   type = "default",

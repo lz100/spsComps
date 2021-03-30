@@ -164,9 +164,58 @@ cssLoader <- function(
 
 ########################### Server side funcs #############################
 
+#' Add CSS loaders from server
+#' @description Add/remove CSS loaders from server to any Shiny/HTML component.
+#' It is useful to indicate busy status when some code is running in the server
+#' and when it finishes, remove the loader to indicate clear status.
+#' @return CSS load in R6 class
+#' @export
+#'
+#' @examples
 addLoader <- R6::R6Class(
   classname = "spsComps_loader",
   public = list(
+    #' @description
+    #' @param target_selector string, which Shiny component you want to add the
+    #' loader to? a shiny component ID or a valid CSS selector if `isID = FLASE`.
+    #' for example, you have a button and want to add animation to it:
+    #' ```
+    #' actionButton(inputId = "btn")
+    #' ```
+    #'
+    #' This function is used in server only, so if you are in shiny module,
+    #' **DO NOT** add the `ns()` wrapper.
+    #'
+    #' @param isID bool, is your selector an ID?
+    #' @param type string, one of  "circle", "dual-ring", "facebook", "heart",
+    #' "ring", "roller", "default", "ellipsis", "grid", "hourglass", "ripple",
+    #' "spinner", default is "default".
+    #' @param id string, the unqiue ID for the loader, if not provided, a random
+    #' ID will be given. If you are using shiny modules, use `session$ns('YOUR_ID')`
+    #'to wrap it.
+    #' @param height string, (r)em, "1.5rem", "1.5em", or pixel, like "10px".
+    #' Default is `NULL`, will be automatically calculated based on the target
+    #' component. It is recommend to use `NULL` for "replace" and "inline" method
+    #' to let it automatically be calculated, but required for "full_screen" method.
+    #' @param width string, default is the same as `height` to make it sequare.
+    #' @param color string, any valid CSS color name, or hex color code
+    #' @param opacity number, between 0-1
+    #' @param method one of "replace", "inline", "full_screen", see details
+    #' @param block bool, for some input components, once the loader starts,
+    #' it can also block user interaction with the component, very useful for
+    #' "inline" method, eg. prevent users from clicking the button while some
+    #' process is still running.
+    #' @param center bool, try to place the load to the center of the target for
+    #' "inline" and "replace" and center of the screen for "full_screen".
+    #' @param bg_color string, any valid CSS color name, or hex color code. Only
+    #' works for "full_screen" method.
+    #' @param footer Additional Shiny/HTML component to add below the loader, like
+    #' a title `h1("load title")`.
+    #' @param z_index number, only works for "full_screen" method, what CSS layer
+    #' should the overlay be places. In HTML, all elements have the default of 0.
+    #' @param alert bool, should alert if target cannot be found or other javascript
+    #' errors? mainly for debugging
+    #' @param session shiny session
     initialize = function(
       target_selector = "",
       isID = TRUE,

@@ -9,7 +9,8 @@ shinyCatch(
   position = "bottom-right",
   blocking_level = "none",
   shiny = TRUE,
-  prefix = "SPS"
+  prefix = "SPS",
+  trace_back = spsOption("traceback")
 )
 }
 \arguments{
@@ -34,6 +35,13 @@ for error, the default will be displayed as "SPS-ERROR". You can make your own
 prefix, like \code{prefix = "MY"}, then, it will be "MY-ERROR". Use \code{""} if you do not
 want any prefix, like \code{prefix = ""}, then, it will just be "ERROR".
 multiple levels}
+
+\item{trace_back}{bool, added since spsComps 0.2, if the expression is blocked
+or has errors, cat the full trace back? It will display called functions
+and code source file and line number if possible. Default follows the
+SPS \code{spsOption("traceback")} setting. You can set it by running \code{spsOption("traceback", TRUE)}.
+If you do not set it, it will be \code{FALSE}. or you can just manually set it
+for each individual \code{shinyCatch} call \code{shinyCatch({...}, trace_back = TRUE)}.}
 }
 \value{
 see description and details

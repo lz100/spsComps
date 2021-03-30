@@ -38,6 +38,7 @@ For \code{dep}, current options are:
 \item gotop: required by \link{spsGoTop} function
 \item animation:  required for animation related functions to add animations
 for icons and other elements
+\item css-loader: required for loader functions
 }
 }
 \examples{
