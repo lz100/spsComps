@@ -1,9 +1,9 @@
 # spsComps <img src="https://github.com/lz100/spsComps/blob/master/img/spscomps.png?raw=true" align="right" height="139" />
 
-The {[systemPipeShiny](https://github.com/systemPipeR/systemPipeShiny)} (SPS) framework comes with many UI and server 
-components. However, installing the whole framework is heavy and takes some time. If you 
-would like to use UI and server components from SPS in your own Shiny apps, but do not want to 
-install the whole framework, just install {spsComps} (systemPipeShiny Components). 
+systemPipeShiny Components (spsComps) package is a collection of Shiny custom UI and 
+server components. These components include different kinds of new inputs, buttons, animations,
+procgress loaders on the UI side. Exception handling functions, new upload control function and more 
+on server side. 
 
 **View the online demo**: https://lezhang.shinyapps.io/spsComps
 
