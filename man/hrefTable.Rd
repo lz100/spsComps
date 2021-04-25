@@ -16,6 +16,7 @@ hrefTable(
   second_col_name = "Options",
   title = "A Table buttons with links",
   title_color = "#0275d8",
+  target_blank = FALSE,
   ...
 )
 }
@@ -46,6 +47,8 @@ vectors to specify button text colors in each table row, one vector per row}
 \item{title}{title of this table}
 
 \item{title_color}{table title color}
+
+\item{target_blank}{bool, whether to add \code{target="_blank"} to the link?}
 
 \item{...}{other HTML param you want to pass to the table}
 }

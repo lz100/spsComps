@@ -86,7 +86,7 @@ spsComps CSS Styles
 .img-gallery{
   max-width:100%;
   height:auto;
-  object-fit: cover;
+  object-fit: fill;
   vertical-align: middle;
   text-align: center;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -95,6 +95,11 @@ spsComps CSS Styles
 .img-gallery:not(.gallery-nohover):hover {
   opacity: 0.7;
   transition: opacity 0.5s;
+}
+
+.sps-tab-link a > p.gallery-nohover, a.sps-tab-link > .gallery-nohover {
+  color: black;
+  cursor: default;
 }
 
 .gallery-enlarge {

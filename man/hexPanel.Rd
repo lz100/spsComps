@@ -13,7 +13,8 @@ hexLogo(
   footer = "",
   footer_link = "",
   x = "-10",
-  y = "-20"
+  y = "-20",
+  target_blank = FALSE
 )
 
 hexPanel(
@@ -25,7 +26,8 @@ hexPanel(
   footers = NULL,
   footer_links = NULL,
   xs = NULL,
-  ys = NULL
+  ys = NULL,
+  target_blank = FALSE
 )
 }
 \arguments{
@@ -45,6 +47,8 @@ displayed on the left}
 \item{x}{number, X offset, e.g. "-10" instead of -10L}
 
 \item{y}{number, Y offset}
+
+\item{target_blank}{bool, whether to add \code{target="_blank"} to the link?}
 
 \item{hex_imgs}{a character vector of logo image source, can be online or
 local, see details}

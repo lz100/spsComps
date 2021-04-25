@@ -12,7 +12,21 @@
 
 -   `shinyCatch`: now has this argument `trace_back`. It will log detailed traceback information on console if enabled. Similar to Rstudio's built-in traceback, it shows the function calls and file+line number if there is any.
 
-## Bug fix 
+-   Add target_blank argument for `gallery`, `hrefTab`, `hrefTable`, `hexLogo` and `hexPanel`: if `TRUE`, add `target="_blank"` to the link.
+
+## Major Change
+
+-   `gallery`:
+
+    -   Change the `object-fil` of images from "cover" to "fill".
+
+    -   Now image captions without link will be not clickable and color black.
+
+    -   galleries with `enlarge` turned on will still have hover effects on all images but captions will be not clickable and color black for images without a link.
+
+## Minor Change
+
+## Bug fix
 
 -   `bsHoverPopover` now works on `body` tag instead of within the target element so that it will not be hidden if the parent of target has some overflow settings.
 

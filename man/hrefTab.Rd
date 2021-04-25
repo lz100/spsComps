@@ -12,6 +12,7 @@ hrefTab(
   title_color = "#0275d8",
   bg_colors = "#337ab7",
   text_colors = "white",
+  target_blank = FALSE,
   ...
 )
 }
@@ -31,6 +32,8 @@ them or specify for each of them in a vector}
 
 \item{text_colors}{individual tab button text color, either 1 value to apply for all of
 them or specify for each of them in a vector}
+
+\item{target_blank}{bool, whether to add \code{target="_blank"} to the link?}
 
 \item{...}{other arguments to be passed to the html element}
 }

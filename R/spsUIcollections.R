@@ -27,15 +27,19 @@
 #' image. 12 is the whole width of the screen and 1 is 1/12 of the screen. Consider
 #' numbers than can fully divide 12, like 1, 2, 3, 4, 6 or 12 (if you want only 1 image
 #' per row).
-#' @param images a vector of image sources, can be online urls or local resource paths.
+#' @param images a vector of image sources, can be online URLs or local resource paths.
 #' @param enlarge bool,  when click on the image, enlarge
-#' it? If enlarge is enabled, click the photo will enlarge intead of jump to the link.
+#' it? If enlarge is enabled, click the photo will enlarge instead of jump to the link.
 #' Only the title below contains the link if enlarge is enabled.
 #' @param enlarge_method  how the photo is enlarged on click,
 #' one of "inline" -- within the gallery change the size of photo to 12, "modal" --
 #' display photo in a pop-up modal.
+#' @param target_blank bool, whether to add `target="_blank"` to the link?
 #' @param style additional CSS style you want to add to the most outside component "div"
-#'
+#' @details
+#' #### `modal` enlarge
+#' When view the `modal` enlarged images, click the "X" button or anywhere outside the
+#' image to close the full screen view.
 #' @export
 #' @return a gallery component
 #'
@@ -88,12 +92,14 @@ gallery <- function(texts,
                     image_frame_size = 4,
                     enlarge = FALSE,
                     enlarge_method = c("inline", "modal"),
+                    target_blank = FALSE,
                     style = ""){
 
     if (is.null(Id)) Id <- glue("gallery{sample(1000000:9999999, 1)}")
     assertthat::assert_that(is.character(texts))
     assertthat::assert_that(is.character(hrefs))
     assertthat::assert_that(is.character(images))
+    stopifnot(is.logical(target_blank) && length(target_blank) == 1)
     image_frame_size <- as.integer(image_frame_size)
     stopifnot(image_frame_size > 0 && image_frame_size <=12)
     stopifnot(is.logical(enlarge))
@@ -109,30 +115,32 @@ gallery <- function(texts,
     href_hover <- rep("", length(hrefs))
     href_hover[hrefs == ""] <- "gallery-nohover"
 
+    target_text <- if (target_blank) 'target="_blank"' else ''
+
     gallery_div <- if(enlarge && enlarge_method == "inline") {
       HTML(glue('
       <div class="col-sm-{image_frame_size} sps-tab-link inline-enlarge" style="right: 1px;">
-        <img src="{images}" class="img-gallery {href_hover}" height=300 width=400 style="width: 100%;">
-        <a {hrefs}><p class="text-center h4">{texts}</p></a>
+        <img src="{images}" class="img-gallery" height=300 width=400 style="width: 100%;">
+        <a {hrefs} {target_text}><p class="text-center h4 {href_hover}">{texts}</p></a>
       </div>
       '))
     } else if (enlarge) {
       HTML(glue('
       <div  id={img_ids} class="col-sm-{image_frame_size} sps-tab-link" style="right: 1px;">
         <img
-          src="{images}" class="img-gallery {href_hover}"
+          src="{images}" class="img-gallery"
           height=300 width=400
           style="width: 100%;"
           onclick=galEnlarge("#{img_ids}")
         >
-        <a {hrefs}><p class="text-center h4">{texts}</p></a>
+        <a {hrefs} {target_text}><p class="text-center h4 {href_hover}">{texts}</p></a>
       </div>
       '))
     } else {
       HTML(glue('
-      <a {hrefs} class="col-sm-{image_frame_size} sps-tab-link" style="right: 1px;">
+      <a {hrefs} {target_text} class="col-sm-{image_frame_size} sps-tab-link" style="right: 1px;">
         <img src="{images}" class="img-gallery {href_hover}" height=300 width=400 style="width: 100%;">
-        <p class="text-center h4">{texts}</p>
+        <p class="text-center h4 {href_hover}">{texts}</p>
       </a>
       '))
     }
@@ -180,6 +188,7 @@ gallery <- function(texts,
 #' them or specify for each of them in a vector
 #' @param text_colors individual tab button text color, either 1 value to apply for all of
 #' them or specify for each of them in a vector
+#' @param target_blank bool, whether to add `target="_blank"` to the link?
 #' @param ... other arguments to be passed to the html element
 #'
 #' @return a Shiny component
@@ -227,6 +236,7 @@ hrefTab <- function(label_texts,
                     title_color = "#0275d8",
                     bg_colors = "#337ab7",
                     text_colors = "white",
+                    target_blank = FALSE,
                      ...
                     ){
     if (is.null(Id)) Id <- glue("list-tab{sample(1000000:9999999, 1)}")
@@ -236,10 +246,14 @@ hrefTab <- function(label_texts,
                 msg = "texts and hrefs must have the same length")
     if (length(bg_colors) > 1) assert_that(length(label_texts) == length(bg_colors))
     if (length(text_colors) > 1) assert_that(length(label_texts) == length(text_colors))
+    stopifnot(is.logical(target_blank) && length(target_blank) == 1)
 
     href_hover <- rep("", length(hrefs))
     href_hover[hrefs == ""] <- "nohover"
     hrefs[hrefs == ""] <- "javascript:null;"
+
+    target_text <- if (target_blank) 'target="_blank"' else ''
+
     div(
         id = Id, class = "col", ... ,
         p(class = "h4",
@@ -248,7 +262,7 @@ hrefTab <- function(label_texts,
         div(
             HTML(glue('
             <a
-              href="{hrefs}"
+              href="{hrefs}" {target_text}
               class="href-button sps-tab-link {href_hover}"
               style="background-color: {bg_colors}; color: {text_colors};"
              >
@@ -306,9 +320,10 @@ hrefTab <- function(label_texts,
 #' @param first_col_name first column name
 #' @param second_col_name second column name
 #' @param title_color table title color
-#' @param ... other HTML param you want to pass to the table
 #' @param item_title_colors  a single character value or a character vector to
 #' specify button title text colors of each row name
+#' @param target_blank bool, whether to add `target="_blank"` to the link?
+#' @param ... other HTML param you want to pass to the table
 #'
 #' @export
 #' @return HTML elements
@@ -361,12 +376,15 @@ hrefTable <- function(item_titles,
                       second_col_name = "Options",
                       title = "A Table buttons with links",
                       title_color = "#0275d8",
+                      target_blank = FALSE,
                       ...) {
 
     if (is.null(Id)) Id <- glue("list-table{sample(1000000:9999999, 1)}")
     assert_that(is.character(item_title_colors) && length(item_title_colors) > 0)
     if(length(item_title_colors) > 1) assert_that(length(item_title_colors) == length(item_titles))
     assert_that(length(item_bg_colors) > 0)
+    stopifnot(is.logical(target_blank) && length(target_blank) == 1)
+
     item_length <- lapply(item_labels, length)
     if(length(item_bg_colors) > 1) {
         assert_that(is.list(item_bg_colors))
@@ -411,6 +429,9 @@ hrefTable <- function(item_titles,
             },
         item_labels, item_hrefs
         )
+
+    target_text <- if (target_blank) 'target="_blank"' else ''
+
     btns <- mapply(
         function(label, href, bg_color, text_color) {
             href_hover <- rep("", length(href))
@@ -418,7 +439,7 @@ hrefTable <- function(item_titles,
             href[href == ""] <- "javascript:null;"
             glue('
             <a
-              href="{href}"
+              href="{href}" {target_text}
               class="href-button {href_hover} sps-tab-link"
               style="background-color: {bg_color}; color: {text_color};"
             >
@@ -522,28 +543,41 @@ spsHr <- function() {
 #' @param footer_link single value of `footer_links`
 #' @param x number, X offset, e.g. "-10" instead of -10L
 #' @param y number, Y offset
+#' @param target_blank bool, whether to add `target="_blank"` to the link?
 #' @export
-hexLogo <- function(id, title="", hex_img, hex_link = "" ,
-                    footer = "", footer_link= "", x="-10", y="-20"){
-    title_text <- if(!emptyIsFalse(title)) ''
-    else glue('<span class="text-info">{title}</span><br>')
-    hex <-  if(!emptyIsFalse(hex_link)) {
-        glue('<polygon points="50 1 95 25 95 75 50 99 5 75 5 25"',
-             'fill="url(#{id}-hex)" stroke="var(--primary)"',
-             'stroke-width="2"/>')
-    } else {
-        glue('<a href="{hex_link}" target="_blank">',
-             '<polygon class="hex" points="50 1 95 25 95 75 50 99 5 75 5 25"',
-             'fill="url(#{id}-hex)" stroke="var(--primary)"',
-             'stroke-width="2"/></a>')
-    }
-    footer_link <- if(!emptyIsFalse(footer_link)) '' else glue('href="{footer_link}"')
-    footer_class <- if(emptyIsFalse(footer_link)) 'powerby-link' else 'powerby-link nohover'
-    footer_text <- if(!emptyIsFalse(footer)) ''
-    else glue('<text x=10 y=115><a class="{footer_class}"',
-              '{footer_link} target="_blank">{footer}</a></text>')
-    tagList(
-        HTML(glue('
+hexLogo <- function(
+  id,
+  title = "",
+  hex_img,
+  hex_link = "" ,
+  footer = "",
+  footer_link = "",
+  x = "-10",
+  y = "-20",
+  target_blank = FALSE
+) {
+  stopifnot(is.logical(target_blank) && length(target_blank) == 1)
+  target_text <- if (target_blank) 'target="_blank"' else ''
+
+  title_text <- if(!emptyIsFalse(title)) ''
+  else glue('<span class="text-info">{title}</span><br>')
+  hex <-  if(!emptyIsFalse(hex_link)) {
+    glue('<polygon points="50 1 95 25 95 75 50 99 5 75 5 25"',
+         'fill="url(#{id}-hex)" stroke="var(--primary)"',
+         'stroke-width="2"/>')
+  } else {
+    glue('<a href="{hex_link}" {target_text}>',
+         '<polygon class="hex" points="50 1 95 25 95 75 50 99 5 75 5 25"',
+         'fill="url(#{id}-hex)" stroke="var(--primary)"',
+         'stroke-width="2"/></a>')
+  }
+  footer_link <- if(!emptyIsFalse(footer_link)) '' else glue('href="{footer_link}"')
+  footer_class <- if(emptyIsFalse(footer_link)) 'powerby-link' else 'powerby-link nohover'
+  footer_text <- if(!emptyIsFalse(footer)) ''
+  else glue('<text x=10 y=115><a class="{footer_class}"',
+            '{footer_link} target="_blank">{footer}</a></text>')
+  tagList(
+    HTML(glue('
         <div id="{id}" class="hex-container">
           {title_text}
           <svg class="hex-box" viewBox="0 0 100 115" version="1.1" xmlns="http://www.w3.org/2000/svg">
@@ -557,8 +591,8 @@ hexLogo <- function(id, title="", hex_img, hex_link = "" ,
           </svg>
         </div>
          ')),
-        spsDepend("basic")
-    )
+    spsDepend("basic")
+  )
 
 }
 
@@ -581,6 +615,7 @@ hexLogo <- function(id, title="", hex_img, hex_link = "" ,
 #' @param xs a character vector X coordinate offset value for each logo image,
 #' default -10, mist be the same length as `hex_imgs`
 #' @param ys Y coordinates offset, must be the same length as `xs`, default -20
+#' @param target_blank bool, whether to add `target="_blank"` to the link?
 #' @details
 #' The image in each hexagon is resized to the same size as the hex border
 #' and then enlarged 125%. You may want to use x, y offset value to change
@@ -655,30 +690,42 @@ hexLogo <- function(id, title="", hex_img, hex_link = "" ,
 #'     }
 #'     shinyApp(ui, server)
 #' }
-hexPanel <- function(id, title, hex_imgs, hex_links=NULL, hex_titles = NULL,
-                     footers=NULL, footer_links=NULL, xs=NULL, ys=NULL){
-    if(not_empty(hex_titles)) assert_that(length(hex_titles) == length(hex_imgs))
-    if(not_empty(hex_links)) assert_that(length(hex_imgs) == length(hex_links))
-    if(not_empty(footers)) assert_that(length(footers) == length(hex_imgs))
-    if(not_empty(footer_links)) assert_that(length(footers) == length(footer_links))
-    if(not_empty(xs)) assert_that(length(hex_imgs) == length(xs))
-    if(not_empty(ys)) assert_that(length(hex_imgs) == length(ys))
+hexPanel <-function(
+  id,
+  title,
+  hex_imgs,
+  hex_links = NULL,
+  hex_titles = NULL,
+  footers = NULL,
+  footer_links = NULL,
+  xs = NULL,
+  ys = NULL,
+  target_blank = FALSE) {
 
-    if(is.null(xs)) xs <- rep("-10", length(hex_imgs))
-    if(is.null(ys)) ys <- rep("-20", length(hex_imgs))
-    lapply(seq_along(hex_imgs), function(i){
-        div(class="hex-item",
-            hexLogo(id = paste0(id, i), title = hex_titles[i],
-                    hex_img = hex_imgs[i], hex_link = hex_links[i],
-                    footer = footers[i], footer_link = footer_links[i],
-                    x = xs[i], y=ys[i])
-        )
-    }) %>% {
-        fluidRow(class = "hex-panel",
-                 h5(class = "text-primary", title),
-                 tagList(.)
-        )
-    }
+  if(not_empty(hex_titles)) assert_that(length(hex_titles) == length(hex_imgs))
+  if(not_empty(hex_links)) assert_that(length(hex_imgs) == length(hex_links))
+  if(not_empty(footers)) assert_that(length(footers) == length(hex_imgs))
+  if(not_empty(footer_links)) assert_that(length(footers) == length(footer_links))
+  if(not_empty(xs)) assert_that(length(hex_imgs) == length(xs))
+  if(not_empty(ys)) assert_that(length(hex_imgs) == length(ys))
+  stopifnot(is.logical(target_blank) && length(target_blank) == 1)
+
+  if(is.null(xs)) xs <- rep("-10", length(hex_imgs))
+  if(is.null(ys)) ys <- rep("-20", length(hex_imgs))
+
+  lapply(seq_along(hex_imgs), function(i){
+    div(class="hex-item",
+        hexLogo(id = paste0(id, i), title = hex_titles[i],
+                hex_img = hex_imgs[i], hex_link = hex_links[i],
+                footer = footers[i], footer_link = footer_links[i],
+                x = xs[i], y=ys[i], target_blank = target_blank)
+    )
+  }) %>% {
+    fluidRow(class = "hex-panel",
+             h5(class = "text-primary", title),
+             tagList(.)
+    )
+  }
 }
 
 #' h2 title with bootstrap info color

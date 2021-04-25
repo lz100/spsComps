@@ -14,6 +14,7 @@ gallery(
   image_frame_size = 4,
   enlarge = FALSE,
   enlarge_method = c("inline", "modal"),
+  target_blank = FALSE,
   style = ""
 )
 }
@@ -22,7 +23,7 @@ gallery(
 
 \item{hrefs}{vector of links when each image is clicked}
 
-\item{images}{a vector of image sources, can be online urls or local resource paths.}
+\item{images}{a vector of image sources, can be online URLs or local resource paths.}
 
 \item{Id}{ID of this gallery}
 
@@ -36,12 +37,14 @@ numbers than can fully divide 12, like 1, 2, 3, 4, 6 or 12 (if you want only 1 i
 per row).}
 
 \item{enlarge}{bool,  when click on the image, enlarge
-it? If enlarge is enabled, click the photo will enlarge intead of jump to the link.
+it? If enlarge is enabled, click the photo will enlarge instead of jump to the link.
 Only the title below contains the link if enlarge is enabled.}
 
 \item{enlarge_method}{how the photo is enlarged on click,
 one of "inline" -- within the gallery change the size of photo to 12, "modal" --
 display photo in a pop-up modal.}
+
+\item{target_blank}{bool, whether to add \code{target="_blank"} to the link?}
 
 \item{style}{additional CSS style you want to add to the most outside component "div"}
 }
@@ -60,6 +63,13 @@ If there is any image that you do not want to add links, use \code{""} to occupy
 If the link is empty, there will be no hover effect on that image, and you cannot click it.
 
 Similar to \code{hrefs}, for the \code{texts}, use \code{""} to  occupy space
+}
+\details{
+\subsection{\code{modal} enlarge}{
+
+When view the \code{modal} enlarged images, click the "X" button or anywhere outside the
+image to close the full screen view.
+}
 }
 \examples{
 if(interactive()){
