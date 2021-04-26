@@ -56,14 +56,11 @@ function fixGalHeight(galleryID){
     return $(function(){
       var galImg = $(`#${galleryID} img.img-gallery`);
       var galH4 = $(`#${galleryID} .sps-tab-link p.text-center.h4`);
-
-
       var rbImg = new ResizeObserver(entries => {
         var h4Heights = galH4.map(function(){
            return $(this).height();
         });
         var maxH = Math.max.apply(null, h4Heights);
-        console.log(maxH)
         galImg.map(function(){
             $(this).height(1.2 * this.width);
             $(this).parent().height(1.2 * this.width + maxH + 20);
