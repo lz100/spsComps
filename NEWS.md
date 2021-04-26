@@ -29,6 +29,7 @@
 ## Bug fix
 
 -   `bsHoverPopover` now works on `body` tag instead of within the target element so that it will not be hidden if the parent of target has some overflow settings.
+-   `gallery`: Fix the height matching issues by adding the caption height in calculation. Now all images should be in the supposed rows.
 
 # spsComps 0.1.1
 
