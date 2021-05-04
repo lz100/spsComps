@@ -8,7 +8,11 @@
 
 -   `animationRemove`: remove animations of an element, call from server only.
 
--   `cssLoader`: creates 12 different loaders to indicate busy status.
+-   Loaders: 12 different loaders to indicate busy status.
+
+    -   `cssLoader`: UI side function, directly add the load on UI when app starts
+
+    -   `addLoader`: server side function, add loaders dynamically and control show and hide of the loader.
 
 -   `shinyCatch`: now has this argument `trace_back`. It will log detailed traceback information on console if enabled. Similar to Rstudio's built-in traceback, it shows the function calls and file+line number if there is any.
 
