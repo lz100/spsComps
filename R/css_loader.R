@@ -172,10 +172,133 @@ cssLoader <- function(
 #' @export
 #'
 #' @examples
+#' if (interactive()){
+#'   ui <- fluidPage(
+#'     spsDepend("css-loader"),
+#'     h4("Use buttons to show and hide loaders with different methods"),
+#'     tags$b("Replace"), br(),
+#'     actionButton("b_re_start", "Replace"),
+#'     actionButton("b_re_stop", "stop replace"),
+#'     br(), tags$b("Inline"), br(),
+#'     actionButton("b_in_start", "Inline"),
+#'     actionButton("b_in_stop", "stop inline"),
+#'     br(), tags$b("Full screen"), br(),
+#'     actionButton("b_fs_start", "Full screen 2s"), br(),
+#'     h4("Add loaders to a big HTML chunk"),
+#'     actionButton("chunk_start", "Chunk loader"),
+#'     actionButton("chunk_stop", "Stop"), br(),
+#'     column(6,
+#'            id = "chunk",
+#'            style = "background-color: #eee",
+#'            h5("Here are some text 12345"),
+#'            tags$hr(),
+#'            icon("home"),
+#'            p("blablablablablablablablablablablablablablablablablablablabla"),
+#'            p("blablablablablablablablablablablablablablablablablablablabla"),
+#'            p("blablablablablablablablablablablablablablablablablablablabla"),
+#'            p("blablablablablablablablablablablablablablablablablablablabla")
+#'     )
+#'   )
+#'
+#'   server <- function(input, output, session) {
+#'     # Init loaders
+#'     loader_replace <- addLoader$new("b_re_start", type = "facebook")
+#'     loader_inline <- addLoader$new("b_in_start", color = "green", method = "inline")
+#'     loader_fs <- addLoader$new(
+#'       "b_fs_start", color = "pink", method = "full_screen",
+#'       bg_color = "#eee", height = "30rem", type = "heart"
+#'     )
+#'     loader_chunk <- addLoader$new(
+#'       "chunk", type = "spinner", color = "orange",
+#'       footer = h5("chunk loader")
+#'     )
+#'
+#'     # toggle loaders
+#'     ## replace
+#'     observeEvent(input$b_re_start, {
+#'       loader_replace$show()
+#'     })
+#'     observeEvent(input$b_re_stop, {
+#'       loader_replace$hide()
+#'     })
+#'     ## inline
+#'     observeEvent(input$b_in_start, {
+#'       loader_inline$show()
+#'     })
+#'     observeEvent(input$b_in_stop, {
+#'       loader_inline$hide()
+#'     })
+#'     ## full screen
+#'     observeEvent(input$b_fs_start, {
+#'       loader_fs$show()
+#'       Sys.sleep(2)
+#'       loader_fs$hide()
+#'     })
+#'     ## chunk
+#'     observeEvent(input$chunk_start, {
+#'       loader_chunk$show()
+#'     })
+#'     observeEvent(input$chunk_stop, {
+#'       loader_chunk$hide()
+#'     })
+#'
+#'   }
+#'
+#'   shinyApp(ui, server)
+#' }
+#'
+#' if (interactive()){
+#'   ui <- bootstrapPage(
+#'     spsDepend("css-loader"),
+#'     h4("Add loaders to Shiny `render` events"),
+#'     tags$b("Replace"), br(),
+#'     selectInput(inputId = "n_re",
+#'                 label = "Change this to render the following plot",
+#'                 choices = c(10, 20, 35, 50)),
+#'     plotOutput(outputId = "p_re"),
+#'     br(), tags$b("Full screen"), br(),
+#'     selectInput(inputId = "n_fs",
+#'                 label = "Change this to render the following plot",
+#'                 choices = c(10, 20, 35, 50)),
+#'     plotOutput(outputId = "p_fs")
+#'   )
+#'
+#'   server <- function(input, output, session) {
+#'     # create loaders
+#'     p_re <- addLoader$new("p_re", type = "facebook")
+#'     p_fs <- addLoader$new(
+#'       "p_fs", color = "pink", method = "full_screen",
+#'       bg_color = "#eee", height = "30rem", type = "grid",
+#'       footer = h4("Replotting...")
+#'     )
+#'     # use loaders in rednering
+#'     output$p_re <- renderPlot({
+#'       on.exit(p_re$hide())
+#'       p_re$show()
+#'       Sys.sleep(1)
+#'       hist(faithful$eruptions,
+#'            probability = TRUE,
+#'            breaks = as.numeric(input$n_re),
+#'            xlab = "Duration (minutes)",
+#'            main = "Geyser eruption duration")
+#'     })
+#'     output$p_fs <- renderPlot({
+#'       on.exit(p_fs$hide())
+#'       p_fs$show()
+#'       Sys.sleep(1)
+#'       hist(faithful$eruptions,
+#'            probability = TRUE,
+#'            breaks = as.numeric(input$n_fs),
+#'            xlab = "Duration (minutes)",
+#'            main = "Geyser eruption duration")
+#'     })
+#'   }
+#'   shinyApp(ui, server)
+#' }
 addLoader <- R6::R6Class(
   classname = "spsComps_loader",
   public = list(
-    #' @description
+    #' @description create a loader object
     #' @param target_selector string, which Shiny component you want to add the
     #' loader to? a shiny component ID or a valid CSS selector if `isID = FLASE`.
     #' for example, you have a button and want to add animation to it:
@@ -197,7 +320,7 @@ addLoader <- R6::R6Class(
     #' Default is `NULL`, will be automatically calculated based on the target
     #' component. It is recommend to use `NULL` for "replace" and "inline" method
     #' to let it automatically be calculated, but required for "full_screen" method.
-    #' @param width string, default is the same as `height` to make it sequare.
+    #' @param width string, default is the same as `height` to make it square.
     #' @param color string, any valid CSS color name, or hex color code
     #' @param opacity number, between 0-1
     #' @param method one of "replace", "inline", "full_screen", see details
@@ -210,12 +333,28 @@ addLoader <- R6::R6Class(
     #' @param bg_color string, any valid CSS color name, or hex color code. Only
     #' works for "full_screen" method.
     #' @param footer Additional Shiny/HTML component to add below the loader, like
-    #' a title `h1("load title")`.
+    #' a title `h1("load title")`. `inline` method does not have a footer.
     #' @param z_index number, only works for "full_screen" method, what CSS layer
     #' should the overlay be places. In HTML, all elements have the default of 0.
     #' @param alert bool, should alert if target cannot be found or other javascript
     #' errors? mainly for debugging
     #' @param session shiny session
+    #' @return A R6 loader object
+    #' @details
+    #' #### Methods
+    #' - `replace`: use a HTML `div` with the same CSS styles to **replace the original**
+    #'   **target**, but add the loader inside and remove original content inside. When the
+    #'   loader is `hide`, show the original `div` and hide this loader `div`. Height
+    #'   and width is the original `div`'s height unless specially specified. Good
+    #'   example of this will be some plot outputs.
+    #' - `inline`: append the loader as the first child of target HTML container.
+    #'   loader's height and width is the original `div`'s height unless specially specified.
+    #'   In addition, this methods will **disable** all inputs and buttons inside the
+    #'   target container, so this method can be useful on some buttons.
+    #' - `full_screen`: Do not change anything of the target HTML container, add
+    #'   an overlay to **cover the whole page** when `show` and hide the overlay when `hide`.
+    #'   This method requires the `height` to be specified manually. Under this method,
+    #'   `bg_color` and `z_index` can also be changed.
     initialize = function(
       target_selector = "",
       isID = TRUE,
@@ -289,6 +428,9 @@ addLoader <- R6::R6Class(
       private$session <- session
 
     },
+    #' @description show the loader
+    #' @param alert bool, if the target selector or loader is not found,
+    #' alert on UI? For debugging purposes.
     show = function(alert = FALSE){
       shinyCatch({
         if(!is.logical(alert) || length(alert) != 1)
@@ -303,7 +445,11 @@ addLoader <- R6::R6Class(
         block = private$block,
         alert = alert
       ))
+      invisible(self)
     },
+    #' @description hide the loader
+    #' @param alert bool, if the target selector or loader is not found,
+    #' alert on UI? For debugging purposes.
     hide = function(alert = FALSE){
       shinyCatch({
         if(!is.logical(alert) || length(alert) != 1)
@@ -318,6 +464,7 @@ addLoader <- R6::R6Class(
         block = private$block,
         alert = alert
       ))
+      invisible(self)
     }
   ),
   private = list(

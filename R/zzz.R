@@ -6,7 +6,9 @@
 #' @importFrom magrittr %>%
 #' @importFrom assertthat not_empty assert_that
 #' @importFrom R6 R6Class
+#' @importFrom crayon green blue
 #' @import shiny spsUtil
+#'
 NULL
 
 #' Add online content

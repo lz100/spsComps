@@ -537,7 +537,7 @@ function loaderFullscreen(
     zIndex: zIndex,
     backgroundColor: bgColor,
     opacity: opacity,
-    position: 'absolute',
+    position: 'fixed',
     top: 0
   })
 
@@ -557,13 +557,18 @@ Shiny.addCustomMessageHandler('sps-toggle-loader', function(data) {
   //selector,id ,state, method, alert
   var el = $(data.selector);
   if (el.length != 1) {
-    if (data.alert) alert("Loader: Cannot find target element or more than one match");
-    throw new Error("Loader: Cannot find target element or more than one match");
+    let msg = `Loader: Cannot find target '${data.selector}' or more than one match`
+    if (data.alert) alert(msg);
+    throw new Error(msg);
   }
   var loader = $(`#${data.id}`);
+  console.log(loader)
+  console.log(loader.length)
+
   if (loader.length != 1 && data.method != "full_screen") {
-    if (data.alert) alert("Loader: Cannot find loader or more than one match");
-    throw new Error("Loader: Cannot find loader or more than one match");
+    let msg = `Loader: Cannot find loader '${data.id}' or more than one match`
+    if (data.alert) alert(msg);
+    throw new Error(msg);
   }
 
   if(data.state == "show") {

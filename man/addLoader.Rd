@@ -11,6 +11,131 @@ Add/remove CSS loaders from server to any Shiny/HTML component.
 It is useful to indicate busy status when some code is running in the server
 and when it finishes, remove the loader to indicate clear status.
 }
+\examples{
+if (interactive()){
+  ui <- fluidPage(
+    spsDepend("css-loader"),
+    h4("Use buttons to show and hide loaders with different methods"),
+    tags$b("Replace"), br(),
+    actionButton("b_re_start", "Replace"),
+    actionButton("b_re_stop", "stop replace"),
+    br(), tags$b("Inline"), br(),
+    actionButton("b_in_start", "Inline"),
+    actionButton("b_in_stop", "stop inline"),
+    br(), tags$b("Full screen"), br(),
+    actionButton("b_fs_start", "Full screen 2s"), br(),
+    h4("Add loaders to a big HTML chunk"),
+    actionButton("chunk_start", "Chunk loader"),
+    actionButton("chunk_stop", "Stop"), br(),
+    column(6,
+           id = "chunk",
+           style = "background-color: #eee",
+           h5("Here are some text 12345"),
+           tags$hr(),
+           icon("home"),
+           p("blablablablablablablablablablablablablablablablablablablabla"),
+           p("blablablablablablablablablablablablablablablablablablablabla"),
+           p("blablablablablablablablablablablablablablablablablablablabla"),
+           p("blablablablablablablablablablablablablablablablablablablabla")
+    )
+  )
+
+  server <- function(input, output, session) {
+    # Init loaders
+    loader_replace <- addLoader$new("b_re_start", type = "facebook")
+    loader_inline <- addLoader$new("b_in_start", color = "green", method = "inline")
+    loader_fs <- addLoader$new(
+      "b_fs_start", color = "pink", method = "full_screen",
+      bg_color = "#eee", height = "30rem", type = "heart"
+    )
+    loader_chunk <- addLoader$new(
+      "chunk", type = "spinner", color = "orange",
+      footer = h5("chunk loader")
+    )
+
+    # toggle loaders
+    ## replace
+    observeEvent(input$b_re_start, {
+      loader_replace$show()
+    })
+    observeEvent(input$b_re_stop, {
+      loader_replace$hide()
+    })
+    ## inline
+    observeEvent(input$b_in_start, {
+      loader_inline$show()
+    })
+    observeEvent(input$b_in_stop, {
+      loader_inline$hide()
+    })
+    ## full screen
+    observeEvent(input$b_fs_start, {
+      loader_fs$show()
+      Sys.sleep(2)
+      loader_fs$hide()
+    })
+    ## chunk
+    observeEvent(input$chunk_start, {
+      loader_chunk$show()
+    })
+    observeEvent(input$chunk_stop, {
+      loader_chunk$hide()
+    })
+
+  }
+
+  shinyApp(ui, server)
+}
+
+if (interactive()){
+  ui <- bootstrapPage(
+    spsDepend("css-loader"),
+    h4("Add loaders to Shiny `render` events"),
+    tags$b("Replace"), br(),
+    selectInput(inputId = "n_re",
+                label = "Change this to render the following plot",
+                choices = c(10, 20, 35, 50)),
+    plotOutput(outputId = "p_re"),
+    br(), tags$b("Full screen"), br(),
+    selectInput(inputId = "n_fs",
+                label = "Change this to render the following plot",
+                choices = c(10, 20, 35, 50)),
+    plotOutput(outputId = "p_fs")
+  )
+
+  server <- function(input, output, session) {
+    # create loaders
+    p_re <- addLoader$new("p_re", type = "facebook")
+    p_fs <- addLoader$new(
+      "p_fs", color = "pink", method = "full_screen",
+      bg_color = "#eee", height = "30rem", type = "grid",
+      footer = h4("Replotting...")
+    )
+    # use loaders in rednering
+    output$p_re <- renderPlot({
+      on.exit(p_re$hide())
+      p_re$show()
+      Sys.sleep(1)
+      hist(faithful$eruptions,
+           probability = TRUE,
+           breaks = as.numeric(input$n_re),
+           xlab = "Duration (minutes)",
+           main = "Geyser eruption duration")
+    })
+    output$p_fs <- renderPlot({
+      on.exit(p_fs$hide())
+      p_fs$show()
+      Sys.sleep(1)
+      hist(faithful$eruptions,
+           probability = TRUE,
+           breaks = as.numeric(input$n_fs),
+           xlab = "Duration (minutes)",
+           main = "Geyser eruption duration")
+    })
+  }
+  shinyApp(ui, server)
+}
+}
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
@@ -24,6 +149,7 @@ and when it finishes, remove the loader to indicate clear status.
 \if{html}{\out{<a id="method-new"></a>}}
 \if{latex}{\out{\hypertarget{method-new}{}}}
 \subsection{Method \code{new()}}{
+create a loader object
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{addLoader$new(
   target_selector = "",
@@ -71,7 +197,7 @@ Default is \code{NULL}, will be automatically calculated based on the target
 component. It is recommend to use \code{NULL} for "replace" and "inline" method
 to let it automatically be calculated, but required for "full_screen" method.}
 
-\item{\code{width}}{string, default is the same as \code{height} to make it sequare.}
+\item{\code{width}}{string, default is the same as \code{height} to make it square.}
 
 \item{\code{color}}{string, any valid CSS color name, or hex color code}
 
@@ -91,7 +217,7 @@ process is still running.}
 works for "full_screen" method.}
 
 \item{\code{footer}}{Additional Shiny/HTML component to add below the loader, like
-a title \code{h1("load title")}.}
+a title \code{h1("load title")}. \code{inline} method does not have a footer.}
 
 \item{\code{z_index}}{number, only works for "full_screen" method, what CSS layer
 should the overlay be places. In HTML, all elements have the default of 0.}
@@ -103,24 +229,65 @@ errors? mainly for debugging}
 }
 \if{html}{\out{</div>}}
 }
+\subsection{Details}{
+\subsection{Methods}{
+\itemize{
+\item \code{replace}: use a HTML \code{div} with the same CSS styles to \strong{replace the original}
+\strong{target}, but add the loader inside and remove original content inside. When the
+loader is \code{hide}, show the original \code{div} and hide this loader \code{div}. Height
+and width is the original \code{div}'s height unless specially specified. Good
+example of this will be some plot outputs.
+\item \code{inline}: append the loader as the first child of target HTML container.
+loader's height and width is the original \code{div}'s height unless specially specified.
+In addition, this methods will \strong{disable} all inputs and buttons inside the
+target container, so this method can be useful on some buttons.
+\item \code{full_screen}: Do not change anything of the target HTML container, add
+an overlay to \strong{cover the whole page} when \code{show} and hide the overlay when \code{hide}.
+This method requires the \code{height} to be specified manually. Under this method,
+\code{bg_color} and \code{z_index} can also be changed.
+}
+}
+}
+
+\subsection{Returns}{
+A R6 loader object
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-show"></a>}}
 \if{latex}{\out{\hypertarget{method-show}{}}}
 \subsection{Method \code{show()}}{
+show the loader
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{addLoader$show(alert = FALSE)}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{alert}}{bool, if the target selector or loader is not found,
+alert on UI? For debugging purposes.}
+}
+\if{html}{\out{</div>}}
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-hide"></a>}}
 \if{latex}{\out{\hypertarget{method-hide}{}}}
 \subsection{Method \code{hide()}}{
+hide the loader
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{addLoader$hide(alert = FALSE)}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{alert}}{bool, if the target selector or loader is not found,
+alert on UI? For debugging purposes.}
+}
+\if{html}{\out{</div>}}
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-clone"></a>}}
