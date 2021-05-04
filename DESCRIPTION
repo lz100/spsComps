@@ -29,7 +29,6 @@ Suggests:
     shinyjqui
 License: GPL (>= 3)
 Encoding: UTF-8
-LazyData: true
 BugReports: https://github.com/lz100/spsComps/issues
 URL: https://github.com/lz100/spsComps
 RoxygenNote: 7.1.1
