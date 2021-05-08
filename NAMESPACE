@@ -2,6 +2,7 @@
 
 export(addLoader)
 export(animateAppend)
+export(animateAppendNested)
 export(animateIcon)
 export(animateServer)
 export(animateUI)

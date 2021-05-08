@@ -286,7 +286,6 @@ animationRemove <- function(
 #' See our online demo for details.
 #' @param speed string, one of "fast", "slow"
 #' @param hover bool, trigger animation on hover?
-#' @param ... other attributes add to the wrapper, for `animateAppendNested` only
 #' @details
 #' #### `animateAppend`
 #' Append the animation directly to the element you provide, but can only apply
@@ -346,6 +345,8 @@ animateAppend <- function(
 #' @rdname animateAppend
 #' @param display string, CSS display method for the out-most wrapper, one of the v
 #' alid css display method, like "block", "inline", "flex", default is "inline-block".
+#' @param ... other attributes add to the wrapper, for `animateAppendNested` only
+#' @export
 animateAppendNested <- function(
   element,
   animation,
