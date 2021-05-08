@@ -1,3 +1,15 @@
+# spsComps 0.3.0
+
+## New features
+
+-   Add `animateAppend`, which allows users to add animations by pipe `%>%`
+
+-   Add `animateAppendNested`, which allows users to add multiple animations to the same element by pipe `%>%`.
+
+## Minor change
+
+-   add `…` argument to the `animateIcon`. Users can append additional attributes.
+
 # spsComps 0.2.0
 
 ## New features

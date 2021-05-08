@@ -1,8 +1,6 @@
 
 
 server <- function(input, output, session) {
-
-
   serverWelcome("welcome")
   serverText("text")
   serverImages("images")
@@ -11,4 +9,6 @@ server <- function(input, output, session) {
   serverOther("other")
   serverServerCol("server_col")
   serverUploadFile("upload_file")
+  serverAnimation("animation")
+  serverLoader("loader")
 }

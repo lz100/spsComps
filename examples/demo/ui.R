@@ -6,6 +6,8 @@ header <- dashboardHeader(
 sidebar <- dashboardSidebar(
   sidebarMenu(
     menuItem("Welcome", tabName = "welcome", icon = icon("star")),
+    menuItem("Animations", tabName = "animation", icon = animateIcon("carrot", "float", color = "orange"), badgeLabel = "NEW"),
+    menuItem("Loaders", tabName = "loader", icon = animateIcon("spinner", "spin", color = "teal"), badgeLabel = "NEW"),
     menuItem("Input Control", tabName = "text", icon = icon("font")),
     menuItem("Image Display", tabName = "images", icon = icon("images")),
     menuItem("Buttons", tabName = "buttons", icon = icon("square")),
@@ -19,6 +21,7 @@ sidebar <- dashboardSidebar(
 body <- dashboardBody(
   tags$head(
     tags$link(href = "demo.css", rel = "stylesheet"),
+    tags$script(src = "demo.js"),
     tags$link(href = "https://github.com/lz100/spsComps/blob/master/img/spscomps.png?raw=true", rel = "icon"),
   ),
   tabItems(
@@ -26,6 +29,8 @@ body <- dashboardBody(
     tabItem(tabName = "text", uiText("text")),
     tabItem(tabName = "images", uiImages("images")),
     tabItem(tabName = "buttons", uiButtons("buttons")),
+    tabItem(tabName = "animation", uiAnimation("animation")),
+    tabItem(tabName = "loader", uiLoader("loader")),
     tabItem(tabName = "progress", uiProgress("progress")),
     tabItem(tabName = "other", uiOther("other")),
     tabItem(tabName = "server_col", uiServerCol("server_col")),

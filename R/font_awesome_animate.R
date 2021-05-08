@@ -5,15 +5,14 @@
 #' @param animation what kind of animation you want, one of "wrench", "ring",
 #' "horizontal", "horizontal-reverse", "vertical", "flash", "bounce", "bounce-reverse",
 #' "spin", "spin-reverse", "float", "pulse", "shake", "tada", "passing", "passing-reverse",
-#' "burst", "falling", "falling-reverse", "rising". See
-#' https://l-lin.github.io/font-awesome-animation/#animation-list
-#' or our online demo for details.
+#' "burst", "falling", "falling-reverse", "rising"s
+#' See our online demo for details.
 #' @param speed string, one of "fast", "slow"
 #' @param hover bool, trigger animation on hover?
 #' @param color string, color of the icon, a valid color name or hex code
 #' @param size string, change font-awesome icon size, one of "xs", "sm", "lg", "2x", "3x",
 #' "5x", "7x", "10x". See examples.
-#'
+#' @param ... append additional attributes you want to the icon
 #' @return a icon tag
 #' @export
 #' @details If you don't specify any animation, it will work the same as the original
@@ -63,14 +62,17 @@ animateIcon <- function(
   speed = NULL,
   hover=FALSE,
   color = "",
-  size = NULL
+  size = NULL,
+  ...
   ){
 
   tags$i(
+    class = "fa",
     class = .genAnimationString(animation, speed, hover, name, size),
     style = glue::glue('color: {color};'),
     spsDepend("animation", js = FALSE),
-    spsDepend("font-awesome")
+    spsDepend("font-awesome"),
+    ...
   )
 }
 
@@ -92,8 +94,8 @@ animateIcon <- function(
 #' @param animation what kind of animation you want, one of "wrench", "ring",
 #' "horizontal", "horizontal-reverse", "vertical", "flash", "bounce", "bounce-reverse",
 #' "spin", "spin-reverse", "float", "pulse", "shake", "tada", "passing", "passing-reverse",
-#' "burst", "falling", "falling-reverse", "rising". See
-#' https://l-lin.github.io/font-awesome-animation/#animation-list
+#' "burst", "falling", "falling-reverse", "rising"s
+#' See our online demo for details.
 #' or our online demo for details.
 #' @param speed string, one of "fast", "slow"
 #' @param hover bool, trigger animation on hover?
@@ -200,7 +202,7 @@ animateIcon <- function(
 #' }
 animateUI <- function(
   selector,
-  animation = NULL,
+  animation,
   speed = NULL,
   hover = FALSE,
   isID = TRUE
@@ -273,6 +275,100 @@ animationRemove <- function(
 }
 
 
+#' Append animation to a Shiny element
+#'
+#' @param element the shiny element to append, must have "shiny.tag" class for
+#' `animateAppend` and can be either "shiny.tag" or "shiny.tag.list" for `animateAppendNested`.
+#' @param animation what kind of animation you want, one of "wrench", "ring",
+#' "horizontal", "horizontal-reverse", "vertical", "flash", "bounce", "bounce-reverse",
+#' "spin", "spin-reverse", "float", "pulse", "shake", "tada", "passing", "passing-reverse",
+#' "burst", "falling", "falling-reverse", "rising"s
+#' See our online demo for details.
+#' @param speed string, one of "fast", "slow"
+#' @param hover bool, trigger animation on hover?
+#' @param ... other attributes add to the wrapper, for `animateAppendNested` only
+#' @details
+#' #### `animateAppend`
+#' Append the animation directly to the element you provide, but can only apply
+#' one type of animation
+#' #### `animateAppendNested`
+#' Append multiple animations to the element you provide by creating a wrapper
+#' around the element. Animations are applied on the wrappers. This may cause some
+#' unknown issues, especially on the display property. Try change the display may
+#' fix the issues. It is **safer** to use `animateAppend`.
+#'
+#' Read more about CSS display: https://www.w3schools.com/cssref/pr_class_display.asp
+#' @return returns a Shiny element
+#' @export
+#'
+#' @examples
+#' if (interactive()){
+#'   library(shiny)
+#'
+#'   ui <- fluidPage(
+#'     icon("home") %>%
+#'       animateAppend("ring"),
+#'     h2("Append animation", class = "text-primary") %>%
+#'       animateAppend("pulse"),
+#'     br(),
+#'     h2("Nested animations", class = "text-primary") %>%
+#'       animateAppendNested("ring") %>%
+#'       animateAppendNested("pulse") %>%
+#'       animateAppendNested("passing"),
+#'     tags$span("Other things"),
+#'     h2("Nested animations display changed", class = "text-primary") %>%
+#'       animateAppendNested("ring") %>%
+#'       animateAppendNested("pulse", display = "block", style = "width: 30%"),
+#'     tags$span("Other things")
+#'   )
+#'
+#'   server <- function(input, output, session) {
+#'
+#'   }
+#'
+#'   shinyApp(ui, server)
+#' }
+animateAppend <- function(
+  element,
+  animation,
+  speed = NULL,
+  hover = FALSE
+) {
+  stopifnot(inherits(element, "shiny.tag"))
+
+  add_class <- .genAnimationString(animation, speed, hover)
+  tagList(
+    htmltools::tagAppendAttributes(element, class = add_class),
+    spsDepend("animation")
+  )
+}
+
+#' @rdname animateAppend
+#' @param display string, CSS display method for the out-most wrapper, one of the v
+#' alid css display method, like "block", "inline", "flex", default is "inline-block".
+animateAppendNested <- function(
+  element,
+  animation,
+  speed = NULL,
+  hover = FALSE,
+  display = "inline-block",
+  ...
+) {
+  stopifnot(inherits(element, c("shiny.tag", "shiny.tag.list")))
+  stopifnot(is.character(display) && length(display) == 1)
+
+  add_class <- .genAnimationString(animation, speed, hover)
+  tagList(
+    div(
+      style = paste0("display: ", display, ";"),
+      class = add_class,
+      ...,
+      element
+    ),
+    spsDepend("animation")
+  )
+}
+
 .genAnimationString <- function(
   animation,
   speed,
@@ -330,7 +426,7 @@ animationRemove <- function(
   ))
   size_class <- if(size != "") paste0("fa-", size) else ""
 
-  glue::glue('sps-animation fa {name_class} {size_class} {animation_class} {hover_class} {speed_class}')
+  glue::glue('sps-animation {name_class} {size_class} {animation_class} {hover_class} {speed_class}')
 }
 
 

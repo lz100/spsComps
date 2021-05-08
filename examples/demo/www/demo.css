@@ -48,5 +48,59 @@ html {font-size:10px;)}
 }
 
 .desc-table tr:nth-child(even) {
-      background-color: rgb(243 243 243);
+  background-color: rgb(243 243 243);
+}
+
+.animate-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.animate-table thead {
+  display: table-header-group;
+  vertical-align: middle;
+  border-color: inherit;
+}
+
+.animate-table th {
+  text-align: left;
+  margin: 10px 10px;
+  border-bottom: 1px solid #434343;
+  color: #b6b6b6;
+  font-weight: normal;
+}
+
+.animate-table tbody {
+  display: table-row-group;
+  vertical-align: middle;
+  border-color: inherit;
+}
+
+.animate-table tr {
+  display: table-row;
+  vertical-align: inherit;
+  border-color: inherit;
+}
+
+.animate-table td {
+  text-align: left;
+  padding: 5px 25px;
+  border-bottom: 1px solid #434343;
+}
+
+.animate-table td:nth-child(2) {
+  color: #ff8e8e;
+}
+
+.animate-table td:nth-child(3) {
+  color: #51abe0;
+}
+
+.animate-table td:nth-child(4) {
+  color: #66b961;
+}
+
+.animate-table code {
+  color: black;
+  background-color: #eee;
 }

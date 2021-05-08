@@ -21,8 +21,7 @@ uiProgress <- function(id) {
               - Try to drag the value for `progress c` below 0, and see what happens.
               ')
           ),
-          h4("you need to open up the progress
-                                tracker, it is collapsed ->"),
+          h4("You can drag the progress panel to any place. ->"),
           actionButton(ns("a"), "progress a"),
           actionButton(ns("b"), "progress b"),
           sliderInput(ns("c"), min = -100,
