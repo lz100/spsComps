@@ -74,7 +74,7 @@ and when it finishes, remove the loader to indicate clear status." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">spsComps</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.9.99</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2</span>
       </span>
     </div>
 
@@ -143,8 +143,7 @@ and when it finishes, remove the loader to indicate clear status.</p>
 </ul>
 <p><hr>
 <a id="method-new"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>new()</code></h3>
-
-<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
+<p>create a loader object</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
 <p><div class="r"></p><pre><span class='va'>addLoader</span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span>
   target_selector <span class='op'>=</span> <span class='st'>""</span>,
   isID <span class='op'>=</span> <span class='cn'>TRUE</span>,
@@ -187,7 +186,7 @@ Default is <code>NULL</code>, will be automatically calculated based on the targ
 component. It is recommend to use <code>NULL</code> for "replace" and "inline" method
 to let it automatically be calculated, but required for "full_screen" method.</p></dd>
 
-<dt><code>width</code></dt><dd><p>string, default is the same as <code>height</code> to make it sequare.</p></dd>
+<dt><code>width</code></dt><dd><p>string, default is the same as <code>height</code> to make it square.</p></dd>
 
 <dt><code>color</code></dt><dd><p>string, any valid CSS color name, or hex color code</p></dd>
 
@@ -207,7 +206,7 @@ process is still running.</p></dd>
 works for "full_screen" method.</p></dd>
 
 <dt><code>footer</code></dt><dd><p>Additional Shiny/HTML component to add below the loader, like
-a title <code>h1("load title")</code>.</p></dd>
+a title <code>h1("load title")</code>. <code>inline</code> method does not have a footer.</p></dd>
 
 <dt><code>z_index</code></dt><dd><p>number, only works for "full_screen" method, what CSS layer
 should the overlay be places. In HTML, all elements have the default of 0.</p></dd>
@@ -218,18 +217,52 @@ errors? mainly for debugging</p></dd>
 <dt><code>session</code></dt><dd><p>shiny session</p></dd>
 
 </dl><p></div></p>
+<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Details</h4>
+
+<h5 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Methods</h5>
+
+<ul>
+<li><p><code>replace</code>: use a HTML <code>div</code> with the same CSS styles to <strong>replace the original</strong>
+<strong>target</strong>, but add the loader inside and remove original content inside. When the
+loader is <code>hide</code>, show the original <code>div</code> and hide this loader <code>div</code>. Height
+and width is the original <code>div</code>'s height unless specially specified. Good
+example of this will be some plot outputs.</p></li>
+<li><p><code>inline</code>: append the loader as the first child of target HTML container.
+loader's height and width is the original <code>div</code>'s height unless specially specified.
+In addition, this methods will <strong>disable</strong> all inputs and buttons inside the
+target container, so this method can be useful on some buttons.</p></li>
+<li><p><code>full_screen</code>: Do not change anything of the target HTML container, add
+an overlay to <strong>cover the whole page</strong> when <code>show</code> and hide the overlay when <code>hide</code>.
+This method requires the <code>height</code> to be specified manually. Under this method,
+<code>bg_color</code> and <code>z_index</code> can also be changed.</p></li>
+</ul>
+
+
+
+<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Returns</h4>
+<p>A R6 loader object</p>
 <p><hr>
 <a id="method-show"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>show()</code></h3>
-
-<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
+<p>show the loader</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
 <p><div class="r"></p><pre><span class='va'>addLoader</span><span class='op'>$</span><span class='fu'>show</span><span class='op'>(</span>alert <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre><p></div></p>
 
+<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
+<p><div class="arguments"></p><dl>
+<dt><code>alert</code></dt><dd><p>bool, if the target selector or loader is not found,
+alert on UI? For debugging purposes.</p></dd>
+
+</dl><p></div></p>
 <p><hr>
 <a id="method-hide"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>hide()</code></h3>
-
-<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
+<p>hide the loader</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
 <p><div class="r"></p><pre><span class='va'>addLoader</span><span class='op'>$</span><span class='fu'>hide</span><span class='op'>(</span>alert <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre><p></div></p>
 
+<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
+<p><div class="arguments"></p><dl>
+<dt><code>alert</code></dt><dd><p>bool, if the target selector or loader is not found,
+alert on UI? For debugging purposes.</p></dd>
+
+</dl><p></div></p>
 <p><hr>
 <a id="method-clone"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>clone()</code></h3>
 <p>The objects of this class are cloneable with this method.</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
@@ -243,6 +276,131 @@ errors? mainly for debugging</p></dd>
 
 
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span><span class='op'>{</span>
+  <span class='va'>ui</span> <span class='op'>&lt;-</span> <span class='fu'>fluidPage</span><span class='op'>(</span>
+    <span class='fu'><a href='spsDepend.html'>spsDepend</a></span><span class='op'>(</span><span class='st'>"css-loader"</span><span class='op'>)</span>,
+    <span class='fu'>h4</span><span class='op'>(</span><span class='st'>"Use buttons to show and hide loaders with different methods"</span><span class='op'>)</span>,
+    <span class='va'>tags</span><span class='op'>$</span><span class='fu'>b</span><span class='op'>(</span><span class='st'>"Replace"</span><span class='op'>)</span>, <span class='fu'>br</span><span class='op'>(</span><span class='op'>)</span>,
+    <span class='fu'>actionButton</span><span class='op'>(</span><span class='st'>"b_re_start"</span>, <span class='st'>"Replace"</span><span class='op'>)</span>,
+    <span class='fu'>actionButton</span><span class='op'>(</span><span class='st'>"b_re_stop"</span>, <span class='st'>"stop replace"</span><span class='op'>)</span>,
+    <span class='fu'>br</span><span class='op'>(</span><span class='op'>)</span>, <span class='va'>tags</span><span class='op'>$</span><span class='fu'>b</span><span class='op'>(</span><span class='st'>"Inline"</span><span class='op'>)</span>, <span class='fu'>br</span><span class='op'>(</span><span class='op'>)</span>,
+    <span class='fu'>actionButton</span><span class='op'>(</span><span class='st'>"b_in_start"</span>, <span class='st'>"Inline"</span><span class='op'>)</span>,
+    <span class='fu'>actionButton</span><span class='op'>(</span><span class='st'>"b_in_stop"</span>, <span class='st'>"stop inline"</span><span class='op'>)</span>,
+    <span class='fu'>br</span><span class='op'>(</span><span class='op'>)</span>, <span class='va'>tags</span><span class='op'>$</span><span class='fu'>b</span><span class='op'>(</span><span class='st'>"Full screen"</span><span class='op'>)</span>, <span class='fu'>br</span><span class='op'>(</span><span class='op'>)</span>,
+    <span class='fu'>actionButton</span><span class='op'>(</span><span class='st'>"b_fs_start"</span>, <span class='st'>"Full screen 2s"</span><span class='op'>)</span>, <span class='fu'>br</span><span class='op'>(</span><span class='op'>)</span>,
+    <span class='fu'>h4</span><span class='op'>(</span><span class='st'>"Add loaders to a big HTML chunk"</span><span class='op'>)</span>,
+    <span class='fu'>actionButton</span><span class='op'>(</span><span class='st'>"chunk_start"</span>, <span class='st'>"Chunk loader"</span><span class='op'>)</span>,
+    <span class='fu'>actionButton</span><span class='op'>(</span><span class='st'>"chunk_stop"</span>, <span class='st'>"Stop"</span><span class='op'>)</span>, <span class='fu'>br</span><span class='op'>(</span><span class='op'>)</span>,
+    <span class='fu'>column</span><span class='op'>(</span><span class='fl'>6</span>,
+           id <span class='op'>=</span> <span class='st'>"chunk"</span>,
+           style <span class='op'>=</span> <span class='st'>"background-color: #eee"</span>,
+           <span class='fu'>h5</span><span class='op'>(</span><span class='st'>"Here are some text 12345"</span><span class='op'>)</span>,
+           <span class='va'>tags</span><span class='op'>$</span><span class='fu'>hr</span><span class='op'>(</span><span class='op'>)</span>,
+           <span class='fu'>icon</span><span class='op'>(</span><span class='st'>"home"</span><span class='op'>)</span>,
+           <span class='fu'>p</span><span class='op'>(</span><span class='st'>"blablablablablablablablablablablablablablablablablablablabla"</span><span class='op'>)</span>,
+           <span class='fu'>p</span><span class='op'>(</span><span class='st'>"blablablablablablablablablablablablablablablablablablablabla"</span><span class='op'>)</span>,
+           <span class='fu'>p</span><span class='op'>(</span><span class='st'>"blablablablablablablablablablablablablablablablablablablabla"</span><span class='op'>)</span>,
+           <span class='fu'>p</span><span class='op'>(</span><span class='st'>"blablablablablablablablablablablablablablablablablablablabla"</span><span class='op'>)</span>
+    <span class='op'>)</span>
+  <span class='op'>)</span>
+
+  <span class='va'>server</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>input</span>, <span class='va'>output</span>, <span class='va'>session</span><span class='op'>)</span> <span class='op'>{</span>
+    <span class='co'># Init loaders</span>
+    <span class='va'>loader_replace</span> <span class='op'>&lt;-</span> <span class='va'>addLoader</span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span><span class='st'>"b_re_start"</span>, type <span class='op'>=</span> <span class='st'>"facebook"</span><span class='op'>)</span>
+    <span class='va'>loader_inline</span> <span class='op'>&lt;-</span> <span class='va'>addLoader</span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span><span class='st'>"b_in_start"</span>, color <span class='op'>=</span> <span class='st'>"green"</span>, method <span class='op'>=</span> <span class='st'>"inline"</span><span class='op'>)</span>
+    <span class='va'>loader_fs</span> <span class='op'>&lt;-</span> <span class='va'>addLoader</span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span>
+      <span class='st'>"b_fs_start"</span>, color <span class='op'>=</span> <span class='st'>"pink"</span>, method <span class='op'>=</span> <span class='st'>"full_screen"</span>,
+      bg_color <span class='op'>=</span> <span class='st'>"#eee"</span>, height <span class='op'>=</span> <span class='st'>"30rem"</span>, type <span class='op'>=</span> <span class='st'>"heart"</span>
+    <span class='op'>)</span>
+    <span class='va'>loader_chunk</span> <span class='op'>&lt;-</span> <span class='va'>addLoader</span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span>
+      <span class='st'>"chunk"</span>, type <span class='op'>=</span> <span class='st'>"spinner"</span>, color <span class='op'>=</span> <span class='st'>"orange"</span>,
+      footer <span class='op'>=</span> <span class='fu'>h5</span><span class='op'>(</span><span class='st'>"chunk loader"</span><span class='op'>)</span>
+    <span class='op'>)</span>
+
+    <span class='co'># toggle loaders</span>
+    <span class='co'>## replace</span>
+    <span class='fu'>observeEvent</span><span class='op'>(</span><span class='va'>input</span><span class='op'>$</span><span class='va'>b_re_start</span>, <span class='op'>{</span>
+      <span class='va'>loader_replace</span><span class='op'>$</span><span class='fu'>show</span><span class='op'>(</span><span class='op'>)</span>
+    <span class='op'>}</span><span class='op'>)</span>
+    <span class='fu'>observeEvent</span><span class='op'>(</span><span class='va'>input</span><span class='op'>$</span><span class='va'>b_re_stop</span>, <span class='op'>{</span>
+      <span class='va'>loader_replace</span><span class='op'>$</span><span class='fu'>hide</span><span class='op'>(</span><span class='op'>)</span>
+    <span class='op'>}</span><span class='op'>)</span>
+    <span class='co'>## inline</span>
+    <span class='fu'>observeEvent</span><span class='op'>(</span><span class='va'>input</span><span class='op'>$</span><span class='va'>b_in_start</span>, <span class='op'>{</span>
+      <span class='va'>loader_inline</span><span class='op'>$</span><span class='fu'>show</span><span class='op'>(</span><span class='op'>)</span>
+    <span class='op'>}</span><span class='op'>)</span>
+    <span class='fu'>observeEvent</span><span class='op'>(</span><span class='va'>input</span><span class='op'>$</span><span class='va'>b_in_stop</span>, <span class='op'>{</span>
+      <span class='va'>loader_inline</span><span class='op'>$</span><span class='fu'>hide</span><span class='op'>(</span><span class='op'>)</span>
+    <span class='op'>}</span><span class='op'>)</span>
+    <span class='co'>## full screen</span>
+    <span class='fu'>observeEvent</span><span class='op'>(</span><span class='va'>input</span><span class='op'>$</span><span class='va'>b_fs_start</span>, <span class='op'>{</span>
+      <span class='va'>loader_fs</span><span class='op'>$</span><span class='fu'>show</span><span class='op'>(</span><span class='op'>)</span>
+      <span class='fu'><a href='https://rdrr.io/r/base/Sys.sleep.html'>Sys.sleep</a></span><span class='op'>(</span><span class='fl'>2</span><span class='op'>)</span>
+      <span class='va'>loader_fs</span><span class='op'>$</span><span class='fu'>hide</span><span class='op'>(</span><span class='op'>)</span>
+    <span class='op'>}</span><span class='op'>)</span>
+    <span class='co'>## chunk</span>
+    <span class='fu'>observeEvent</span><span class='op'>(</span><span class='va'>input</span><span class='op'>$</span><span class='va'>chunk_start</span>, <span class='op'>{</span>
+      <span class='va'>loader_chunk</span><span class='op'>$</span><span class='fu'>show</span><span class='op'>(</span><span class='op'>)</span>
+    <span class='op'>}</span><span class='op'>)</span>
+    <span class='fu'>observeEvent</span><span class='op'>(</span><span class='va'>input</span><span class='op'>$</span><span class='va'>chunk_stop</span>, <span class='op'>{</span>
+      <span class='va'>loader_chunk</span><span class='op'>$</span><span class='fu'>hide</span><span class='op'>(</span><span class='op'>)</span>
+    <span class='op'>}</span><span class='op'>)</span>
+
+  <span class='op'>}</span>
+
+  <span class='fu'>shinyApp</span><span class='op'>(</span><span class='va'>ui</span>, <span class='va'>server</span><span class='op'>)</span>
+<span class='op'>}</span>
+
+<span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span><span class='op'>{</span>
+  <span class='va'>ui</span> <span class='op'>&lt;-</span> <span class='fu'>bootstrapPage</span><span class='op'>(</span>
+    <span class='fu'><a href='spsDepend.html'>spsDepend</a></span><span class='op'>(</span><span class='st'>"css-loader"</span><span class='op'>)</span>,
+    <span class='fu'>h4</span><span class='op'>(</span><span class='st'>"Add loaders to Shiny `render` events"</span><span class='op'>)</span>,
+    <span class='va'>tags</span><span class='op'>$</span><span class='fu'>b</span><span class='op'>(</span><span class='st'>"Replace"</span><span class='op'>)</span>, <span class='fu'>br</span><span class='op'>(</span><span class='op'>)</span>,
+    <span class='fu'>selectInput</span><span class='op'>(</span>inputId <span class='op'>=</span> <span class='st'>"n_re"</span>,
+                label <span class='op'>=</span> <span class='st'>"Change this to render the following plot"</span>,
+                choices <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>10</span>, <span class='fl'>20</span>, <span class='fl'>35</span>, <span class='fl'>50</span><span class='op'>)</span><span class='op'>)</span>,
+    <span class='fu'>plotOutput</span><span class='op'>(</span>outputId <span class='op'>=</span> <span class='st'>"p_re"</span><span class='op'>)</span>,
+    <span class='fu'>br</span><span class='op'>(</span><span class='op'>)</span>, <span class='va'>tags</span><span class='op'>$</span><span class='fu'>b</span><span class='op'>(</span><span class='st'>"Full screen"</span><span class='op'>)</span>, <span class='fu'>br</span><span class='op'>(</span><span class='op'>)</span>,
+    <span class='fu'>selectInput</span><span class='op'>(</span>inputId <span class='op'>=</span> <span class='st'>"n_fs"</span>,
+                label <span class='op'>=</span> <span class='st'>"Change this to render the following plot"</span>,
+                choices <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>10</span>, <span class='fl'>20</span>, <span class='fl'>35</span>, <span class='fl'>50</span><span class='op'>)</span><span class='op'>)</span>,
+    <span class='fu'>plotOutput</span><span class='op'>(</span>outputId <span class='op'>=</span> <span class='st'>"p_fs"</span><span class='op'>)</span>
+  <span class='op'>)</span>
+
+  <span class='va'>server</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>input</span>, <span class='va'>output</span>, <span class='va'>session</span><span class='op'>)</span> <span class='op'>{</span>
+    <span class='co'># create loaders</span>
+    <span class='va'>p_re</span> <span class='op'>&lt;-</span> <span class='va'>addLoader</span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span><span class='st'>"p_re"</span>, type <span class='op'>=</span> <span class='st'>"facebook"</span><span class='op'>)</span>
+    <span class='va'>p_fs</span> <span class='op'>&lt;-</span> <span class='va'>addLoader</span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span>
+      <span class='st'>"p_fs"</span>, color <span class='op'>=</span> <span class='st'>"pink"</span>, method <span class='op'>=</span> <span class='st'>"full_screen"</span>,
+      bg_color <span class='op'>=</span> <span class='st'>"#eee"</span>, height <span class='op'>=</span> <span class='st'>"30rem"</span>, type <span class='op'>=</span> <span class='st'>"grid"</span>,
+      footer <span class='op'>=</span> <span class='fu'>h4</span><span class='op'>(</span><span class='st'>"Replotting..."</span><span class='op'>)</span>
+    <span class='op'>)</span>
+    <span class='co'># use loaders in rednering</span>
+    <span class='va'>output</span><span class='op'>$</span><span class='va'>p_re</span> <span class='op'>&lt;-</span> <span class='fu'>renderPlot</span><span class='op'>(</span><span class='op'>{</span>
+      <span class='fu'><a href='https://rdrr.io/r/base/on.exit.html'>on.exit</a></span><span class='op'>(</span><span class='va'>p_re</span><span class='op'>$</span><span class='fu'>hide</span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
+      <span class='va'>p_re</span><span class='op'>$</span><span class='fu'>show</span><span class='op'>(</span><span class='op'>)</span>
+      <span class='fu'><a href='https://rdrr.io/r/base/Sys.sleep.html'>Sys.sleep</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>)</span>
+      <span class='fu'><a href='https://rdrr.io/r/graphics/hist.html'>hist</a></span><span class='op'>(</span><span class='va'>faithful</span><span class='op'>$</span><span class='va'>eruptions</span>,
+           probability <span class='op'>=</span> <span class='cn'>TRUE</span>,
+           breaks <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span><span class='op'>(</span><span class='va'>input</span><span class='op'>$</span><span class='va'>n_re</span><span class='op'>)</span>,
+           xlab <span class='op'>=</span> <span class='st'>"Duration (minutes)"</span>,
+           main <span class='op'>=</span> <span class='st'>"Geyser eruption duration"</span><span class='op'>)</span>
+    <span class='op'>}</span><span class='op'>)</span>
+    <span class='va'>output</span><span class='op'>$</span><span class='va'>p_fs</span> <span class='op'>&lt;-</span> <span class='fu'>renderPlot</span><span class='op'>(</span><span class='op'>{</span>
+      <span class='fu'><a href='https://rdrr.io/r/base/on.exit.html'>on.exit</a></span><span class='op'>(</span><span class='va'>p_fs</span><span class='op'>$</span><span class='fu'>hide</span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
+      <span class='va'>p_fs</span><span class='op'>$</span><span class='fu'>show</span><span class='op'>(</span><span class='op'>)</span>
+      <span class='fu'><a href='https://rdrr.io/r/base/Sys.sleep.html'>Sys.sleep</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>)</span>
+      <span class='fu'><a href='https://rdrr.io/r/graphics/hist.html'>hist</a></span><span class='op'>(</span><span class='va'>faithful</span><span class='op'>$</span><span class='va'>eruptions</span>,
+           probability <span class='op'>=</span> <span class='cn'>TRUE</span>,
+           breaks <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span><span class='op'>(</span><span class='va'>input</span><span class='op'>$</span><span class='va'>n_fs</span><span class='op'>)</span>,
+           xlab <span class='op'>=</span> <span class='st'>"Duration (minutes)"</span>,
+           main <span class='op'>=</span> <span class='st'>"Geyser eruption duration"</span><span class='op'>)</span>
+    <span class='op'>}</span><span class='op'>)</span>
+  <span class='op'>}</span>
+  <span class='fu'>shinyApp</span><span class='op'>(</span><span class='va'>ui</span>, <span class='va'>server</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -71,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">spsComps</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.9.99</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2</span>
       </span>
     </div>
 
@@ -126,7 +126,13 @@
 <li><p><code>animateIcon</code>: create font-awesome icons with animations!</p></li>
 <li><p><code>animateUI</code>, <code>animateServer</code>: add animations to any HTML/Shiny element, one is called from the UI, one is called from the server side.</p></li>
 <li><p><code>animationRemove</code>: remove animations of an element, call from server only.</p></li>
-<li><p><code>cssLoader</code>: creates 12 different loaders to indicate busy status.</p></li>
+<li>
+<p>Loaders: 12 different loaders to indicate busy status.</p>
+<ul>
+<li><p><code>cssLoader</code>: UI side function, directly add the load on UI when app starts</p></li>
+<li><p><code>addLoader</code>: server side function, add loaders dynamically and control show and hide of the loader.</p></li>
+</ul>
+</li>
 <li><p><code>shinyCatch</code>: now has this argument <code>trace_back</code>. It will log detailed traceback information on console if enabled. Similar to Rstudio’s built-in traceback, it shows the function calls and file+line number if there is any.</p></li>
 <li><p>Add target_blank argument for <code>gallery</code>, <code>hrefTab</code>, <code>hrefTable</code>, <code>hexLogo</code> and <code>hexPanel</code>: if <code>TRUE</code>, add <code>target="_blank"</code> to the link.</p></li>
 </ul>
@@ -155,6 +161,8 @@
 <ul>
 <li>
 <code>bsHoverPopover</code> now works on <code>body</code> tag instead of within the target element so that it will not be hidden if the parent of target has some overflow settings.</li>
+<li>
+<code>gallery</code>: Fix the height matching issues by adding the caption height in calculation. Now all images should be in the supposed rows.</li>
 </ul>
 </div>
 </div>
