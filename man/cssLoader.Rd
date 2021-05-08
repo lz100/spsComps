@@ -106,7 +106,7 @@ if (interactive()){
     ),
     actionButton(
       "btn-b", "Loading",
-      icon =  cssLoader(is_icon = TRUE, color = "#667db6", inline = TRUE)
+      icon =  cssLoader(type = "hourglass", is_icon = TRUE, color = "#667db6", inline = TRUE)
     )
   )
   server <- function(input, output, session) {}

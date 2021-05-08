@@ -10,7 +10,8 @@ animateIcon(
   speed = NULL,
   hover = FALSE,
   color = "",
-  size = NULL
+  size = NULL,
+  ...
 )
 }
 \arguments{
@@ -19,9 +20,8 @@ animateIcon(
 \item{animation}{what kind of animation you want, one of "wrench", "ring",
 "horizontal", "horizontal-reverse", "vertical", "flash", "bounce", "bounce-reverse",
 "spin", "spin-reverse", "float", "pulse", "shake", "tada", "passing", "passing-reverse",
-"burst", "falling", "falling-reverse", "rising". See
-https://l-lin.github.io/font-awesome-animation/#animation-list
-or our online demo for details.}
+"burst", "falling", "falling-reverse", "rising"s
+See our online demo for details.}
 
 \item{speed}{string, one of "fast", "slow"}
 
@@ -31,6 +31,8 @@ or our online demo for details.}
 
 \item{size}{string, change font-awesome icon size, one of "xs", "sm", "lg", "2x", "3x",
 "5x", "7x", "10x". See examples.}
+
+\item{...}{append additional attributes you want to the icon}
 }
 \value{
 a icon tag

@@ -6,7 +6,7 @@
 \alias{animationRemove}
 \title{Add/remove animation to any HTML/shiny component}
 \usage{
-animateUI(selector, animation = NULL, speed = NULL, hover = FALSE, isID = TRUE)
+animateUI(selector, animation, speed = NULL, hover = FALSE, isID = TRUE)
 
 animateServer(
   selector,
@@ -38,8 +38,8 @@ function. If you are using the server side functions \link{animateServer} and \l
 \item{animation}{what kind of animation you want, one of "wrench", "ring",
 "horizontal", "horizontal-reverse", "vertical", "flash", "bounce", "bounce-reverse",
 "spin", "spin-reverse", "float", "pulse", "shake", "tada", "passing", "passing-reverse",
-"burst", "falling", "falling-reverse", "rising". See
-https://l-lin.github.io/font-awesome-animation/#animation-list
+"burst", "falling", "falling-reverse", "rising"s
+See our online demo for details.
 or our online demo for details.}
 
 \item{speed}{string, one of "fast", "slow"}
