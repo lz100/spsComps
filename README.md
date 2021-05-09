@@ -5,7 +5,12 @@ server components. These components include different kinds of new inputs, butto
 procgress loaders on the UI side. Exception handling functions, new upload control 
 function and more on server side. 
 
-**View the online demo**: https://lezhang.shinyapps.io/spsComps
+## Demos
+
+| Demo | type | source code |
+|---|---|---|
+|[shiny](https://lezhang.shinyapps.io/spsComps)|shinyapps.io|[Github](https://github.com/lz100/spsComps/tree/master/examples/demo)|
+|[Rmd](https://systempipe.org/sps/dev/spscomps/ui/)|Rmarkdown rendered|[Raw](https://raw.githubusercontent.com/systemPipeR/systemPipeR.github.io/main/content/en/sps/dev/spscomps/ui.Rmd)|
 
 ## Install
 

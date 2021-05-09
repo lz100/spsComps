@@ -25,7 +25,8 @@ Imports:
     R6,
     crayon
 Suggests:
-    testthat
+    testthat,
+    shinyjqui
 License: GPL (>= 3)
 Encoding: UTF-8
 BugReports: https://github.com/lz100/spsComps/issues
