@@ -491,3 +491,12 @@ by loading.io With CC0 License
   }
 }
 
+
+/*gif*/
+.sps-loader-gif img {
+  object-fit: fill;
+}
+
+
+
+

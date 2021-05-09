@@ -8,7 +8,9 @@
 #'
 #' @param type string, one of  "circle", "dual-ring", "facebook", "heart",
 #' "ring", "roller", "default", "ellipsis", "grid", "hourglass", "ripple",
-#' "spinner"
+#' "spinner", "gif", default is "default".
+#' @param src string, online URL or local path of the gif animation file if
+#' you would like to upload your own loader.
 #' @param id string, optional, ID for the component, if not given, a random
 #' ID will be given.
 #' @param height string, pixel, like "10px"; or (r)em, "1.5rem", "1.5em".
@@ -86,6 +88,7 @@
 #' }
 cssLoader <- function(
   type = "default",
+  src = "",
   id = "",
   height = "1.5rem",
   width = height,
@@ -100,6 +103,8 @@ cssLoader <- function(
     type = type, id = id, height = height, width = width, color = color,
     opacity = opacity, inline = inline, is_icon = is_icon
   )
+  if(type == "gif") stopifnot(is.character(src) && length(src) == 1)
+  if (is.null(src)) src <- ""
   if (id == "") id <- paste0('spsloader-', glue::glue_collapse(sample(9, 9)))
   element <- if (is_icon) tags$i else tags$div
   display <- if (inline) "inline-block" else "block"
@@ -115,7 +120,7 @@ cssLoader <- function(
     tags$script(glue(.open = "@{", .close = "}@",
       '\n
         $(function(){
-          $("#@{id}@").prepend(chooseLoader("@{id}@", "@{type}@", "@{color}@", "@{width}@", "@{height}@"));
+          $("#@{id}@").prepend(chooseLoader("@{id}@", "@{type}@", "@{src}@", "@{color}@", "@{width}@", "@{height}@"));
         });
       \n'
     )),
@@ -158,7 +163,8 @@ cssLoader <- function(
     "grid",
     "hourglass",
     "ripple",
-    "spinner"
+    "spinner",
+    "gif"
   ))
 }
 
@@ -322,7 +328,9 @@ addLoader <- R6::R6Class(
     #' @param isID bool, is your selector an ID?
     #' @param type string, one of  "circle", "dual-ring", "facebook", "heart",
     #' "ring", "roller", "default", "ellipsis", "grid", "hourglass", "ripple",
-    #' "spinner", default is "default".
+    #' "spinner", "gif", default is "default".
+    #' @param src string, online URL or local path of the gif animation file if
+    #' you would like to upload your own loader.
     #' @param id string, the unqiue ID for the loader, if not provided, a random
     #' ID will be given. If you are using shiny modules, DO NOT use `session$ns('YOUR_ID')`
     #' to wrap it. Loaders live on the top level of the document.
@@ -373,6 +381,7 @@ addLoader <- R6::R6Class(
       target_selector = "",
       isID = TRUE,
       type = "default",
+      src = "",
       id = "",
       height = NULL,
       width = height,
@@ -403,6 +412,8 @@ addLoader <- R6::R6Class(
         type = type, id = id, color = color,
         opacity = opacity, isID = isID
       )
+      if(type == "gif") stopifnot(is.character(src) && length(src) == 1)
+      if (is.null(src)) src <- ""
 
       method <- match.arg(method, c("replace", "inline", "full_screen"))
       if ((method == "full_screen") && (is.null(height) || is.null(width)))
@@ -422,6 +433,7 @@ addLoader <- R6::R6Class(
         selector = selector,
         id = id,
         type = type,
+        src = src,
         height = height,
         width = width,
         method = method,
@@ -504,7 +516,9 @@ addLoader <- R6::R6Class(
     #' is **not** recreated until the next time `show` method is called.
     #' @param type string, one of  "circle", "dual-ring", "facebook", "heart",
     #' "ring", "roller", "default", "ellipsis", "grid", "hourglass", "ripple",
-    #' "spinner", default is "default".
+    #' "spinner", "gif", default is "default".
+    #' @param src string, online URL or local path of the gif animation file if
+    #' you would like to upload your own loader.
     #' @param id string, the unqiue ID for the loader, if not provided, a random
     #' ID will be given. If you are using shiny modules, DO NOT use `session$ns('YOUR_ID')`
     #' to wrap it. Loaders live on the top level of the document.
@@ -532,6 +546,7 @@ addLoader <- R6::R6Class(
     #' errors? mainly for debugging
     recreate = function(
       type = "default",
+      src = NULL,
       id = "",
       height = NULL,
       width = height,
@@ -557,6 +572,8 @@ addLoader <- R6::R6Class(
         type = type, id = id, color = color,
         opacity = opacity
       )
+      if(type == "gif") stopifnot(is.character(src) && length(src) == 1)
+      if (is.null(src)) src <- ""
 
       method <- match.arg(method, c("replace", "inline", "full_screen"))
       if ((method == "full_screen") && (is.null(height) || is.null(width)))
@@ -576,6 +593,7 @@ addLoader <- R6::R6Class(
         selector = selector,
         id = id,
         type = type,
+        src = src,
         height = height,
         width = width,
         method = method,

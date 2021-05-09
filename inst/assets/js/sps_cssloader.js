@@ -1,6 +1,7 @@
 
 // get loader div
-function chooseLoader(id, type, color, width, height){
+function chooseLoader(id, type, src, color, width, height){
+  console.log(color)
   var types = {
     //
     "circle"   :
@@ -416,13 +417,19 @@ function chooseLoader(id, type, color, width, height){
             background: ${color};
         }
       </style>
-      `
+      `,
+    "gif":
+    `
+    <div class="sps-loader-gif">
+      <img src=${src} style="height: ${height}; width: ${width}"><img>
+    </div>
+    `
   }
   return types[type] || '<div>type not found</div>';
 }
 
 Shiny.addCustomMessageHandler('sps-add-loader', function(data) {
-  // selector,id ,type ,height ,width ,method , bgColor,
+  // selector,id ,type, src, height ,width ,method , bgColor,
   // color ,opacity ,block , center, footer, zIndex, alert
 
   // skip if loader is created
@@ -485,9 +492,8 @@ function loaderInit(data, el, loader_height, loader_width) {
   }
 
   var loader = chooseLoader(
-    data.id, data.type, data.color,
-    loader_height,
-    loader_width,
+    data.id, data.type, data.src,
+    data.color, loader_width, loader_height
   );
   $(`#${data.id}`).prepend(loader);
 }
