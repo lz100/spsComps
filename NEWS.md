@@ -10,6 +10,18 @@
 
 -   add `…` argument to the `animateIcon`. Users can append additional attributes.
 
+-   Rewrite methods in `addLoader` class.
+
+    -   Now it add the load to the document when first time `show` method is called instead of on class initialization. This solves the problem that some elements are not visible on app start so javascript functions cannot catch the dimensions to do the calculation.
+
+    -   Add 2 new methods, `recreate` and destroy.
+
+    -   `destroy` will remove the loader from the app (client side)
+
+    -   `recreate` = `hide` + `destroy` + create a new loader, users can change type, color, method, etc and recalculate the loader dimensions.
+
+-   Now `animationRemove` can also remove animations add by `animateUI` and `animateIcon` functions.
+
 # spsComps 0.2.0
 
 ## New features

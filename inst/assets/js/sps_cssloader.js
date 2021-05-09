@@ -426,7 +426,7 @@ Shiny.addCustomMessageHandler('sps-add-loader', function(data) {
   // color ,opacity ,block , center, footer, zIndex, alert
 
   // skip if loader is created
-  console.log($(`#${data.id}-container`).length)
+  //console.log($(`#${data.id}-container`).length)
   if($(`#${data.id}-container`).length) return(true);
 
   //get element
@@ -448,7 +448,7 @@ Shiny.addCustomMessageHandler('sps-add-loader', function(data) {
     if (data.alert) console.log(msg);
     throw new Error(msg);
   }
-  console.log('loader added')
+  //console.log('loader added')
   loaderInit(data, el, loader_height, loader_width)
 
 });
