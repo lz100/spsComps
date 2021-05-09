@@ -6,9 +6,7 @@
 
 -   Add `animateAppendNested`, which allows users to add multiple animations to the same element by pipe `%>%`.
 
-## Minor change
-
--   add `…` argument to the `animateIcon`. Users can append additional attributes.
+## Major change
 
 -   Rewrite methods in `addLoader` class.
 
@@ -20,6 +18,9 @@
 
     -   `recreate` = `hide` + `destroy` + create a new loader, users can change type, color, method, etc and recalculate the loader dimensions.
 
+## Minor change
+
+-   add `…` argument to the `animateIcon`. Users can append additional attributes.
 -   Now `animationRemove` can also remove animations add by `animateUI` and `animateIcon` functions.
 
 # spsComps 0.2.0
