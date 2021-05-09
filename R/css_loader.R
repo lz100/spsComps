@@ -307,15 +307,25 @@ addLoader <- R6::R6Class(
     #' ```
     #'
     #' This function is used in server only, so if you are in shiny module,
-    #' **DO NOT** add the `ns()` wrapper.
+    #' use `ns()` for ID on UI but **DO NOT** add the `ns()` wrapper on server.
+    #'
+    #' UI
+    #' ```
+    #' actionButton(inputId = ns("btn"))
+    #' ```
+    #'
+    #' server
+    #' ```
+    #' addLoader$new(target_selector = "btn", ...)
+    #' ```
     #'
     #' @param isID bool, is your selector an ID?
     #' @param type string, one of  "circle", "dual-ring", "facebook", "heart",
     #' "ring", "roller", "default", "ellipsis", "grid", "hourglass", "ripple",
     #' "spinner", default is "default".
     #' @param id string, the unqiue ID for the loader, if not provided, a random
-    #' ID will be given. If you are using shiny modules, use `session$ns('YOUR_ID')`
-    #'to wrap it.
+    #' ID will be given. If you are using shiny modules, DO NOT use `session$ns('YOUR_ID')`
+    #' to wrap it. Loaders live on the top level of the document.
     #' @param height string, (r)em, "1.5rem", "1.5em", or pixel, like "10px".
     #' Default is `NULL`, will be automatically calculated based on the target
     #' component. It is recommend to use `NULL` for "replace" and "inline" method
@@ -355,6 +365,10 @@ addLoader <- R6::R6Class(
     #'   an overlay to **cover the whole page** when `show` and hide the overlay when `hide`.
     #'   This method requires the `height` to be specified manually. Under this method,
     #'   `bg_color` and `z_index` can also be changed.
+    #'
+    #' #### New container
+    #' `addLoader$new()` method only stores the loader information, the loader is
+    #' add to your docuement upon the first time `addLoader$show()` is called.
     initialize = function(
       target_selector = "",
       isID = TRUE,
@@ -404,7 +418,7 @@ addLoader <- R6::R6Class(
       footer <- if(method != "inline") htmltools::doRenderTags(footer) else NULL
       z_index <- floor(z_index)
 
-      session$sendCustomMessage('sps-add-loader', message = list(
+      private$data <- list(
         selector = selector,
         id = id,
         type = type,
@@ -419,59 +433,168 @@ addLoader <- R6::R6Class(
         zIndex = z_index,
         bgColor = bg_color,
         alert = alert
-      ))
-
-      private$selector <- selector
-      private$id <- paste0(id, "-container")
-      private$block <- block
-      private$method <- method
+      )
       private$session <- session
+      invisible(self)
 
     },
     #' @description show the loader
     #' @param alert bool, if the target selector or loader is not found,
     #' alert on UI? For debugging purposes.
+    #' @details
+    #' Make sure your target element is visible when the time you call this `show`
+    #' method, otherwise, you will not get it if height and width is rely on
+    #' auto-calculation for "replace" and "inline" method. "full_screen" method
+    #' is not affected.
     show = function(alert = FALSE){
+      if (private$detroyed) {
+        shinyCatch(msg("Loader is destroyed, use `recreate` method to create a new one"))
+        return(invisible(self))
+      }
+
       shinyCatch({
         if(!is.logical(alert) || length(alert) != 1)
           stop("Alert needs to be TRUE or FALSE")
       }, blocking_level = "error")
 
-      private$session$sendCustomMessage('sps-toggle-loader', message = list(
-        selector = private$selector,
-        id = private$id,
-        state = "show",
-        method = private$method,
-        block = private$block,
-        alert = alert
-      ))
+
+      private$session$sendCustomMessage('sps-add-loader', message = private$data)
+      private$session$sendCustomMessage(
+        'sps-toggle-loader', message = append(private$data, list(state = "show"))
+      )
       invisible(self)
     },
     #' @description hide the loader
     #' @param alert bool, if the target selector or loader is not found,
     #' alert on UI? For debugging purposes.
     hide = function(alert = FALSE){
+      if (private$detroyed) {
+        shinyCatch(msg("Loader is destroyed, use `recreate` method to create a new one"))
+        return(invisible(self))
+      }
       shinyCatch({
         if(!is.logical(alert) || length(alert) != 1)
           stop("Alert needs to be TRUE or FALSE")
       }, blocking_level = "error")
 
-      private$session$sendCustomMessage('sps-toggle-loader', message = list(
-        selector = private$selector,
-        id = private$id,
-        state = "hide",
-        method = private$method,
-        block = private$block,
-        alert = alert
+      private$session$sendCustomMessage(
+        'sps-toggle-loader', message = append(private$data, list(state = "hide"))
+      )
+      invisible(self)
+    },
+
+    #' @description Destroy current loader
+    #' @param alert bool, if the target selector or loader is not found,
+    #' alert on UI? For debugging purposes.
+    #' @details hide and remove current loader from the current document
+    destroy = function(alert = FALSE) {
+      self$hide(alert)
+      private$session$sendCustomMessage('sps-remove-loader', message = list(
+        id = private$data$id
       ))
+      private$detroyed <- TRUE
+      invisible(self)
+    },
+
+    #' @description recreate the loader
+    #' @details This method will first disable then destroy (remove) current loader,
+    #' and finally store new information of the new loader.
+    #'
+    #' **Note:**: this method only refresh loader object on the server, the loader
+    #' is **not** recreated until the next time `show` method is called.
+    #' @param type string, one of  "circle", "dual-ring", "facebook", "heart",
+    #' "ring", "roller", "default", "ellipsis", "grid", "hourglass", "ripple",
+    #' "spinner", default is "default".
+    #' @param id string, the unqiue ID for the loader, if not provided, a random
+    #' ID will be given. If you are using shiny modules, DO NOT use `session$ns('YOUR_ID')`
+    #' to wrap it. Loaders live on the top level of the document.
+    #' @param height string, (r)em, "1.5rem", "1.5em", or pixel, like "10px".
+    #' Default is `NULL`, will be automatically calculated based on the target
+    #' component. It is recommend to use `NULL` for "replace" and "inline" method
+    #' to let it automatically be calculated, but required for "full_screen" method.
+    #' @param width string, default is the same as `height` to make it square.
+    #' @param color string, any valid CSS color name, or hex color code
+    #' @param opacity number, between 0-1
+    #' @param method one of "replace", "inline", "full_screen", see details
+    #' @param block bool, for some input components, once the loader starts,
+    #' it can also block user interaction with the component, very useful for
+    #' "inline" method, eg. prevent users from clicking the button while some
+    #' process is still running.
+    #' @param center bool, try to place the load to the center of the target for
+    #' "inline" and "replace" and center of the screen for "full_screen".
+    #' @param bg_color string, any valid CSS color name, or hex color code. Only
+    #' works for "full_screen" method.
+    #' @param footer Additional Shiny/HTML component to add below the loader, like
+    #' a title `h1("load title")`. `inline` method does not have a footer.
+    #' @param z_index number, only works for "full_screen" method, what CSS layer
+    #' should the overlay be places. In HTML, all elements have the default of 0.
+    #' @param alert bool, should alert if target cannot be found or other javascript
+    #' errors? mainly for debugging
+    recreate = function(
+      type = "default",
+      id = "",
+      height = NULL,
+      width = height,
+      color = "#337ab7",
+      opacity = 1,
+      method = "replace",
+      block = TRUE,
+      center = TRUE,
+      bg_color = "#eee",
+      footer = NULL,
+      z_index = 2000,
+      alert = FALSE
+    ) {
+      stopifnot(is.character(bg_color) && length(bg_color) == 1)
+      stopifnot(is.logical(alert) && length(alert) == 1)
+      stopifnot(is.logical(center) && length(center) == 1)
+      stopifnot(is.numeric(z_index) && length(z_index) == 1)
+      if(!is.null(footer)) stopifnot(inherits(footer, "shiny.tag") && length(footer) == 3)
+      if(!is.null(height)) stopifnot(is.character(height) && length(height) == 1)
+      if(!is.null(width)) stopifnot(is.character(width) && length(width) == 1)
+
+      type <- .validateLoader(
+        type = type, id = id, color = color,
+        opacity = opacity
+      )
+
+      method <- match.arg(method, c("replace", "inline", "full_screen"))
+      if ((method == "full_screen") && (is.null(height) || is.null(width)))
+        stop("Loader: height and width cannot by NULL for full screen method.")
+
+      id <- if (id == "") paste0('spsloader-', glue::glue_collapse(sample(9, 9))) else id
+
+      footer <- if(method != "inline") htmltools::doRenderTags(footer) else NULL
+      z_index <- floor(z_index)
+
+      # hide and destroy
+      if(!private$detroyed) self$destroy(alert)
+      # update data
+      data <- private$data
+      selector <- data$selector
+      private$data <- list(
+        selector = selector,
+        id = id,
+        type = type,
+        height = height,
+        width = width,
+        method = method,
+        color = color,
+        opacity = opacity,
+        block = block,
+        center = center,
+        footer = footer,
+        zIndex = z_index,
+        bgColor = bg_color,
+        alert = alert
+      )
+      private$detroyed <- FALSE
       invisible(self)
     }
   ),
   private = list(
-    selector = NULL,
-    id = NULL,
-    block = NULL,
-    method = NULL,
-    session = NULL
+    data = list(),
+    session = NULL,
+    detroyed = FALSE
   )
 )

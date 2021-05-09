@@ -97,7 +97,7 @@ uiLoader <- function(id) {
               icon =  cssLoader(is_icon = TRUE, inline = TRUE, color = "#3a7bd5"
               )
             ),
-            p("A button with only the loader and some text"),
+            p("A button with the loader and some text"),
             actionButton(
               ns("btn-b"), "Loading",
               icon =  cssLoader(type = "hourglass", is_icon = TRUE, color = "#667db6", inline = TRUE)
@@ -316,6 +316,112 @@ uiLoader <- function(id) {
             }
             shinyApp(ui, server)
             '
+          ), spsHr(),
+          markdown(
+            '
+            ### Change loader with `addLoader$recreate()`
+            For example we have a button below, we can change type, color, method
+            and other things of this button.
+
+            You can also use `addLoader$destroy()` to hide + destroy the loader
+            '
+          ),
+          fluidRow(
+            column(
+              6, br(), br(), br(), br(),
+              actionButton(
+                ns("btn_change"), "A button", class = "center-block",
+                style = "height: 100px; width: 200px"
+              )
+            ),
+            column(
+              6,
+              selectInput(ns("change_type"), "Change type", c(
+                "default", "dual-ring", "facebook", "heart",
+                "ring", "roller", "circle", "ellipsis",
+                "grid", "hourglass", "ripple", "spinner"
+              )),
+
+              selectInput(ns("change_method"), "Change method", c(
+                "replace", "inline"
+              )),
+              selectInput(ns("change_color"), "Change color", c(
+                "red", "orange", "yellow", "green", "blue", "indigo", "violet"
+              )),
+              sliderInput(ns("change_opacity"), label = "change opacity",
+                          0, 1, 1, 0.1),
+              shinyWidgets::switchInput(
+                inputId = ns("destroy"),
+                label = "destroyed?",
+                onLabel = "Yes",
+                offLabel = "No",
+                value = FALSE
+              )
+            )
+          ),
+          spsCodeBtn(
+            ns("code_addLoader_recreate"),
+            show_span = TRUE,
+            '
+            ui <- fluidPage(
+              spsDepend("css-loader"),
+              fluidRow(
+                column(
+                  6, br(), br(), br(), br(),
+                  actionButton(
+                    "btn_change", "A button", class = "center-block",
+                    style = "height: 100px; width: 200px"
+                  )
+                ),
+                column(
+                  6,
+                  selectInput("change_type", "Change type", c(
+                    "default", "dual-ring", "facebook", "heart",
+                    "ring", "roller", "circle", "ellipsis",
+                    "grid", "hourglass", "ripple", "spinner"
+                  )),
+
+                  selectInput("change_method", "Change method", c(
+                    "replace", "inline"
+                  )),
+                  selectInput("change_color", "Change color", c(
+                    "red", "orange", "yellow", "green", "blue", "indigo", "violet"
+                  )),
+                  sliderInput("change_opacity", label = "change opacity",
+                              0, 1, 1, 0.1),
+                  shinyWidgets::switchInput(
+                    inputId = "destroy",
+                    label = "destroyed?",
+                    onLabel = "Yes",
+                    offLabel = "No",
+                    value = FALSE
+                  )
+                )
+              )
+            )
+
+            server <- function(input, output, session) {
+              loader_change <- addLoader$new("btn_change")
+              observe({
+                loader_change$
+                  recreate(
+                    type = input$change_type,
+                    method = input$change_method,
+                    opacity = input$change_opacity,
+                    color = input$change_color
+                  )$
+                  show()
+                shinyWidgets::updateSwitchInput(session, "destroy", value = FALSE)
+              })
+              observe({
+                req(input$destroy)
+                loader_change$destroy()
+              })
+
+            }
+
+            shinyApp(ui, server)
+            '
           )
         )
       )
@@ -327,6 +433,24 @@ serverLoader <- function(id) {
   moduleServer(
     id,
     function(input, output, session) {
+      # Init loader
+      loader_change <- addLoader$new("btn_change")
+      observe({
+        loader_change$
+          recreate(
+          type = input$change_type,
+          method = input$change_method,
+          opacity = input$change_opacity,
+          color = input$change_color
+          )$
+          show()
+        shinyWidgets::updateSwitchInput(session, "destroy", value = FALSE)
+      })
+      observe({
+        req(input$destroy)
+        loader_change$destroy()
+      })
+
       # Init loaders
       loader_replace <- addLoader$new("b_re_start", type = "facebook")
       loader_inline <- addLoader$new("b_in_start", color = "green", method = "inline")

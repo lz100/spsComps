@@ -323,7 +323,7 @@ uiAnimation <- function(id) {
           div(
             class = "text-minor",
             tags$code("animateAppendNested"),
-            tags$span(": multiple animations animations with pipe"), br(),
+            tags$span(": add multiple animations with pipe"), br(),
           ),
           h2("Nested animations", class = "text-primary") %>%
             animateAppendNested("ring") %>%
