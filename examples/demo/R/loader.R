@@ -1,3 +1,5 @@
+spinner <- "https://github.com/lz100/spsComps/blob/master/examples/demo/www/spinner.gif?raw=true"
+eater <- "https://github.com/lz100/spsComps/blob/master/examples/demo/www/bean_eater.gif?raw=true"
 
 # UI
 uiLoader <- function(id) {
@@ -73,6 +75,72 @@ uiLoader <- function(id) {
                   br()
                 )
               })
+            )
+            server <- function(input, output, session) {}
+            shinyApp(ui, server)
+            '
+          ), spsHr(),
+          h3("Use your own GIF as loaders"),
+          cssLoader(
+            "gif", spinner, height = "50px"
+          ),
+          cssLoader(
+            "gif", spinner, height = "100px"
+          ),
+          cssLoader(
+            "gif", eater, height = "150px"
+          ),
+          cssLoader(
+            "gif", eater, height = "200px"
+          ),
+          h4("custom loaders in buttons"),
+          actionButton(
+            ns("btn-custom1"), "",
+            icon =  cssLoader(
+              type = "gif", src = spinner,
+              is_icon = TRUE, inline = TRUE
+            )
+          ),
+          actionButton(
+            ns("btn-custom2"), "A button",
+            icon =  cssLoader(
+              type = "gif", src = eater,
+              is_icon = TRUE, inline = TRUE
+            )
+          ), br(),
+          spsCodeBtn(
+            ns("code_loader_custom"),
+            show_span = TRUE,
+            '
+            spinner <- "https://github.com/lz100/spsComps/blob/master/examples/demo/www/spinner.gif?raw=true"
+            eater <- "https://github.com/lz100/spsComps/blob/master/examples/demo/www/bean_eater.gif?raw=true"
+            ui <- fluidPage(
+              cssLoader(
+                "gif", src = spinner, height = "50px"
+              ),
+              cssLoader(
+                "gif", spinner, height = "100px"
+              ),
+              cssLoader(
+                "gif", eater, height = "150px"
+              ),
+              cssLoader(
+                "gif", eater, height = "200px"
+              ),
+              actionButton(
+                "btn-custom1", "",
+                icon =  cssLoader(
+                  type = "gif", src = spinner,
+                  is_icon = TRUE, inline = TRUE
+                )
+              ),
+              actionButton(
+                "btn-custom2", "A button",
+                icon =  cssLoader(
+                  type = "gif", src = eater,
+                  is_icon = TRUE, inline = TRUE
+                )
+              )
             )
             server <- function(input, output, session) {}
             shinyApp(ui, server)
@@ -339,7 +407,8 @@ uiLoader <- function(id) {
               selectInput(ns("change_type"), "Change type", c(
                 "default", "dual-ring", "facebook", "heart",
                 "ring", "roller", "circle", "ellipsis",
-                "grid", "hourglass", "ripple", "spinner"
+                "grid", "hourglass", "ripple", "spinner",
+                "gif"
               )),
 
               selectInput(ns("change_method"), "Change method", c(
@@ -348,6 +417,10 @@ uiLoader <- function(id) {
               selectInput(ns("change_color"), "Change color", c(
                 "red", "orange", "yellow", "green", "blue", "indigo", "violet"
               )),
+              clearableTextInput(
+                ns("src"), label = "Link for your own gif, only used for 'gif' type",
+                value = "https://github.com/lz100/spsComps/blob/master/examples/demo/www/bean_eater.gif?raw=true"
+              ),
               sliderInput(ns("change_opacity"), label = "change opacity",
                           0, 1, 1, 0.1),
               shinyWidgets::switchInput(
@@ -380,7 +453,6 @@ uiLoader <- function(id) {
                     "ring", "roller", "circle", "ellipsis",
                     "grid", "hourglass", "ripple", "spinner"
                   )),
-
                   selectInput("change_method", "Change method", c(
                     "replace", "inline"
                   )),
@@ -389,6 +461,10 @@ uiLoader <- function(id) {
                   )),
                   sliderInput("change_opacity", label = "change opacity",
                               0, 1, 1, 0.1),
+                  clearableTextInput(
+                    "src", label = "Link for your own gif, only used for \'gif\' type",
+                    value = "https://github.com/lz100/spsComps/blob/master/examples/demo/www/bean_eater.gif?raw=true"
+                  ),
                   shinyWidgets::switchInput(
                     inputId = "destroy",
                     label = "destroyed?",
@@ -406,6 +482,7 @@ uiLoader <- function(id) {
                 loader_change$
                   recreate(
                     type = input$change_type,
+                    src = input$src,
                     method = input$change_method,
                     opacity = input$change_opacity,
                     color = input$change_color
@@ -439,6 +516,7 @@ serverLoader <- function(id) {
         loader_change$
           recreate(
           type = input$change_type,
+          src = input$src,
           method = input$change_method,
           opacity = input$change_opacity,
           color = input$change_color

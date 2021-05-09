@@ -86,6 +86,42 @@
 #'   server <- function(input, output, session) {}
 #'   shinyApp(ui, server)
 #' }
+#' # use your own
+#' if (interactive()){
+#'   library(shiny)
+#'   spinner <- "https://github.com/lz100/spsComps/blob/master/examples/demo/www/spinner.gif?raw=true"
+#'   eater <- "https://github.com/lz100/spsComps/blob/master/examples/demo/www/bean_eater.gif?raw=true"
+#'   ui <- fluidPage(
+#'     cssLoader(
+#'       "gif", spinner, height = "50px"
+#'     ),
+#'     cssLoader(
+#'       "gif", spinner, height = "100px"
+#'     ),
+#'     cssLoader(
+#'       "gif", eater, height = "150px"
+#'     ),
+#'     cssLoader(
+#'       "gif", eater, height = "200px"
+#'     ),
+#'     actionButton(
+#'       "btn-custom1", "",
+#'       icon =  cssLoader(
+#'         type = "gif", src = spinner,
+#'         is_icon = TRUE, inline = TRUE
+#'       )
+#'     ),
+#'     actionButton(
+#'       "btn-custom2", "A button",
+#'       icon =  cssLoader(
+#'         type = "gif", src = eater,
+#'         is_icon = TRUE, inline = TRUE
+#'       )
+#'     )
+#'   )
+#'   server <- function(input, output, session) {}
+#'   shinyApp(ui, server)
+#' }
 cssLoader <- function(
   type = "default",
   src = "",

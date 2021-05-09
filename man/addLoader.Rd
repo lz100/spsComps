@@ -157,6 +157,7 @@ create a loader object
   target_selector = "",
   isID = TRUE,
   type = "default",
+  src = "",
   id = "",
   height = NULL,
   width = height,
@@ -194,7 +195,10 @@ server\preformatted{addLoader$new(target_selector = "btn", ...)
 
 \item{\code{type}}{string, one of  "circle", "dual-ring", "facebook", "heart",
 "ring", "roller", "default", "ellipsis", "grid", "hourglass", "ripple",
-"spinner", default is "default".}
+"spinner", "gif", default is "default".}
+
+\item{\code{src}}{string, online URL or local path of the gif animation file if
+you would like to upload your own loader.}
 
 \item{\code{id}}{string, the unqiue ID for the loader, if not provided, a random
 ID will be given. If you are using shiny modules, DO NOT use \code{session$ns('YOUR_ID')}
@@ -340,6 +344,7 @@ recreate the loader
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{addLoader$recreate(
   type = "default",
+  src = NULL,
   id = "",
   height = NULL,
   width = height,
@@ -360,7 +365,10 @@ recreate the loader
 \describe{
 \item{\code{type}}{string, one of  "circle", "dual-ring", "facebook", "heart",
 "ring", "roller", "default", "ellipsis", "grid", "hourglass", "ripple",
-"spinner", default is "default".}
+"spinner", "gif", default is "default".}
+
+\item{\code{src}}{string, online URL or local path of the gif animation file if
+you would like to upload your own loader.}
 
 \item{\code{id}}{string, the unqiue ID for the loader, if not provided, a random
 ID will be given. If you are using shiny modules, DO NOT use \code{session$ns('YOUR_ID')}
