@@ -71,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">spsComps</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.99.3</span>
       </span>
     </div>
 
@@ -115,13 +115,53 @@
       <small>Source: <a href='https://github.com/lz100/spsComps/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="spscomps-020" class="section level1">
-<h1 class="page-header" data-toc-text="0.2.0">
-<a href="#spscomps-020" class="anchor"></a>spsComps 0.2.0<small> Unreleased </small>
+    <div id="spscomps-030" class="section level1">
+<h1 class="page-header" data-toc-text="0.3.0">
+<a href="#spscomps-030" class="anchor"></a>spsComps 0.3.0<small> Unreleased </small>
 </h1>
 <div id="new-features" class="section level2">
 <h2 class="hasAnchor">
 <a href="#new-features" class="anchor"></a>New features</h2>
+<ul>
+<li><p>Add <code>animateAppend</code>, which allows users to add animations by pipe <code><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></code></p></li>
+<li><p>Add <code>animateAppendNested</code>, which allows users to add multiple animations to the same element by pipe <code><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></code>.</p></li>
+</ul>
+</div>
+<div id="major-change" class="section level2">
+<h2 class="hasAnchor">
+<a href="#major-change" class="anchor"></a>Major change</h2>
+<ul>
+<li>
+<p>Rewrite methods in <code>addLoader</code> class.</p>
+<ul>
+<li><p>Now it add the load to the document when first time <code>show</code> method is called instead of on class initialization. This solves the problem that some elements are not visible on app start so javascript functions cannot catch the dimensions to do the calculation.</p></li>
+<li>
+<p>Add 2 new methods, <code>recreate</code> and <code>destroy</code>:</p>
+<ul>
+<li><p><code>destroy</code> will remove the loader from the app (client side)</p></li>
+<li><p><code>recreate</code> = <code>hide</code> + <code>destroy</code> + create a new loader, users can change type, color, method, etc and recalculate the loader dimensions.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div id="minor-change" class="section level2">
+<h2 class="hasAnchor">
+<a href="#minor-change" class="anchor"></a>Minor change</h2>
+<ul>
+<li>add <code>…</code> argument to the <code>animateIcon</code>. Users can append additional attributes.</li>
+<li>Now <code>animationRemove</code> can also remove animations add by <code>animateUI</code> and <code>animateIcon</code> functions.</li>
+</ul>
+</div>
+</div>
+    <div id="spscomps-020" class="section level1">
+<h1 class="page-header" data-toc-text="0.2.0">
+<a href="#spscomps-020" class="anchor"></a>spsComps 0.2.0<small> Unreleased </small>
+</h1>
+<div id="new-features-1" class="section level2">
+<h2 class="hasAnchor">
+<a href="#new-features-1" class="anchor"></a>New features</h2>
 <ul>
 <li><p><code>animateIcon</code>: create font-awesome icons with animations!</p></li>
 <li><p><code>animateUI</code>, <code>animateServer</code>: add animations to any HTML/Shiny element, one is called from the UI, one is called from the server side.</p></li>
@@ -137,9 +177,9 @@
 <li><p>Add target_blank argument for <code>gallery</code>, <code>hrefTab</code>, <code>hrefTable</code>, <code>hexLogo</code> and <code>hexPanel</code>: if <code>TRUE</code>, add <code>target="_blank"</code> to the link.</p></li>
 </ul>
 </div>
-<div id="major-change" class="section level2">
+<div id="major-change-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#major-change" class="anchor"></a>Major Change</h2>
+<a href="#major-change-1" class="anchor"></a>Major Change</h2>
 <ul>
 <li>
 <p><code>gallery</code>:</p>
@@ -151,9 +191,9 @@
 </li>
 </ul>
 </div>
-<div id="minor-change" class="section level2">
+<div id="minor-change-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#minor-change" class="anchor"></a>Minor Change</h2>
+<a href="#minor-change-1" class="anchor"></a>Minor Change</h2>
 </div>
 <div id="bug-fix" class="section level2">
 <h2 class="hasAnchor">
@@ -198,9 +238,9 @@
 <li>Migrated from systemPipeShiny</li>
 </ul>
 </div>
-<div id="new-features-1" class="section level2">
+<div id="new-features-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-features-1" class="anchor"></a>New features</h2>
+<a href="#new-features-2" class="anchor"></a>New features</h2>
 <ul>
 <li>
 <p>Enhanced <code>gallery</code> arguments.</p>

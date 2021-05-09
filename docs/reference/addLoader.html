@@ -74,7 +74,7 @@ and when it finishes, remove the loader to indicate clear status." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">spsComps</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.99.3</span>
       </span>
     </div>
 
@@ -139,6 +139,8 @@ and when it finishes, remove the loader to indicate clear status.</p>
 <li><p><a href='#method-new'><code>addLoader$new()</code></a></p></li>
 <li><p><a href='#method-show'><code>addLoader$show()</code></a></p></li>
 <li><p><a href='#method-hide'><code>addLoader$hide()</code></a></p></li>
+<li><p><a href='#method-destroy'><code>addLoader$destroy()</code></a></p></li>
+<li><p><a href='#method-recreate'><code>addLoader$recreate()</code></a></p></li>
 <li><p><a href='#method-clone'><code>addLoader$clone()</code></a></p></li>
 </ul>
 <p><hr>
@@ -169,7 +171,9 @@ and when it finishes, remove the loader to indicate clear status.</p>
 loader to? a shiny component ID or a valid CSS selector if <code>isID = FLASE</code>.
 for example, you have a button and want to add animation to it:<pre><span class='fu'>actionButton</span><span class='op'>(</span>inputId <span class='op'>=</span> <span class='st'>"btn"</span><span class='op'>)</span>
 </pre>This function is used in server only, so if you are in shiny module,
-<strong>DO NOT</strong> add the <code>ns()</code> wrapper.</p></dd>
+use <code>ns()</code> for ID on UI but <strong>DO NOT</strong> add the <code>ns()</code> wrapper on server.UI<pre><span class='fu'>actionButton</span><span class='op'>(</span>inputId <span class='op'>=</span> <span class='fu'>ns</span><span class='op'>(</span><span class='st'>"btn"</span><span class='op'>)</span><span class='op'>)</span>
+</pre>server<pre><span class='va'>addLoader</span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span>target_selector <span class='op'>=</span> <span class='st'>"btn"</span>, <span class='va'>...</span><span class='op'>)</span>
+</pre></p></dd>
 
 <dt><code>isID</code></dt><dd><p>bool, is your selector an ID?</p></dd>
 
@@ -178,8 +182,8 @@ for example, you have a button and want to add animation to it:<pre><span class=
 "spinner", default is "default".</p></dd>
 
 <dt><code>id</code></dt><dd><p>string, the unqiue ID for the loader, if not provided, a random
-ID will be given. If you are using shiny modules, use <code>session$ns('YOUR_ID')</code>
-to wrap it.</p></dd>
+ID will be given. If you are using shiny modules, DO NOT use <code>session$ns('YOUR_ID')</code>
+to wrap it. Loaders live on the top level of the document.</p></dd>
 
 <dt><code>height</code></dt><dd><p>string, (r)em, "1.5rem", "1.5em", or pixel, like "10px".
 Default is <code>NULL</code>, will be automatically calculated based on the target
@@ -238,6 +242,12 @@ This method requires the <code>height</code> to be specified manually. Under thi
 </ul>
 
 
+<h5 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>New container</h5>
+
+
+<p><code>addLoader$new()</code> method only stores the loader information, the loader is
+add to your docuement upon the first time <code>addLoader$show()</code> is called.</p>
+
 
 <h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Returns</h4>
 <p>A R6 loader object</p>
@@ -252,6 +262,12 @@ This method requires the <code>height</code> to be specified manually. Under thi
 alert on UI? For debugging purposes.</p></dd>
 
 </dl><p></div></p>
+<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Details</h4>
+<p>Make sure your target element is visible when the time you call this <code>show</code>
+method, otherwise, you will not get it if height and width is rely on
+auto-calculation for "replace" and "inline" method. "full_screen" method
+is not affected.</p>
+
 <p><hr>
 <a id="method-hide"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>hide()</code></h3>
 <p>hide the loader</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
@@ -263,6 +279,89 @@ alert on UI? For debugging purposes.</p></dd>
 alert on UI? For debugging purposes.</p></dd>
 
 </dl><p></div></p>
+<p><hr>
+<a id="method-destroy"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>destroy()</code></h3>
+<p>Destroy current loader</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
+<p><div class="r"></p><pre><span class='va'>addLoader</span><span class='op'>$</span><span class='fu'>destroy</span><span class='op'>(</span>alert <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre><p></div></p>
+
+<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
+<p><div class="arguments"></p><dl>
+<dt><code>alert</code></dt><dd><p>bool, if the target selector or loader is not found,
+alert on UI? For debugging purposes.</p></dd>
+
+</dl><p></div></p>
+<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Details</h4>
+<p>hide and remove current loader from the current document</p>
+
+<p><hr>
+<a id="method-recreate"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>recreate()</code></h3>
+<p>recreate the loader</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
+<p><div class="r"></p><pre><span class='va'>addLoader</span><span class='op'>$</span><span class='fu'>recreate</span><span class='op'>(</span>
+  type <span class='op'>=</span> <span class='st'>"default"</span>,
+  id <span class='op'>=</span> <span class='st'>""</span>,
+  height <span class='op'>=</span> <span class='cn'>NULL</span>,
+  width <span class='op'>=</span> <span class='va'>height</span>,
+  color <span class='op'>=</span> <span class='st'>"#337ab7"</span>,
+  opacity <span class='op'>=</span> <span class='fl'>1</span>,
+  method <span class='op'>=</span> <span class='st'>"replace"</span>,
+  block <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  center <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  bg_color <span class='op'>=</span> <span class='st'>"#eee"</span>,
+  footer <span class='op'>=</span> <span class='cn'>NULL</span>,
+  z_index <span class='op'>=</span> <span class='fl'>2000</span>,
+  alert <span class='op'>=</span> <span class='cn'>FALSE</span>
+<span class='op'>)</span></pre><p></div></p>
+
+<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
+<p><div class="arguments"></p><dl>
+<dt><code>type</code></dt><dd><p>string, one of  "circle", "dual-ring", "facebook", "heart",
+"ring", "roller", "default", "ellipsis", "grid", "hourglass", "ripple",
+"spinner", default is "default".</p></dd>
+
+<dt><code>id</code></dt><dd><p>string, the unqiue ID for the loader, if not provided, a random
+ID will be given. If you are using shiny modules, DO NOT use <code>session$ns('YOUR_ID')</code>
+to wrap it. Loaders live on the top level of the document.</p></dd>
+
+<dt><code>height</code></dt><dd><p>string, (r)em, "1.5rem", "1.5em", or pixel, like "10px".
+Default is <code>NULL</code>, will be automatically calculated based on the target
+component. It is recommend to use <code>NULL</code> for "replace" and "inline" method
+to let it automatically be calculated, but required for "full_screen" method.</p></dd>
+
+<dt><code>width</code></dt><dd><p>string, default is the same as <code>height</code> to make it square.</p></dd>
+
+<dt><code>color</code></dt><dd><p>string, any valid CSS color name, or hex color code</p></dd>
+
+<dt><code>opacity</code></dt><dd><p>number, between 0-1</p></dd>
+
+<dt><code>method</code></dt><dd><p>one of "replace", "inline", "full_screen", see details</p></dd>
+
+<dt><code>block</code></dt><dd><p>bool, for some input components, once the loader starts,
+it can also block user interaction with the component, very useful for
+"inline" method, eg. prevent users from clicking the button while some
+process is still running.</p></dd>
+
+<dt><code>center</code></dt><dd><p>bool, try to place the load to the center of the target for
+"inline" and "replace" and center of the screen for "full_screen".</p></dd>
+
+<dt><code>bg_color</code></dt><dd><p>string, any valid CSS color name, or hex color code. Only
+works for "full_screen" method.</p></dd>
+
+<dt><code>footer</code></dt><dd><p>Additional Shiny/HTML component to add below the loader, like
+a title <code>h1("load title")</code>. <code>inline</code> method does not have a footer.</p></dd>
+
+<dt><code>z_index</code></dt><dd><p>number, only works for "full_screen" method, what CSS layer
+should the overlay be places. In HTML, all elements have the default of 0.</p></dd>
+
+<dt><code>alert</code></dt><dd><p>bool, should alert if target cannot be found or other javascript
+errors? mainly for debugging</p></dd>
+
+</dl><p></div></p>
+<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Details</h4>
+<p>This method will first disable then destroy (remove) current loader,
+and finally store new information of the new loader.</p>
+<p><strong>Note:</strong>: this method only refresh loader object on the server, the loader
+is <strong>not</strong> recreated until the next time <code>show</code> method is called.</p>
+
 <p><hr>
 <a id="method-clone"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>clone()</code></h3>
 <p>The objects of this class are cloneable with this method.</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
