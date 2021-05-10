@@ -74,7 +74,7 @@ with other code blocks. This function is designed to handle these issues." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">spsComps</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.99.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.99.4</span>
       </span>
     </div>
 
@@ -259,10 +259,10 @@ go away on UI unless users' mouse hover on the bar or manually close it.</p></li
 <span class='op'>}</span>
 <span class='co'># outside shiny examples</span>
 <span class='fu'>shinyCatch</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/message.html'>message</a></span><span class='op'>(</span><span class='st'>"this message"</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #0000BB;font-weight: bold;'>[SPS-INFO] 2021-05-09 02:15:47 this message
+</div><div class='output co'>#&gt; <span style='color: #0000BB;font-weight: bold;'>[SPS-INFO] 2021-05-10 02:18:24 this message
 #&gt; </span><span></div><div class='input'><span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span><span class='op'>{</span><span class='fu'>shinyCatch</span><span class='op'>(</span><span class='kw'><a href='https://rdrr.io/r/base/stop.html'>stop</a></span><span class='op'>(</span><span class='st'>"this error"</span><span class='op'>)</span><span class='op'>)</span>; <span class='st'>"no block"</span><span class='op'>}</span>, silent <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #BB0000;font-weight: bold;'>[SPS-ERROR] 2021-05-09 02:15:47 this error</span><span></div><div class='output co'>#&gt; [1] "no block"</div><div class='input'><span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span><span class='op'>{</span><span class='fu'>shinyCatch</span><span class='op'>(</span><span class='kw'><a href='https://rdrr.io/r/base/stop.html'>stop</a></span><span class='op'>(</span><span class='st'>"this error"</span><span class='op'>)</span>, blocking_level <span class='op'>=</span> <span class='st'>"error"</span><span class='op'>)</span>; <span class='st'>"blocked"</span><span class='op'>}</span>, silent <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #BB0000;font-weight: bold;'>[SPS-ERROR] 2021-05-09 02:15:47 this error</span><span></div></span></pre>
+</div><div class='output co'>#&gt; </span><span style='color: #BB0000;font-weight: bold;'>[SPS-ERROR] 2021-05-10 02:18:24 this error</span><span></div><div class='output co'>#&gt; [1] "no block"</div><div class='input'><span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span><span class='op'>{</span><span class='fu'>shinyCatch</span><span class='op'>(</span><span class='kw'><a href='https://rdrr.io/r/base/stop.html'>stop</a></span><span class='op'>(</span><span class='st'>"this error"</span><span class='op'>)</span>, blocking_level <span class='op'>=</span> <span class='st'>"error"</span><span class='op'>)</span>; <span class='st'>"blocked"</span><span class='op'>}</span>, silent <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; </span><span style='color: #BB0000;font-weight: bold;'>[SPS-ERROR] 2021-05-10 02:18:24 this error</span><span></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

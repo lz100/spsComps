@@ -75,7 +75,7 @@ of the CSS loader here, like position, color, size, opacity, etc." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">spsComps</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.99.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.99.4</span>
       </span>
     </div>
 
@@ -129,6 +129,7 @@ of the CSS loader here, like position, color, size, opacity, etc.</p>
 
     <pre class="usage"><span class='fu'>cssLoader</span><span class='op'>(</span>
   type <span class='op'>=</span> <span class='st'>"default"</span>,
+  src <span class='op'>=</span> <span class='st'>""</span>,
   id <span class='op'>=</span> <span class='st'>""</span>,
   height <span class='op'>=</span> <span class='st'>"1.5rem"</span>,
   width <span class='op'>=</span> <span class='va'>height</span>,
@@ -146,7 +147,12 @@ of the CSS loader here, like position, color, size, opacity, etc.</p>
       <th>type</th>
       <td><p>string, one of  "circle", "dual-ring", "facebook", "heart",
 "ring", "roller", "default", "ellipsis", "grid", "hourglass", "ripple",
-"spinner"</p></td>
+"spinner", "gif", default is "default".</p></td>
+    </tr>
+    <tr>
+      <th>src</th>
+      <td><p>string, online URL or local path of the gif animation file if
+you would like to upload your own loader.</p></td>
     </tr>
     <tr>
       <th>id</th>
@@ -249,6 +255,42 @@ for the <a href='https://rdrr.io/pkg/shiny/man/actionButton.html'>shiny::actionB
     <span class='fu'><a href='https://rdrr.io/pkg/shiny/man/actionButton.html'>actionButton</a></span><span class='op'>(</span>
       <span class='st'>"btn-b"</span>, <span class='st'>"Loading"</span>,
       icon <span class='op'>=</span>  <span class='fu'>cssLoader</span><span class='op'>(</span>type <span class='op'>=</span> <span class='st'>"hourglass"</span>, is_icon <span class='op'>=</span> <span class='cn'>TRUE</span>, color <span class='op'>=</span> <span class='st'>"#667db6"</span>, inline <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+    <span class='op'>)</span>
+  <span class='op'>)</span>
+  <span class='va'>server</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>input</span>, <span class='va'>output</span>, <span class='va'>session</span><span class='op'>)</span> <span class='op'>{</span><span class='op'>}</span>
+  <span class='fu'><a href='https://rdrr.io/pkg/shiny/man/shinyApp.html'>shinyApp</a></span><span class='op'>(</span><span class='va'>ui</span>, <span class='va'>server</span><span class='op'>)</span>
+<span class='op'>}</span>
+<span class='co'># use your own</span>
+<span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span><span class='op'>{</span>
+  <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://shiny.rstudio.com/'>shiny</a></span><span class='op'>)</span>
+  <span class='va'>spinner</span> <span class='op'>&lt;-</span> <span class='st'>"https://github.com/lz100/spsComps/blob/master/examples/demo/www/spinner.gif?raw=true"</span>
+  <span class='va'>eater</span> <span class='op'>&lt;-</span> <span class='st'>"https://github.com/lz100/spsComps/blob/master/examples/demo/www/bean_eater.gif?raw=true"</span>
+  <span class='va'>ui</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/shiny/man/fluidPage.html'>fluidPage</a></span><span class='op'>(</span>
+    <span class='fu'>cssLoader</span><span class='op'>(</span>
+      <span class='st'>"gif"</span>, <span class='va'>spinner</span>, height <span class='op'>=</span> <span class='st'>"50px"</span>
+    <span class='op'>)</span>,
+    <span class='fu'>cssLoader</span><span class='op'>(</span>
+      <span class='st'>"gif"</span>, <span class='va'>spinner</span>, height <span class='op'>=</span> <span class='st'>"100px"</span>
+    <span class='op'>)</span>,
+    <span class='fu'>cssLoader</span><span class='op'>(</span>
+      <span class='st'>"gif"</span>, <span class='va'>eater</span>, height <span class='op'>=</span> <span class='st'>"150px"</span>
+    <span class='op'>)</span>,
+    <span class='fu'>cssLoader</span><span class='op'>(</span>
+      <span class='st'>"gif"</span>, <span class='va'>eater</span>, height <span class='op'>=</span> <span class='st'>"200px"</span>
+    <span class='op'>)</span>,
+    <span class='fu'><a href='https://rdrr.io/pkg/shiny/man/actionButton.html'>actionButton</a></span><span class='op'>(</span>
+      <span class='st'>"btn-custom1"</span>, <span class='st'>""</span>,
+      icon <span class='op'>=</span>  <span class='fu'>cssLoader</span><span class='op'>(</span>
+        type <span class='op'>=</span> <span class='st'>"gif"</span>, src <span class='op'>=</span> <span class='va'>spinner</span>,
+        is_icon <span class='op'>=</span> <span class='cn'>TRUE</span>, inline <span class='op'>=</span> <span class='cn'>TRUE</span>
+      <span class='op'>)</span>
+    <span class='op'>)</span>,
+    <span class='fu'><a href='https://rdrr.io/pkg/shiny/man/actionButton.html'>actionButton</a></span><span class='op'>(</span>
+      <span class='st'>"btn-custom2"</span>, <span class='st'>"A button"</span>,
+      icon <span class='op'>=</span>  <span class='fu'>cssLoader</span><span class='op'>(</span>
+        type <span class='op'>=</span> <span class='st'>"gif"</span>, src <span class='op'>=</span> <span class='va'>eater</span>,
+        is_icon <span class='op'>=</span> <span class='cn'>TRUE</span>, inline <span class='op'>=</span> <span class='cn'>TRUE</span>
+      <span class='op'>)</span>
     <span class='op'>)</span>
   <span class='op'>)</span>
   <span class='va'>server</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>input</span>, <span class='va'>output</span>, <span class='va'>session</span><span class='op'>)</span> <span class='op'>{</span><span class='op'>}</span>
