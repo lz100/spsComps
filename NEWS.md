@@ -24,6 +24,7 @@
 
 -   add `…` argument to the `animateIcon`. Users can append additional attributes.
 -   Now `animationRemove` can also remove animations add by `animateUI` and `animateIcon` functions.
+-   Internal rewrite some functions so removed some imported packages.
 
 # spsComps 0.2.0
 
