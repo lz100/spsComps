@@ -62,32 +62,30 @@ function, see examples.
 }
 \examples{
 if(interactive()){
-    library(shinyWidgets)
-    # change value to 'local' to see the difference
-    spsOption("mode", value = "server")
-    ui <- fluidPage(
-        spsDepend("toastr"),
-        shinyWidgets::radioGroupButtons(
-            inputId = "data_source", label = "Choose your data file source:",
-            selected = "upload",
-            choiceNames = c("Upload", "Example"),
-            choiceValues = c("upload", "eg")
-        ),
-        dynamicFile("data_path", label = "input file"),
-        dataTableOutput("df")
-    )
+  # change value to 'local' to see the difference
+  spsOption("mode", value = "server")
+  ui <- fluidPage(
+    spsDepend("toastr"),
+    radioButtons(
+      "data_source", "Choose your data file source:",
+      c("Upload" = "upload", "Example" = "eg"),
+      selected = "eg"
+    ),
+    dynamicFile("data_path", label = "input file"),
+    dataTableOutput("df")
+  )
 
-    server <- function(input, output, session) {
-        tmp_file <- tempfile(fileext = ".csv")
-        write.csv(iris, file = tmp_file)
-        upload_path <- dynamicFileServer(input, session, "data_path")
-        data_df <- reactive({
-            loadDF(choice = input$data_source,
-                   upload_path = upload_path()$datapath,
-                   delim = ",", eg_path = tmp_file)
-        })
-        output$df <- renderDataTable(data_df())
-    }
-    shinyApp(ui, server)
+  server <- function(input, output, session) {
+    tmp_file <- tempfile(fileext = ".csv")
+    write.csv(iris, file = tmp_file)
+    upload_path <- dynamicFileServer(input, session, "data_path")
+    data_df <- reactive({
+      loadDF(choice = input$data_source,
+             upload_path = upload_path()$datapath,
+             delim = ",", eg_path = tmp_file)
+    })
+    output$df <- renderDataTable(data_df())
+  }
+  shinyApp(ui, server)
 }
 }

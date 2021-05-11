@@ -371,7 +371,6 @@ spsValidate <- function(
 #' @param quietly bool, should warning messages be suppressed?
 #' @importFrom shinyAce is.empty
 #' @importFrom shinytoastr toastr_success
-#' @importFrom shinyWidgets sendSweetAlert
 #' @return TRUE if pass, sweet alert massage and FALSE if fail
 #' @export
 #'
@@ -437,36 +436,39 @@ shinyCheckPkg <-function(
         )
     github_cmd <- if (shinyAce::is.empty(missing_github)) "" else
         paste0(
-            'if (!requireNamespace("BiocManager", quietly=TRUE))
+            'if (!requireNamespace("remotes", quietly=TRUE))
                 install.packages("BiocManager")\n',
-            "BiocManager::install(c('", paste0(missing_github, collapse = "', '"), "'))"
+            "remotes::install(c('", paste0(missing_github, collapse = "', '"), "'))"
         )
 
     if (length(missing_cran) + length(missing_bioc) + length(missing_github) > 0) {
-        shinyWidgets::sendSweetAlert(
-            session = session,
-            title = "Please install required packages",
-            text = tags$div(style = "
-                        background-color: #FA5858;
-                        text-align: left;
-                        overflow: auto;
-                        white-space: pre;
-                        color: black;
-
-                        ",
-                            p(cran_cmd),
-                            p(bioc_cmd),
-                            p(github_cmd)
-            ),
-            html = TRUE,
-            type = "error"
-        )
-        return(FALSE)
+      dependServer("sweetalert2")
+      alert <- list(
+        type = "error",
+        title = "Please install packages",
+        body = htmltools::doRenderTags(tags$div(
+          style =
+          "
+          background-color: #FA5858;
+          text-align: left;
+          overflow: auto;
+          white-space: pre;
+          color: black;
+          margin: 0 -30px;
+          ",
+        p(cran_cmd),
+        p(bioc_cmd),
+        p(github_cmd)
+        ))
+      )
+      session$sendCustomMessage("sps-checkpkg", message = alert)
+      return(FALSE)
     } else {
-        shinytoastr::toastr_success(
-            message = "You have all required packages for this tab",
-            position = "bottom-right")
-        return(TRUE)
+      dependServer("toastr")
+      shinytoastr::toastr_success(
+        message = "You have all required packages for this tab",
+        position = "bottom-right")
+      return(TRUE)
     }
 }
 
@@ -508,33 +510,31 @@ shinyCheckPkg <-function(
 #' @importFrom vroom vroom
 #' @examples
 #' if(interactive()){
-#'     library(shinyWidgets)
-#'     # change value to 'local' to see the difference
-#'     spsOption("mode", value = "server")
-#'     ui <- fluidPage(
-#'         spsDepend("toastr"),
-#'         shinyWidgets::radioGroupButtons(
-#'             inputId = "data_source", label = "Choose your data file source:",
-#'             selected = "upload",
-#'             choiceNames = c("Upload", "Example"),
-#'             choiceValues = c("upload", "eg")
-#'         ),
-#'         dynamicFile("data_path", label = "input file"),
-#'         dataTableOutput("df")
-#'     )
+#'   # change value to 'local' to see the difference
+#'   spsOption("mode", value = "server")
+#'   ui <- fluidPage(
+#'     spsDepend("toastr"),
+#'     radioButtons(
+#'       "data_source", "Choose your data file source:",
+#'       c("Upload" = "upload", "Example" = "eg"),
+#'       selected = "eg"
+#'     ),
+#'     dynamicFile("data_path", label = "input file"),
+#'     dataTableOutput("df")
+#'   )
 #'
-#'     server <- function(input, output, session) {
-#'         tmp_file <- tempfile(fileext = ".csv")
-#'         write.csv(iris, file = tmp_file)
-#'         upload_path <- dynamicFileServer(input, session, "data_path")
-#'         data_df <- reactive({
-#'             loadDF(choice = input$data_source,
-#'                    upload_path = upload_path()$datapath,
-#'                    delim = ",", eg_path = tmp_file)
-#'         })
-#'         output$df <- renderDataTable(data_df())
-#'     }
-#'     shinyApp(ui, server)
+#'   server <- function(input, output, session) {
+#'     tmp_file <- tempfile(fileext = ".csv")
+#'     write.csv(iris, file = tmp_file)
+#'     upload_path <- dynamicFileServer(input, session, "data_path")
+#'     data_df <- reactive({
+#'       loadDF(choice = input$data_source,
+#'              upload_path = upload_path()$datapath,
+#'              delim = ",", eg_path = tmp_file)
+#'     })
+#'     output$df <- renderDataTable(data_df())
+#'   }
+#'   shinyApp(ui, server)
 #' }
 loadDF <- function(choice, data_init=NULL, upload_path=NULL, eg_path=NULL,
                    comment = "#", delim = "\t",

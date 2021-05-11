@@ -1,9 +1,9 @@
 # SPS add HTML dependency functions
 
 #' Add commonly used HTML dependencies
-#' @description Mostly used in SPS internal development or add dependencies for
+#' @description Add dependencies for
 #' some server end functions. For most UI functions, the dependency has been automatically
-#' attached for you.
+#' attached for you when you call the function.
 #' @param dep dependency names, see details
 #' @param js bool, use only javascript from this resource if there are both js and css files?
 #' @param css bool, use only CSS from this resource if there are both js and css files?
@@ -12,17 +12,17 @@
 #' @details For `dep`, current options are:
 #'
 #' - basic: spsComps basic css and js
-#' - css_loading: for css loaders
-#' - update_pg: spsComps [pgPaneUpdate] function required, js only
+#' - update_pg: spsComps [pgPaneUpdate] function required, js and css
 #' - update_timeline: spsComps [spsTimeline] function required, js only
 #' - font-awesome: font-awesome, css only
-#' - bttn: comes from shinyWidgets package, bttn.css, css only
 #' - toastr: comes from shinytoastr package, toastr.js, css and js
-#' - pop-tip: enable enhanced bootstrap popover and tips, required for [bsHoverPopover] function
-#' - gotop: required by [spsGoTop] function
+#' - pop-tip: enable enhanced bootstrap popover and tips, required for [bsHoverPopover] function.
+#' js only
+#' - gotop: required by [spsGoTop] function. js and css
 #' - animation:  required for animation related functions to add animations
-#' for icons and other elements
-#' - css-loader: required for loader functions
+#' for icons and other elements, like [animateServer]. js and css
+#' - css-loader: required for loader functions, like [addLoader]. js and css
+#' - sweetalert2: sweetalert2.js, required by [shinyCheckPkg], js only
 #'
 #' @return [htmltools::htmlDependency] object
 #' @export
@@ -77,21 +77,20 @@ spsDepend <- function(dep, js = TRUE, css = TRUE, listing = TRUE) {
                     if (css) css_file else NULL
                 )
             },
-            "css_loading" = {
+            "update_pg" = {
               js_file <- htmltools::htmlDependency(
-                name = "spsLoading-js",
+                name = "sps-update-pg",
                 version = packageVersion("spsComps"),
-                package = "spsComps",
-                src = c(href = "spsComps", file = "assets"),
-                script = "js/sps_cssloader.js",
+                src = c(href = "spsComps", file = system.file("assets", package = "spsComps")),
+                script = "js/sps_update_pg.js",
                 all_files = FALSE
               )
               css_file <- htmltools::htmlDependency(
-                name = "spsLoading-css",
+                name = "pg-panel",
                 version = packageVersion("spsComps"),
                 package = "spsComps",
                 src = c(href = "spsComps", file = "assets"),
-                stylesheet = "css/css_loader.css",
+                stylesheet = "css/sps_pg_panel.css",
                 all_files = FALSE
               )
               list(
@@ -99,13 +98,6 @@ spsDepend <- function(dep, js = TRUE, css = TRUE, listing = TRUE) {
                 if (css) css_file else NULL
               )
             },
-            "update_pg" = htmltools::htmlDependency(
-                name = "sps-update-pg",
-                version = packageVersion("spsComps"),
-                src = c(href = "spsComps", file = system.file("assets", package = "spsComps")),
-                script = "js/sps_update_pg.js",
-                all_files = FALSE
-            ),
             "update_timeline" = htmltools::htmlDependency(
                 name = "sps-update-timeline",
                 version = packageVersion("spsComps"),
@@ -114,7 +106,6 @@ spsDepend <- function(dep, js = TRUE, css = TRUE, listing = TRUE) {
                 all_files = FALSE
             ),
             "font-awesome" = htmltools::findDependencies(icon("")),
-            "bttn" = htmltools::findDependencies(shinyWidgets::actionBttn("", ""))[2],
             "toastr" = {
                 js_file <- htmltools::htmlDependency(
                     name = "toastr-js",
@@ -187,6 +178,13 @@ spsDepend <- function(dep, js = TRUE, css = TRUE, listing = TRUE) {
                 if (css) css_file else NULL
               )
             },
+            "sweetalert2" = htmltools::htmlDependency(
+              name = "sweetalert2",
+              version = "10.16.7",
+              src = c(href = "spsComps", file = system.file("assets", package = "spsComps")),
+              script = list("js/sweetalert2_202105.js", "js/sps_sweetalert.js"),
+              all_files = FALSE
+            ),
             {
               if (listing) {
                 msg(glue::glue('Dependency "{dep}" not found.'), level = "warning")
@@ -194,16 +192,16 @@ spsDepend <- function(dep, js = TRUE, css = TRUE, listing = TRUE) {
                   '
                 - basic: spsComps basic css and js
                 - css_loading: for css loaders
-                - update_pg: spsComps [pgPaneUpdate] function required, js only
+                - update_pg: spsComps [pgPaneUpdate] function required, js and css
                 - update_timeline: spsComps [spsTimeline] function required, js only
                 - font-awesome: font-awesome, css only
-                - bttn: comes from shinyWidgets package, bttn.css, css only
                 - toastr: comes from shinytoastr package, toastr.js, css and js
                 - pop-tip: enable enhanced bootstrap popover and tips, required for [bsHoverPopover] function
                 - gotop: required by [spsGoTop] function
                 - animation:  required for animation related functions to add animations
                 for icons and other elements
                 - css-loader: required for loader functions
+                - sweetalert2: for shinyCheckPkg function
                 \n'
                 ))
               } else {
@@ -211,4 +209,13 @@ spsDepend <- function(dep, js = TRUE, css = TRUE, listing = TRUE) {
               }
             }
     )
+}
+
+
+#' Internal method to append dependency from the server
+#'
+#' @noRd
+dependServer <- function(dep, js = TRUE, css = TRUE, session = getDefaultReactiveDomain()) {
+  insertUI(selector = "head", where = "beforeEnd", ui = singleton(spsDepend(dep)),
+           immediate = TRUE, session = session)
 }

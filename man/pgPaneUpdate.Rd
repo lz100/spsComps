@@ -47,7 +47,7 @@ choose}
 \item{session}{current shiny session}
 }
 \value{
-HTML elements
+returns HTML elements
 }
 \description{
 Creates a panel that displays multiple progress items.
@@ -59,8 +59,7 @@ A overall progress is automatically calculated on the bottom.
 if(interactive()){
     # try to slide c under 0
     ui <- fluidPage(
-        h4("you need to open up the progress
-                                tracker, it is collapsed ->"),
+        h4("Use your mouse to drag it"),
         actionButton("a", "a"),
         actionButton("b", "b"),
         sliderInput("c", min = -100,

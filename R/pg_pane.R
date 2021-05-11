@@ -1,5 +1,4 @@
 #' @rdname pgPaneUpdate
-#' @importFrom shinyWidgets progressBar
 #'
 #' @param titles labels to display for each progress, must have the same length
 #' as `pg_ids`
@@ -41,45 +40,55 @@ pgPaneUI <-function(
                 div(class = "timeline-item",
                     h3(class = "timeline-header no-border", titles[i]),
                     div(class="timeline-body", style = "padding: 0px;",
-                        shinyWidgets::progressBar(
-                            glue("{pg_ids[i]}-pg"), striped = TRUE,
-                            status = "primary", 0
+                        div(
+                          class = "progress-group",
+                          div(
+                            class = "progress",
+                            div(
+                              class = "progress-bar progress-bar-primary bg-primary progress-bar-striped",
+                              id = glue("{pg_ids[i]}-pg"),
+                              role = "progressbar"
+                            )
+                          )
                         )
                     )
                 )
         )
     }) %>% {
-
       tags$ul(
         class="timeline",
         id = glue("{pane_id}-timeline"),
         .,
         tags$li(
           class="time-label",
-          tags$span(id=glue("{pane_id}-pg-label"), class="bg-orange", "Ready")
+          tags$span(id=glue("{pane_id}-pg-label"), class="bg-orange", "Not Ready")
         ),
-        div(style = "margin-left: 60px; margin-right: 15px;",
-            shinyWidgets::progressBar(
-              glue("{pane_id}-pg-all"), striped = TRUE,
-              status = "primary", 0
+        div(
+          style = "margin-left: 60px; margin-right: 15px;",
+          div(
+            class = "progress-group",
+            div(
+              class = "progress",
+              div(
+                class = "progress-bar progress-bar-primary bg-primary progress-bar-striped",
+                id = glue("{pane_id}-pg-all"),
+                role = "progressbar"
+              )
             )
+          )
         )
       )
-
     } %>% {
         div(class = "tab-pane sps-pg-panel", id = glue("{pane_id}-pg-container"),
             style = glue('top: {top}; right: {right}'),
             absolutePanel(
                 top = top, right = right, draggable = TRUE, width = "310",
                 height = "auto", class = "control-panel", cursor = "inherit",
-                style = "background-color: rgb(253, 253, 253); z-index:999;",
                 fluidRow(
                     column(3),
                     column(7, h4(title_main)),
                     column(2,
-                           HTML(glue('<button class="action-button ',
-                                     'bttn bttn-simple bttn-xs bttn-primary ',
-                                     'bttn-no-outline"',
+                           HTML(glue('<button class="pg-panel-button"',
                                      'data-target="#{pane_id}-pg-collapse"',
                                      ' data-toggle="collapse">',
                                      '<i class="fa fa-minus"></i></button>')))
@@ -87,10 +96,8 @@ pgPaneUI <-function(
                 div(class = if(opened) "collapse in" else "collapse",
                     id = glue("{pane_id}-pg-collapse"), .)
             ),
-            spsDepend("basic", js = FALSE),
             spsDepend("update_pg"),
             spsDepend("font-awesome"),
-            spsDepend("bttn"),
             spsDepend("toastr")
         )
     }
@@ -109,15 +116,13 @@ pgPaneUI <-function(
 #' @param value 0-100 number to update the progress you use `pg_id` to
 #' choose
 #' @param session current shiny session
-#' @importFrom shinyWidgets updateProgressBar
-#' @return HTML elements
+#' @return returns HTML elements
 #' @export
 #' @examples
 #' if(interactive()){
 #'     # try to slide c under 0
 #'     ui <- fluidPage(
-#'         h4("you need to open up the progress
-#'                                 tracker, it is collapsed ->"),
+#'         h4("Use your mouse to drag it"),
 #'         actionButton("a", "a"),
 #'         actionButton("b", "b"),
 #'         sliderInput("c", min = -100,
@@ -158,9 +163,6 @@ pgPaneUpdate <- function(pane_id, pg_id, value,
         assert_that(is.character(pg_id))
         assert_that(value >= 0 & value <= 100,
                     msg = "Progress value needs to be 0-100")
-        shinyWidgets::updateProgressBar(session,
-                                        id = glue("{pg_id}-pg"),
-                                        value = value)
         if(inherits(session, "session_proxy")){
             pane_id <- session$ns(pane_id)
             pg_id <- session$ns(pg_id)

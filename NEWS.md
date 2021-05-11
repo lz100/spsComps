@@ -6,9 +6,6 @@
 
 -   Add `animateAppendNested`, which allows users to add multiple animations to the same element by pipe `%>%`.
 
-```{=html}
-<!-- -->
-```
 -   Custom loaders supported. A new `type`, `"gif"` is added to all loader functions. Users can choose this type and specify a remote URL or a local path to the gif file with the `src` argument to create their own custom loaders.
 
 ## Major change

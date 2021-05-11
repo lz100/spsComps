@@ -20,25 +20,25 @@ mute it.}
 \link[htmltools:htmlDependency]{htmltools::htmlDependency} object
 }
 \description{
-Mostly used in SPS internal development or add dependencies for
+Add dependencies for
 some server end functions. For most UI functions, the dependency has been automatically
-attached for you.
+attached for you when you call the function.
 }
 \details{
 For \code{dep}, current options are:
 \itemize{
 \item basic: spsComps basic css and js
-\item css_loading: for css loaders
-\item update_pg: spsComps \link{pgPaneUpdate} function required, js only
+\item update_pg: spsComps \link{pgPaneUpdate} function required, js and css
 \item update_timeline: spsComps \link{spsTimeline} function required, js only
 \item font-awesome: font-awesome, css only
-\item bttn: comes from shinyWidgets package, bttn.css, css only
 \item toastr: comes from shinytoastr package, toastr.js, css and js
-\item pop-tip: enable enhanced bootstrap popover and tips, required for \link{bsHoverPopover} function
-\item gotop: required by \link{spsGoTop} function
+\item pop-tip: enable enhanced bootstrap popover and tips, required for \link{bsHoverPopover} function.
+js only
+\item gotop: required by \link{spsGoTop} function. js and css
 \item animation:  required for animation related functions to add animations
-for icons and other elements
-\item css-loader: required for loader functions
+for icons and other elements, like \link{animateServer}. js and css
+\item css-loader: required for loader functions, like \link{addLoader}. js and css
+\item sweetalert2: sweetalert2.js, required by \link{shinyCheckPkg}, js only
 }
 }
 \examples{
