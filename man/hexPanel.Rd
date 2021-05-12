@@ -69,7 +69,7 @@ default -10, mist be the same length as \code{hex_imgs}}
 \item{ys}{Y coordinates offset, must be the same length as \code{xs}, default -20}
 }
 \value{
-HTML elements
+HTML elements, tagList
 }
 \description{
 Shiny UI widgets to generate hexagon logo(s).

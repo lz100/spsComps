@@ -16,7 +16,7 @@ that you want to match the height to the other element}
 you can use complex jquery selector}
 }
 \value{
-will be run as javascript
+tagList containing javascript
 }
 \description{
 Match the height of one element to the second element.

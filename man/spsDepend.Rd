@@ -4,7 +4,7 @@
 \alias{spsDepend}
 \title{Add commonly used HTML dependencies}
 \usage{
-spsDepend(dep, js = TRUE, css = TRUE, listing = TRUE)
+spsDepend(dep = "", js = TRUE, css = TRUE, listing = TRUE)
 }
 \arguments{
 \item{dep}{dependency names, see details}

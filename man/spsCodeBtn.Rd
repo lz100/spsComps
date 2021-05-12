@@ -53,7 +53,7 @@ left of the button? The span text will use text from \code{tool_tip}}
 \item{...}{other args pass to the \link[shiny:actionButton]{shiny::actionButton}}
 }
 \value{
-a shiny element
+a shiny tagList
 }
 \description{
 Developers often wants to show their code in a shiny app.
