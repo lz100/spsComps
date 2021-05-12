@@ -71,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">spsComps</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.99.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.99.6</span>
       </span>
     </div>
 
@@ -126,6 +126,7 @@
 <li><p>Add <code>animateAppend</code>, which allows users to add animations by pipe <code><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></code></p></li>
 <li><p>Add <code>animateAppendNested</code>, which allows users to add multiple animations to the same element by pipe <code><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></code>.</p></li>
 <li><p>Custom loaders supported. A new <code>type</code>, <code>"gif"</code> is added to all loader functions. Users can choose this type and specify a remote URL or a local path to the gif file with the <code>src</code> argument to create their own custom loaders.</p></li>
+<li><p>New function <code>bsTip</code>: add a custom tooltip to any Shiny element you want. You can change color, font size, position and more for each individual tooltip.</p></li>
 </ul>
 </div>
 <div id="major-change" class="section level2">
@@ -145,6 +146,7 @@
 </li>
 </ul>
 </li>
+<li><p>Rewrite <code>bsHoverPopover</code> and rename it <code>bsPopover</code>, the old name still works. Now it doesn’t depend on any packages.</p></li>
 </ul>
 </div>
 <div id="minor-change" class="section level2">

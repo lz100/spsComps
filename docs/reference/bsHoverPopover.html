@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Bootstrap popover trigger on hover instead of click — bsHoverPopover • spsComps</title>
+<title>Enhanced Bootstrap popover — bsHoverPopover • spsComps</title>
 
 
 <!-- jquery -->
@@ -39,10 +39,9 @@
 
 
 
-<meta property="og:title" content="Bootstrap popover trigger on hover instead of click — bsHoverPopover" />
-<meta property="og:description" content="enhanced Bootstrap 3 popover by hovering, see
-bsplus::bs_embed_popover for details. Everything is similar but has
-additional trigger method, default &quot;hover&quot;. Original method only works with
+<meta property="og:title" content="Enhanced Bootstrap popover — bsHoverPopover" />
+<meta property="og:description" content="enhanced Bootstrap 3 popover by hovering, clicking
+or other methods. Default is by &quot;hover&quot;. Original bootstrap3 method only works with
 &quot;click&quot; on buttons." />
 
 
@@ -75,7 +74,7 @@ additional trigger method, default &quot;hover&quot;. Original method only works
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">spsComps</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.99.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.99.6</span>
       </span>
     </div>
 
@@ -115,33 +114,27 @@ additional trigger method, default &quot;hover&quot;. Original method only works
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Bootstrap popover trigger on hover instead of click</h1>
-    <small class="dont-index">Source: <a href='https://github.com/lz100/spsComps/blob/master/R/spsUIcollections.R'><code>R/spsUIcollections.R</code></a></small>
+    <h1>Enhanced Bootstrap popover</h1>
+    <small class="dont-index">Source: <a href='https://github.com/lz100/spsComps/blob/master/R/popover_tip.R'><code>R/popover_tip.R</code></a></small>
     <div class="hidden name"><code>bsHoverPopover.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>enhanced Bootstrap 3 popover by hovering, see
-<a href='https://rdrr.io/pkg/bsplus/man/bs_embed_popover.html'>bsplus::bs_embed_popover</a> for details. Everything is similar but has
-additional trigger method, default "hover". Original method only works with
+    <p>enhanced Bootstrap 3 popover by hovering, clicking
+or other methods. Default is by "hover". Original bootstrap3 method only works with
 "click" on buttons.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>bsHoverPopover</span><span class='op'>(</span>
-  <span class='va'>tag</span>,
-  title <span class='op'>=</span> <span class='cn'>NULL</span>,
-  content <span class='op'>=</span> <span class='cn'>NULL</span>,
-  placement <span class='op'>=</span> <span class='st'>"top"</span>,
-  trigger <span class='op'>=</span> <span class='st'>"hover"</span>,
-  <span class='va'>...</span>
-<span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>bsHoverPopover</span><span class='op'>(</span><span class='va'>tag</span>, <span class='va'>title</span>, content <span class='op'>=</span> <span class='st'>""</span>, placement <span class='op'>=</span> <span class='st'>"top"</span>, trigger <span class='op'>=</span> <span class='st'>"hover"</span><span class='op'>)</span>
+
+<span class='fu'>bsPopover</span><span class='op'>(</span><span class='va'>tag</span>, <span class='va'>title</span>, content <span class='op'>=</span> <span class='st'>""</span>, placement <span class='op'>=</span> <span class='st'>"top"</span>, trigger <span class='op'>=</span> <span class='st'>"hover"</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>tag</th>
-      <td><p><a href='https://rdrr.io/pkg/htmltools/man/tag.html'>htmltools::tag</a>, generally htmltools::tags$button() or htmltools::tags$a(),
+      <td><p><a href='https://rdrr.io/pkg/htmltools/man/tag.html'>htmltools::tag</a>, like htmltools::tags$button() or htmltools::tags$a(),
 or <code><a href='https://rdrr.io/pkg/shiny/man/actionButton.html'>shiny::actionButton()</a></code></p></td>
     </tr>
     <tr>
@@ -154,22 +147,23 @@ or <code><a href='https://rdrr.io/pkg/shiny/man/actionButton.html'>shiny::action
     </tr>
     <tr>
       <th>placement</th>
-      <td><p>character, placement of the popover with respect to <code>tag</code></p></td>
+      <td><p>character, placement of the popover with respect to <code>tag</code>, one
+of "top", "right", "bottom", and "left"</p></td>
     </tr>
     <tr>
       <th>trigger</th>
-      <td><p>trigger method, default "hover", one of click | hover |
-focus | manual.</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>other named arguments, passed to <code><a href='https://rdrr.io/pkg/bsplus/man/bs_set_data.html'>bsplus::bs_set_data()</a></code></p></td>
+      <td><p>trigger method, default "hover", one of click , hover ,
+focus , manual.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>shiny element</p>
+    <p>shiny element, tag</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>bsHoverPopover is the old name of  bsPopover, the same function.</p>
+<p>Read more about popover here: https://getbootstrap.com/docs/3.3/javascript/#popovers</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span><span class='op'>{</span>
@@ -180,13 +174,13 @@ focus | manual.</p></td>
         <span class='fu'><a href='https://rdrr.io/pkg/shiny/man/column.html'>column</a></span><span class='op'>(</span>
             <span class='fl'>8</span>,
             <span class='fu'><a href='https://rdrr.io/pkg/shiny/man/actionButton.html'>actionButton</a></span><span class='op'>(</span><span class='st'>'a'</span>, <span class='st'>'On button'</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-                <span class='fu'>bsHoverPopover</span><span class='op'>(</span>
+                <span class='fu'>bsPopoverEnhance</span><span class='op'>(</span>
                     title <span class='op'>=</span> <span class='st'>"title a"</span>,
                     content <span class='op'>=</span> <span class='st'>"popover works on a button"</span>,
                     placement <span class='op'>=</span> <span class='st'>"bottom"</span>
                 <span class='op'>)</span>,
             <span class='va'>tags</span><span class='op'>$</span><span class='fu'>a</span><span class='op'>(</span><span class='st'>"On link"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-                <span class='fu'>bsHoverPopover</span><span class='op'>(</span>
+                <span class='fu'>bsPopoverEnhance</span><span class='op'>(</span>
                     title <span class='op'>=</span> <span class='st'>"title b"</span>,
                     content <span class='op'>=</span> <span class='st'>"popover works on a link"</span>,
                     placement <span class='op'>=</span> <span class='st'>"bottom"</span>
@@ -199,7 +193,7 @@ focus | manual.</p></td>
               background-color: cornflowerblue;
             '</span>
             <span class='op'>)</span> <span class='op'>%&gt;%</span>
-              <span class='fu'>bsHoverPopover</span><span class='op'>(</span>
+              <span class='fu'>bsPopoverEnhance</span><span class='op'>(</span>
                 title <span class='op'>=</span> <span class='st'>"general element"</span>,
                 content <span class='op'>=</span> <span class='st'>"popover works on a 'div'"</span>,
                 placement <span class='op'>=</span> <span class='st'>"right"</span>
