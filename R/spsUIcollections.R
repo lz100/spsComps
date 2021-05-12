@@ -509,7 +509,7 @@ hrefTable <- function(item_titles,
 #'     shinyApp(ui, server)
 #' }
 renderDesc <- function(id, desc) {
-    tagList(
+    div(
         HTML(glue('
         <div class="desc">
           <div class="collapse desc-body" id="{id}" aria-expanded="false">
@@ -635,7 +635,7 @@ hexLogo <- function(
 #' `footer_links` has the same required length.
 #'
 #' @export
-#' @return HTML elements
+#' @return HTML elements, tagList
 #' @importFrom assertthat not_empty assert_that
 #' @examples
 #' if(interactive()){
@@ -743,160 +743,6 @@ tabTitle <- function(title, ...){
 }
 
 
-
-#' Bootstrap popover trigger on hover instead of click
-#' @description enhanced Bootstrap 3 popover by hovering, see
-#' [bsplus::bs_embed_popover] for details. Everything is similar but has
-#' additional trigger method, default "hover". Original method only works with
-#' "click" on buttons.
-#' @param tag [htmltools::tag], generally htmltools::tags$button() or htmltools::tags$a(),
-#' or [shiny::actionButton()]
-#' @param title character, title for the popover, generally text
-#' @param content character, content for the popover body, can be HTML
-#' @param placement character, placement of the popover with respect to `tag`
-#' @param trigger trigger method, default "hover", one of click | hover |
-#' focus | manual.
-#' @param ... other named arguments, passed to [bsplus::bs_set_data()]
-#' @importFrom bsplus bs_embed_popover
-#' @return shiny element
-#' @export
-#'
-#' @examples
-#' if(interactive()){
-#'     library(shiny)
-#'     library(magrittr)
-#'     ui <- fluidPage(
-#'         column(2),
-#'         column(
-#'             8,
-#'             actionButton('a', 'On button') %>%
-#'                 bsHoverPopover(
-#'                     title = "title a",
-#'                     content = "popover works on a button",
-#'                     placement = "bottom"
-#'                 ),
-#'             tags$a("On link") %>%
-#'                 bsHoverPopover(
-#'                     title = "title b",
-#'                     content = "popover works on a link",
-#'                     placement = "bottom"
-#'                 ),
-#'             div(
-#'               tags$b("general element"),
-#'               style =
-#'                 '
-#'               height: 100px;
-#'               background-color: cornflowerblue;
-#'             '
-#'             ) %>%
-#'               bsHoverPopover(
-#'                 title = "general element",
-#'                 content = "popover works on a 'div'",
-#'                 placement = "right"
-#'               )
-#'         )
-#'
-#'     )
-#'     server <- function(input, output, session) {}
-#'     shinyApp(ui, server)
-#' }
-bsHoverPopover <- function(
-    tag, title = NULL, content = NULL, placement = "top", trigger="hover", ...){
-    tagList(
-        bsplus::bs_embed_popover(
-            tag, title = title, content = content, placement = placement, ...) %>%{
-                if(trigger == "hover")
-                    tagAppendAttributes(., `pop-toggle` = trigger)
-                else tagAppendAttributes(., `data-trigger` = trigger)
-            },
-        spsDepend("pop-tip")
-    )
-}
-
-
-# internal css loader unit
-spsLoader <- function(id=NULL){
-    if(is.null(id)) id = paste0("loader", sample(1000000, 1))
-    tagList(
-        singleton(
-            tags$style('
-            .sps-loader {
-              height: auto;
-              display: inline-block;
-              align-items: center;
-              justify-content: center;
-            }
-            .sps-loader .container {
-              width: 80px;
-              height: 60px;
-              text-align: center;
-              font-size: 10px;
-            }
-            .sps-loader .container .boxLoading {
-              background-color: #3c8dbc;
-              height: 100%;
-              width: 6px;
-              display: inline-block;
-              -webkit-animation: sps-loading 1.2s infinite ease-in-out;
-              animation: sps-loading 1.2s infinite ease-in-out;
-            }
-            .sps-loader .container .boxLoading2 {
-              -webkit-animation-delay: -1.1s;
-              animation-delay: -1.1s;
-            }
-            .sps-loader .container .boxLoading3 {
-              -webkit-animation-delay: -1s;
-              animation-delay: -1s;
-            }
-            .sps-loader .container .boxLoading4 {
-              -webkit-animation-delay: -0.9s;
-              animation-delay: -0.9s;
-            }
-            .sps-loader .container .boxLoading5 {
-              -webkit-animation-delay: -0.8s;
-              animation-delay: -0.8s;
-            }
-
-            @-webkit-keyframes sps-loading {
-              0%,
-              40%,
-              100% {
-                -webkit-transform: scaleY(0.4);
-              }
-              20% {
-                -webkit-transform: scaleY(1);
-              }
-            }
-            @keyframes sps-loading {
-              0%,
-              40%,
-              100% {
-                transform: scaleY(0.4);
-                -webkit-transform: scaleY(0.4);
-              }
-              20% {
-                transform: scaleY(1);
-                -webkit-transform: scaleY(1);
-              }
-            }
-          ')
-        ),
-        tags$div(
-            id = id, class = "sps-loader",
-            HTML('
-            <div class="container">
-                <div class="boxLoading boxLoading1"></div>
-                <div class="boxLoading boxLoading2"></div>
-                <div class="boxLoading boxLoading3"></div>
-                <div class="boxLoading boxLoading4"></div>
-                <div class="boxLoading boxLoading5"></div>
-            </div>
-           ')
-        )
-    )
-}
-
-
 #' Match height of one element to the other element
 #' @description Match the height of one element to the second element.
 #' If the height of second element change, the height of first element will change
@@ -907,7 +753,7 @@ spsLoader <- function(id=NULL){
 #' @param isID bool, if `TRUE`, `div1` and `div2` will be treated as ID, otherwise
 #' you can use complex jquery selector
 #'
-#' @return will be run as javascript
+#' @return tagList containing javascript
 #' @export
 #'
 #' @examples
@@ -1070,7 +916,7 @@ spsGoTop <- function(
 #' 2. You could update the code inside the collapse use [shinyAce::updateAceEditor]
 #' on server, the code block ID is button ID + "-ace", like "my_button-ace" . See
 #' examples.
-#' @return a shiny element
+#' @return a shiny tagList
 #' @export
 #'
 #' @examples
@@ -1259,53 +1105,6 @@ spsCodeBtn <- function(
         spsDepend("pop-tip")
     )
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

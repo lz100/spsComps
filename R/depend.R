@@ -3,7 +3,11 @@
 #' Add commonly used HTML dependencies
 #' @description Add dependencies for
 #' some server end functions. For most UI functions, the dependency has been automatically
-#' attached for you when you call the function.
+#' attached for you when you call the function. Most server functions will also
+#' attach the dependency for you automatically too. However, a few server functions have
+#' to append the dependency before app start like [addLoader]. So you would need
+#' to call in this function somewhere in your UI. Read help of each function for
+#' details.
 #' @param dep dependency names, see details
 #' @param js bool, use only javascript from this resource if there are both js and css files?
 #' @param css bool, use only CSS from this resource if there are both js and css files?
@@ -48,7 +52,7 @@
 #'
 #'     shinyApp(ui, server)
 #' }
-spsDepend <- function(dep, js = TRUE, css = TRUE, listing = TRUE) {
+spsDepend <- function(dep="", js = TRUE, css = TRUE, listing = TRUE) {
     stopifnot(is.character(dep) && length(dep) == 1)
     stopifnot(is.logical(js) && length(js) == 1)
     stopifnot(is.logical(css) && length(css) == 1)
@@ -215,7 +219,13 @@ spsDepend <- function(dep, js = TRUE, css = TRUE, listing = TRUE) {
 #' Internal method to append dependency from the server
 #'
 #' @noRd
-dependServer <- function(dep, js = TRUE, css = TRUE, session = getDefaultReactiveDomain()) {
-  insertUI(selector = "head", where = "beforeEnd", ui = singleton(spsDepend(dep)),
+dependServer <- function(
+  dep,
+  check_existing = NULL,
+  js = TRUE,
+  css = TRUE,
+  session = getDefaultReactiveDomain()
+) {
+  insertUI(selector = "body", where = "afterBegin", ui = singleton(spsDepend(dep)),
            immediate = TRUE, session = session)
 }

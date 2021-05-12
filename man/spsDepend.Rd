@@ -22,7 +22,11 @@ mute it.}
 \description{
 Add dependencies for
 some server end functions. For most UI functions, the dependency has been automatically
-attached for you when you call the function.
+attached for you when you call the function. Most server functions will also
+attach the dependency for you automatically too. However, a few server functions have
+to append the dependency before app start like \link{addLoader}. So you would need
+to call in this function somewhere in your UI. Read help of each function for
+details.
 }
 \details{
 For \code{dep}, current options are:

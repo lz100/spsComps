@@ -14,8 +14,8 @@ and when it finishes, remove the loader to indicate clear status.
 \examples{
 if (interactive()){
   ui <- fluidPage(
-    spsDepend("css-loader"),
     h4("Use buttons to show and hide loaders with different methods"),
+    spsDepend("css-loader"), # required
     tags$b("Replace"), br(),
     actionButton("b_re_start", "Replace"),
     actionButton("b_re_stop", "stop replace"),
@@ -89,12 +89,12 @@ if (interactive()){
 
 if (interactive()){
   ui <- bootstrapPage(
-    spsDepend("css-loader"),
+    spsDepend("css-loader"), # required
     h4("Add loaders to Shiny `render` events"),
     tags$b("Replace"), br(),
-    selectInput(inputId = "n_re",
-                label = "Change this to render the following plot",
-                choices = c(10, 20, 35, 50)),
+    selectizeInput(inputId = "n_re",
+                   label = "Change this to render the following plot",
+                   choices = c(10, 20, 35, 50)),
     plotOutput(outputId = "p_re"),
     br(), tags$b("Full screen"), br(),
     selectInput(inputId = "n_fs",
@@ -105,16 +105,18 @@ if (interactive()){
 
   server <- function(input, output, session) {
     # create loaders
-    p_re <- addLoader$new("p_re", type = "facebook")
-    p_fs <- addLoader$new(
+    l_re <- addLoader$new("p_re")
+    l_fs <- addLoader$new(
       "p_fs", color = "pink", method = "full_screen",
       bg_color = "#eee", height = "30rem", type = "grid",
       footer = h4("Replotting...")
     )
     # use loaders in rednering
     output$p_re <- renderPlot({
-      on.exit(p_re$hide())
-      p_re$show()
+      on.exit(l_re$hide())
+      # to make it responsive
+      # (always create a new one by calculating the new height and width)
+      l_re$recreate()$show()
       Sys.sleep(1)
       hist(faithful$eruptions,
            probability = TRUE,
@@ -123,8 +125,9 @@ if (interactive()){
            main = "Geyser eruption duration")
     })
     output$p_fs <- renderPlot({
-      on.exit(p_fs$hide())
-      p_fs$show()
+      on.exit(l_fs$hide())
+      l_fs$show()
+
       Sys.sleep(1)
       hist(faithful$eruptions,
            probability = TRUE,
@@ -264,6 +267,13 @@ This method requires the \code{height} to be specified manually. Under this meth
 
 \code{addLoader$new()} method only stores the loader information, the loader is
 add to your docuement upon the first time \code{addLoader$show()} is called.
+}
+
+\subsection{Required javascript and css files}{
+
+Unfortunately, js and css required by this function cannot be added automatically from
+the server end. These files have to be added before app start. Add
+\code{spsDepend('css-loader')} somewhere in your UI to add the dependency.
 }
 }
 

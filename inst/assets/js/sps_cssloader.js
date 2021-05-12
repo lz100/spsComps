@@ -1,7 +1,6 @@
 
 // get loader div
 function chooseLoader(id, type, src, color, width, height){
-  console.log(color)
   var types = {
     //
     "circle"   :
@@ -501,6 +500,7 @@ function loaderInit(data, el, loader_height, loader_width) {
 function loaderReplace(el, id, loader_height, loader_width, opacity, center, block, footer) {
   var newEl = el.clone().empty();
   newEl.attr('id', `${id}-container`);
+  newEl.removeClass("shiny-plot-output shiny-bound-output");
   newEl.attr('is-inline', el.css('display').includes('inline') ? true : false);
   newEl.css({display: 'none', opacity: opacity});
   if (block) newEl.attr('disabled','disabled');
