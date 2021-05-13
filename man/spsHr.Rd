@@ -2,16 +2,62 @@
 % Please edit documentation in R/spsUIcollections.R
 \name{spsHr}
 \alias{spsHr}
-\title{hr line with color #3b8dbc38}
+\title{Create a horizontal line}
 \usage{
-spsHr()
+spsHr(
+  status = "info",
+  width = 0.5,
+  other_color = NULL,
+  type = "solid",
+  opacity = 1
+)
+}
+\arguments{
+\item{status}{string, one of "primary", "info", "success", "warning", "danger".
+This determines the color of the line.}
+
+\item{width}{numeric, how wide should the line be, a number larger than 0}
+
+\item{other_color}{string, if you do not like the default 5 status colors,
+specify a valid CSS color here. If this is provided \code{status} will be ignored.}
+
+\item{type}{string, one of "solid", "dotted", "dashed", "double",
+"groove", "ridge", "inset", "outset"}
+
+\item{opacity}{numeric, a number larger than 0 smaller than 1}
 }
 \value{
 HTML <hr> element
 }
 \description{
-hr line with color #3b8dbc38
+Create a horizontal line of your choice
+}
+\details{
+Read more about type here: https://www.w3schools.com/css/css_border.asp
 }
 \examples{
-spsHr()
+if(interactive()) {
+  library(shiny)
+  library(magrittr)
+  ui <- fluidPage(
+    tags$b("Different status"),
+    spsHr("info"),
+    spsHr("primary"),
+    spsHr("success"),
+    spsHr("warning"),
+    spsHr("danger"),
+    tags$b("custom color"),
+    spsHr(other_color = "purple"),
+    spsHr(other_color = "pink"),
+    tags$b("Different width"),
+    lapply(1:5, function(x) spsHr(width = x)),
+    tags$b("Different type"),
+    c("solid", "dotted", "dashed", "double", "groove", "ridge", "inset", "outset") \%>\%
+      lapply(function(x) spsHr(type = x, width = 3)),
+    tags$b("Different opacity"),
+    lapply(seq(0.2, 1, 0.2), function(x) spsHr(opacity = x))
+  )
+  server <- function(input, output, session) {}
+  shinyApp(ui, server)
+}
 }

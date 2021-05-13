@@ -11,4 +11,5 @@ server <- function(input, output, session) {
   serverUploadFile("upload_file")
   serverAnimation("animation")
   serverLoader("loader")
+  serverPoptip("poptip")
 }

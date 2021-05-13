@@ -8,7 +8,9 @@
 
 -   Custom loaders supported. A new `type`, `"gif"` is added to all loader functions. Users can choose this type and specify a remote URL or a local path to the gif file with the `src` argument to create their own custom loaders.
 
--   New function `bsTip`: add a custom tooltip to any Shiny element you want. You can change color, font size, position and more for each individual tooltip.
+-   Rewrite `bsHoverPopover` and name it `bsPopover` and it's higher higher wrapper `bsPop`. This function allow users to create bootstrap3 Popover with deep customization, color, background, text size and more for each individual of them.
+
+-   New function `bsTooltip` and `bsTip`: add a custom tooltip to any Shiny/ Rmarkdown element you want. You can change color, font size, position and more for each individual tooltip.
 
 ## Major change
 
@@ -21,8 +23,6 @@
         -   `destroy` will remove the loader from the app (client side)
 
         -   `recreate` = `hide` + `destroy` + create a new loader, users can change type, color, method, etc and recalculate the loader dimensions.
-
--   Rewrite `bsHoverPopover` and rename it `bsPopover`, the old name still works. Now it doesn't depend on any packages.
 
 ## Minor change
 

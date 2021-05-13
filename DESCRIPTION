@@ -1,7 +1,7 @@
 Package: spsComps
 Title: 'systemPipeShiny' UI and Server Components
-Version: 0.2.99.6
-Date: 2021-05-11
+Version: 0.2.99.7
+Date: 2021-05-12
 Authors@R: c(person(given = "Le", family = "Zhang", role = c("aut", "cre"), email = "lezhang100@gmail.com"))
 Description: The systemPipeShiny (SPS) framework comes with many UI and server components. However, installing the whole framework is heavy and takes some time. If you would like to use UI and server components from SPS in your own Shiny apps, do not hesitate to try this package.
 Depends:

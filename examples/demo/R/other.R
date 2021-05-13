@@ -7,80 +7,83 @@ uiOther <- function(id) {
       column(
         6,
         box(
-          title = "bsHoverPopover", solidHeader = TRUE, status = "primary", width = 12,
+          title = "bsAlert", solidHeader = TRUE, status = "primary", width = 12,
           div(
             class = "text-minor",
             markdown(
               '
-              Enhanced Bootstrap 3 popover by hovering of `bsplus::bs_embed_popover`.
-              Similar but also works on "hover" on buttons instead of only "click".
-              - Add a popover tooltip with descriptions to almost any Shiny components.
+              Add a dismissable alert messages to UI with `bsAlert`
               ')
           ), br(),
-          actionButton(ns('popover-btn'), 'On button') %>%
-            bsHoverPopover(
-              title = "title a",
-              content = "popover works on a button",
-              placement = "bottom"
-            ), br(), br(),
-          tags$a("On link") %>%
-            bsHoverPopover(
-              title = "title b",
-              content = "popover works on a link",
-              placement = "bottom"
-            ),
-          br(), br(),
-          div(
-            tags$b("general element"),
-            style =
-            '
-              height: 100px;
-              background-color: cornflowerblue;
-            '
-          ) %>%
-            bsHoverPopover(
-              title = "general element",
-              content = "popover works on a 'div'",
-              placement = "right"
-            ),
+          bsAlert(tags$b("Success: "), "You made it", status = "success"),
+          bsAlert(tags$b("Info: "), "Something happened", status = "info"),
+          bsAlert(tags$b("Warning: "), "Something is not right", status = "warning"),
+          bsAlert(tags$b("Danger: "), "Oh no...", status = "danger"),
           br(),
           spsCodeBtn(
-            ns("code_bshover"),
+            ns("code_bsalert"),
             show_span = TRUE,
             '
             library(shiny)
+            ui <- fluidPage(
+              bsAlert(tags$b("Success: "), "You made it", status = "success"),
+              bsAlert(tags$b("Info: "), "Something happened", status = "info"),
+              bsAlert(tags$b("Warning: "), "Something is not right", status = "warning"),
+              bsAlert(tags$b("Danger: "), "Oh no...", status = "danger")
+            )
+            server <- function(input, output, session) {}
+            shinyApp(ui, server)
+            '
+          )
+        ),
+        box(
+          title = "spsHr", solidHeader = TRUE, status = "primary", width = 12,
+          div(
+            class = "text-minor",
+            markdown(
+              '
+              Add a colorful horizontal line to UI with `spsHr`
+              ')
+          ), br(),
+          tags$b("Different status"),
+          spsHr("info"),
+          spsHr("primary"),
+          spsHr("success"),
+          spsHr("warning"),
+          spsHr("danger"),
+          tags$b("custom color"),
+          spsHr(other_color = "purple"),
+          spsHr(other_color = "pink"),
+          tags$b("Different width"),
+          lapply(1:5, function(x) spsHr(width = x)),
+          tags$b("Different type"),
+          c("solid", "dotted", "dashed", "double", "groove", "ridge", "inset", "outset") %>%
+            lapply(function(x) spsHr(type = x, width = 3)),
+          tags$b("Different opacity"),
+          lapply(seq(0.2, 1, 0.2), function(x) spsHr(opacity = x)),
+          br(),
+          spsCodeBtn(
+            ns("code_spshr"),
+            show_span = TRUE,
+            '
             library(magrittr)
             ui <- fluidPage(
-                column(2),
-                column(
-                    8,
-                    actionButton("a", "On button") %>%
-                        bsHoverPopover(
-                            title = "title a",
-                            content = "popover works on a button",
-                            placement = "bottom"
-                        ),
-                    tags$a("On link") %>%
-                        bsHoverPopover(
-                            title = "title b",
-                            content = "popover works on a link",
-                            placement = "bottom"
-                        ),
-                    div(
-                      tags$b("general element"),
-                      style =
-                      \'
-                      height: 100px;
-                      background-color: cornflowerblue;
-                      \'
-                    ) %>%
-                      bsHoverPopover(
-                        title = "general element",
-                        content = "popover works on a \'div\'",
-                        placement = "right"
-                      )
-                )
-
+              tags$b("Different status"),
+              spsHr("info"),
+              spsHr("primary"),
+              spsHr("success"),
+              spsHr("warning"),
+              spsHr("danger"),
+              tags$b("custom color"),
+              spsHr(other_color = "purple"),
+              spsHr(other_color = "pink"),
+              tags$b("Different width"),
+              lapply(1:5, function(x) spsHr(width = x)),
+              tags$b("Different type"),
+              c("solid", "dotted", "dashed", "double", "groove", "ridge", "inset", "outset") %>%
+                lapply(function(x) spsHr(type = x, width = 3)),
+              tags$b("Different opacity"),
+              lapply(seq(0.2, 1, 0.2), function(x) spsHr(opacity = x))
             )
             server <- function(input, output, session) {}
             shinyApp(ui, server)
@@ -119,7 +122,7 @@ uiOther <- function(id) {
             column(
               4, id = ns("el-c"),
               style = "border: 5px solid #eee; border-radius: 10px; background-color: red;",
-              tags$b("This block's is not matched with others")
+              tags$b("This block is not matched with others")
             )
           ),
           heightMatcher(ns("el-a"), ns("el-b")),
@@ -143,7 +146,7 @@ uiOther <- function(id) {
                 column(
                     3, id = "c",
                     style = "border: 1px black solid; background-color: red;",
-                    p("This block\'s is not matched with others")
+                    p("This block is not matched with others")
                 ),
                 heightMatcher("a", "b")
             )
@@ -152,6 +155,49 @@ uiOther <- function(id) {
 
             }
             # Try to drag `b` from bottom right corner and see what happens to `a`
+            shinyApp(ui, server)
+            '
+          )
+        ),
+        box(
+          title = "spsTitle", solidHeader = TRUE, status = "primary", width = 12,
+          div(
+            class = "text-minor",
+            markdown(
+              '
+              Add a colorful custom title to UI with `spsTitle`
+              ')
+          ), br(),
+          tags$b("Different status"),
+          c("primary", "info", "success", "warning", "danger") %>%
+            lapply(function(x) spsTitle(x, "3", status = x)),
+          tags$b("custom color"),
+          spsTitle("purple", "4", other_color = "purple"),
+          spsTitle("pink", "4", other_color = "pink"),
+          tags$b("Different levels"),
+          lapply(as.character(1:6), function(x) spsTitle(paste0("H", x), x)),
+          tags$b("Different opacity"),
+          lapply(seq(0.2, 1, 0.2), function(x) spsTitle(as.character(x), opacity = x)),
+          br(),
+          spsCodeBtn(
+            ns("code_spstitle"),
+            show_span = TRUE,
+            '
+            library(shiny)
+            library(magrittr)
+            ui <- fluidPage(
+              tags$b("Different status"),
+              c("primary", "info", "success", "warning", "danger") %>%
+                lapply(function(x) spsTitle(x, "4", status = x)),
+              tags$b("custom color"),
+              spsTitle("purple", "4", other_color = "purple"),
+              spsTitle("pink", "4", other_color = "pink"),
+              tags$b("Different levels"),
+              lapply(as.character(1:6), function(x) spsTitle(paste0("H", x), x)),
+              tags$b("Different opacity"),
+              lapply(seq(0.2, 1, 0.2), function(x) spsTitle(as.character(x), opacity = x))
+            )
+            server <- function(input, output, session) {}
             shinyApp(ui, server)
             '
           )
