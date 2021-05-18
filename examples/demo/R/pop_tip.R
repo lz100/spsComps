@@ -49,11 +49,17 @@ uiPoptip <- function(id) {
           actionButton("", "20px") %>%
             bsTooltip("20px", fontsize = "20px"),
           br(), br(),
-          actionButton("", "combined") %>%
-            bsTooltip(
-              "custom tooltip", "bottom",
-              "#0275d8", "#eee", "15px"
-            ), br(),
+          lapply(c("100", "400", "600", "900"), function(x) {
+            actionButton("", paste0("weight ", x)) %>% bsTooltip(paste0("weight ", x), fontweight = x)
+          }), br(), br(),
+          lapply(c(0.2, 0.5, 0.8, 1), function(x) {
+            actionButton("", paste0("opacity ", x)) %>% bsTooltip(paste0("opacity ", x), opacity = x)
+          }), br(), br(),
+          actionButton("", "allow html: 'abc<b>del</b>abc' ") %>%
+            bsTooltip('abc<b>del</b>abc', html = TRUE, bgcolor = "#0275d8"),
+          actionButton("", "allow html: '<s>del content</s>' ") %>%
+            bsTooltip('<s>del content</s>', html = TRUE, bgcolor = "#d9534f"),
+          br(), br(),
           spsCodeBtn(
             ns("code_tooltip"),
             show_span = TRUE,
@@ -84,11 +90,18 @@ uiPoptip <- function(id) {
               actionButton("", "20px") %>%
                 bsTooltip("20px", fontsize = "20px"),
               br(), br(), column(2),
-              actionButton("", "combined") %>%
-                bsTooltip(
-                  "custom tooltip", "bottom",
-                  "#0275d8", "#eee", "15px"
-                )
+              lapply(c("100", "400", "600", "900"), function(x) {
+                actionButton("", paste0("weight ", x)) %>% bsTooltip(paste0("weight ", x), fontweight = x)
+              }),
+              br(), br(), column(2),
+              lapply(c(0.2, 0.5, 0.8, 1), function(x) {
+                actionButton("", paste0("opacity ", x)) %>% bsTooltip(paste0("opacity ", x), opacity = x)
+              }),
+              br(), br(), column(2),
+              actionButton("", "allow html: \'abc<b>del</b>abc\' ") %>%
+                bsTooltip(\'abc<b>del</b>abc\', html = TRUE, bgcolor = "#0275d8"),
+              actionButton("", "allow html: \'<s>del content</s>\' ") %>%
+                bsTooltip(\'<s>del content</s>\', html = TRUE, bgcolor = "#d9534f")
             )
             server <- function(input, output, session) {}
             shinyApp(ui, server)

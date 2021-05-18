@@ -344,11 +344,11 @@ spsValidate <- function(
     )
 
     if(emptyIsFalse(verbose)){
-        spsinfo(pass_msg, TRUE)
-        if(shiny){
-            shinytoastr::toastr_success(
-                pass_msg, position = "bottom-right", timeOut = 3000)
-        }
+      msg(pass_msg, paste0(prefix, "INFO"), "blue")
+      if(shiny){
+        shinytoastr::toastr_success(
+          pass_msg, position = "bottom-right", timeOut = 3000)
+      }
     }
     return(TRUE)
 }
@@ -472,100 +472,14 @@ shinyCheckPkg <-function(
     }
 }
 
-
-#' Load tabular files as tibbles to server
-#' @description load a file to server end. It's designed to be used with a
-#' input file source switch button.
-#' It uses [vroom::vroom] to load the file. In SPS, this
-#' function is usually combined as downstream of  [dynamicFileServer()]
-#' function on on the server side to
-#' read the file into R. This loading function only works for parsing
-#' tabular data, use [vroom::vroom()] internally.
-#'
-#' If no user data is uploaded, it will return the example dataset that is prepared
-#' by the developer. If the developer does not provide the dataset either,
-#' it will return a 8-row empty tibble.
-#' @param choice where this file comes from, one of 'upload' or example 'eg'?
-#' @param data_init a tibble to return if `upload_path` or `eg_path` is not
-#' provided. Return a 8x8 empty tibble if not provided
-#' @param upload_path when `choice` is "upload", where to load the file, will
-#' return `data_init` if this param is not provided
-#' @param eg_path when `choice` is "eg", where to load the file, will
-#' return `data_init` if this param is not provided
-#' @param comment comment characters to parse the datafile,
-#' see help file of [vroom::vroom]
-#' @param delim delimiter characters to parse the data file,
-#' see help file of [vroom::vroom]
-#' @param col_types columns specifications, see help file of [vroom::vroom]
-#' @param ... other params for vroom, see help file of [vroom::vroom]
-#' @details This is function is wrapped by the [shinyCatch()] function, so it
-#' will show loading information both on console and on UI. This function
-#' prevents loading file errors to crash the Shiny app, so any kind of file upload will not
-#' crash the app. To show message on UI, `spsDepend("toastr")` must be used in Shiny UI
-#' function, see examples.
-#' @return returns a tibble and `NULL` if parsing fails
-#' @export
-#' @importFrom shinyAce is.empty
-#' @importFrom dplyr as_tibble
-#' @importFrom vroom vroom
-#' @examples
-#' if(interactive()){
-#'   # change value to 'local' to see the difference
-#'   spsOption("mode", value = "server")
-#'   ui <- fluidPage(
-#'     spsDepend("toastr"),
-#'     radioButtons(
-#'       "data_source", "Choose your data file source:",
-#'       c("Upload" = "upload", "Example" = "eg"),
-#'       selected = "eg"
-#'     ),
-#'     dynamicFile("data_path", label = "input file"),
-#'     dataTableOutput("df")
-#'   )
-#'
-#'   server <- function(input, output, session) {
-#'     tmp_file <- tempfile(fileext = ".csv")
-#'     write.csv(iris, file = tmp_file)
-#'     upload_path <- dynamicFileServer(input, session, "data_path")
-#'     data_df <- reactive({
-#'       loadDF(choice = input$data_source,
-#'              upload_path = upload_path()$datapath,
-#'              delim = ",", eg_path = tmp_file)
-#'     })
-#'     output$df <- renderDataTable(data_df())
-#'   }
-#'   shinyApp(ui, server)
-#' }
-loadDF <- function(choice, data_init=NULL, upload_path=NULL, eg_path=NULL,
-                   comment = "#", delim = "\t",
-                   col_types = vroom::cols(), ...){
-    df <- shinyCatch({
-        choice <- match.arg(choice, c("upload", "eg"))
-        if(!inherits(data_init, "data.frame")){
-            data_init <- data.frame(matrix("", 8,8), stringsAsFactors = FALSE) %>%
-                dplyr::as_tibble()
-        }
-        else {data_init}
-        if(!any(class(data_init) %in% c("tbl_df", "tbl", "data.frame"))) {
-            stop("data_init need to be dataframe or tibble")
-        }
-        data_init <- dplyr::as_tibble(data_init)
-        if (choice == "upload" & shinyAce::is.empty(upload_path))
-            return(data_init)
-        if (choice == "eg" & shinyAce::is.empty(eg_path))
-            return(data_init)
-        upload_path <- switch(choice,
-                              "upload" = upload_path,
-                              "eg" = eg_path,
-        )
-        df <- shinyCatch(vroom::vroom(
-            upload_path,  delim = delim, comment = comment,
-            col_types = col_types, ...
-        ))
-        if(is.null(df)){msg("Can't read file, return empty", "error")}
-        if(!names(df) %>% validUTF8() %>% all()){
-            msg("non UTF-8 coding detected, return empty", "error")}
-        df
-    })
-    return(df)
+checkNameSpace <- function(packages, quietly = FALSE, from = "CRAN") {
+  if (!emptyIsFalse(packages)) return(NULL)
+  pkg_ls <- installed.packages()[, 1]
+  missing_pkgs <- packages[!packages %in% pkg_ls]
+  if (!quietly & assertthat::not_empty(missing_pkgs)) {
+    msg(glue("These packages are missing from ",
+             "{from}: {glue_collapse(missing_pkgs, sep = ',')}"), "warning")
+  }
+  return(missing_pkgs)
 }
+

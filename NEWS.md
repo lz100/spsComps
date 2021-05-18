@@ -24,6 +24,8 @@
 
         -   `recreate` = `hide` + `destroy` + create a new loader, users can change type, color, method, etc and recalculate the loader dimensions.
 
+    -   to reduce dependencies `loadDF`, `dynamicFile` and `dynamicFileServer` are moved to systemPipeShiny main package.
+
 ## Minor change
 
 -   add `…` argument to the `animateIcon`. Users can append additional attributes.

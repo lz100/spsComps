@@ -719,129 +719,7 @@ hexPanel <-function(
   }
 }
 
-#' Title element
-#' @description  Add a title element to UI
-#' @param title string, title text
-#' @param level string, level of the title, the larger, the bigger, one of
-#' "1", "2", "3", "4", "5", "6"
-#' @param status string, one of "primary", "info", "success", "warning", "danger".
-#' This determines the color of the line.
-#' @param other_color string, if you do not like the default 5 status colors,
-#' specify a valid CSS color here. If this is provided, `status` will be ignored.
-#' @param opacity numeric, a number larger than 0 smaller than 1
-#' @param ... other attributes and children add to this element
-#'
-#' @return returns a shiny tag
-#' @export
-#'
-#' @examples
-#' if(interactive()) {
-#'   library(shiny)
-#'   library(magrittr)
-#'   ui <- fluidPage(
-#'     tags$b("Different status"),
-#'     c("primary", "info", "success", "warning", "danger") %>%
-#'       lapply(function(x) spsTitle(x, "4", status = x)),
-#'     tags$b("custom color"),
-#'     spsTitle("purple", "4", other_color = "purple"),
-#'     spsTitle("pink", "4", other_color = "pink"),
-#'     tags$b("Different levels"),
-#'     lapply(as.character(1:6), function(x) spsTitle(paste0("H", x), x)),
-#'     tags$b("Different opacity"),
-#'     lapply(seq(0.2, 1, 0.2), function(x) spsTitle(as.character(x), opacity = x))
-#'   )
-#'   server <- function(input, output, session) {}
-#'   shinyApp(ui, server)
-#' }
-spsTitle <- function(
-  title,
-  level = "2",
-  status = "info",
-  other_color = NULL,
-  opacity = 1,
-  ...
-  ){
-  if (!is.null(other_color)) {
-    stopifnot(is.character(other_color) && length(other_color) == 1)
-    color <- other_color
-  } else {
-    color <- getBsColor(status)
-  }
-  level <- match.arg(level, c("1", "2", "3", "4", "5", "6"))
-  stopifnot(is.character(title) && length(title) == 1)
-  stopifnot(is.numeric(opacity) && opacity <= 1 && opacity >= 0)
-  tags[[paste0("h", level)]](
-    title,
-    style = glue("color: {color}; opacity: {opacity}; "),
-    ...
-  )
-}
 
-#' @rdname spsTitle
-#' @export
-tabTitle <- spsTitle
-
-
-#' Create a horizontal line
-#' @description Create a horizontal line of your choice
-#' @param status string, one of "primary", "info", "success", "warning", "danger".
-#' This determines the color of the line.
-#' @param width numeric, how wide should the line be, a number larger than 0
-#' @param other_color string, if you do not like the default 5 status colors,
-#' specify a valid CSS color here. If this is provided `status` will be ignored.
-#' @param type string, one of "solid", "dotted", "dashed", "double",
-#' "groove", "ridge", "inset", "outset"
-#' @param opacity numeric, a number larger than 0 smaller than 1
-#'
-#' @export
-#' @return HTML <hr> element
-#' @details
-#' Read more about type here: https://www.w3schools.com/css/css_border.asp
-#' @examples
-#' if(interactive()) {
-#'   library(shiny)
-#'   library(magrittr)
-#'   ui <- fluidPage(
-#'     tags$b("Different status"),
-#'     spsHr("info"),
-#'     spsHr("primary"),
-#'     spsHr("success"),
-#'     spsHr("warning"),
-#'     spsHr("danger"),
-#'     tags$b("custom color"),
-#'     spsHr(other_color = "purple"),
-#'     spsHr(other_color = "pink"),
-#'     tags$b("Different width"),
-#'     lapply(1:5, function(x) spsHr(width = x)),
-#'     tags$b("Different type"),
-#'     c("solid", "dotted", "dashed", "double", "groove", "ridge", "inset", "outset") %>%
-#'       lapply(function(x) spsHr(type = x, width = 3)),
-#'     tags$b("Different opacity"),
-#'     lapply(seq(0.2, 1, 0.2), function(x) spsHr(opacity = x))
-#'   )
-#'   server <- function(input, output, session) {}
-#'   shinyApp(ui, server)
-#' }
-spsHr <- function(
-  status = "info",
-  width = 0.5,
-  other_color = NULL,
-  type = "solid",
-  opacity = 1
-) {
-  if (!is.null(other_color)) {
-    stopifnot(is.character(other_color) && length(other_color) == 1)
-    color <- other_color
-  } else {
-    color <- getBsColor(status)
-  }
-  type <- match.arg(type, c("solid", "dotted", "dashed", "double", "groove", "ridge", "inset", "outset"))
-  stopifnot(is.character(type) && length(type) == 1)
-  stopifnot(is.numeric(opacity) && opacity <= 1 && opacity >= 0)
-  stopifnot(is.numeric(width) && width >= 0)
-  width <- paste0(width, "px")
-  tags$hr(style =glue('border: {width} {type} {color}; opacity: {opacity}'))
-}
 
 #' Match height of one element to the other element
 #' @description Match the height of one element to the second element.
@@ -1161,19 +1039,16 @@ spsCodeBtn <- function(
             inputId = id,
             label = label,
             icon = btn_icon,
-            `data-toggle`="tooltip",
-            title = tool_tip,
-            `data-placement` = placement,
             style = btn_style,
             ...
         )
-    )
+    ) %>% bsTooltip(title = tool_tip, placement = placement)
     if (display == "modal") {
-        display_el <- bsplus::bs_modal(
-            id = paste0(id, "-modal"),
+        display_el <- bsModal(
+            id = id,
             title = title,
             size = size,
-            body = shinyAce::aceEditor(
+            shinyAce::aceEditor(
                 outputId = paste0(id, "-ace"),
                 value = glue(.open = '@{', .close = '}@', glue_collapse(code)),
                 mode = language,
@@ -1181,11 +1056,14 @@ spsCodeBtn <- function(
                 fontSize = "14"
             )
         )
-        btn <- btn %>% bsplus::bs_attach_modal(id_modal = paste0(id, "-modal"))
+        btn <- btn %>% htmltools::tagAppendAttributes(
+          `data-toggle`="modal",
+          `data-target`= paste0('#', id, '-modal')
+        )
     } else {
-        display_el <- bsplus::bs_collapse(
-            id = paste0(id, "-collapse"),
-            content = div(
+        display_el <- bsCollapse(
+            id = id,
+            div(
                 h4(class="modal-title", title),
                 shinyAce::aceEditor(
                     outputId = paste0(id, "-ace"),
@@ -1196,7 +1074,12 @@ spsCodeBtn <- function(
                 )
             )
         )
-        btn <- btn %>% bsplus::bs_attach_collapse(id_collapse = paste0(id, "-collapse"))
+        btn <- btn %>% htmltools::tagAppendAttributes(
+          `data-toggle`="collapse",
+          `aria-expanded`="false",
+          `aria-controls`= paste0(id, '-collapse'),
+          `data-target`= paste0('#', id, '-collapse')
+        )
     }
     tagList(
         btn,
@@ -1206,9 +1089,61 @@ spsCodeBtn <- function(
     )
 }
 
+bsModal <- function(id, ..., title="title",
+                    size=c('normal', 'large', 'small'),
+                    confirmbtn = FALSE,
+                    confirmbtn_id = paste0(id, "-confirm"),
+                    confirmbtn_text = "confirm"
+){
+  size <- switch(size[1],
+                 'large' = 'modal-lg',
+                 'small' = 'modal-sm',
+                 ''
+  )
+  div(
+    class="modal fade", id= paste0(id, "-modal"), tabindex="-1", role="dialog",
+    `aria-labelledby`=paste0(id, "-modal-title"),
+    div(
+      class=paste("modal-dialog", size), role="document",
+      div(
+        class="modal-content",
+        div(
+          class="modal-header",
+          HTML('<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+          '),
+          h4(class="modal-title", id=paste0(id, "-modal-title"), title)
+        ),
+        div(
+          class="modal-body", ...
+        ),
+        div(
+          class="modal-footer",
+          tags$button(type="button", class="btn btn-default", `data-dismiss`="modal", "Close"),
+          if(confirmbtn){
+            tags$button(
+              class = "btn btn-default action-button btn-primary",
+              id = confirmbtn_id,
+              type = "button",
+              confirmbtn_text
+            )
+          } else
+          {div()}
+        )
+      )
+    )
+  )
+}
 
-
-
+bsCollapse <- function(id, ..., collapsed = FALSE) {
+  div(
+    class = if (collapsed) "collapse in" else "collapse",
+    id = paste0(id, "-collapse"),
+    `aria-expanded` = if (collapsed) "true" else "false",
+    ...
+  )
+}
 
 
 
