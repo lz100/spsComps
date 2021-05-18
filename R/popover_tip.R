@@ -27,7 +27,7 @@
 #' [bsTip] is the convenient function for [bsTooltip], which has the background
 #' and content color set to 5 different bootstrap colors, you can use `status`
 #' to set, one of "primary", "info", "success", "warning", "danger"
-#'
+#' @export
 #' @examples
 #' if(interactive()){
 #'   library(shiny)
@@ -180,6 +180,7 @@ bsTip <- function(
 #' [bsPop] is the convenient function for [bsPopover], which has the background
 #' and content color set to 5 different bootstrap colors, you can use `status`
 #' to set, one of "primary", "info", "success", "warning", "danger"
+#' @export
 #' @examples
 #' if(interactive()){
 #'   library(shiny)
