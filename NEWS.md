@@ -26,6 +26,8 @@
 
     -   to reduce dependencies `loadDF`, `dynamicFile` and `dynamicFileServer` are moved to systemPipeShiny main package.
 
+    -   Rewrite `spsTitle` and `spsHr`, now you can create colorful titles and horizontal divider lines with these two functions respectively.
+
 ## Minor change
 
 -   add `…` argument to the `animateIcon`. Users can append additional attributes.

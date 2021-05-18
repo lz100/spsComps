@@ -87,7 +87,27 @@ Read details of these components on our [website](https://systempipe.org/sps/dev
 
 ![pg_panel](https://github.com/systemPipeR/systemPipeR.github.io/blob/main/static/sps/img/spscomps/pg_panel.gif?raw=true)
 
-
 ##### Timeline 
 
 ![timeline](https://github.com/systemPipeR/systemPipeR.github.io/blob/main/static/sps/img/spscomps/timeline.gif?raw=true)
+
+#### Tooltips
+
+![tooltips](https://github.com/systemPipeR/systemPipeR.github.io/blob/main/static/sps/img/spscomps/bstip.gif?raw=true)
+
+![tooltips](https://github.com/systemPipeR/systemPipeR.github.io/blob/main/static/sps/img/spscomps/bstip.png?raw=true)
+
+#### Popovers
+
+![popovers](https://github.com/systemPipeR/systemPipeR.github.io/blob/main/static/sps/img/spscomps/bspopover.gif?raw=true)
+
+![popovers](https://github.com/systemPipeR/systemPipeR.github.io/blob/main/static/sps/img/spscomps/bspopover.png?raw=true)
+
+#### Colorful titles
+
+![spstitle](https://github.com/systemPipeR/systemPipeR.github.io/blob/main/static/sps/img/spscomps/spstitle.png?raw=true)
+
+#### Colorful divider lines
+
+![spshr](https://github.com/systemPipeR/systemPipeR.github.io/blob/main/static/sps/img/spscomps/spshr.png?raw=true)
+
