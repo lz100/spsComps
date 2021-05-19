@@ -24,6 +24,35 @@ body <- dashboardBody(
     tags$link(href = "demo.css", rel = "stylesheet"),
     tags$script(src = "demo.js"),
     tags$link(href = "https://github.com/lz100/spsComps/blob/master/img/spscomps.png?raw=true", rel = "icon"),
+    HTML(
+      "
+      <script async src=\"https://www.googletagmanager.com/gtag/js?id=G-STGQZ2PFM0\"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag(\'js\', new Date());
+
+        gtag(\'config\', \'G-STGQZ2PFM0\');
+
+        $(document).on('click', 'a', function(e) {
+          var href = $(e.currentTarget).attr('href');
+          var domain = window.location.hostname;
+          var type = href.startsWith('#') ||
+                href.startsWith(domain) ||
+                href.startsWith(`https://${domain}`)
+                ? 'internal' : 'external';
+          gtag('send', 'link', type, $(e.currentTarget).attr('href') || '');
+        });
+
+        $(document).on('click', 'button', function(e) {
+          var el = $(e.currentTarget);
+          var elId = el.attr('id');
+          var elText = el.text();
+          gtag('send', 'btn', elId || '', elText || '');
+        });
+      </script>
+      "
+    )
   ),
   tabItems(
     tabItem(tabName = "welcome", uiWelcome("welcome")),
