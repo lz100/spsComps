@@ -91,7 +91,7 @@ bsTooltip <- function(
   placement <- match.arg(placement, c('top', 'right', 'bottom', 'left'))
   tipid <- paste0("bsTooltip", paste0(sample(seq(0, 9), 8, replace = TRUE), collapse = ""))
   html <- if(html) "true" else "false"
-  title <- str_replace_all(title, '\n | \r', ' ')
+  title <- str_replace_all(title, '\n | \r', ' ') %>% str_replace_all('"', '\\\\"')
 
   tag %>%
     tagAppendAttributes(
@@ -278,8 +278,11 @@ bsPopover <- function(
   popid <- paste0("bspopover", paste0(sample(seq(0, 9), 8, replace = TRUE), collapse = ""))
   html <- if(html) "true" else "false"
 
-  content <- str_replace_all(content, '\n | \r', ' ')
-  title <- str_replace_all(title, '\n | \r', ' ')
+  content <- str_replace_all(content, '\n | \r', ' ') %>%
+    str_replace_all('"', '\\\\"')
+  title <- str_replace_all(title, '\n | \r', ' ') %>%
+    str_replace_all('"', '\\\\"')
+
   tag %>%
     tagAppendAttributes(
       `data-popoverid` = popid
