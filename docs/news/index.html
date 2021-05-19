@@ -71,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">spsComps</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.99.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0.99</span>
       </span>
     </div>
 
@@ -115,9 +115,21 @@
       <small>Source: <a href='https://github.com/lz100/spsComps/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="spscomps-040-dev" class="section level1">
+<h1 class="page-header" data-toc-text="0.4.0">
+<a href="#spscomps-040-dev" class="anchor"></a>spsComps 0.4.0 Dev<small> Unreleased </small>
+</h1>
+<div id="bug-fix" class="section level2">
+<h2 class="hasAnchor">
+<a href="#bug-fix" class="anchor"></a>Bug fix</h2>
+<ul>
+<li>fix in <code>bsTooltip</code> and <code>bsPopover</code>, if text is defined in multiple lines and will cause js conflicts on calling the function. Now all line-change symbols are replaced before sending to js.</li>
+</ul>
+</div>
+</div>
     <div id="spscomps-030" class="section level1">
 <h1 class="page-header" data-toc-text="0.3.0">
-<a href="#spscomps-030" class="anchor"></a>spsComps 0.3.0<small> Unreleased </small>
+<a href="#spscomps-030" class="anchor"></a>spsComps 0.3.0<small> 2021-05-18 </small>
 </h1>
 <div id="new-features" class="section level2">
 <h2 class="hasAnchor">
@@ -145,6 +157,8 @@
 <li><p><code>recreate</code> = <code>hide</code> + <code>destroy</code> + create a new loader, users can change type, color, method, etc and recalculate the loader dimensions.</p></li>
 </ul>
 </li>
+<li><p>to reduce dependencies <code>loadDF</code>, <code>dynamicFile</code> and <code>dynamicFileServer</code> are moved to systemPipeShiny main package.</p></li>
+<li><p>Rewrite <code>spsTitle</code> and <code>spsHr</code>, now you can create colorful titles and horizontal divider lines with these two functions respectively.</p></li>
 </ul>
 </li>
 </ul>
@@ -199,9 +213,9 @@
 <h2 class="hasAnchor">
 <a href="#minor-change-1" class="anchor"></a>Minor Change</h2>
 </div>
-<div id="bug-fix" class="section level2">
+<div id="bug-fix-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fix" class="anchor"></a>Bug fix</h2>
+<a href="#bug-fix-1" class="anchor"></a>Bug fix</h2>
 <ul>
 <li>
 <code>bsHoverPopover</code> now works on <code>body</code> tag instead of within the target element so that it will not be hidden if the parent of target has some overflow settings.</li>
@@ -214,9 +228,9 @@
 <h1 class="page-header" data-toc-text="0.1.1">
 <a href="#spscomps-011" class="anchor"></a>spsComps 0.1.1<small> 2021-03-09 </small>
 </h1>
-<div id="bug-fix-1" class="section level2">
+<div id="bug-fix-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fix-1" class="anchor"></a>Bug fix</h2>
+<a href="#bug-fix-2" class="anchor"></a>Bug fix</h2>
 <ul>
 <li>fix links in shiny demo</li>
 <li>fix <code>hrefTab</code> and <code>hrefTable</code> incompatible with Rmarkdown by replacing the &lt;a&gt; tag <code>href</code> from none to <code>javascript:null;</code>.</li>
