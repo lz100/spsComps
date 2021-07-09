@@ -23,8 +23,9 @@ install.packages("spsComps")
 Develop version:
 
 ```r
-if (!requireNamespace("spsComps", quietly=TRUE))
-    remotes::install_github("lz100/spsComps")
+if (!requireNamespace("remotes", quietly=TRUE))
+    install.packages("remotes")
+remotes::install_github("lz100/spsComps")
 ```
 
 ## User manual 
