@@ -30,8 +30,8 @@ remotes::install_github("lz100/spsComps")
 
 ## User manual 
 
-Read details of these components on our [website](https://systempipe.org/sps/dev/spscomps/)
-
+- [User guide](https://systempipe.org/sps/dev/spscomps/)
+- [Function references](https://systempipe.org/sps/sps_funcs/)
 
 ## Other packages in systemPipeShiny
 
