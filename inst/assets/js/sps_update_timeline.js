@@ -1,5 +1,4 @@
 Shiny.addCustomMessageHandler("sps-update-timeline", function(data) {
-    console.log(data.upLabel);
     if (data.complete === true) $(data.id).addClass("complete")
     else $(data.id).removeClass("complete")
     if (data.upLabel !== null) $(`${data.id} .sps-timestamp span`).text(data.upLabel)
