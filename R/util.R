@@ -29,14 +29,17 @@ getBsColor <- function(status) {
 }
 
 # from spsUtil
-emptyIsFalse <- function(x){
-  if(is.function(x)) return(TRUE)
-  if(length(x) > 1)  return(TRUE)
-  if(length(x) == 0) return(FALSE)
-  if(is.na(x)) return(FALSE)
-  if(nchar(x) == 0) return(FALSE)
-  if(isFALSE(x)) return(FALSE)
+notFalsy <- function (x) {
+  if (is.function(x)) return(TRUE)
+  if (is.environment(x)) return(TRUE)
+  if (length(x) < 1 || all(is.na(x)) || is.null(x)) return(FALSE)
+  if (nchar(x[1]) == 0) return(FALSE)
+  if (isFALSE(x)) return(FALSE)
   else TRUE
+}
+emptyIsFalse <- notFalsy
+isFalsy <- function(x) {
+  !notFalsy(x)
 }
 
 # from spsUtil
@@ -48,8 +51,16 @@ remove_ANSI <- function(strings) {
 }
 
 # from spsUtil
-spsOption <- function(opt, value = NULL, empty_is_false = TRUE){
-  stopifnot(is.character(opt) && length(opt) == 1)
+spsOption <- function(opt, value = NULL, .list = NULL, empty_is_false = TRUE){
+  if (!is.null(.list)) {
+    lapply(seq_along(.list), function(x) {
+      if(is.null(.list[[x]])) stop(c("In `spsOption`: option ", names(.list)[x], " is NULL, not allowed"))
+    })
+    old_opts <- getOption('sps')
+    old_opts[names(.list)] <- .list
+    return(options(sps = old_opts))
+  }
+  assertthat::assert_that(is.character(opt) && length(opt) == 1)
   if(assertthat::not_empty(value))
     options(sps = getOption('sps') %>% {.[[opt]] <- value; .})
   else {

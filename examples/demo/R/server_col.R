@@ -285,6 +285,47 @@ uiServerCol <- function(id) {
             shinyApp(ui, server)
             '
           )
+        ),
+        box(
+          title = "Reactive numeric inline-operation", solidHeader = TRUE, status = "primary", width = 12,
+          div(
+            class = "text-minor",
+            markdown(
+              '
+              `incRv`, `multRv`, `diviRv` enables you to use numeric inline-operation that
+              can be done in other programming languages, like `i += 1`, `i *= 1`, `i /= 1` on
+              `reactiveValue` objects.
+
+              If you want apply this operation on `reactiveValues` or normal R objects,
+              check the similar operations in [spsUtil{blk}](https://systempipe.org/sps/funcs/spscomps/reference/)
+              package.
+              ')
+          ),
+          tags$label("Increase/Decrease by 1"), br(),
+          textOutput(ns("rv")),
+          actionButton(ns("inc"), "Increase"),
+          actionButton(ns("des"), "Decrease"), br(),
+          spsCodeBtn(
+            ns("code_incrv"),
+            show_span = TRUE,
+            '
+            library(shiny)
+            ui <- fluidPage(
+              textOutput("text"),
+              actionButton("b", "increase by 1"),
+              actionButton("c", "decrease by 1")
+            )
+            server <- function(input, output, session) {
+              rv <- reactiveVal(0)
+              observeEvent(input$b, incRv(rv))
+              observeEvent(input$c, incRv(rv, -1))
+              output$text <- renderText({
+                paste("current value is", rv())
+              })
+            }
+            shinyApp(ui, server)
+            '
+          )
         )
       )
   )
@@ -387,6 +428,14 @@ serverServerCol <- function(id) {
           if(!shinyCheckPkg(session, cran_pkg = c("ggplot99"))) stop("Install packages")
         })
         output$plot_pkg <- renderPlot(plot(99))
+      })
+
+      ## inc ----
+      rv <- reactiveVal(0)
+      observeEvent(input$inc, incRv(rv))
+      observeEvent(input$des, incRv(rv, -1))
+      output$rv <- renderPrint({
+        paste("current value is", rv())
       })
     }
   )

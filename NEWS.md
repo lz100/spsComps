@@ -1,5 +1,9 @@
 # spsComps 0.4.0 Dev
 
+## New Features
+
+-   `incRv`, `multRv`, `diviRv`: reactive in-line numeric operations, like `i += 1`, `i *= 1`.
+
 ## Bug fix
 
 -   fix in `bsTooltip` and `bsPopover`, if text is defined in multiple lines and will cause js conflicts on calling the function. Now all line-change symbols are replaced before sending to js.

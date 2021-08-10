@@ -483,3 +483,87 @@ checkNameSpace <- function(packages, quietly = FALSE, from = "CRAN") {
   return(missing_pkgs)
 }
 
+
+
+#' In-line numeric operation for reactiveVal
+#' @description In-place operations like `i += 1`, `i -= 1` is not support in
+#' R. These functions implement these operations in R. This set of functions will
+#' apply this kind of operations on `[shiny::reactiveVal]` objects.
+#' @param react reactiveVal object, when it is called, should return an numeric object
+#' @param value the numeric value to do the operation on `react`
+#' @seealso If you want [shiny::reactiveValues]  version of these operators or just
+#' normal numeric objects, use [spsUtil::inc], [spsUtil::mult], and [spsUtil::divi].
+#' @return No return, will directly change the reactiveVal object provided to the
+#' `react` argument
+#' @details
+#' `incRv(i)` is the same as `i <- i + 1`.
+#' `incRv(i, -1)` is the same as `i <- i - 1`.
+#' `multRv(i)` is the same as `i <- i * 2`.
+#' `diviRv(i)` is the same as `i <- i / 2`.
+#' @export
+#'
+#' @examples
+#' reactiveConsole(TRUE)
+#' rv <- reactiveVal(0)
+#' incRv(rv) # add 1
+#' rv()
+#' incRv(rv) # add 1
+#' rv()
+#' incRv(rv, -1) # minus 1
+#' rv()
+#' incRv(rv, -1) # minus 1
+#' rv()
+#' rv2 <- reactiveVal(1)
+#' multRv(rv2) # times 2
+#' rv2()
+#' multRv(rv2) # times 2
+#' rv2()
+#' diviRv(rv2) # divide 2
+#' rv2()
+#' diviRv(rv2) # divide 2
+#' rv2()
+#' reactiveConsole(FALSE)
+#' # Real shiny example
+#' if(interactive()){
+#'   ui <- fluidPage(
+#'     textOutput("text"),
+#'     actionButton("b", "increase by 1")
+#'   )
+#'   server <- function(input, output, session) {
+#'     rv <- reactiveVal(0)
+#'     observeEvent(input$b, {
+#'       incRv(rv)
+#'     })
+#'     output$text <- renderText({
+#'       rv()
+#'     })
+#'   }
+#'   shinyApp(ui, server)
+#' }
+incRv <- function(react, value = 1) {
+  if(!inherits(react, "reactiveVal")) stop("react must be a 'reactiveVal' object")
+  if(!is.numeric(value)) stop("value must be numeric")
+  react(isolate(react()) + value)
+}
+
+#' @export
+#' @rdname incRv
+multRv <-  function(react, value = 2) {
+  if(!inherits(react, "reactiveVal")) stop("react must be a 'reactiveVal' object")
+  if(!is.numeric(value)) stop("value must be numeric")
+  react(isolate(react()) * value)
+}
+
+
+#' @export
+#' @rdname incRv
+diviRv <-  function(react, value = 2) {
+  if(!inherits(react, "reactiveVal")) stop("react must be a 'reactiveVal' object")
+  if(!is.numeric(value)) stop("value must be numeric")
+  react(isolate(react()) / value)
+}
+
+
+
+
+
