@@ -52,6 +52,7 @@ want the app to crash but just stop this code block, inform users and continue
 with other code blocks. This function is designed to handle these issues.
 }
 \details{
+\subsection{Blocking}{
 \itemize{
 \item The blocking works
 similar to shiny's \code{\link[shiny:req]{shiny::req()}} and \code{\link[shiny:validate]{shiny::validate()}}.
@@ -68,10 +69,26 @@ error will be blocked.
 \item If \code{blocking_level} is other than these 3, no exceptions will be block, and
 if there is any error, \code{NULL} will return and following code will continue to
 run.
-\item To have the message displayed on shiny, \code{spsDepend("toastr")} must be added
+}
+}
+
+\subsection{To use it}{
+
+To have the message displayed on shiny, \code{spsDepend("toastr")} must be added
 in UI if you are working on you own app not under SPS framework, see examples.
-\item Messages will be displayed for 3s, 5s for warnings and errors will never
-go away on UI unless users' mouse hover on the bar or manually close it.
+}
+
+\subsection{Display}{
+
+Messages will be displayed for 3 seconds, and 5s for warnings. Errors will never
+go away on UI unless users' mouse hover on the bar or manually click it.
+}
+
+\subsection{environment}{
+
+\code{shinyCatch} uses the same environment as where it is called, it means if you
+assign a variable inside the expression, you can still get it from outside the
+\code{shinyCatch}, see examples.
 }
 }
 \examples{
@@ -126,4 +143,7 @@ if(interactive()){
 shinyCatch(message("this message"))
 try({shinyCatch(stop("this error")); "no block"}, silent = TRUE)
 try({shinyCatch(stop("this error"), blocking_level = "error"); "blocked"}, silent = TRUE)
+# get variable from outside
+shinyCatch({my_val <- 123})
+my_val
 }

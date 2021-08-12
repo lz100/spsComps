@@ -21,7 +21,7 @@ Imports:
 Suggests:
     testthat,
     shinyjqui,
-    spsUtil (>= 0.1.2)
+    spsUtil (>= 0.2.0)
 License: GPL (>= 3)
 Encoding: UTF-8
 BugReports: https://github.com/lz100/spsComps/issues

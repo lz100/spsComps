@@ -177,7 +177,6 @@ cssLoader <- function(
   isID = TRUE
 ) {
 
-  stopifnot(is.character(type) && length(type) == 1)
   stopifnot(is.character(id) && length(id) == 1)
   stopifnot(is.character(height) && length(height) == 1)
   stopifnot(is.character(width) && length(width) == 1)

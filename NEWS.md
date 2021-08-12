@@ -10,6 +10,10 @@
 -   Fix some links and bugs in demos.
 -   Fix text in `shinyCheckPkg`.
 
+## Minor Change
+
+-   Better help and examples for `shinyCatch`.
+
 # spsComps 0.3.0
 
 ## New features

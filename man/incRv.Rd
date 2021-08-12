@@ -73,5 +73,5 @@ if(interactive()){
 }
 \seealso{
 If you want \link[shiny:reactiveValues]{shiny::reactiveValues}  version of these operators or just
-normal numeric objects, use \link[spsUtil:inc]{spsUtil::inc}, \link[spsUtil:mult]{spsUtil::mult}, and \link[spsUtil:divi]{spsUtil::divi}.
+normal numeric objects, use \link[spsUtil:inc]{spsUtil::inc}, \link[spsUtil:inc]{spsUtil::mult}, and \link[spsUtil:inc]{spsUtil::divi}.
 }
