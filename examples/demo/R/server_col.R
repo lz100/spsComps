@@ -185,6 +185,7 @@ uiServerCol <- function(id) {
             result the validation to fail.
             ')
           ),
+          spsHr(),
           column(
             6,
             h3("click below to make the plot"),
@@ -251,7 +252,7 @@ uiServerCol <- function(id) {
             server <- function(input, output, session) {
                 mydata <- datasets::iris
                 observeEvent(input$vd1, {
-                    spsOption("verbose", TRUE) # use global sps verbose setting
+                    spsUtil::spsOption("verbose", TRUE) # use global sps verbose setting
                     spsValidate({
                         is.data.frame(mydata)
                     }, vd_name = "Is dataframe")
@@ -297,10 +298,12 @@ uiServerCol <- function(id) {
               `reactiveValue` objects.
 
               If you want apply this operation on `reactiveValues` or normal R objects,
-              check the similar operations in [spsUtil{blk}](https://systempipe.org/sps/funcs/spscomps/reference/)
+              check the similar operations `inc`, `mult` and `divi`
+              in [spsUtil{blk}](https://systempipe.org/sps/funcs/spsutil/reference/)
               package.
               ')
           ),
+          spsHr(),
           tags$label("Increase/Decrease by 1"), br(),
           textOutput(ns("rv")),
           actionButton(ns("inc"), "Increase"),
@@ -382,7 +385,7 @@ serverServerCol <- function(id) {
       ## spsValidate server ----
       mydata <- datasets::iris
       observeEvent(input$vd1, {
-        spsOption("verbose", TRUE) # use global sps verbose setting
+        spsUtil::spsOption("verbose", TRUE) # use global sps verbose setting
         spsValidate({
           is.data.frame(mydata)
         }, vd_name = "Is dataframe")

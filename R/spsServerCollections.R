@@ -437,7 +437,7 @@ shinyCheckPkg <-function(
     github_cmd <- if (shinyAce::is.empty(missing_github)) "" else
         paste0(
             'if (!requireNamespace("remotes", quietly=TRUE))
-                install.packages("BiocManager")\n',
+                install.packages("remotes")\n',
             "remotes::install(c('", paste0(missing_github, collapse = "', '"), "'))"
         )
 

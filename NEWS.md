@@ -7,6 +7,8 @@
 ## Bug fix
 
 -   fix in `bsTooltip` and `bsPopover`, if text is defined in multiple lines and will cause js conflicts on calling the function. Now all line-change symbols are replaced before sending to js.
+-   Fix some links and bugs in demos.
+-   Fix text in `shinyCheckPkg`.
 
 # spsComps 0.3.0
 
