@@ -109,7 +109,7 @@ spsDepend <- function(dep="", js = TRUE, css = TRUE, listing = TRUE) {
                 script = "js/sps_update_timeline.js",
                 all_files = FALSE
             ),
-            "font-awesome" = htmltools::findDependencies(icon("")),
+            "font-awesome" = htmltools::findDependencies(icon("home")),
             "toastr" = {
                 js_file <- htmltools::htmlDependency(
                     name = "toastr-js",

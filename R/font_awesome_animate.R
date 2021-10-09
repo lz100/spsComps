@@ -145,7 +145,7 @@ animateIcon <- function(
 #'       tags$label("on hover, move mouse on the red thumb"), br(),
 #'       actionButton(
 #'         "btn2", "",
-#'         icon = icon(id = "myicon", "thumbs-o-up"),
+#'         icon = icon(id = "myicon", "thumbs-up"),
 #'         style = "color: red; boarder: initial; border-color: transparent;"
 #'       ), br(),
 #'       animateUI("btn2", animation = "bounce", speed = "fast", hover = TRUE),

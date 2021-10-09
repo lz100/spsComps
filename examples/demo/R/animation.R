@@ -35,9 +35,9 @@ animate_table <- '
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">vertical</code></td>
-      <td><i class="fa fa-thumbs-o-up faa-vertical animated" style="font-size: 2em"></i></td>
-      <td><i class="fa fa-thumbs-o-up faa-vertical animated faa-fast" style="font-size: 2em"></i></td>
-      <td><i class="fa fa-thumbs-o-up faa-vertical animated faa-slow" style="font-size: 2em"></i></td>
+      <td><i class="fa fa-thumbs-up faa-vertical animated" style="font-size: 2em"></i></td>
+      <td><i class="fa fa-thumbs-up faa-vertical animated faa-fast" style="font-size: 2em"></i></td>
+      <td><i class="fa fa-thumbs-up faa-vertical animated faa-slow" style="font-size: 2em"></i></td>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">flash</code></td>
@@ -47,9 +47,9 @@ animate_table <- '
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">bounce</code></td>
-      <td><i class="fa fa-thumbs-o-up faa-bounce animated" style="font-size: 2em"></i></td>
-      <td><i class="fa fa-thumbs-o-up faa-bounce animated faa-fast" style="font-size: 2em"></i></td>
-      <td><i class="fa fa-thumbs-o-up faa-bounce animated faa-slow" style="font-size: 2em"></i></td>
+      <td><i class="fa fa-thumbs-up faa-bounce animated" style="font-size: 2em"></i></td>
+      <td><i class="fa fa-thumbs-up faa-bounce animated faa-fast" style="font-size: 2em"></i></td>
+      <td><i class="fa fa-thumbs-up faa-bounce animated faa-slow" style="font-size: 2em"></i></td>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">bounce-reverse</code></td>
@@ -261,7 +261,7 @@ uiAnimation <- function(id) {
           tags$label("on hover, move mouse on the red thumb"), br(),
           actionButton(
             ns("btn2"), "",
-            icon = icon(id = ns("myicon"), "thumbs-o-up"),
+            icon = icon(id = ns("myicon"), "thumbs-up"),
             style = "color: red; boarder: initial; border-color: transparent;"
           ), br(),
           animateUI(ns("btn2"), animation = "bounce", speed = "fast", hover = TRUE),
@@ -284,7 +284,7 @@ uiAnimation <- function(id) {
               tags$label("on hover, move mouse on the red thumb"), br(),
               actionButton(
                 "btn2", "",
-                icon = icon(id = "myicon", "thumbs-o-up"),
+                icon = icon(id = "myicon", "thumbs-up"),
                 style = "color: red; boarder: initial; border-color: transparent;"
               ), br(),
               animateUI("btn2", animation = "bounce", speed = "fast", hover = TRUE),
