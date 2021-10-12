@@ -15,7 +15,7 @@ and when it finishes, remove the loader to indicate clear status.
 if (interactive()){
   ui <- fluidPage(
     h4("Use buttons to show and hide loaders with different methods"),
-    spsDepend("css-loader"), # required
+    spsDepend("addLoader"), # optional
     tags$b("Replace"), br(),
     actionButton("b_re_start", "Replace"),
     actionButton("b_re_stop", "stop replace"),
@@ -30,7 +30,7 @@ if (interactive()){
     column(6,
            id = "chunk",
            style = "background-color: #eee",
-           h5("Here are some text 12345"),
+           h5("Here is some text 12345"),
            tags$hr(),
            icon("home"),
            p("blablablablablablablablablablablablablablablablablablablabla"),
@@ -89,7 +89,7 @@ if (interactive()){
 
 if (interactive()){
   ui <- bootstrapPage(
-    spsDepend("css-loader"), # required
+    spsDepend("addLoader"), # optional
     h4("Add loaders to Shiny `render` events"),
     tags$b("Replace"), br(),
     selectizeInput(inputId = "n_re",
@@ -271,9 +271,10 @@ add to your docuement upon the first time \code{addLoader$show()} is called.
 
 \subsection{Required javascript and css files}{
 
-Unfortunately, js and css required by this function cannot be added automatically from
-the server end. These files have to be added before app start. Add
-\code{spsDepend('css-loader')} somewhere in your UI to add the dependency.
+Since spsComps 0.3.1 all dependencies will be added automatically. If you
+don't see them working, try to  manually add
+\code{spsDepend('addLoader')} or \code{spsDepend('css-loader')} (old name) somewhere in your
+UI to add the dependency.
 }
 }
 

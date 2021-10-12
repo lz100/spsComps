@@ -57,7 +57,13 @@ spsDepend <- function(dep="", js = TRUE, css = TRUE, listing = TRUE) {
     stopifnot(is.logical(js) && length(js) == 1)
     stopifnot(is.logical(css) && length(css) == 1)
     stopifnot(is.logical(listing) && length(listing) == 1)
-
+    # fix alternative names
+    dep <- switch(dep,
+      "shinyCatch" = "toastr",
+      "spsValidate" = "toastr",
+      "addLoader" = "css-loader",
+      dep
+    )
     switch (dep,
             "basic" = {
                 js_file <- htmltools::htmlDependency(
@@ -226,6 +232,8 @@ dependServer <- function(
   css = TRUE,
   session = getDefaultReactiveDomain()
 ) {
-  insertUI(selector = "body", where = "afterBegin", ui = singleton(spsDepend(dep)),
-           immediate = TRUE, session = session)
+  insertUI(
+    selector = "body", where = "afterBegin",
+    ui = singleton(spsDepend(dep, js, css)), immediate = TRUE, session = session
+  )
 }

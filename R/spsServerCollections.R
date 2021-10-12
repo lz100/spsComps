@@ -27,9 +27,10 @@
 #' run.
 #'
 #' #### To use it
-#'
-#' To have the message displayed on shiny, `spsDepend("toastr")` must be added
-#' in UI if you are working on you own app not under SPS framework, see examples.
+#' Since spsComps 0.3.1 to have the message displayed on shiny UI, you don't need
+#' to attach the dependencies manually by adding `spsDepend("shinyCatch")` or
+#' `spsDepend("toastr")` (old name) on UI. This becomes optional, only in the case
+#' that automatic attachment is not working.
 #' #### Display
 #'
 #' Messages will be displayed for 3 seconds, and 5s for warnings. Errors will never
@@ -69,7 +70,7 @@
 #' @examples
 #' if(interactive()){
 #'   ui <- fluidPage(
-#'     spsDepend("toastr"),
+#'     spsDepend("shinyCatch"), # optional
 #'     h4("Run this example on your own computer to better understand exception
 #'            catch and dual-end logging", class = "text-center"),
 #'     column(
@@ -134,6 +135,7 @@ shinyCatch <- function(
   assert_that(all(is.character(prefix), length(prefix) == 1))
   prefix <- paste0(prefix, if (prefix == "") " " else "-")
   shiny <- all(!is.null(getDefaultReactiveDomain()), shiny)
+  if(shiny) dependServer("toastr")
   toastr_actions <- list(
     message = function(m) {
       msg(m$message, paste0(prefix, "INFO"), "blue")
@@ -156,6 +158,7 @@ shinyCatch <- function(
         title = "There is an error", hideDuration = 300)
     }
   )
+
   switch(tolower(blocking_level),
          "error" = tryCatch(
            suppressMessages(suppressWarnings(withCallingHandlers(
@@ -264,12 +267,14 @@ findTraceFile <- function(calls) {
 #' and no final return, else `TRUE`.
 #' @export
 #' @details
-#' - To have the message displayed on shiny, `spsDepend("toastr")` must be added
-#' in UI if you are working on you own app not under SPS framework, see examples.
+#' - Since spsComps 0.3.1 to have the message displayed on shiny UI, you don't need
+#' to attach the dependencies manually by adding `spsDepend("spsValidate")` or
+#' `spsDepend("toastr")` (old name) on UI. This becomes optional, only in the case
+#' that automatic attachment is not working.
 #' @examples
 #' if(interactive()){
 #'     ui <- fluidPage(
-#'         spsDepend("toastr"), # need to add toastr dependency
+#'         spsDepend("spsValidate"), # optional
 #'         column(
 #'             4,
 #'             h3("click below to make the plot"),
@@ -576,6 +581,10 @@ diviRv <-  function(react, value = 2) {
 }
 
 
-
+onNextInput <- function(expr, session = getDefaultReactiveDomain()) {
+  observeEvent(once = TRUE, reactiveValuesToList(session$input), {
+    force(expr)
+  }, ignoreInit = TRUE)
+}
 
 

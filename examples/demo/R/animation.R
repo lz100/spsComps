@@ -189,7 +189,7 @@ uiAnimation <- function(id) {
             library(shiny)
 
             ui <- fluidPage(
-              spsDepend("animation"),
+              spsDepend("animation"), # optional
               h3("Adding/removing animations from server"),
               tags$label("use a button to control"), br(),
               actionButton("btn3", "animate itself"),

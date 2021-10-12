@@ -74,8 +74,10 @@ run.
 
 \subsection{To use it}{
 
-To have the message displayed on shiny, \code{spsDepend("toastr")} must be added
-in UI if you are working on you own app not under SPS framework, see examples.
+Since spsComps 0.3.1 to have the message displayed on shiny UI, you don't need
+to attach the dependencies manually by adding \code{spsDepend("shinyCatch")} or
+\code{spsDepend("toastr")} (old name) on UI. This becomes optional, only in the case
+that automatic attachment is not working.
 }
 
 \subsection{Display}{
@@ -94,7 +96,7 @@ assign a variable inside the expression, you can still get it from outside the
 \examples{
 if(interactive()){
   ui <- fluidPage(
-    spsDepend("toastr"),
+    spsDepend("shinyCatch"), # optional
     h4("Run this example on your own computer to better understand exception
            catch and dual-end logging", class = "text-center"),
     column(

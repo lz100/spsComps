@@ -121,10 +121,10 @@ animateIcon <- function(
 #' Google "CSS selector" to learn more.
 #'
 #' #### only server functions
-#' If you use [animateServer] or [animationRemove] on the server, you need
-#' to add `spsDepend("animation")` somewhere
-#' in your UI to load the required CSS and javascript, inside `tags$head()` is preferred.
-#' see examples.
+#' If you use [animateServer] or [animationRemove] on the server, but not [animateUI]
+#' you don't have to load the required CSS and javascript, since spsComps 0.3.1. In case
+#' they don't work, you can manually add the dependency by  adding
+#'  `spsDepend("animation")` somewhere in your UI. see examples.
 #' @export
 #'
 #' @examples
@@ -132,7 +132,7 @@ animateIcon <- function(
 #'   library(shiny)
 #'
 #'   ui <- fluidPage(
-#'     spsDepend("animation"),
+#'     spsDepend("animation"), # optional
 #'     column(
 #'       6,
 #'       h3("Adding animations from UI"),
@@ -236,6 +236,7 @@ animateServer <- function(
 ){
   stopifnot(is.character(selector) && length(selector) == 1)
   stopifnot(is.logical(isID) && length(isID) == 1)
+  dependServer("animation")
 
   selector <- if(isID) {
     paste0("#", if(inherits(session, "session_proxy")) session$ns(selector) else selector)
@@ -262,6 +263,7 @@ animationRemove <- function(
   stopifnot(is.character(selector) && length(selector) == 1)
   stopifnot(is.logical(isID) && length(isID) == 1)
   stopifnot(is.logical(alert) && length(alert) == 1)
+  dependServer("animation")
 
   selector <- if(isID) {
     paste0("#", if(inherits(session, "session_proxy")) session$ns(selector) else selector)

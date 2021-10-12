@@ -216,7 +216,7 @@ cssLoader <- function(
 #' if (interactive()){
 #'   ui <- fluidPage(
 #'     h4("Use buttons to show and hide loaders with different methods"),
-#'     spsDepend("css-loader"), # required
+#'     spsDepend("addLoader"), # optional
 #'     tags$b("Replace"), br(),
 #'     actionButton("b_re_start", "Replace"),
 #'     actionButton("b_re_stop", "stop replace"),
@@ -231,7 +231,7 @@ cssLoader <- function(
 #'     column(6,
 #'            id = "chunk",
 #'            style = "background-color: #eee",
-#'            h5("Here are some text 12345"),
+#'            h5("Here is some text 12345"),
 #'            tags$hr(),
 #'            icon("home"),
 #'            p("blablablablablablablablablablablablablablablablablablablabla"),
@@ -290,7 +290,7 @@ cssLoader <- function(
 #'
 #' if (interactive()){
 #'   ui <- bootstrapPage(
-#'     spsDepend("css-loader"), # required
+#'     spsDepend("addLoader"), # optional
 #'     h4("Add loaders to Shiny `render` events"),
 #'     tags$b("Replace"), br(),
 #'     selectizeInput(inputId = "n_re",
@@ -417,9 +417,10 @@ addLoader <- R6::R6Class(
     #' add to your docuement upon the first time `addLoader$show()` is called.
     #'
     #' #### Required javascript and css files
-    #' Unfortunately, js and css required by this function cannot be added automatically from
-    #' the server end. These files have to be added before app start. Add
-    #' `spsDepend('css-loader')` somewhere in your UI to add the dependency.
+    #' Since spsComps 0.3.1 all dependencies will be added automatically. If you
+    #' don't see them working, try to  manually add
+    #' `spsDepend('addLoader')` or `spsDepend('css-loader')` (old name) somewhere in your
+    #'  UI to add the dependency.
     initialize = function(
       target_selector = "",
       isID = TRUE,
@@ -461,6 +462,8 @@ addLoader <- R6::R6Class(
       method <- match.arg(method, c("replace", "inline", "full_screen"))
       if ((method == "full_screen") && (is.null(height) || is.null(width)))
         stop("Loader: height and width cannot by NULL for full screen method.")
+
+      dependServer("css-loader")
 
       selector <- if(isID) {
         paste0("#", if(inherits(session, "session_proxy")) session$ns(target_selector) else target_selector)

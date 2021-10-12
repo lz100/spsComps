@@ -238,7 +238,7 @@ uiLoader <- function(id) {
             show_span = TRUE,
             '
             ui <- fluidPage(
-              spsDepend("css-loader"),
+              spsDepend("addLoader"), # optional
               h4("Use buttons to show and hide loaders with different methods"),
               tags$b("Replace"), br(),
               actionButton("b_re_start", "Replace"),
@@ -338,7 +338,7 @@ uiLoader <- function(id) {
             show_span = TRUE,
             '
             ui <- bootstrapPage(
-              spsDepend("css-loader"),
+              spsDepend("addLoader"), # optional
               h4("Add loaders to Shiny `render` events"),
               tags$b("Replace"), br(),
               selectInput(inputId = "n_re",
@@ -437,7 +437,7 @@ uiLoader <- function(id) {
             show_span = TRUE,
             '
             ui <- fluidPage(
-              spsDepend("css-loader"),
+              spsDepend("addLoader"), # optional
               fluidRow(
                 column(
                   6, br(), br(), br(), br(),

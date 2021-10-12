@@ -51,7 +51,7 @@ uiServerCol <- function(id) {
             show_span = TRUE,
             '
             ui <- fluidPage(
-              spsDepend("toastr"),
+              spsDepend("shinyCatch"), # optional
               h4("Run this example on your own computer to better understand exception
                      catch and dual-end logging", class = "text-center"),
               column(
@@ -219,7 +219,7 @@ uiServerCol <- function(id) {
             show_span = TRUE,
             '
             ui <- fluidPage(
-                spsDepend("toastr"), # need to add toastr dependency
+                spsDepend("spsValidate"), # optional
                 column(
                     4,
                     h3("click below to make the plot"),

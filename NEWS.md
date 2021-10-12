@@ -3,6 +3,7 @@
 ## New Features
 
 -   `incRv`, `multRv`, `diviRv`: reactive in-line numeric operations, like `i += 1`, `i *= 1`.
+-   For server only functions, now attaching the JS and CSS dependency by adding `spsDepend("xxx")` on UI is not required anymore, it becomes optional. This process is handled internally. In case this will not work, users still have the option to attach the dependency manually via `spsDepend`.
 
 ## Bug fix
 

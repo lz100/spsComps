@@ -48,14 +48,16 @@ provides better user notification and server-end logging (dual-end logging).
 }
 \details{
 \itemize{
-\item To have the message displayed on shiny, \code{spsDepend("toastr")} must be added
-in UI if you are working on you own app not under SPS framework, see examples.
+\item Since spsComps 0.3.1 to have the message displayed on shiny UI, you don't need
+to attach the dependencies manually by adding \code{spsDepend("spsValidate")} or
+\code{spsDepend("toastr")} (old name) on UI. This becomes optional, only in the case
+that automatic attachment is not working.
 }
 }
 \examples{
 if(interactive()){
     ui <- fluidPage(
-        spsDepend("toastr"), # need to add toastr dependency
+        spsDepend("spsValidate"), # optional
         column(
             4,
             h3("click below to make the plot"),

@@ -80,10 +80,10 @@ Google "CSS selector" to learn more.
 
 \subsection{only server functions}{
 
-If you use \link{animateServer} or \link{animationRemove} on the server, you need
-to add \code{spsDepend("animation")} somewhere
-in your UI to load the required CSS and javascript, inside \code{tags$head()} is preferred.
-see examples.
+If you use \link{animateServer} or \link{animationRemove} on the server, but not \link{animateUI}
+you don't have to load the required CSS and javascript, since spsComps 0.3.1. In case
+they don't work, you can manually add the dependency by  adding
+\code{spsDepend("animation")} somewhere in your UI. see examples.
 }
 }
 \examples{
@@ -91,7 +91,7 @@ if(interactive()){
   library(shiny)
 
   ui <- fluidPage(
-    spsDepend("animation"),
+    spsDepend("animation"), # optional
     column(
       6,
       h3("Adding animations from UI"),
