@@ -177,7 +177,7 @@ uiButtons <- function(id) {
             '
             A go top button, when users scroll the page down more than 50 pixels,
             the button will be displayed. When the button is clicked, scroll all
-            the way to the button.
+            the way to the top of the page.
 
             #### This demo
             When you are on this tab, 3 `spsGoTop` buttons has enabled. so **now scroll**
