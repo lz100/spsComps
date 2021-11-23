@@ -31,7 +31,7 @@ uiServerCol <- function(id) {
               ')
           ),
           spsHr(),
-          h4("Image following buttons do some data process and then render some text to users:"),
+          h4("Imagine following buttons do some data process and then render some text to users:"),
           tags$label("Error blocks the rest of the code in the same reactive context"), br(),
           actionButton(ns("btn1"),"error and blocking"),
           br(), tags$label("Error happens but code contonues, you should see 'I am not blocked by error' below"), br(),
@@ -295,7 +295,7 @@ uiServerCol <- function(id) {
               '
               `incRv`, `multRv`, `diviRv` enables you to use numeric inline-operation that
               can be done in other programming languages, like `i += 1`, `i *= 1`, `i /= 1` on
-              `reactiveValue` objects.
+              `reactiveVal` objects.
 
               If you want apply this operation on `reactiveValues` or normal R objects,
               check the similar operations `inc`, `mult` and `divi`
