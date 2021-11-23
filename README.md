@@ -2,8 +2,7 @@
 
 systemPipeShiny Components (spsComps) package is a collection of Shiny custom UI and 
 server components. These components include different kinds of new inputs, buttons, animations,
-procgress loaders on the UI side. Exception handling functions, new upload control 
-function and more on server side. 
+progress loaders and more on the UI side. There are also components like exception handling, validation functions on server side. 
 
 ## Demos
 
