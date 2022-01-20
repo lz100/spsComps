@@ -489,13 +489,24 @@ shinyCheckPkg <-function(
     }
 }
 
-checkNameSpace <- function(packages, quietly = FALSE, from = "CRAN") {
-  if (!emptyIsFalse(packages)) return(NULL)
-  pkg_ls <- installed.packages()[, 1]
-  missing_pkgs <- packages[!packages %in% pkg_ls]
-  if (!quietly & assertthat::not_empty(missing_pkgs)) {
-    msg(glue("These packages are missing from ",
-             "{from}: {glue_collapse(missing_pkgs, sep = ',')}"), "warning")
+checkNameSpace <- function(
+  packages,
+  quietly = FALSE,
+  from = "CRAN",
+  on_timeout = {FALSE}
+  ){
+  stopifnot(is.character(packages))
+  stopifnot(is.logical(quietly) && length(quietly) == 1)
+  stopifnot(is.character(from) && length(from) == 1)
+  if (!emptyIsFalse(packages))
+    return(NULL)
+  check_res <- unlist(lapply(packages, function(pkg){
+    emptyIsFalse(find.package(pkg, quiet = TRUE))
+  }))
+  missing_pkgs <- packages[!check_res]
+  if (!quietly && assertthat::not_empty(missing_pkgs)) {
+    msg(glue("These packages are missing from ", "{from}: {glue_collapse(missing_pkgs, sep = ',')}"),
+        "warning")
   }
   return(missing_pkgs)
 }
@@ -581,10 +592,113 @@ diviRv <-  function(react, value = 2) {
 }
 
 
+#' Wait for the next input change
+#' @description This server function runs a callback experssion when the next
+#' time any input value changes. This is useful for dynamically added components from
+#' the server. For example, loading a shiny module UI from server by `renderUI` and loading
+#' the shiny module server from server by `moduleServer`. Loading the server must
+#' wait until `renderUI` is finished. However, in shiny `renderUI` is asynchronous.
+#' It means `moduleServer` is immediately executed after `renderUI`. The result
+#' is module's server part cannot find the UI, because it is still updating.
+#' This function is hack to solve this problem by waiting for the next input
+#' settlement operation called from Shiny javascript to R so one can start
+#' other server actions.
+#' @param expr code expression, wrap inside `{}`
+#' @param session shiny session
+#' @return an [observeEvent] that runs only one time to watch for the next input change.
+#' @export
+#' @details
+#' #### Common usage
+#' This function adds a `on.exit` statement to the parent `observer`, `renderXX`,
+#' and other reactive events, so make sure you use them inside these functions
+#' instead of plain server.
+#'
+#' ```r
+#' server = function(input, output, session) {
+#'   # ok
+#'   output$someID <- renderUI({
+#'     onNextInput({...})
+#'     div(...)
+#'   })
+#'
+#'   # following is not ok
+#'   onNextInput({...})
+#' }
+#' ```
+#'
+#' #### About this function
+#' This function fixes the issue in [shiny #3348](https://github.com/rstudio/shiny/issues/3348).
+#' Until there is an official support for this feature, this function is
+#' useful.
+#' @examples
+#' if(interactive()){
+#'   library(shiny)
+#'
+#'   # Simple example
+#'   ui <- fluidPage(
+#'     uiOutput("someui")
+#'   )
+#'   server <- function(input, output, session) {
+#'     output$someui <- renderUI({
+#'       # we update the text of new rendered text input to 3 random letters
+#'       # after `textInput` is displayed, and it only works for one time.
+#'       onNextInput({
+#'         updateTextInput(inputId = "mytext", value = paste0(sample(letters, 3), collapse = ""))
+#'       })
+#'       textInput("mytext", "some text")
+#'     })
+#'     # if you directly have update event like following line, it won't work
+#'     # updateTextInput(inputId = "mytext", value = paste0(sample(letters, 3), collapse = ""))
+#'   }
+#'   shinyApp(ui, server)
+#'
+#'
+#'   # complex example with modules
+#'   modUI <- function(id) {
+#'     ns <- NS(id)
+#'     textInput(ns("mytext"), "some text")
+#'   }
+#'   modServer = function(id) {
+#'     moduleServer(
+#'       id,
+#'       function(input, output, session) {
+#'         updateTextInput(inputId = "mytext", value = paste0(sample(letters, 3), collapse = ""))
+#'       }
+#'     )
+#'   }
+#'   ui = fluidPage(
+#'     actionButton("a", "load module UI"),
+#'     uiOutput("mod_container")
+#'   )
+#'   server = function(input, output, session) {
+#'     # everytime you click, render a new module UI and update the text value
+#'     # immediately
+#'     observeEvent(input$a, {
+#'       output$mod_container <- renderUI({
+#'         onNextInput(modServer("mod"))
+#'         modUI("mod")
+#'       })
+#'     })
+#'     # Without `onNextInput`, module server call will not work
+#'     # uncomment below and, comment `onNextInput` line to see the difference
+#'     # modServer("mod")
+#'   }
+#'
+#'   shinyApp(ui, server)
+#' }
 onNextInput <- function(expr, session = getDefaultReactiveDomain()) {
-  observeEvent(once = TRUE, reactiveValuesToList(session$input), {
-    force(expr)
-  }, ignoreInit = TRUE)
+  do.call(
+    on.exit,
+    list(
+      substitute({
+        observeEvent(once = TRUE, reactiveValuesToList(session$input), {
+          force(expr)
+        }, ignoreInit = TRUE)
+      }),
+      add = TRUE
+    ),
+    envir = parent.frame()
+  )
 }
 
 

@@ -1,3 +1,9 @@
+# spsComps 0.4.0.99 Dev
+
+## New Features
+
+-   `onNextInput`, a server callback that is run after next input value change. A hack to address [3348](https://github.com/rstudio/shiny/issues/3348).
+
 # spsComps 0.3.1
 
 ## New Features
@@ -94,7 +100,7 @@
 ## Bug fix
 
 -   fix links in shiny demo
--   fix `hrefTab` and `hrefTable` incompatible with Rmarkdown by replacing the \<a\> tag `href` from none to `javascript:null;`.
+-   fix `hrefTab` and `hrefTable` incompatible with Rmarkdown by replacing the \<a> tag `href` from none to `javascript:null;`.
 
 ## Other
 
