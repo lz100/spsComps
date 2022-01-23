@@ -593,9 +593,10 @@ diviRv <-  function(react, value = 2) {
 
 
 #' Wait for the next input change
-#' @description This server function runs a callback experssion when the next
-#' time any input value changes. This is useful for dynamically added components from
-#' the server. For example, loading a shiny module UI from server by `renderUI` and loading
+#' @description This is a server function that runs like a callback when the next time
+#' any input value changes. This is useful for to watch dynamically added components from
+#' the server and then do something. For example, loading a
+#' shiny module UI from server by `renderUI` and loading
 #' the shiny module server from server by `moduleServer`. Loading the server must
 #' wait until `renderUI` is finished. However, in shiny `renderUI` is asynchronous.
 #' It means `moduleServer` is immediately executed after `renderUI`. The result

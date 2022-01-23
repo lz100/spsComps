@@ -15,9 +15,10 @@ onNextInput(expr, session = getDefaultReactiveDomain())
 an \link{observeEvent} that runs only one time to watch for the next input change.
 }
 \description{
-This server function runs a callback experssion when the next
-time any input value changes. This is useful for dynamically added components from
-the server. For example, loading a shiny module UI from server by \code{renderUI} and loading
+This is a server function that runs like a callback when the next time
+any input value changes. This is useful for to watch dynamically added components from
+the server and then do something. For example, loading a
+shiny module UI from server by \code{renderUI} and loading
 the shiny module server from server by \code{moduleServer}. Loading the server must
 wait until \code{renderUI} is finished. However, in shiny \code{renderUI} is asynchronous.
 It means \code{moduleServer} is immediately executed after \code{renderUI}. The result

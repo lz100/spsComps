@@ -329,6 +329,92 @@ uiServerCol <- function(id) {
             shinyApp(ui, server)
             '
           )
+        ),
+        box(
+          title = "onNextInput", solidHeader = TRUE, status = "primary", width = 12,
+          div(
+            class = "text-minor",
+            markdown(
+              '
+              #### on next input call back
+              This is a server function that runs like a callback when the next
+              time any input value changes. This is useful for to watch dynamically added components from
+              the server and then do something. For example, loading a shiny module UI from server by `renderUI` and loading
+              the shiny module server from server by `moduleServer`. Loading the server must
+              wait until `renderUI` is finished. However, in shiny `renderUI` is asynchronous.
+              It means `moduleServer` is immediately executed after `renderUI`. The result
+              is module\'s server part cannot find the UI, because it is still updating.
+              This function is hack to solve this problem by waiting for the next input
+              settlement operation called from Shiny javascript to R so one can start
+              other server actions.
+
+              *****
+
+              #### Try it yourself
+              This function is hard to demostrate on the demo, please try following
+              code on your own and refer to the help file.
+              '
+            ),
+            spsCodeBtn(
+              ns("code_onnextinput"),
+              show_span = TRUE,
+              '
+              library(shiny)
+
+              # Simple example
+              ui <- fluidPage(
+                uiOutput("someui")
+              )
+              server <- function(input, output, session) {
+                output$someui <- renderUI({
+                  # we update the text of new rendered text input to 3 random letters
+                  # after `textInput` is displayed, and it only works for one time.
+                  onNextInput({
+                    updateTextInput(inputId = "mytext", value = paste0(sample(letters, 3), collapse = ""))
+                  })
+                  textInput("mytext", "some text")
+                })
+                # if you directly have update event like following line, it won\'t work
+              # updateTextInput(inputId = "mytext", value = paste0(sample(letters, 3), collapse = ""))
+              }
+              shinyApp(ui, server)
+
+
+              # complex example with modules
+              modUI <- function(id) {
+                ns <- NS(id)
+                textInput(ns("mytext"), "some text")
+              }
+              modServer = function(id) {
+                moduleServer(
+                  id,
+                  function(input, output, session) {
+                    updateTextInput(inputId = "mytext", value = paste0(sample(letters, 3), collapse = ""))
+                  }
+                )
+              }
+              ui = fluidPage(
+                actionButton("a", "load module UI"),
+                uiOutput("mod_container")
+              )
+              server = function(input, output, session) {
+                # everytime you click, render a new module UI and update the text value
+                # immediately
+                observeEvent(input$a, {
+                  output$mod_container <- renderUI({
+                    onNextInput(modServer("mod"))
+                    modUI("mod")
+                  })
+                })
+                # Without `onNextInput`, module server call will not work
+                # uncomment below and, comment `onNextInput` line to see the difference
+                # modServer("mod")
+              }
+
+              shinyApp(ui, server)
+              '
+            )
+          )
         )
       )
   )
