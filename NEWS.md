@@ -1,4 +1,4 @@
-# spsComps 0.3.1.99 Dev
+# spsComps 0.3.2.0
 
 ## New Features
 
