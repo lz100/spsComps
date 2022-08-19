@@ -32,7 +32,9 @@ other server actions.
 
 This function adds a \code{on.exit} statement to the parent \code{observer}, \code{renderXX},
 and other reactive events, so make sure you use them inside these functions
-instead of plain server.\if{html}{\out{<div class="sourceCode r">}}\preformatted{server = function(input, output, session) \{
+instead of plain server.
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{server = function(input, output, session) \{
   # ok
   output$someID <- renderUI(\{
     onNextInput(\{...\})

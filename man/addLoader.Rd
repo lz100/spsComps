@@ -142,17 +142,17 @@ if (interactive()){
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-new}{\code{addLoader$new()}}
-\item \href{#method-show}{\code{addLoader$show()}}
-\item \href{#method-hide}{\code{addLoader$hide()}}
-\item \href{#method-destroy}{\code{addLoader$destroy()}}
-\item \href{#method-recreate}{\code{addLoader$recreate()}}
-\item \href{#method-clone}{\code{addLoader$clone()}}
+\item \href{#method-spsComps_loader-new}{\code{addLoader$new()}}
+\item \href{#method-spsComps_loader-show}{\code{addLoader$show()}}
+\item \href{#method-spsComps_loader-hide}{\code{addLoader$hide()}}
+\item \href{#method-spsComps_loader-destroy}{\code{addLoader$destroy()}}
+\item \href{#method-spsComps_loader-recreate}{\code{addLoader$recreate()}}
+\item \href{#method-spsComps_loader-clone}{\code{addLoader$clone()}}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-new"></a>}}
-\if{latex}{\out{\hypertarget{method-new}{}}}
+\if{html}{\out{<a id="method-spsComps_loader-new"></a>}}
+\if{latex}{\out{\hypertarget{method-spsComps_loader-new}{}}}
 \subsection{Method \code{new()}}{
 create a loader object
 \subsection{Usage}{
@@ -182,17 +182,23 @@ create a loader object
 \describe{
 \item{\code{target_selector}}{string, which Shiny component you want to add the
 loader to? a shiny component ID or a valid CSS selector if \code{isID = FLASE}.
-for example, you have a button and want to add animation to it:\preformatted{actionButton(inputId = "btn")
-}
+for example, you have a button and want to add animation to it:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{actionButton(inputId = "btn")
+}\if{html}{\out{</div>}}
 
 This function is used in server only, so if you are in shiny module,
 use \code{ns()} for ID on UI but \strong{DO NOT} add the \code{ns()} wrapper on server.
 
-UI\preformatted{actionButton(inputId = ns("btn"))
-}
+UI
 
-server\preformatted{addLoader$new(target_selector = "btn", ...)
-}}
+\if{html}{\out{<div class="sourceCode">}}\preformatted{actionButton(inputId = ns("btn"))
+}\if{html}{\out{</div>}}
+
+server
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{addLoader$new(target_selector = "btn", ...)
+}\if{html}{\out{</div>}}}
 
 \item{\code{isID}}{bool, is your selector an ID?}
 
@@ -283,8 +289,8 @@ A R6 loader object
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-show"></a>}}
-\if{latex}{\out{\hypertarget{method-show}{}}}
+\if{html}{\out{<a id="method-spsComps_loader-show"></a>}}
+\if{latex}{\out{\hypertarget{method-spsComps_loader-show}{}}}
 \subsection{Method \code{show()}}{
 show the loader
 \subsection{Usage}{
@@ -308,8 +314,8 @@ is not affected.
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-hide"></a>}}
-\if{latex}{\out{\hypertarget{method-hide}{}}}
+\if{html}{\out{<a id="method-spsComps_loader-hide"></a>}}
+\if{latex}{\out{\hypertarget{method-spsComps_loader-hide}{}}}
 \subsection{Method \code{hide()}}{
 hide the loader
 \subsection{Usage}{
@@ -326,8 +332,8 @@ alert on UI? For debugging purposes.}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-destroy"></a>}}
-\if{latex}{\out{\hypertarget{method-destroy}{}}}
+\if{html}{\out{<a id="method-spsComps_loader-destroy"></a>}}
+\if{latex}{\out{\hypertarget{method-spsComps_loader-destroy}{}}}
 \subsection{Method \code{destroy()}}{
 Destroy current loader
 \subsection{Usage}{
@@ -348,8 +354,8 @@ hide and remove current loader from the current document
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-recreate"></a>}}
-\if{latex}{\out{\hypertarget{method-recreate}{}}}
+\if{html}{\out{<a id="method-spsComps_loader-recreate"></a>}}
+\if{latex}{\out{\hypertarget{method-spsComps_loader-recreate}{}}}
 \subsection{Method \code{recreate()}}{
 recreate the loader
 \subsection{Usage}{
@@ -430,8 +436,8 @@ is \strong{not} recreated until the next time \code{show} method is called.
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clone"></a>}}
-\if{latex}{\out{\hypertarget{method-clone}{}}}
+\if{html}{\out{<a id="method-spsComps_loader-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-spsComps_loader-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{

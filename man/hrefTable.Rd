@@ -69,12 +69,14 @@ link buttons.
 length. Each vector in \code{item_labels}, \code{item_hrefs} must also have the same
 length. For example, if we want to make a table of two rows, the first row
 has 1 cell and the second row has 2 cells:
-}\preformatted{ hrefTable(
+}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{ hrefTable(
      item_titles = c("row 1", "row 2"),
      item_labels = list(c("cell 1"), c("cell 1", "cell 2")),
      item_hrefs = list(c("link1"), c("link1", "link2")
  )
-}
+}\if{html}{\out{</div>}}
 \enumerate{
 \item If \code{item_title_colors}, \code{item_text_colors} are given more than one value,
 the list must have the same length as \code{item_titles}, and length of each vector

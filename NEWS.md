@@ -1,3 +1,9 @@
+# spsComps 0.3.2.1
+
+## Minor
+
+-   Fix rds as requested by CRAN.
+
 # spsComps 0.3.2.0
 
 ## New Features
@@ -100,7 +106,7 @@
 ## Bug fix
 
 -   fix links in shiny demo
--   fix `hrefTab` and `hrefTable` incompatible with Rmarkdown by replacing the \<a> tag `href` from none to `javascript:null;`.
+-   fix `hrefTab` and `hrefTable` incompatible with Rmarkdown by replacing the \<a\> tag `href` from none to `javascript:null;`.
 
 ## Other
 

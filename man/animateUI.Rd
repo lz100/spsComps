@@ -26,8 +26,10 @@ animationRemove(
 }
 \arguments{
 \item{selector}{string, a shiny component ID or a valid CSS selector if \code{isID = FLASE}.
-for example, you have a button and want to add animation to it:\preformatted{actionButton(inputId = "btn")
-}
+for example, you have a button and want to add animation to it:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{actionButton(inputId = "btn")
+}\if{html}{\out{</div>}}
 
 Then the selector is "btn" \code{selector = 'btn'}. If you are using shiny modules,
 use \code{ns()} to wrap it in UI for the button \code{actionButton(inputId = ns("btn"))},
