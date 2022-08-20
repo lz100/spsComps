@@ -20,7 +20,7 @@ provides better user notification and server-end logging (dual-end logging)."><!
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">spsComps</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.1.99</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.1</span>
       </span>
     </div>
 
@@ -59,14 +59,14 @@ provides better user notification and server-end logging (dual-end logging).</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">spsValidate</span><span class="op">(</span>
-  <span class="va">expr</span>,
-  vd_name <span class="op">=</span> <span class="st">"my validation"</span>,
-  pass_msg <span class="op">=</span> <span class="fu">glue</span><span class="op">(</span><span class="st">"validation: '{vd_name}' passed"</span><span class="op">)</span>,
-  shiny <span class="op">=</span> <span class="cn">TRUE</span>,
-  verbose <span class="op">=</span> <span class="fu">spsOption</span><span class="op">(</span><span class="st">"verbose"</span><span class="op">)</span>,
-  prefix <span class="op">=</span> <span class="st">""</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">spsValidate</span><span class="op">(</span></span>
+<span>  <span class="va">expr</span>,</span>
+<span>  vd_name <span class="op">=</span> <span class="st">"my validation"</span>,</span>
+<span>  pass_msg <span class="op">=</span> <span class="fu">glue</span><span class="op">(</span><span class="st">"validation: '{vd_name}' passed"</span><span class="op">)</span>,</span>
+<span>  shiny <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="fu">spsOption</span><span class="op">(</span><span class="st">"verbose"</span><span class="op">)</span>,</span>
+<span>  prefix <span class="op">=</span> <span class="st">""</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -78,24 +78,37 @@ If there is no error, it will return <code>TRUE</code> and display <code>pass_ms
 console and shiny app if <code>verbose = TRUE</code> or global SPS option verbose is <code>TRUE</code>.</p>
 <p>If the expression fails, it will block the code following this function within
 the same reactive domain to continue, similar to <code><a href="shinyCatch.html">shinyCatch()</a></code>.</p></dd>
+
+
 <dt>vd_name</dt>
 <dd><p>validate title</p></dd>
+
+
 <dt>pass_msg</dt>
 <dd><p>string, if pass, what message do you want to show</p></dd>
+
+
 <dt>shiny</dt>
 <dd><p>bool, show message on console but hide from users?
 see <code><a href="shinyCatch.html">shinyCatch()</a></code> for more details</p></dd>
+
+
 <dt>verbose</dt>
 <dd><p>bool, show pass message? Default follows global verbose
 setting, use <a href="https://rdrr.io/pkg/spsUtil/man/spsOption.html" class="external-link">spsUtil::spsOption</a> to set up the value <code>spsOption("verbose, TRUE")</code>
 to turn on and <code>spsOption("verbose, FALSE")</code> to turn off and <code>spsOption("verbose")</code>
 to check current setting, see examples.</p></dd>
+
+
 <dt>prefix</dt>
 <dd><p>see <code>prefix</code> in <code><a href="shinyCatch.html">shinyCatch()</a></code></p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>If expression fails, block the code following this validation function
+    
+
+<p>If expression fails, block the code following this validation function
 and no final return, else <code>TRUE</code>.</p>
     </div>
     <div id="details">
@@ -109,80 +122,80 @@ that automatic attachment is not working.</p></li>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span>
-<span class="r-in">    <span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/fluidPage.html" class="external-link">fluidPage</a></span><span class="op">(</span></span>
-<span class="r-in">        <span class="fu"><a href="spsDepend.html">spsDepend</a></span><span class="op">(</span><span class="st">"spsValidate"</span><span class="op">)</span>, <span class="co"># optional</span></span>
-<span class="r-in">        <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/column.html" class="external-link">column</a></span><span class="op">(</span></span>
-<span class="r-in">            <span class="fl">4</span>,</span>
-<span class="r-in">            <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">h3</a></span><span class="op">(</span><span class="st">"click below to make the plot"</span><span class="op">)</span>,</span>
-<span class="r-in">            <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">p</a></span><span class="op">(</span><span class="st">"this button will succeed, verbose on"</span><span class="op">)</span>,</span>
-<span class="r-in">            <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span><span class="st">"vd1"</span>, <span class="st">"make plot 1"</span><span class="op">)</span>,</span>
-<span class="r-in">            <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/plotOutput.html" class="external-link">plotOutput</a></span><span class="op">(</span><span class="st">"p1"</span><span class="op">)</span></span>
-<span class="r-in">        <span class="op">)</span>,</span>
-<span class="r-in">        <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/column.html" class="external-link">column</a></span><span class="op">(</span></span>
-<span class="r-in">            <span class="fl">4</span>,</span>
-<span class="r-in">            <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">h3</a></span><span class="op">(</span><span class="st">"click below to make the plot"</span><span class="op">)</span>,</span>
-<span class="r-in">            <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">p</a></span><span class="op">(</span><span class="st">"this button will succeed, verbose off"</span><span class="op">)</span>,</span>
-<span class="r-in">            <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span><span class="st">"vd2"</span>, <span class="st">"make plot 2"</span><span class="op">)</span>,</span>
-<span class="r-in">            <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/plotOutput.html" class="external-link">plotOutput</a></span><span class="op">(</span><span class="st">"p2"</span><span class="op">)</span></span>
-<span class="r-in">        <span class="op">)</span>,</span>
-<span class="r-in">        <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/column.html" class="external-link">column</a></span><span class="op">(</span></span>
-<span class="r-in">            <span class="fl">4</span>,</span>
-<span class="r-in">            <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">h3</a></span><span class="op">(</span><span class="st">"click below to make the plot"</span><span class="op">)</span>,</span>
-<span class="r-in">            <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">p</a></span><span class="op">(</span><span class="st">"this button will fail, no plot will be made"</span><span class="op">)</span>,</span>
-<span class="r-in">            <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span><span class="st">"vd3"</span>, <span class="st">"make plot 3"</span><span class="op">)</span>,</span>
-<span class="r-in">            <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/plotOutput.html" class="external-link">plotOutput</a></span><span class="op">(</span><span class="st">"p3"</span><span class="op">)</span></span>
-<span class="r-in">        <span class="op">)</span>,</span>
-<span class="r-in">        <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/column.html" class="external-link">column</a></span><span class="op">(</span></span>
-<span class="r-in">            <span class="fl">4</span>,</span>
-<span class="r-in">            <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">h3</a></span><span class="op">(</span><span class="st">"click below to make the plot"</span><span class="op">)</span>,</span>
-<span class="r-in">            <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">p</a></span><span class="op">(</span><span class="st">"this button will fail, but the message is hidden from users"</span><span class="op">)</span>,</span>
-<span class="r-in">            <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span><span class="st">"vd4"</span>, <span class="st">"make plot 4"</span><span class="op">)</span>,</span>
-<span class="r-in">            <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/plotOutput.html" class="external-link">plotOutput</a></span><span class="op">(</span><span class="st">"p4"</span><span class="op">)</span></span>
-<span class="r-in">        <span class="op">)</span></span>
-<span class="r-in">    <span class="op">)</span></span>
-<span class="r-in">    <span class="va">server</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span>, <span class="va">session</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">        <span class="va">mydata</span> <span class="op">&lt;-</span> <span class="fu">datasets</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/r/datasets/iris.html" class="external-link">iris</a></span></span>
-<span class="r-in">        <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">vd1</span>, <span class="op">{</span></span>
-<span class="r-in">            <span class="fu">spsOption</span><span class="op">(</span><span class="st">"verbose"</span>, <span class="cn">TRUE</span><span class="op">)</span> <span class="co"># use global sps verbose setting</span></span>
-<span class="r-in">            <span class="fu">spsValidate</span><span class="op">(</span><span class="op">{</span></span>
-<span class="r-in">                <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">is.data.frame</a></span><span class="op">(</span><span class="va">mydata</span><span class="op">)</span></span>
-<span class="r-in">            <span class="op">}</span>, vd_name <span class="op">=</span> <span class="st">"Is dataframe"</span><span class="op">)</span></span>
-<span class="r-in">            <span class="va">output</span><span class="op">$</span><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/renderPlot.html" class="external-link">renderPlot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Length</span>, <span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Width</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in">        <span class="op">}</span><span class="op">)</span></span>
-<span class="r-in">        <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">vd2</span>, <span class="op">{</span></span>
-<span class="r-in">            <span class="fu">spsValidate</span><span class="op">(</span><span class="op">{</span></span>
-<span class="r-in">                <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">is.data.frame</a></span><span class="op">(</span><span class="va">mydata</span><span class="op">)</span></span>
-<span class="r-in">            <span class="op">}</span>,</span>
-<span class="r-in">            vd_name <span class="op">=</span> <span class="st">"Is dataframe"</span>,</span>
-<span class="r-in">            verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="co"># use in-function verbose setting</span></span>
-<span class="r-in">            <span class="va">output</span><span class="op">$</span><span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/renderPlot.html" class="external-link">renderPlot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Length</span>, <span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Width</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in">        <span class="op">}</span><span class="op">)</span></span>
-<span class="r-in">        <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">vd3</span>, <span class="op">{</span></span>
-<span class="r-in">            <span class="fu">spsValidate</span><span class="op">(</span><span class="op">{</span></span>
-<span class="r-in">                <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">is.data.frame</a></span><span class="op">(</span><span class="va">mydata</span><span class="op">)</span></span>
-<span class="r-in">                <span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">mydata</span><span class="op">)</span> <span class="op">&lt;=</span> <span class="fl">200</span><span class="op">)</span> <span class="kw"><a href="https://rdrr.io/r/base/stop.html" class="external-link">stop</a></span><span class="op">(</span><span class="st">"Input needs more than 200 rows"</span><span class="op">)</span></span>
-<span class="r-in">            <span class="op">}</span><span class="op">)</span></span>
-<span class="r-in">            <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="st">"other things blocked"</span><span class="op">)</span></span>
-<span class="r-in">            <span class="va">output</span><span class="op">$</span><span class="va">p3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/renderPlot.html" class="external-link">renderPlot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Length</span>, <span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Width</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in">        <span class="op">}</span><span class="op">)</span></span>
-<span class="r-in">        <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">vd4</span>, <span class="op">{</span></span>
-<span class="r-in">            <span class="fu">spsValidate</span><span class="op">(</span><span class="op">{</span></span>
-<span class="r-in">                <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">is.data.frame</a></span><span class="op">(</span><span class="va">mydata</span><span class="op">)</span></span>
-<span class="r-in">                <span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">mydata</span><span class="op">)</span> <span class="op">&lt;=</span> <span class="fl">200</span><span class="op">)</span> <span class="kw"><a href="https://rdrr.io/r/base/stop.html" class="external-link">stop</a></span><span class="op">(</span><span class="st">"Input needs more than 200 rows"</span><span class="op">)</span></span>
-<span class="r-in">            <span class="op">}</span>, shiny <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span class="r-in">            <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="st">"other things blocked"</span><span class="op">)</span></span>
-<span class="r-in">            <span class="va">output</span><span class="op">$</span><span class="va">p4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/renderPlot.html" class="external-link">renderPlot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Length</span>, <span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Width</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in">        <span class="op">}</span><span class="op">)</span></span>
-<span class="r-in">    <span class="op">}</span></span>
-<span class="r-in">    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/shinyApp.html" class="external-link">shinyApp</a></span><span class="op">(</span><span class="va">ui</span>, <span class="va">server</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"><span class="co"># outside shiny example</span></span>
-<span class="r-in"><span class="va">mydata2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span>, b <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">spsValidate</span><span class="op">(</span><span class="op">{</span><span class="op">(</span><span class="va">mydata2</span><span class="op">)</span><span class="op">}</span>, <span class="st">"Not empty"</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span></span>
+<span class="r-in"><span>    <span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/fluidPage.html" class="external-link">fluidPage</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>        <span class="fu"><a href="spsDepend.html">spsDepend</a></span><span class="op">(</span><span class="st">"spsValidate"</span><span class="op">)</span>, <span class="co"># optional</span></span></span>
+<span class="r-in"><span>        <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/column.html" class="external-link">column</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>            <span class="fl">4</span>,</span></span>
+<span class="r-in"><span>            <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">h3</a></span><span class="op">(</span><span class="st">"click below to make the plot"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>            <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">p</a></span><span class="op">(</span><span class="st">"this button will succeed, verbose on"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>            <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span><span class="st">"vd1"</span>, <span class="st">"make plot 1"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>            <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/plotOutput.html" class="external-link">plotOutput</a></span><span class="op">(</span><span class="st">"p1"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>        <span class="op">)</span>,</span></span>
+<span class="r-in"><span>        <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/column.html" class="external-link">column</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>            <span class="fl">4</span>,</span></span>
+<span class="r-in"><span>            <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">h3</a></span><span class="op">(</span><span class="st">"click below to make the plot"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>            <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">p</a></span><span class="op">(</span><span class="st">"this button will succeed, verbose off"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>            <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span><span class="st">"vd2"</span>, <span class="st">"make plot 2"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>            <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/plotOutput.html" class="external-link">plotOutput</a></span><span class="op">(</span><span class="st">"p2"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>        <span class="op">)</span>,</span></span>
+<span class="r-in"><span>        <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/column.html" class="external-link">column</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>            <span class="fl">4</span>,</span></span>
+<span class="r-in"><span>            <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">h3</a></span><span class="op">(</span><span class="st">"click below to make the plot"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>            <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">p</a></span><span class="op">(</span><span class="st">"this button will fail, no plot will be made"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>            <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span><span class="st">"vd3"</span>, <span class="st">"make plot 3"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>            <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/plotOutput.html" class="external-link">plotOutput</a></span><span class="op">(</span><span class="st">"p3"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>        <span class="op">)</span>,</span></span>
+<span class="r-in"><span>        <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/column.html" class="external-link">column</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>            <span class="fl">4</span>,</span></span>
+<span class="r-in"><span>            <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">h3</a></span><span class="op">(</span><span class="st">"click below to make the plot"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>            <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">p</a></span><span class="op">(</span><span class="st">"this button will fail, but the message is hidden from users"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>            <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span><span class="st">"vd4"</span>, <span class="st">"make plot 4"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>            <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/plotOutput.html" class="external-link">plotOutput</a></span><span class="op">(</span><span class="st">"p4"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>        <span class="op">)</span></span></span>
+<span class="r-in"><span>    <span class="op">)</span></span></span>
+<span class="r-in"><span>    <span class="va">server</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span>, <span class="va">session</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>        <span class="va">mydata</span> <span class="op">&lt;-</span> <span class="fu">datasets</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/r/datasets/iris.html" class="external-link">iris</a></span></span></span>
+<span class="r-in"><span>        <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">vd1</span>, <span class="op">{</span></span></span>
+<span class="r-in"><span>            <span class="fu">spsOption</span><span class="op">(</span><span class="st">"verbose"</span>, <span class="cn">TRUE</span><span class="op">)</span> <span class="co"># use global sps verbose setting</span></span></span>
+<span class="r-in"><span>            <span class="fu">spsValidate</span><span class="op">(</span><span class="op">{</span></span></span>
+<span class="r-in"><span>                <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">is.data.frame</a></span><span class="op">(</span><span class="va">mydata</span><span class="op">)</span></span></span>
+<span class="r-in"><span>            <span class="op">}</span>, vd_name <span class="op">=</span> <span class="st">"Is dataframe"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>            <span class="va">output</span><span class="op">$</span><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/renderPlot.html" class="external-link">renderPlot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Length</span>, <span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Width</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span>        <span class="op">}</span><span class="op">)</span></span></span>
+<span class="r-in"><span>        <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">vd2</span>, <span class="op">{</span></span></span>
+<span class="r-in"><span>            <span class="fu">spsValidate</span><span class="op">(</span><span class="op">{</span></span></span>
+<span class="r-in"><span>                <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">is.data.frame</a></span><span class="op">(</span><span class="va">mydata</span><span class="op">)</span></span></span>
+<span class="r-in"><span>            <span class="op">}</span>,</span></span>
+<span class="r-in"><span>            vd_name <span class="op">=</span> <span class="st">"Is dataframe"</span>,</span></span>
+<span class="r-in"><span>            verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="co"># use in-function verbose setting</span></span></span>
+<span class="r-in"><span>            <span class="va">output</span><span class="op">$</span><span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/renderPlot.html" class="external-link">renderPlot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Length</span>, <span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Width</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span>        <span class="op">}</span><span class="op">)</span></span></span>
+<span class="r-in"><span>        <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">vd3</span>, <span class="op">{</span></span></span>
+<span class="r-in"><span>            <span class="fu">spsValidate</span><span class="op">(</span><span class="op">{</span></span></span>
+<span class="r-in"><span>                <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">is.data.frame</a></span><span class="op">(</span><span class="va">mydata</span><span class="op">)</span></span></span>
+<span class="r-in"><span>                <span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">mydata</span><span class="op">)</span> <span class="op">&lt;=</span> <span class="fl">200</span><span class="op">)</span> <span class="kw"><a href="https://rdrr.io/r/base/stop.html" class="external-link">stop</a></span><span class="op">(</span><span class="st">"Input needs more than 200 rows"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>            <span class="op">}</span><span class="op">)</span></span></span>
+<span class="r-in"><span>            <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="st">"other things blocked"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>            <span class="va">output</span><span class="op">$</span><span class="va">p3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/renderPlot.html" class="external-link">renderPlot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Length</span>, <span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Width</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span>        <span class="op">}</span><span class="op">)</span></span></span>
+<span class="r-in"><span>        <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">vd4</span>, <span class="op">{</span></span></span>
+<span class="r-in"><span>            <span class="fu">spsValidate</span><span class="op">(</span><span class="op">{</span></span></span>
+<span class="r-in"><span>                <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">is.data.frame</a></span><span class="op">(</span><span class="va">mydata</span><span class="op">)</span></span></span>
+<span class="r-in"><span>                <span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">mydata</span><span class="op">)</span> <span class="op">&lt;=</span> <span class="fl">200</span><span class="op">)</span> <span class="kw"><a href="https://rdrr.io/r/base/stop.html" class="external-link">stop</a></span><span class="op">(</span><span class="st">"Input needs more than 200 rows"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>            <span class="op">}</span>, shiny <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-in"><span>            <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="st">"other things blocked"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>            <span class="va">output</span><span class="op">$</span><span class="va">p4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/renderPlot.html" class="external-link">renderPlot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Length</span>, <span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Width</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span>        <span class="op">}</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    <span class="op">}</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/shinyApp.html" class="external-link">shinyApp</a></span><span class="op">(</span><span class="va">ui</span>, <span class="va">server</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span><span class="co"># outside shiny example</span></span></span>
+<span class="r-in"><span><span class="va">mydata2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span>, b <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">spsValidate</span><span class="op">(</span><span class="op">{</span><span class="op">(</span><span class="va">mydata2</span><span class="op">)</span><span class="op">}</span>, <span class="st">"Not empty"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
-<span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">spsValidate</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/stopifnot.html" class="external-link">stopifnot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">is.data.frame</a></span><span class="op">(</span><span class="va">mydata2</span><span class="op">)</span><span class="op">)</span>, <span class="st">"is dataframe?"</span><span class="op">)</span>, silent <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000; font-weight: bold;">[ ERROR] 2022-01-24 07:24:16 is.data.frame(mydata2) is not TRUE</span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">spsValidate</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/stopifnot.html" class="external-link">stopifnot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">is.data.frame</a></span><span class="op">(</span><span class="va">mydata2</span><span class="op">)</span><span class="op">)</span>, <span class="st">"is dataframe?"</span><span class="op">)</span>, silent <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000; font-weight: bold;">[ ERROR] 2022-08-20 07:25:31 is.data.frame(mydata2) is not TRUE</span></span>
 </code></pre></div>
     </div>
   </div>
@@ -197,7 +210,7 @@ that automatic attachment is not working.</p></li>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

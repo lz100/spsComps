@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">spsComps</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.1.99</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.1</span>
       </span>
     </div>
 
@@ -53,36 +53,38 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">animateUI</span><span class="op">(</span><span class="va">selector</span>, <span class="va">animation</span>, speed <span class="op">=</span> <span class="cn">NULL</span>, hover <span class="op">=</span> <span class="cn">FALSE</span>, isID <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-
-<span class="fu">animateServer</span><span class="op">(</span>
-  <span class="va">selector</span>,
-  animation <span class="op">=</span> <span class="cn">NULL</span>,
-  speed <span class="op">=</span> <span class="cn">NULL</span>,
-  hover <span class="op">=</span> <span class="cn">FALSE</span>,
-  isID <span class="op">=</span> <span class="cn">TRUE</span>,
-  session <span class="op">=</span> <span class="fu">shiny</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/domains.html" class="external-link">getDefaultReactiveDomain</a></span><span class="op">(</span><span class="op">)</span>
-<span class="op">)</span>
-
-<span class="fu">animationRemove</span><span class="op">(</span>
-  <span class="va">selector</span>,
-  isID <span class="op">=</span> <span class="cn">TRUE</span>,
-  alert <span class="op">=</span> <span class="cn">FALSE</span>,
-  session <span class="op">=</span> <span class="fu">shiny</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/domains.html" class="external-link">getDefaultReactiveDomain</a></span><span class="op">(</span><span class="op">)</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">animateUI</span><span class="op">(</span><span class="va">selector</span>, <span class="va">animation</span>, speed <span class="op">=</span> <span class="cn">NULL</span>, hover <span class="op">=</span> <span class="cn">FALSE</span>, isID <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">animateServer</span><span class="op">(</span></span>
+<span>  <span class="va">selector</span>,</span>
+<span>  animation <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  speed <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  hover <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  isID <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  session <span class="op">=</span> <span class="fu">shiny</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/domains.html" class="external-link">getDefaultReactiveDomain</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">animationRemove</span><span class="op">(</span></span>
+<span>  <span class="va">selector</span>,</span>
+<span>  isID <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  alert <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  session <span class="op">=</span> <span class="fu">shiny</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/domains.html" class="external-link">getDefaultReactiveDomain</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>selector</dt>
 <dd><p>string, a shiny component ID or a valid CSS selector if <code>isID = FLASE</code>.
-for example, you have a button and want to add animation to it:</p><div class="sourceCode"><pre><code><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span>inputId <span class="op">=</span> <span class="st">"btn"</span><span class="op">)</span></code></pre></div>
-
+for example, you have a button and want to add animation to it:</p>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">actionButton</span>(<span class="dt">inputId =</span> <span class="st">"btn"</span>)</span></code></pre><p></p></div>
 <p>Then the selector is "btn" <code>selector = 'btn'</code>. If you are using shiny modules,
 use <code>ns()</code> to wrap it in UI for the button <code>actionButton(inputId = ns("btn"))</code>,
 and also add <code>ns()</code> to selector <code>selector = ns('btn')</code> for the animateUI
 function. If you are using the server side functions animateServer and animationRemove,
 <strong>DO NOT</strong> add the <code>ns()</code> wrapper.</p></dd>
+
+
 <dt>animation</dt>
 <dd><p>what kind of animation you want, one of "wrench", "ring",
 "horizontal", "horizontal-reverse", "vertical", "flash", "bounce", "bounce-reverse",
@@ -90,22 +92,35 @@ function. If you are using the server side functions animateServer and animation
 "burst", "falling", "falling-reverse", "rising"s
 See our online demo for details.
 or our online demo for details.</p></dd>
+
+
 <dt>speed</dt>
 <dd><p>string, one of "fast", "slow"</p></dd>
+
+
 <dt>hover</dt>
 <dd><p>bool, trigger animation on hover?</p></dd>
+
+
 <dt>isID</dt>
 <dd><p>bool, is your selector an ID?</p></dd>
+
+
 <dt>session</dt>
 <dd><p>the current shiny session</p></dd>
+
+
 <dt>alert</dt>
 <dd><p>bool, for animationRemove only: if the component is not found or it
 does not contain any animation or the animation is not added by spsComps,
 alert on UI? More like for debugging purposes.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>see details</p>
+    
+
+<p>see details</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -141,78 +156,78 @@ they don't work, you can manually add the dependency by  adding
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span>
-<span class="r-in">  <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.rstudio.com/" class="external-link">shiny</a></span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in">  <span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/fluidPage.html" class="external-link">fluidPage</a></span><span class="op">(</span></span>
-<span class="r-in">    <span class="fu"><a href="spsDepend.html">spsDepend</a></span><span class="op">(</span><span class="st">"animation"</span><span class="op">)</span>, <span class="co"># optional</span></span>
-<span class="r-in">    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/column.html" class="external-link">column</a></span><span class="op">(</span></span>
-<span class="r-in">      <span class="fl">6</span>,</span>
-<span class="r-in">      <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">h3</a></span><span class="op">(</span><span class="st">"Adding animations from UI"</span><span class="op">)</span>,</span>
-<span class="r-in">      <span class="va">tags</span><span class="op">$</span><span class="fu">label</span><span class="op">(</span><span class="st">"to a button"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span class="r-in">      <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span><span class="st">"btn1"</span>, <span class="st">"random button"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span class="r-in">      <span class="fu">animateUI</span><span class="op">(</span><span class="st">"btn1"</span>, animation <span class="op">=</span> <span class="st">"ring"</span><span class="op">)</span>,</span>
-<span class="r-in">      <span class="va">tags</span><span class="op">$</span><span class="fu">label</span><span class="op">(</span><span class="st">"to some text"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span class="r-in">      <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">p</a></span><span class="op">(</span>id <span class="op">=</span> <span class="st">"mytext"</span>, class <span class="op">=</span> <span class="st">"text-red"</span>, <span class="st">"some move text"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span class="r-in">      <span class="fu">animateUI</span><span class="op">(</span><span class="st">"mytext"</span>, animation <span class="op">=</span> <span class="st">"horizontal"</span>, speed <span class="op">=</span> <span class="st">"fast"</span><span class="op">)</span>,</span>
-<span class="r-in">      <span class="va">tags</span><span class="op">$</span><span class="fu">label</span><span class="op">(</span><span class="st">"on hover, move mouse on the red thumb"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span class="r-in">      <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span></span>
-<span class="r-in">        <span class="st">"btn2"</span>, <span class="st">""</span>,</span>
-<span class="r-in">        icon <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/icon.html" class="external-link">icon</a></span><span class="op">(</span>id <span class="op">=</span> <span class="st">"myicon"</span>, <span class="st">"thumbs-up"</span><span class="op">)</span>,</span>
-<span class="r-in">        style <span class="op">=</span> <span class="st">"color: red; boarder: initial; border-color: transparent;"</span></span>
-<span class="r-in">      <span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span class="r-in">      <span class="fu">animateUI</span><span class="op">(</span><span class="st">"btn2"</span>, animation <span class="op">=</span> <span class="st">"bounce"</span>, speed <span class="op">=</span> <span class="st">"fast"</span>, hover <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
-<span class="r-in">      <span class="va">tags</span><span class="op">$</span><span class="fu">label</span><span class="op">(</span><span class="st">"on a plot"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span class="r-in">      <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/plotOutput.html" class="external-link">plotOutput</a></span><span class="op">(</span><span class="st">"plot1"</span><span class="op">)</span>,</span>
-<span class="r-in">      <span class="fu">animateUI</span><span class="op">(</span><span class="st">"plot1"</span>, animation <span class="op">=</span> <span class="st">"float"</span>, speed <span class="op">=</span> <span class="st">"fast"</span><span class="op">)</span></span>
-<span class="r-in">    <span class="op">)</span>,</span>
-<span class="r-in">    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/column.html" class="external-link">column</a></span><span class="op">(</span></span>
-<span class="r-in">      <span class="fl">6</span>,</span>
-<span class="r-in">      <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">h3</a></span><span class="op">(</span><span class="st">"Adding/removing animations from server"</span><span class="op">)</span>,</span>
-<span class="r-in">      <span class="va">tags</span><span class="op">$</span><span class="fu">label</span><span class="op">(</span><span class="st">"use a button to control"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span class="r-in">      <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span><span class="st">"btn3"</span>, <span class="st">"animate itself"</span><span class="op">)</span>,</span>
-<span class="r-in">      <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span><span class="st">"btn4"</span>, <span class="st">"stop animation"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span class="r-in">      <span class="va">tags</span><span class="op">$</span><span class="fu">label</span><span class="op">(</span><span class="st">"advanced selector in for complex group"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span class="r-in">      <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/sliderInput.html" class="external-link">sliderInput</a></span><span class="op">(</span></span>
-<span class="r-in">        <span class="st">"myslider"</span>,</span>
-<span class="r-in">        label <span class="op">=</span> <span class="st">"animating if less than 5"</span>,</span>
-<span class="r-in">        value <span class="op">=</span> <span class="fl">0</span>,</span>
-<span class="r-in">        min <span class="op">=</span> <span class="fl">0</span>, max <span class="op">=</span> <span class="fl">10</span>,</span>
-<span class="r-in">        step <span class="op">=</span> <span class="fl">1</span></span>
-<span class="r-in">      <span class="op">)</span>,</span>
-<span class="r-in">      <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/sliderInput.html" class="external-link">sliderInput</a></span><span class="op">(</span></span>
-<span class="r-in">        <span class="st">"myslider2"</span>,  min <span class="op">=</span> <span class="fl">0</span>, max <span class="op">=</span> <span class="fl">10</span>, value <span class="op">=</span> <span class="fl">10</span>,</span>
-<span class="r-in">        label <span class="op">=</span> <span class="st">"this one will not be selected"</span></span>
-<span class="r-in">      <span class="op">)</span></span>
-<span class="r-in">    <span class="op">)</span></span>
-<span class="r-in">  <span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in">  <span class="va">server</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span>, <span class="va">session</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">    <span class="va">output</span><span class="op">$</span><span class="va">plot1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/renderPlot.html" class="external-link">renderPlot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="fl">10</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in">    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">myslider</span>, <span class="op">{</span></span>
-<span class="r-in">      <span class="kw">if</span> <span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">myslider</span> <span class="op">&lt;=</span> <span class="fl">5</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">        <span class="fu">animateServer</span><span class="op">(</span></span>
-<span class="r-in">          <span class="co"># the slider container does not has the ID, it is inside</span></span>
-<span class="r-in">          selector <span class="op">=</span> <span class="st">".shiny-input-container:has(#myslider)"</span>,</span>
-<span class="r-in">          animation <span class="op">=</span> <span class="st">"horizontal"</span>, speed <span class="op">=</span> <span class="st">"slow"</span>, isID <span class="op">=</span> <span class="cn">FALSE</span></span>
-<span class="r-in">        <span class="op">)</span></span>
-<span class="r-in">      <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
-<span class="r-in">        <span class="fu">animationRemove</span><span class="op">(</span></span>
-<span class="r-in">          selector <span class="op">=</span> <span class="st">".shiny-input-container:has(#myslider)"</span>,</span>
-<span class="r-in">          isID <span class="op">=</span> <span class="cn">FALSE</span></span>
-<span class="r-in">        <span class="op">)</span></span>
-<span class="r-in">      <span class="op">}</span></span>
-<span class="r-in">    <span class="op">}</span><span class="op">)</span></span>
-<span class="r-in">    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">btn3</span>, <span class="op">{</span></span>
-<span class="r-in">      <span class="fu">animateServer</span><span class="op">(</span><span class="st">"btn3"</span>, animation <span class="op">=</span> <span class="st">"flash"</span>, speed <span class="op">=</span> <span class="st">"slow"</span><span class="op">)</span></span>
-<span class="r-in">    <span class="op">}</span><span class="op">)</span></span>
-<span class="r-in">    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">btn4</span>, <span class="op">{</span></span>
-<span class="r-in">      <span class="fu">animationRemove</span><span class="op">(</span><span class="st">"btn3"</span><span class="op">)</span></span>
-<span class="r-in">    <span class="op">}</span><span class="op">)</span></span>
-<span class="r-in">  <span class="op">}</span></span>
-<span class="r-in"></span>
-<span class="r-in">  <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/shinyApp.html" class="external-link">shinyApp</a></span><span class="op">(</span><span class="va">ui</span>, <span class="va">server</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.rstudio.com/" class="external-link">shiny</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/fluidPage.html" class="external-link">fluidPage</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="spsDepend.html">spsDepend</a></span><span class="op">(</span><span class="st">"animation"</span><span class="op">)</span>, <span class="co"># optional</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/column.html" class="external-link">column</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>      <span class="fl">6</span>,</span></span>
+<span class="r-in"><span>      <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">h3</a></span><span class="op">(</span><span class="st">"Adding animations from UI"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>      <span class="va">tags</span><span class="op">$</span><span class="fu">label</span><span class="op">(</span><span class="st">"to a button"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>      <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span><span class="st">"btn1"</span>, <span class="st">"random button"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>      <span class="fu">animateUI</span><span class="op">(</span><span class="st">"btn1"</span>, animation <span class="op">=</span> <span class="st">"ring"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>      <span class="va">tags</span><span class="op">$</span><span class="fu">label</span><span class="op">(</span><span class="st">"to some text"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>      <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">p</a></span><span class="op">(</span>id <span class="op">=</span> <span class="st">"mytext"</span>, class <span class="op">=</span> <span class="st">"text-red"</span>, <span class="st">"some move text"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>      <span class="fu">animateUI</span><span class="op">(</span><span class="st">"mytext"</span>, animation <span class="op">=</span> <span class="st">"horizontal"</span>, speed <span class="op">=</span> <span class="st">"fast"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>      <span class="va">tags</span><span class="op">$</span><span class="fu">label</span><span class="op">(</span><span class="st">"on hover, move mouse on the red thumb"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>      <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>        <span class="st">"btn2"</span>, <span class="st">""</span>,</span></span>
+<span class="r-in"><span>        icon <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/icon.html" class="external-link">icon</a></span><span class="op">(</span>id <span class="op">=</span> <span class="st">"myicon"</span>, <span class="st">"thumbs-up"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>        style <span class="op">=</span> <span class="st">"color: red; boarder: initial; border-color: transparent;"</span></span></span>
+<span class="r-in"><span>      <span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>      <span class="fu">animateUI</span><span class="op">(</span><span class="st">"btn2"</span>, animation <span class="op">=</span> <span class="st">"bounce"</span>, speed <span class="op">=</span> <span class="st">"fast"</span>, hover <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>      <span class="va">tags</span><span class="op">$</span><span class="fu">label</span><span class="op">(</span><span class="st">"on a plot"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>      <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/plotOutput.html" class="external-link">plotOutput</a></span><span class="op">(</span><span class="st">"plot1"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>      <span class="fu">animateUI</span><span class="op">(</span><span class="st">"plot1"</span>, animation <span class="op">=</span> <span class="st">"float"</span>, speed <span class="op">=</span> <span class="st">"fast"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    <span class="op">)</span>,</span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/column.html" class="external-link">column</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>      <span class="fl">6</span>,</span></span>
+<span class="r-in"><span>      <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">h3</a></span><span class="op">(</span><span class="st">"Adding/removing animations from server"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>      <span class="va">tags</span><span class="op">$</span><span class="fu">label</span><span class="op">(</span><span class="st">"use a button to control"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>      <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span><span class="st">"btn3"</span>, <span class="st">"animate itself"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>      <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span><span class="st">"btn4"</span>, <span class="st">"stop animation"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>      <span class="va">tags</span><span class="op">$</span><span class="fu">label</span><span class="op">(</span><span class="st">"advanced selector in for complex group"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>      <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/sliderInput.html" class="external-link">sliderInput</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>        <span class="st">"myslider"</span>,</span></span>
+<span class="r-in"><span>        label <span class="op">=</span> <span class="st">"animating if less than 5"</span>,</span></span>
+<span class="r-in"><span>        value <span class="op">=</span> <span class="fl">0</span>,</span></span>
+<span class="r-in"><span>        min <span class="op">=</span> <span class="fl">0</span>, max <span class="op">=</span> <span class="fl">10</span>,</span></span>
+<span class="r-in"><span>        step <span class="op">=</span> <span class="fl">1</span></span></span>
+<span class="r-in"><span>      <span class="op">)</span>,</span></span>
+<span class="r-in"><span>      <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/sliderInput.html" class="external-link">sliderInput</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>        <span class="st">"myslider2"</span>,  min <span class="op">=</span> <span class="fl">0</span>, max <span class="op">=</span> <span class="fl">10</span>, value <span class="op">=</span> <span class="fl">10</span>,</span></span>
+<span class="r-in"><span>        label <span class="op">=</span> <span class="st">"this one will not be selected"</span></span></span>
+<span class="r-in"><span>      <span class="op">)</span></span></span>
+<span class="r-in"><span>    <span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="va">server</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span>, <span class="va">session</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>    <span class="va">output</span><span class="op">$</span><span class="va">plot1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/renderPlot.html" class="external-link">renderPlot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="fl">10</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">myslider</span>, <span class="op">{</span></span></span>
+<span class="r-in"><span>      <span class="kw">if</span> <span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">myslider</span> <span class="op">&lt;=</span> <span class="fl">5</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>        <span class="fu">animateServer</span><span class="op">(</span></span></span>
+<span class="r-in"><span>          <span class="co"># the slider container does not has the ID, it is inside</span></span></span>
+<span class="r-in"><span>          selector <span class="op">=</span> <span class="st">".shiny-input-container:has(#myslider)"</span>,</span></span>
+<span class="r-in"><span>          animation <span class="op">=</span> <span class="st">"horizontal"</span>, speed <span class="op">=</span> <span class="st">"slow"</span>, isID <span class="op">=</span> <span class="cn">FALSE</span></span></span>
+<span class="r-in"><span>        <span class="op">)</span></span></span>
+<span class="r-in"><span>      <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>        <span class="fu">animationRemove</span><span class="op">(</span></span></span>
+<span class="r-in"><span>          selector <span class="op">=</span> <span class="st">".shiny-input-container:has(#myslider)"</span>,</span></span>
+<span class="r-in"><span>          isID <span class="op">=</span> <span class="cn">FALSE</span></span></span>
+<span class="r-in"><span>        <span class="op">)</span></span></span>
+<span class="r-in"><span>      <span class="op">}</span></span></span>
+<span class="r-in"><span>    <span class="op">}</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">btn3</span>, <span class="op">{</span></span></span>
+<span class="r-in"><span>      <span class="fu">animateServer</span><span class="op">(</span><span class="st">"btn3"</span>, animation <span class="op">=</span> <span class="st">"flash"</span>, speed <span class="op">=</span> <span class="st">"slow"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    <span class="op">}</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">btn4</span>, <span class="op">{</span></span></span>
+<span class="r-in"><span>      <span class="fu">animationRemove</span><span class="op">(</span><span class="st">"btn3"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    <span class="op">}</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/shinyApp.html" class="external-link">shinyApp</a></span><span class="op">(</span><span class="va">ui</span>, <span class="va">server</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -227,7 +242,7 @@ they don't work, you can manually add the dependency by  adding
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

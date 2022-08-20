@@ -21,7 +21,7 @@ link buttons."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/li
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">spsComps</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.1.99</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.1</span>
       </span>
     </div>
 
@@ -61,60 +61,87 @@ link buttons.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">hrefTable</span><span class="op">(</span>
-  <span class="va">item_titles</span>,
-  <span class="va">item_labels</span>,
-  <span class="va">item_hrefs</span>,
-  item_title_colors <span class="op">=</span> <span class="st">"#0275d8"</span>,
-  item_bg_colors <span class="op">=</span> <span class="st">"#337ab7"</span>,
-  item_text_colors <span class="op">=</span> <span class="st">"white"</span>,
-  Id <span class="op">=</span> <span class="cn">NULL</span>,
-  first_col_name <span class="op">=</span> <span class="st">"Category"</span>,
-  second_col_name <span class="op">=</span> <span class="st">"Options"</span>,
-  title <span class="op">=</span> <span class="st">"A Table buttons with links"</span>,
-  title_color <span class="op">=</span> <span class="st">"#0275d8"</span>,
-  target_blank <span class="op">=</span> <span class="cn">FALSE</span>,
-  <span class="va">...</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">hrefTable</span><span class="op">(</span></span>
+<span>  <span class="va">item_titles</span>,</span>
+<span>  <span class="va">item_labels</span>,</span>
+<span>  <span class="va">item_hrefs</span>,</span>
+<span>  item_title_colors <span class="op">=</span> <span class="st">"#0275d8"</span>,</span>
+<span>  item_bg_colors <span class="op">=</span> <span class="st">"#337ab7"</span>,</span>
+<span>  item_text_colors <span class="op">=</span> <span class="st">"white"</span>,</span>
+<span>  Id <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  first_col_name <span class="op">=</span> <span class="st">"Category"</span>,</span>
+<span>  second_col_name <span class="op">=</span> <span class="st">"Options"</span>,</span>
+<span>  title <span class="op">=</span> <span class="st">"A Table buttons with links"</span>,</span>
+<span>  title_color <span class="op">=</span> <span class="st">"#0275d8"</span>,</span>
+<span>  target_blank <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>item_titles</dt>
 <dd><p>vector of strings, a vector of titles for table row names</p></dd>
+
+
 <dt>item_labels</dt>
 <dd><p>list, a list of character vectors to specify button
 labels in each table row, one vector per row</p></dd>
+
+
 <dt>item_hrefs</dt>
 <dd><p>list, a list  of character vectors to specify button hrefs
 links in each table row, one vector per row</p></dd>
+
+
 <dt>item_title_colors</dt>
 <dd><p>a single character value or a character vector to
 specify button title text colors of each row name</p></dd>
+
+
 <dt>item_bg_colors</dt>
 <dd><p>a single character value or a list, a list  of character
 vectors to specify button background colors in each table row, one vector per row</p></dd>
+
+
 <dt>item_text_colors</dt>
 <dd><p>a single character value or a list, a list  of character
 vectors to specify button text colors in each table row, one vector per row</p></dd>
+
+
 <dt>Id</dt>
 <dd><p>optional ID</p></dd>
+
+
 <dt>first_col_name</dt>
 <dd><p>first column name</p></dd>
+
+
 <dt>second_col_name</dt>
 <dd><p>second column name</p></dd>
+
+
 <dt>title</dt>
 <dd><p>title of this table</p></dd>
+
+
 <dt>title_color</dt>
 <dd><p>table title color</p></dd>
+
+
 <dt>target_blank</dt>
 <dd><p>bool, whether to add <code>target="_blank"</code> to the link?</p></dd>
+
+
 <dt>...</dt>
 <dd><p>other HTML param you want to pass to the table</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>HTML elements</p>
+    
+
+<p>HTML elements</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -123,13 +150,11 @@ vectors to specify button text colors in each table row, one vector per row</p><
 length. Each vector in <code>item_labels</code>, <code>item_hrefs</code> must also have the same
 length. For example, if we want to make a table of two rows, the first row
 has 1 cell and the second row has 2 cells:</p></li>
-</ol><div class="sourceCode"><pre><code> hrefTable(
-     item_titles = c("row 1", "row 2"),
-     item_labels = list(c("cell 1"), c("cell 1", "cell 2")),
-     item_hrefs = list(c("link1"), c("link1", "link2")
- )
-</code></pre></div>
-<ol><li><p>If <code>item_title_colors</code>, <code>item_text_colors</code> are given more than one value,
+</ol><p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1"></a> <span class="kw">hrefTable</span>(</span>
+<span id="cb1-2"><a href="#cb1-2"></a>     <span class="dt">item_titles =</span> <span class="kw">c</span>(<span class="st">"row 1"</span>, <span class="st">"row 2"</span>),</span>
+<span id="cb1-3"><a href="#cb1-3"></a>     <span class="dt">item_labels =</span> <span class="kw">list</span>(<span class="kw">c</span>(<span class="st">"cell 1"</span>), <span class="kw">c</span>(<span class="st">"cell 1"</span>, <span class="st">"cell 2"</span>)),</span>
+<span id="cb1-4"><a href="#cb1-4"></a>     <span class="dt">item_hrefs =</span> <span class="kw">list</span>(<span class="kw">c</span>(<span class="st">"link1"</span>), <span class="kw">c</span>(<span class="st">"link1"</span>, <span class="st">"link2"</span>)</span>
+<span id="cb1-5"><a href="#cb1-5"></a> )</span></code></pre><p></p></div><ol><li><p>If <code>item_title_colors</code>, <code>item_text_colors</code> are given more than one value,
 the list must have the same length as <code>item_titles</code>, and length of each vector
 in the list must match the vector in <code>item_labels</code> in the same order.</p></li>
 <li><p>If  <code>item_title_colors</code> is given more than one value, the vector must have
@@ -142,43 +167,43 @@ effects.</p></li>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span>
-<span class="r-in">    <span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/fluidPage.html" class="external-link">fluidPage</a></span><span class="op">(</span></span>
-<span class="r-in">        <span class="fu">hrefTable</span><span class="op">(</span></span>
-<span class="r-in">            title <span class="op">=</span> <span class="st">"default"</span>,</span>
-<span class="r-in">            item_titles <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"workflow 1"</span>, <span class="st">"unclickable"</span><span class="op">)</span>,</span>
-<span class="r-in">            item_labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"tab 1"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"tab 3"</span>, <span class="st">"tab 4"</span><span class="op">)</span><span class="op">)</span>,</span>
-<span class="r-in">            item_hrefs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"https://www.google.com/"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">""</span>, <span class="st">""</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in">        <span class="op">)</span>,</span>
-<span class="r-in">        <span class="fu">hrefTable</span><span class="op">(</span></span>
-<span class="r-in">            title <span class="op">=</span> <span class="st">"Change button color and text color"</span>,</span>
-<span class="r-in">            item_titles <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"workflow 1"</span>, <span class="st">"No links"</span><span class="op">)</span>,</span>
-<span class="r-in">            item_labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"tab 1"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"tab 3"</span>, <span class="st">"tab 4"</span><span class="op">)</span><span class="op">)</span>,</span>
-<span class="r-in">            item_hrefs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"https://www.google.com/"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">""</span>, <span class="st">""</span><span class="op">)</span><span class="op">)</span>,</span>
-<span class="r-in">            item_bg_colors <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"blue"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"red"</span>, <span class="st">"orange"</span><span class="op">)</span><span class="op">)</span>,</span>
-<span class="r-in">            item_text_colors <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"black"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"yellow"</span>, <span class="st">"green"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in">        <span class="op">)</span>,</span>
-<span class="r-in">        <span class="fu">hrefTable</span><span class="op">(</span></span>
-<span class="r-in">            title <span class="op">=</span> <span class="st">"Change row name colors and width"</span>,</span>
-<span class="r-in">            item_titles <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Green"</span>, <span class="st">"Red"</span>, <span class="st">"Orange"</span><span class="op">)</span>,</span>
-<span class="r-in">            item_labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"tab 1"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"tab 3"</span>, <span class="st">"tab 4"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"tab 5"</span>, <span class="st">"tab 6"</span>, <span class="st">"tab 7"</span><span class="op">)</span><span class="op">)</span>,</span>
-<span class="r-in">            item_hrefs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
-<span class="r-in">                <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"https://www.google.com/"</span><span class="op">)</span>,</span>
-<span class="r-in">                <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">""</span>, <span class="st">""</span><span class="op">)</span>,</span>
-<span class="r-in">                <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"https://www.google.com/"</span>, <span class="st">"https://www.google.com/"</span>, <span class="st">""</span><span class="op">)</span></span>
-<span class="r-in">            <span class="op">)</span>,</span>
-<span class="r-in">            item_title_colors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"green"</span>, <span class="st">"red"</span>, <span class="st">"orange"</span><span class="op">)</span>,</span>
-<span class="r-in">            style <span class="op">=</span> <span class="st">"width: 50%"</span></span>
-<span class="r-in">        <span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in">    <span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in">    <span class="va">server</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span>, <span class="va">session</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"></span>
-<span class="r-in">    <span class="op">}</span></span>
-<span class="r-in"></span>
-<span class="r-in">    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/shinyApp.html" class="external-link">shinyApp</a></span><span class="op">(</span><span class="va">ui</span>, <span class="va">server</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span></span>
+<span class="r-in"><span>    <span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/fluidPage.html" class="external-link">fluidPage</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>        <span class="fu">hrefTable</span><span class="op">(</span></span></span>
+<span class="r-in"><span>            title <span class="op">=</span> <span class="st">"default"</span>,</span></span>
+<span class="r-in"><span>            item_titles <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"workflow 1"</span>, <span class="st">"unclickable"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>            item_labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"tab 1"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"tab 3"</span>, <span class="st">"tab 4"</span><span class="op">)</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>            item_hrefs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"https://www.google.com/"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">""</span>, <span class="st">""</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span>        <span class="op">)</span>,</span></span>
+<span class="r-in"><span>        <span class="fu">hrefTable</span><span class="op">(</span></span></span>
+<span class="r-in"><span>            title <span class="op">=</span> <span class="st">"Change button color and text color"</span>,</span></span>
+<span class="r-in"><span>            item_titles <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"workflow 1"</span>, <span class="st">"No links"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>            item_labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"tab 1"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"tab 3"</span>, <span class="st">"tab 4"</span><span class="op">)</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>            item_hrefs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"https://www.google.com/"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">""</span>, <span class="st">""</span><span class="op">)</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>            item_bg_colors <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"blue"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"red"</span>, <span class="st">"orange"</span><span class="op">)</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>            item_text_colors <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"black"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"yellow"</span>, <span class="st">"green"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span>        <span class="op">)</span>,</span></span>
+<span class="r-in"><span>        <span class="fu">hrefTable</span><span class="op">(</span></span></span>
+<span class="r-in"><span>            title <span class="op">=</span> <span class="st">"Change row name colors and width"</span>,</span></span>
+<span class="r-in"><span>            item_titles <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Green"</span>, <span class="st">"Red"</span>, <span class="st">"Orange"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>            item_labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"tab 1"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"tab 3"</span>, <span class="st">"tab 4"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"tab 5"</span>, <span class="st">"tab 6"</span>, <span class="st">"tab 7"</span><span class="op">)</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>            item_hrefs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>                <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"https://www.google.com/"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">""</span>, <span class="st">""</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"https://www.google.com/"</span>, <span class="st">"https://www.google.com/"</span>, <span class="st">""</span><span class="op">)</span></span></span>
+<span class="r-in"><span>            <span class="op">)</span>,</span></span>
+<span class="r-in"><span>            item_title_colors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"green"</span>, <span class="st">"red"</span>, <span class="st">"orange"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>            style <span class="op">=</span> <span class="st">"width: 50%"</span></span></span>
+<span class="r-in"><span>        <span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>    <span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>    <span class="va">server</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span>, <span class="va">session</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>    <span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/shinyApp.html" class="external-link">shinyApp</a></span><span class="op">(</span><span class="va">ui</span>, <span class="va">server</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -193,7 +218,7 @@ effects.</p></li>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

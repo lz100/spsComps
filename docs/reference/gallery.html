@@ -22,7 +22,7 @@ Similar to hrefs, for the texts, use "" to  occupy space'><!-- mathjax --><scrip
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">spsComps</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.1.99</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.1</span>
       </span>
     </div>
 
@@ -63,56 +63,79 @@ Similar to hrefs, for the texts, use "" to  occupy space'><!-- mathjax --><scrip
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">gallery</span><span class="op">(</span>
-  <span class="va">texts</span>,
-  <span class="va">hrefs</span>,
-  <span class="va">images</span>,
-  Id <span class="op">=</span> <span class="cn">NULL</span>,
-  title <span class="op">=</span> <span class="st">"Gallery"</span>,
-  title_color <span class="op">=</span> <span class="st">"#0275d8"</span>,
-  image_frame_size <span class="op">=</span> <span class="fl">4</span>,
-  enlarge <span class="op">=</span> <span class="cn">FALSE</span>,
-  enlarge_method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"inline"</span>, <span class="st">"modal"</span><span class="op">)</span>,
-  target_blank <span class="op">=</span> <span class="cn">FALSE</span>,
-  style <span class="op">=</span> <span class="st">""</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">gallery</span><span class="op">(</span></span>
+<span>  <span class="va">texts</span>,</span>
+<span>  <span class="va">hrefs</span>,</span>
+<span>  <span class="va">images</span>,</span>
+<span>  Id <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  title <span class="op">=</span> <span class="st">"Gallery"</span>,</span>
+<span>  title_color <span class="op">=</span> <span class="st">"#0275d8"</span>,</span>
+<span>  image_frame_size <span class="op">=</span> <span class="fl">4</span>,</span>
+<span>  enlarge <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  enlarge_method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"inline"</span>, <span class="st">"modal"</span><span class="op">)</span>,</span>
+<span>  target_blank <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  style <span class="op">=</span> <span class="st">""</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>texts</dt>
 <dd><p>vector of labels under each image</p></dd>
+
+
 <dt>hrefs</dt>
 <dd><p>vector of links when each image is clicked</p></dd>
+
+
 <dt>images</dt>
 <dd><p>a vector of image sources, can be online URLs or local resource paths.</p></dd>
+
+
 <dt>Id</dt>
 <dd><p>ID of this gallery</p></dd>
+
+
 <dt>title</dt>
 <dd><p>Title of gallery</p></dd>
+
+
 <dt>title_color</dt>
 <dd><p>Title color</p></dd>
+
+
 <dt>image_frame_size</dt>
 <dd><p>integer, 1-12, this controls width. How large is each
 image. 12 is the whole width of the screen and 1 is 1/12 of the screen. Consider
 numbers than can fully divide 12, like 1, 2, 3, 4, 6 or 12 (if you want only 1 image
 per row).</p></dd>
+
+
 <dt>enlarge</dt>
 <dd><p>bool,  when click on the image, enlarge
 it? If enlarge is enabled, click the photo will enlarge instead of jump to the link.
 Only the title below contains the link if enlarge is enabled.</p></dd>
+
+
 <dt>enlarge_method</dt>
 <dd><p>how the photo is enlarged on click,
 one of "inline" -- within the gallery change the size of photo to 12, "modal" --
 display photo in a pop-up modal.</p></dd>
+
+
 <dt>target_blank</dt>
 <dd><p>bool, whether to add <code>target="_blank"</code> to the link?</p></dd>
+
+
 <dt>style</dt>
 <dd><p>additional CSS style you want to add to the most outside component "div"</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>a gallery component</p>
+    
+
+<p>a gallery component</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -129,45 +152,45 @@ image to close the full screen view.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span>
-<span class="r-in">  <span class="va">texts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"p1"</span>, <span class="st">"p2"</span>, <span class="st">""</span>, <span class="st">"p4"</span>, <span class="st">"p5"</span><span class="op">)</span></span>
-<span class="r-in">  <span class="va">hrefs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"https://github.com/lz100/spsComps/blob/master/img/1.jpg?raw=true"</span>,</span>
-<span class="r-in">             <span class="st">"https://github.com/lz100/spsComps/blob/master/img/2.jpg?raw=true"</span>,</span>
-<span class="r-in">             <span class="st">""</span>,</span>
-<span class="r-in">             <span class="st">"https://github.com/lz100/spsComps/blob/master/img/4.jpg?raw=true"</span>,</span>
-<span class="r-in">             <span class="st">"https://github.com/lz100/spsComps/blob/master/img/5.jpg?raw=true"</span><span class="op">)</span></span>
-<span class="r-in">  <span class="va">images</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"https://github.com/lz100/spsComps/blob/master/img/1.jpg?raw=true"</span>,</span>
-<span class="r-in">              <span class="st">"https://github.com/lz100/spsComps/blob/master/img/2.jpg?raw=true"</span>,</span>
-<span class="r-in">              <span class="st">"https://github.com/lz100/spsComps/blob/master/img/3.jpg?raw=true"</span>,</span>
-<span class="r-in">              <span class="st">"https://github.com/lz100/spsComps/blob/master/img/4.jpg?raw=true"</span>,</span>
-<span class="r-in">              <span class="st">"https://github.com/lz100/spsComps/blob/master/img/5.jpg?raw=true"</span><span class="op">)</span></span>
-<span class="r-in">  <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.rstudio.com/" class="external-link">shiny</a></span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in">  <span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/fluidPage.html" class="external-link">fluidPage</a></span><span class="op">(</span></span>
-<span class="r-in">    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/column.html" class="external-link">column</a></span><span class="op">(</span></span>
-<span class="r-in">      <span class="fl">6</span>,</span>
-<span class="r-in">      <span class="fu">gallery</span><span class="op">(</span>texts <span class="op">=</span> <span class="va">texts</span>, hrefs <span class="op">=</span> <span class="va">hrefs</span>, images <span class="op">=</span> <span class="va">images</span>, title <span class="op">=</span> <span class="st">"Default gallery"</span><span class="op">)</span>,</span>
-<span class="r-in">      <span class="fu"><a href="spsHr.html">spsHr</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span class="r-in">      <span class="fu">gallery</span><span class="op">(</span>texts <span class="op">=</span> <span class="va">texts</span>, hrefs <span class="op">=</span> <span class="va">hrefs</span>, images <span class="op">=</span> <span class="va">images</span>,</span>
-<span class="r-in">              image_frame_size <span class="op">=</span> <span class="fl">2</span>, title <span class="op">=</span> <span class="st">"Photo size"</span><span class="op">)</span>,</span>
-<span class="r-in">      <span class="fu"><a href="spsHr.html">spsHr</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span class="r-in">      <span class="fu">gallery</span><span class="op">(</span>texts <span class="op">=</span> <span class="va">texts</span>, hrefs <span class="op">=</span> <span class="va">hrefs</span>, images <span class="op">=</span> <span class="va">images</span>,</span>
-<span class="r-in">              enlarge <span class="op">=</span> <span class="cn">TRUE</span>, title <span class="op">=</span> <span class="st">"Inline enlarge"</span><span class="op">)</span>,</span>
-<span class="r-in">      <span class="fu"><a href="spsHr.html">spsHr</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span class="r-in">      <span class="fu">gallery</span><span class="op">(</span></span>
-<span class="r-in">        texts <span class="op">=</span> <span class="va">texts</span>, hrefs <span class="op">=</span> <span class="va">hrefs</span>, images <span class="op">=</span> <span class="va">images</span>,</span>
-<span class="r-in">        enlarge <span class="op">=</span> <span class="cn">TRUE</span>, title <span class="op">=</span> <span class="st">"Modal enlarge"</span>,</span>
-<span class="r-in">        enlarge_method <span class="op">=</span> <span class="st">"modal"</span></span>
-<span class="r-in">      <span class="op">)</span></span>
-<span class="r-in">    <span class="op">)</span></span>
-<span class="r-in">  <span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in">  <span class="va">server</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span>, <span class="va">session</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"></span>
-<span class="r-in">  <span class="op">}</span></span>
-<span class="r-in"></span>
-<span class="r-in">  <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/shinyApp.html" class="external-link">shinyApp</a></span><span class="op">(</span><span class="va">ui</span>, <span class="va">server</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">texts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"p1"</span>, <span class="st">"p2"</span>, <span class="st">""</span>, <span class="st">"p4"</span>, <span class="st">"p5"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">hrefs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"https://github.com/lz100/spsComps/blob/master/img/1.jpg?raw=true"</span>,</span></span>
+<span class="r-in"><span>             <span class="st">"https://github.com/lz100/spsComps/blob/master/img/2.jpg?raw=true"</span>,</span></span>
+<span class="r-in"><span>             <span class="st">""</span>,</span></span>
+<span class="r-in"><span>             <span class="st">"https://github.com/lz100/spsComps/blob/master/img/4.jpg?raw=true"</span>,</span></span>
+<span class="r-in"><span>             <span class="st">"https://github.com/lz100/spsComps/blob/master/img/5.jpg?raw=true"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">images</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"https://github.com/lz100/spsComps/blob/master/img/1.jpg?raw=true"</span>,</span></span>
+<span class="r-in"><span>              <span class="st">"https://github.com/lz100/spsComps/blob/master/img/2.jpg?raw=true"</span>,</span></span>
+<span class="r-in"><span>              <span class="st">"https://github.com/lz100/spsComps/blob/master/img/3.jpg?raw=true"</span>,</span></span>
+<span class="r-in"><span>              <span class="st">"https://github.com/lz100/spsComps/blob/master/img/4.jpg?raw=true"</span>,</span></span>
+<span class="r-in"><span>              <span class="st">"https://github.com/lz100/spsComps/blob/master/img/5.jpg?raw=true"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.rstudio.com/" class="external-link">shiny</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/fluidPage.html" class="external-link">fluidPage</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/column.html" class="external-link">column</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>      <span class="fl">6</span>,</span></span>
+<span class="r-in"><span>      <span class="fu">gallery</span><span class="op">(</span>texts <span class="op">=</span> <span class="va">texts</span>, hrefs <span class="op">=</span> <span class="va">hrefs</span>, images <span class="op">=</span> <span class="va">images</span>, title <span class="op">=</span> <span class="st">"Default gallery"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>      <span class="fu"><a href="spsHr.html">spsHr</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>      <span class="fu">gallery</span><span class="op">(</span>texts <span class="op">=</span> <span class="va">texts</span>, hrefs <span class="op">=</span> <span class="va">hrefs</span>, images <span class="op">=</span> <span class="va">images</span>,</span></span>
+<span class="r-in"><span>              image_frame_size <span class="op">=</span> <span class="fl">2</span>, title <span class="op">=</span> <span class="st">"Photo size"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>      <span class="fu"><a href="spsHr.html">spsHr</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>      <span class="fu">gallery</span><span class="op">(</span>texts <span class="op">=</span> <span class="va">texts</span>, hrefs <span class="op">=</span> <span class="va">hrefs</span>, images <span class="op">=</span> <span class="va">images</span>,</span></span>
+<span class="r-in"><span>              enlarge <span class="op">=</span> <span class="cn">TRUE</span>, title <span class="op">=</span> <span class="st">"Inline enlarge"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>      <span class="fu"><a href="spsHr.html">spsHr</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>      <span class="fu">gallery</span><span class="op">(</span></span></span>
+<span class="r-in"><span>        texts <span class="op">=</span> <span class="va">texts</span>, hrefs <span class="op">=</span> <span class="va">hrefs</span>, images <span class="op">=</span> <span class="va">images</span>,</span></span>
+<span class="r-in"><span>        enlarge <span class="op">=</span> <span class="cn">TRUE</span>, title <span class="op">=</span> <span class="st">"Modal enlarge"</span>,</span></span>
+<span class="r-in"><span>        enlarge_method <span class="op">=</span> <span class="st">"modal"</span></span></span>
+<span class="r-in"><span>      <span class="op">)</span></span></span>
+<span class="r-in"><span>    <span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="va">server</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span>, <span class="va">session</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/shinyApp.html" class="external-link">shinyApp</a></span><span class="op">(</span><span class="va">ui</span>, <span class="va">server</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -182,7 +205,7 @@ image to close the full screen view.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

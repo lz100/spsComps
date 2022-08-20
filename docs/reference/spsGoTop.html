@@ -19,7 +19,7 @@ in you UI."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">spsComps</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.1.99</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.1</span>
       </span>
     </div>
 
@@ -57,31 +57,42 @@ in you UI.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">spsGoTop</span><span class="op">(</span>
-  id <span class="op">=</span> <span class="st">"gotop"</span>,
-  icon <span class="op">=</span> <span class="cn">NULL</span>,
-  right <span class="op">=</span> <span class="st">"1rem"</span>,
-  bottom <span class="op">=</span> <span class="st">"10rem"</span>,
-  color <span class="op">=</span> <span class="st">"#337ab7"</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">spsGoTop</span><span class="op">(</span></span>
+<span>  id <span class="op">=</span> <span class="st">"gotop"</span>,</span>
+<span>  icon <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  right <span class="op">=</span> <span class="st">"1rem"</span>,</span>
+<span>  bottom <span class="op">=</span> <span class="st">"10rem"</span>,</span>
+<span>  color <span class="op">=</span> <span class="st">"#337ab7"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>id</dt>
 <dd><p>element ID</p></dd>
+
+
 <dt>icon</dt>
 <dd><p><a href="https://rdrr.io/pkg/shiny/man/icon.html" class="external-link">shiny::icon</a> if you do not want to use the default rocket image</p></dd>
+
+
 <dt>right</dt>
 <dd><p>character string, css style, the button's position to window right</p></dd>
+
+
 <dt>bottom</dt>
 <dd><p>character string, css style, the button's position to window bottom</p></dd>
+
+
 <dt>color</dt>
 <dd><p>color of the icon.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>a shiny component</p>
+    
+
+<p>a shiny component</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -91,23 +102,23 @@ down 50px, this button will appear.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span>
-<span class="r-in">    <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.rstudio.com/" class="external-link">shiny</a></span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in">    <span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/fluidPage.html" class="external-link">fluidPage</a></span><span class="op">(</span></span>
-<span class="r-in">        <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">h1</a></span><span class="op">(</span><span class="st">"Scroll the page..."</span><span class="op">)</span>,</span>
-<span class="r-in">        <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span> <span class="fl">100</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>,</span>
-<span class="r-in">        <span class="fu">spsGoTop</span><span class="op">(</span><span class="st">"default"</span><span class="op">)</span>,</span>
-<span class="r-in">        <span class="fu">spsGoTop</span><span class="op">(</span><span class="st">"mid"</span>, right <span class="op">=</span> <span class="st">"50%"</span>,  bottom<span class="op">=</span> <span class="st">"50%"</span>, icon <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/icon.html" class="external-link">icon</a></span><span class="op">(</span><span class="st">"home"</span><span class="op">)</span>, color <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span>,</span>
-<span class="r-in">        <span class="fu">spsGoTop</span><span class="op">(</span><span class="st">"up"</span>, right <span class="op">=</span> <span class="st">"95%"</span>,  bottom<span class="op">=</span> <span class="st">"95%"</span>, icon <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/icon.html" class="external-link">icon</a></span><span class="op">(</span><span class="st">"arrow-up"</span><span class="op">)</span>, color <span class="op">=</span> <span class="st">"green"</span><span class="op">)</span></span>
-<span class="r-in">    <span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in">    <span class="va">server</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span>, <span class="va">session</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"></span>
-<span class="r-in">    <span class="op">}</span></span>
-<span class="r-in"></span>
-<span class="r-in">    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/shinyApp.html" class="external-link">shinyApp</a></span><span class="op">(</span><span class="va">ui</span>, <span class="va">server</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span></span>
+<span class="r-in"><span>    <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.rstudio.com/" class="external-link">shiny</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>    <span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/fluidPage.html" class="external-link">fluidPage</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>        <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">h1</a></span><span class="op">(</span><span class="st">"Scroll the page..."</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>        <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span> <span class="fl">100</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>        <span class="fu">spsGoTop</span><span class="op">(</span><span class="st">"default"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>        <span class="fu">spsGoTop</span><span class="op">(</span><span class="st">"mid"</span>, right <span class="op">=</span> <span class="st">"50%"</span>,  bottom<span class="op">=</span> <span class="st">"50%"</span>, icon <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/icon.html" class="external-link">icon</a></span><span class="op">(</span><span class="st">"home"</span><span class="op">)</span>, color <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>        <span class="fu">spsGoTop</span><span class="op">(</span><span class="st">"up"</span>, right <span class="op">=</span> <span class="st">"95%"</span>,  bottom<span class="op">=</span> <span class="st">"95%"</span>, icon <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/icon.html" class="external-link">icon</a></span><span class="op">(</span><span class="st">"arrow-up"</span><span class="op">)</span>, color <span class="op">=</span> <span class="st">"green"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    <span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>    <span class="va">server</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span>, <span class="va">session</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>    <span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/shinyApp.html" class="external-link">shinyApp</a></span><span class="op">(</span><span class="va">ui</span>, <span class="va">server</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -122,7 +133,7 @@ down 50px, this button will appear.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

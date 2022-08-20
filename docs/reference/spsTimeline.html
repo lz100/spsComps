@@ -18,7 +18,7 @@ use updateSpsTimeline on server to update it."><!-- mathjax --><script src="http
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">spsComps</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.1.99</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.1</span>
       </span>
     </div>
 
@@ -55,16 +55,16 @@ use <strong>updateSpsTimeline</strong> on server to update it.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">spsTimeline</span><span class="op">(</span><span class="va">id</span>, <span class="va">up_labels</span>, <span class="va">down_labels</span>, <span class="va">icons</span>, <span class="va">completes</span><span class="op">)</span>
-
-<span class="fu">updateSpsTimeline</span><span class="op">(</span>
-  <span class="va">session</span>,
-  <span class="va">id</span>,
-  <span class="va">item_no</span>,
-  complete <span class="op">=</span> <span class="cn">TRUE</span>,
-  up_label <span class="op">=</span> <span class="cn">NULL</span>,
-  down_label <span class="op">=</span> <span class="cn">NULL</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">spsTimeline</span><span class="op">(</span><span class="va">id</span>, <span class="va">up_labels</span>, <span class="va">down_labels</span>, <span class="va">icons</span>, <span class="va">completes</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">updateSpsTimeline</span><span class="op">(</span></span>
+<span>  <span class="va">session</span>,</span>
+<span>  <span class="va">id</span>,</span>
+<span>  <span class="va">item_no</span>,</span>
+<span>  complete <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  up_label <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  down_label <span class="op">=</span> <span class="cn">NULL</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -73,34 +73,55 @@ use <strong>updateSpsTimeline</strong> on server to update it.</p>
 <dd><p>html ID of the timeline if you are using shiny modules:
 use namespace function to create the ID but DO NOT use namespace function
 on server.</p></dd>
+
+
 <dt>up_labels</dt>
 <dd><p>a vector of strings, text you want to display on top of each
 timeline item, usually like year number. If you do not want any text for a
 certain items, use <code>""</code> to occupy the space.</p></dd>
+
+
 <dt>down_labels</dt>
 <dd><p>a vector of strings, text you want to display at the
 bottom of each timeline item.</p></dd>
+
+
 <dt>icons</dt>
 <dd><p>a list of icon objects. If you do not want an icon for certain
 items, use <code><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">div()</a></code> to occupy the space.</p></dd>
+
+
 <dt>completes</dt>
 <dd><p>a vector of TRUE or FALSE, indicating if the items are
 completed or not. Completed items will become green.</p></dd>
+
+
 <dt>session</dt>
 <dd><p>current shiny session</p></dd>
+
+
 <dt>item_no</dt>
 <dd><p>integer, which item number counting from left to right you
 want to update</p></dd>
+
+
 <dt>complete</dt>
 <dd><p>bool, is this item completed or not</p></dd>
+
+
 <dt>up_label</dt>
 <dd><p>the <code>item_no</code> associated up label to update</p></dd>
+
+
 <dt>down_label</dt>
 <dd><p>the <code>item_no</code> associated down label to update</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>returns a shiny component</p>
+    
+
+<p>returns a shiny component</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -110,35 +131,35 @@ length.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span>
-<span class="r-in">    <span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/fluidPage.html" class="external-link">fluidPage</a></span><span class="op">(</span></span>
-<span class="r-in">        <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/column.html" class="external-link">column</a></span><span class="op">(</span><span class="fl">6</span>,</span>
-<span class="r-in">               <span class="fu">spsTimeline</span><span class="op">(</span></span>
-<span class="r-in">                   <span class="st">"b"</span>,</span>
-<span class="r-in">                   up_labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2000"</span>, <span class="st">"2001"</span><span class="op">)</span>,</span>
-<span class="r-in">                   down_labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"step 1"</span>, <span class="st">"step 2"</span><span class="op">)</span>,</span>
-<span class="r-in">                   icons <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/icon.html" class="external-link">icon</a></span><span class="op">(</span><span class="st">"table"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/icon.html" class="external-link">icon</a></span><span class="op">(</span><span class="st">"cog"</span><span class="op">)</span><span class="op">)</span>,</span>
-<span class="r-in">                   completes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">FALSE</span>, <span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in">               <span class="op">)</span></span>
-<span class="r-in">        <span class="op">)</span>,</span>
-<span class="r-in">        <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/column.html" class="external-link">column</a></span><span class="op">(</span><span class="fl">6</span>,</span>
-<span class="r-in">               <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"complete step 1"</span><span class="op">)</span>,</span>
-<span class="r-in">               <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span><span class="st">"c"</span>, <span class="st">"uncomplete step 1"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in">    <span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in">    <span class="va">server</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span>, <span class="va">session</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">        <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">a</span>, <span class="op">{</span></span>
-<span class="r-in">            <span class="fu">updateSpsTimeline</span><span class="op">(</span><span class="va">session</span>, <span class="st">"b"</span>, <span class="fl">1</span>, up_label <span class="op">=</span> <span class="st">"0000"</span>, down_label <span class="op">=</span> <span class="st">"Finish"</span><span class="op">)</span></span>
-<span class="r-in">        <span class="op">}</span><span class="op">)</span></span>
-<span class="r-in">        <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">c</span>, <span class="op">{</span></span>
-<span class="r-in">            <span class="fu">updateSpsTimeline</span><span class="op">(</span><span class="va">session</span>, <span class="st">"b"</span>, <span class="fl">1</span>, complete <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span class="r-in">                              up_label <span class="op">=</span> <span class="st">"9999"</span>, down_label <span class="op">=</span> <span class="st">"Step 1"</span><span class="op">)</span></span>
-<span class="r-in">        <span class="op">}</span><span class="op">)</span></span>
-<span class="r-in">    <span class="op">}</span></span>
-<span class="r-in"></span>
-<span class="r-in">    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/shinyApp.html" class="external-link">shinyApp</a></span><span class="op">(</span><span class="va">ui</span>, <span class="va">server</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span></span>
+<span class="r-in"><span>    <span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/fluidPage.html" class="external-link">fluidPage</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>        <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/column.html" class="external-link">column</a></span><span class="op">(</span><span class="fl">6</span>,</span></span>
+<span class="r-in"><span>               <span class="fu">spsTimeline</span><span class="op">(</span></span></span>
+<span class="r-in"><span>                   <span class="st">"b"</span>,</span></span>
+<span class="r-in"><span>                   up_labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2000"</span>, <span class="st">"2001"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                   down_labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"step 1"</span>, <span class="st">"step 2"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                   icons <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/icon.html" class="external-link">icon</a></span><span class="op">(</span><span class="st">"table"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/icon.html" class="external-link">icon</a></span><span class="op">(</span><span class="st">"cog"</span><span class="op">)</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                   completes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">FALSE</span>, <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span>               <span class="op">)</span></span></span>
+<span class="r-in"><span>        <span class="op">)</span>,</span></span>
+<span class="r-in"><span>        <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/column.html" class="external-link">column</a></span><span class="op">(</span><span class="fl">6</span>,</span></span>
+<span class="r-in"><span>               <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"complete step 1"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>               <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span><span class="st">"c"</span>, <span class="st">"uncomplete step 1"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>    <span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>    <span class="va">server</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span>, <span class="va">session</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>        <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">a</span>, <span class="op">{</span></span></span>
+<span class="r-in"><span>            <span class="fu">updateSpsTimeline</span><span class="op">(</span><span class="va">session</span>, <span class="st">"b"</span>, <span class="fl">1</span>, up_label <span class="op">=</span> <span class="st">"0000"</span>, down_label <span class="op">=</span> <span class="st">"Finish"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>        <span class="op">}</span><span class="op">)</span></span></span>
+<span class="r-in"><span>        <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">c</span>, <span class="op">{</span></span></span>
+<span class="r-in"><span>            <span class="fu">updateSpsTimeline</span><span class="op">(</span><span class="va">session</span>, <span class="st">"b"</span>, <span class="fl">1</span>, complete <span class="op">=</span> <span class="cn">FALSE</span>,</span></span>
+<span class="r-in"><span>                              up_label <span class="op">=</span> <span class="st">"9999"</span>, down_label <span class="op">=</span> <span class="st">"Step 1"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>        <span class="op">}</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    <span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/shinyApp.html" class="external-link">shinyApp</a></span><span class="op">(</span><span class="va">ui</span>, <span class="va">server</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -153,7 +174,7 @@ length.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

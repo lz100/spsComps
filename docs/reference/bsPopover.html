@@ -18,7 +18,7 @@ color, font size, background color, and more for each individual popover."><!-- 
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">spsComps</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.1.99</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.1</span>
       </span>
     </div>
 
@@ -55,94 +55,125 @@ color, font size, background color, and more for each individual popover.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">bsPopover</span><span class="op">(</span>
-  <span class="va">tag</span>,
-  title <span class="op">=</span> <span class="st">""</span>,
-  content <span class="op">=</span> <span class="st">""</span>,
-  placement <span class="op">=</span> <span class="st">"top"</span>,
-  bgcolor <span class="op">=</span> <span class="st">"#ebebeb"</span>,
-  titlecolor <span class="op">=</span> <span class="st">"black"</span>,
-  contentcolor <span class="op">=</span> <span class="st">"black"</span>,
-  titlesize <span class="op">=</span> <span class="st">"14px"</span>,
-  contentsize <span class="op">=</span> <span class="st">"12px"</span>,
-  titleweight <span class="op">=</span> <span class="st">"600"</span>,
-  contentweight <span class="op">=</span> <span class="st">"400"</span>,
-  opacity <span class="op">=</span> <span class="fl">1</span>,
-  html <span class="op">=</span> <span class="cn">FALSE</span>,
-  trigger <span class="op">=</span> <span class="st">"hover focus"</span>
-<span class="op">)</span>
-
-<span class="fu">bsHoverPopover</span><span class="op">(</span>
-  <span class="va">tag</span>,
-  title <span class="op">=</span> <span class="st">""</span>,
-  content <span class="op">=</span> <span class="st">""</span>,
-  placement <span class="op">=</span> <span class="st">"top"</span>,
-  bgcolor <span class="op">=</span> <span class="st">"#ebebeb"</span>,
-  titlecolor <span class="op">=</span> <span class="st">"black"</span>,
-  contentcolor <span class="op">=</span> <span class="st">"black"</span>,
-  titlesize <span class="op">=</span> <span class="st">"14px"</span>,
-  contentsize <span class="op">=</span> <span class="st">"12px"</span>,
-  titleweight <span class="op">=</span> <span class="st">"600"</span>,
-  contentweight <span class="op">=</span> <span class="st">"400"</span>,
-  opacity <span class="op">=</span> <span class="fl">1</span>,
-  html <span class="op">=</span> <span class="cn">FALSE</span>,
-  trigger <span class="op">=</span> <span class="st">"hover focus"</span>
-<span class="op">)</span>
-
-<span class="fu">bsPop</span><span class="op">(</span>
-  <span class="va">tag</span>,
-  title <span class="op">=</span> <span class="st">""</span>,
-  content <span class="op">=</span> <span class="st">""</span>,
-  placement <span class="op">=</span> <span class="st">"top"</span>,
-  status <span class="op">=</span> <span class="st">"primary"</span>,
-  titlesize <span class="op">=</span> <span class="st">"14px"</span>,
-  contentsize <span class="op">=</span> <span class="st">"12px"</span>,
-  titleweight <span class="op">=</span> <span class="st">"600"</span>,
-  contentweight <span class="op">=</span> <span class="st">"400"</span>,
-  opacity <span class="op">=</span> <span class="fl">1</span>,
-  html <span class="op">=</span> <span class="cn">TRUE</span>,
-  trigger <span class="op">=</span> <span class="st">"hover focus"</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">bsPopover</span><span class="op">(</span></span>
+<span>  <span class="va">tag</span>,</span>
+<span>  title <span class="op">=</span> <span class="st">""</span>,</span>
+<span>  content <span class="op">=</span> <span class="st">""</span>,</span>
+<span>  placement <span class="op">=</span> <span class="st">"top"</span>,</span>
+<span>  bgcolor <span class="op">=</span> <span class="st">"#ebebeb"</span>,</span>
+<span>  titlecolor <span class="op">=</span> <span class="st">"black"</span>,</span>
+<span>  contentcolor <span class="op">=</span> <span class="st">"black"</span>,</span>
+<span>  titlesize <span class="op">=</span> <span class="st">"14px"</span>,</span>
+<span>  contentsize <span class="op">=</span> <span class="st">"12px"</span>,</span>
+<span>  titleweight <span class="op">=</span> <span class="st">"600"</span>,</span>
+<span>  contentweight <span class="op">=</span> <span class="st">"400"</span>,</span>
+<span>  opacity <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  html <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  trigger <span class="op">=</span> <span class="st">"hover focus"</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">bsHoverPopover</span><span class="op">(</span></span>
+<span>  <span class="va">tag</span>,</span>
+<span>  title <span class="op">=</span> <span class="st">""</span>,</span>
+<span>  content <span class="op">=</span> <span class="st">""</span>,</span>
+<span>  placement <span class="op">=</span> <span class="st">"top"</span>,</span>
+<span>  bgcolor <span class="op">=</span> <span class="st">"#ebebeb"</span>,</span>
+<span>  titlecolor <span class="op">=</span> <span class="st">"black"</span>,</span>
+<span>  contentcolor <span class="op">=</span> <span class="st">"black"</span>,</span>
+<span>  titlesize <span class="op">=</span> <span class="st">"14px"</span>,</span>
+<span>  contentsize <span class="op">=</span> <span class="st">"12px"</span>,</span>
+<span>  titleweight <span class="op">=</span> <span class="st">"600"</span>,</span>
+<span>  contentweight <span class="op">=</span> <span class="st">"400"</span>,</span>
+<span>  opacity <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  html <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  trigger <span class="op">=</span> <span class="st">"hover focus"</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">bsPop</span><span class="op">(</span></span>
+<span>  <span class="va">tag</span>,</span>
+<span>  title <span class="op">=</span> <span class="st">""</span>,</span>
+<span>  content <span class="op">=</span> <span class="st">""</span>,</span>
+<span>  placement <span class="op">=</span> <span class="st">"top"</span>,</span>
+<span>  status <span class="op">=</span> <span class="st">"primary"</span>,</span>
+<span>  titlesize <span class="op">=</span> <span class="st">"14px"</span>,</span>
+<span>  contentsize <span class="op">=</span> <span class="st">"12px"</span>,</span>
+<span>  titleweight <span class="op">=</span> <span class="st">"600"</span>,</span>
+<span>  contentweight <span class="op">=</span> <span class="st">"400"</span>,</span>
+<span>  opacity <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  html <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  trigger <span class="op">=</span> <span class="st">"hover focus"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>tag</dt>
 <dd><p>a shiny tag as input</p></dd>
+
+
 <dt>title</dt>
 <dd><p>string, popover title</p></dd>
+
+
 <dt>content</dt>
 <dd><p>string, popover cotent</p></dd>
+
+
 <dt>placement</dt>
 <dd><p>string, one of "top", "bottom", "left", "right", where to put the
 tooltip</p></dd>
+
+
 <dt>bgcolor</dt>
 <dd><p>string, background color, valid value of CSS color name or hex value or rgb value</p></dd>
+
+
 <dt>titlecolor</dt>
 <dd><p>string, title text color, valid value of CSS color name or hex value or rgb value</p></dd>
+
+
 <dt>contentcolor</dt>
 <dd><p>string, content text color, valid value of CSS color name or hex value or rgb value</p></dd>
+
+
 <dt>titlesize</dt>
 <dd><p>string, title text font size, valid value of CSS font size, like "10px", "1rem".</p></dd>
+
+
 <dt>contentsize</dt>
 <dd><p>string, content text font size, valid value of CSS font size, like "10px", "1rem".</p></dd>
+
+
 <dt>titleweight</dt>
 <dd><p>string, CSS valid title font weight unit</p></dd>
+
+
 <dt>contentweight</dt>
 <dd><p>string, CSS valid content font weight unit</p></dd>
+
+
 <dt>opacity</dt>
 <dd><p>numeric, between 0 and 1</p></dd>
+
+
 <dt>html</dt>
 <dd><p>bool, allow title contain HTML code? like <code>"&lt;strong&gt;abc&lt;/strong&gt;"</code></p></dd>
+
+
 <dt>trigger</dt>
 <dd><p>string, how to trigger the tooltip, one or combination of
 click | hover | focus | manual.</p></dd>
+
+
 <dt>status</dt>
 <dd><p>string, used only for wrapper bsPop, see details</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>shiny tag</p>
+    
+
+<p>shiny tag</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -163,86 +194,86 @@ to set, one of "primary", "info", "success", "warning", "danger"</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span>
-<span class="r-in">  <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.rstudio.com/" class="external-link">shiny</a></span><span class="op">)</span></span>
-<span class="r-in">  <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://magrittr.tidyverse.org" class="external-link">magrittr</a></span><span class="op">)</span></span>
-<span class="r-in">  <span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/fluidPage.html" class="external-link">fluidPage</a></span><span class="op">(</span></span>
-<span class="r-in">    <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/column.html" class="external-link">column</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span>,</span>
-<span class="r-in">    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span><span class="st">""</span>, <span class="st">"Popover on the left"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">      <span class="fu">bsPopover</span><span class="op">(</span><span class="st">"Popover on the left"</span>, <span class="st">"content"</span>, <span class="st">"left"</span><span class="op">)</span>,</span>
-<span class="r-in">    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span><span class="st">""</span>, <span class="st">"Popover on the top"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">      <span class="fu">bsPopover</span><span class="op">(</span><span class="st">"Popover on the top"</span>, <span class="st">"content"</span>, <span class="st">"top"</span><span class="op">)</span>,</span>
-<span class="r-in">    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span><span class="st">""</span>, <span class="st">"Popover on the right"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">      <span class="fu">bsPopover</span><span class="op">(</span><span class="st">"Popover on the right"</span>, <span class="st">"content"</span>, <span class="st">"right"</span><span class="op">)</span>,</span>
-<span class="r-in">    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span><span class="st">""</span>, <span class="st">"Popover on the bottom"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">      <span class="fu">bsPopover</span><span class="op">(</span><span class="st">"Popover on the bottom"</span>, <span class="st">"content"</span>, <span class="st">"bottom"</span><span class="op">)</span>,</span>
-<span class="r-in">    <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/column.html" class="external-link">column</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span>,</span>
-<span class="r-in">    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span><span class="st">""</span>, <span class="st">"primary color"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">      <span class="fu">bsPopover</span><span class="op">(</span></span>
-<span class="r-in">        <span class="st">"primary color"</span>, <span class="st">"content"</span>, bgcolor <span class="op">=</span> <span class="st">"#0275d8"</span>,</span>
-<span class="r-in">        titlecolor <span class="op">=</span> <span class="st">"white"</span>, contentcolor <span class="op">=</span> <span class="st">"#0275d8"</span><span class="op">)</span>,</span>
-<span class="r-in">    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span><span class="st">""</span>, <span class="st">"danger color"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">      <span class="fu">bsPopover</span><span class="op">(</span></span>
-<span class="r-in">        <span class="st">"danger color"</span>,  <span class="st">"content"</span>, bgcolor <span class="op">=</span> <span class="st">"#d9534f"</span>,</span>
-<span class="r-in">        titlecolor <span class="op">=</span> <span class="st">"white"</span>, contentcolor <span class="op">=</span> <span class="st">"#d9534f"</span><span class="op">)</span>,</span>
-<span class="r-in">    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span><span class="st">""</span>, <span class="st">"warning color"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">      <span class="fu">bsPopover</span><span class="op">(</span></span>
-<span class="r-in">        <span class="st">"warning color"</span>, <span class="st">"content"</span>, bgcolor <span class="op">=</span> <span class="st">"#f0ad4e"</span>,</span>
-<span class="r-in">        titlecolor <span class="op">=</span> <span class="st">"white"</span>, contentcolor <span class="op">=</span> <span class="st">"#f0ad4e"</span><span class="op">)</span>,</span>
-<span class="r-in">    <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/column.html" class="external-link">column</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span>,</span>
-<span class="r-in">    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span><span class="st">""</span>, <span class="st">"9px &amp; 14px"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">      <span class="fu">bsPopover</span><span class="op">(</span><span class="st">"9px"</span>, <span class="st">"14"</span>, titlesize <span class="op">=</span> <span class="st">"9px"</span>, contentsize <span class="op">=</span> <span class="op">)</span>,</span>
-<span class="r-in">    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span><span class="st">""</span>, <span class="st">"14px &amp; 12px"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">      <span class="fu">bsPopover</span><span class="op">(</span><span class="st">"14px"</span>, <span class="st">"12"</span>, titlesize <span class="op">=</span> <span class="st">"14px"</span><span class="op">)</span>,</span>
-<span class="r-in">    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span><span class="st">""</span>, <span class="st">"20px &amp; 9px"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">      <span class="fu">bsPopover</span><span class="op">(</span><span class="st">"20px"</span>, <span class="st">"9"</span>, titlesize <span class="op">=</span> <span class="st">"20px"</span><span class="op">)</span>,</span>
-<span class="r-in">    <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/column.html" class="external-link">column</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span>,</span>
-<span class="r-in">    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span><span class="st">""</span>, <span class="st">"weight 100 &amp; 800"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">      <span class="fu">bsPopover</span><span class="op">(</span><span class="st">"weight 100"</span>, <span class="st">"800"</span>, titleweight <span class="op">=</span>  <span class="st">"100"</span>, contentweight <span class="op">=</span> <span class="st">"800"</span><span class="op">)</span>,</span>
-<span class="r-in">    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span><span class="st">""</span>, <span class="st">"weight 400 &amp; 600"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">      <span class="fu">bsPopover</span><span class="op">(</span><span class="st">"weight 400"</span>, <span class="st">"600"</span>, titleweight <span class="op">=</span>  <span class="st">"400"</span>, contentweight <span class="op">=</span> <span class="st">"600"</span><span class="op">)</span>,</span>
-<span class="r-in">    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span><span class="st">""</span>, <span class="st">"weight 600 &amp; 400"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">      <span class="fu">bsPopover</span><span class="op">(</span><span class="st">"weight 600"</span>, <span class="st">"400"</span>, titleweight <span class="op">=</span>  <span class="st">"600"</span>, contentweight <span class="op">=</span> <span class="st">"400"</span><span class="op">)</span>,</span>
-<span class="r-in">    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span><span class="st">""</span>, <span class="st">"weight 900 &amp; 200"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">      <span class="fu">bsPopover</span><span class="op">(</span><span class="st">"weight 900"</span>, <span class="st">"200"</span>, titleweight <span class="op">=</span>  <span class="st">"900"</span>, contentweight <span class="op">=</span> <span class="st">"200"</span><span class="op">)</span>,</span>
-<span class="r-in">    <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/column.html" class="external-link">column</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span>,</span>
-<span class="r-in">    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span><span class="st">""</span>, <span class="st">"opacity 0.2"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">      <span class="fu">bsPopover</span><span class="op">(</span><span class="st">"opacity 0.2"</span>, opacity <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span>,</span>
-<span class="r-in">    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span><span class="st">""</span>, <span class="st">"opacity 0.5"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">      <span class="fu">bsPopover</span><span class="op">(</span><span class="st">"opacity 0.5"</span>, opacity <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>,</span>
-<span class="r-in">    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span><span class="st">""</span>, <span class="st">"opacity 0.8"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">      <span class="fu">bsPopover</span><span class="op">(</span><span class="st">"opacity 0.8"</span>, opacity <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span>,</span>
-<span class="r-in">    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span><span class="st">""</span>, <span class="st">"opacity 1"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">      <span class="fu">bsPopover</span><span class="op">(</span><span class="st">"opacity 1"</span>, opacity <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,</span>
-<span class="r-in">    <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/column.html" class="external-link">column</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span>,</span>
-<span class="r-in">    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span><span class="st">"f1"</span>, <span class="st">"allow html: 'abc&lt;span class='text-danger'&gt;danger&lt;/span&gt;'"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">      <span class="fu">bsPopover</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/HTML.html" class="external-link">HTML</a></span><span class="op">(</span><span class="st">"abc&lt;span class='text-danger'&gt;danger&lt;/span&gt;"</span><span class="op">)</span>,</span>
-<span class="r-in">                html <span class="op">=</span> <span class="cn">TRUE</span>, bgcolor <span class="op">=</span> <span class="st">"#0275d8"</span><span class="op">)</span>,</span>
-<span class="r-in">    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span><span class="st">"f2"</span>, <span class="st">"allow html: '&lt;s&gt;del content&lt;/s&gt;'"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">      <span class="fu">bsPopover</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/HTML.html" class="external-link">HTML</a></span><span class="op">(</span><span class="st">"&lt;s&gt;del content&lt;/s&gt;"</span><span class="op">)</span>, html <span class="op">=</span> <span class="cn">TRUE</span>, bgcolor <span class="op">=</span> <span class="st">"#d9534f"</span><span class="op">)</span></span>
-<span class="r-in">  <span class="op">)</span></span>
-<span class="r-in">  <span class="va">server</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span>, <span class="va">session</span><span class="op">)</span> <span class="op">{</span><span class="op">}</span></span>
-<span class="r-in">  <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/shinyApp.html" class="external-link">shinyApp</a></span><span class="op">(</span><span class="va">ui</span>, <span class="va">server</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"><span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span>
-<span class="r-in">  <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.rstudio.com/" class="external-link">shiny</a></span><span class="op">)</span></span>
-<span class="r-in">  <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://magrittr.tidyverse.org" class="external-link">magrittr</a></span><span class="op">)</span></span>
-<span class="r-in">  <span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/fluidPage.html" class="external-link">fluidPage</a></span><span class="op">(</span></span>
-<span class="r-in">    <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/column.html" class="external-link">column</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span>,</span>
-<span class="r-in">    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span><span class="st">""</span>, <span class="st">"primary"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">      <span class="fu">bsPop</span><span class="op">(</span><span class="st">"primary"</span>, <span class="st">"primary"</span>, status <span class="op">=</span> <span class="st">"primary"</span><span class="op">)</span>,</span>
-<span class="r-in">    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span><span class="st">""</span>, <span class="st">"info"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">      <span class="fu">bsPop</span><span class="op">(</span><span class="st">"info"</span>, <span class="st">"info"</span>, status <span class="op">=</span> <span class="st">"info"</span><span class="op">)</span>,</span>
-<span class="r-in">    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span><span class="st">""</span>, <span class="st">"success"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">      <span class="fu">bsPop</span><span class="op">(</span><span class="st">"success"</span>, <span class="st">"success"</span>, status <span class="op">=</span> <span class="st">"success"</span><span class="op">)</span>,</span>
-<span class="r-in">    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span><span class="st">""</span>, <span class="st">"warning"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">      <span class="fu">bsPop</span><span class="op">(</span><span class="st">"warning"</span>, <span class="st">"warning"</span>, status <span class="op">=</span> <span class="st">"warning"</span><span class="op">)</span>,</span>
-<span class="r-in">    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span><span class="st">""</span>, <span class="st">"danger"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">      <span class="fu">bsPop</span><span class="op">(</span><span class="st">"danger"</span>, <span class="st">"danger"</span>, status <span class="op">=</span> <span class="st">"danger"</span><span class="op">)</span></span>
-<span class="r-in">  <span class="op">)</span></span>
-<span class="r-in">  <span class="va">server</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span>, <span class="va">session</span><span class="op">)</span> <span class="op">{</span><span class="op">}</span></span>
-<span class="r-in">  <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/shinyApp.html" class="external-link">shinyApp</a></span><span class="op">(</span><span class="va">ui</span>, <span class="va">server</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.rstudio.com/" class="external-link">shiny</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://magrittr.tidyverse.org" class="external-link">magrittr</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/fluidPage.html" class="external-link">fluidPage</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/column.html" class="external-link">column</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span><span class="st">""</span>, <span class="st">"Popover on the left"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>      <span class="fu">bsPopover</span><span class="op">(</span><span class="st">"Popover on the left"</span>, <span class="st">"content"</span>, <span class="st">"left"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span><span class="st">""</span>, <span class="st">"Popover on the top"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>      <span class="fu">bsPopover</span><span class="op">(</span><span class="st">"Popover on the top"</span>, <span class="st">"content"</span>, <span class="st">"top"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span><span class="st">""</span>, <span class="st">"Popover on the right"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>      <span class="fu">bsPopover</span><span class="op">(</span><span class="st">"Popover on the right"</span>, <span class="st">"content"</span>, <span class="st">"right"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span><span class="st">""</span>, <span class="st">"Popover on the bottom"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>      <span class="fu">bsPopover</span><span class="op">(</span><span class="st">"Popover on the bottom"</span>, <span class="st">"content"</span>, <span class="st">"bottom"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/column.html" class="external-link">column</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span><span class="st">""</span>, <span class="st">"primary color"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>      <span class="fu">bsPopover</span><span class="op">(</span></span></span>
+<span class="r-in"><span>        <span class="st">"primary color"</span>, <span class="st">"content"</span>, bgcolor <span class="op">=</span> <span class="st">"#0275d8"</span>,</span></span>
+<span class="r-in"><span>        titlecolor <span class="op">=</span> <span class="st">"white"</span>, contentcolor <span class="op">=</span> <span class="st">"#0275d8"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span><span class="st">""</span>, <span class="st">"danger color"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>      <span class="fu">bsPopover</span><span class="op">(</span></span></span>
+<span class="r-in"><span>        <span class="st">"danger color"</span>,  <span class="st">"content"</span>, bgcolor <span class="op">=</span> <span class="st">"#d9534f"</span>,</span></span>
+<span class="r-in"><span>        titlecolor <span class="op">=</span> <span class="st">"white"</span>, contentcolor <span class="op">=</span> <span class="st">"#d9534f"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span><span class="st">""</span>, <span class="st">"warning color"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>      <span class="fu">bsPopover</span><span class="op">(</span></span></span>
+<span class="r-in"><span>        <span class="st">"warning color"</span>, <span class="st">"content"</span>, bgcolor <span class="op">=</span> <span class="st">"#f0ad4e"</span>,</span></span>
+<span class="r-in"><span>        titlecolor <span class="op">=</span> <span class="st">"white"</span>, contentcolor <span class="op">=</span> <span class="st">"#f0ad4e"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/column.html" class="external-link">column</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span><span class="st">""</span>, <span class="st">"9px &amp; 14px"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>      <span class="fu">bsPopover</span><span class="op">(</span><span class="st">"9px"</span>, <span class="st">"14"</span>, titlesize <span class="op">=</span> <span class="st">"9px"</span>, contentsize <span class="op">=</span> <span class="op">)</span>,</span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span><span class="st">""</span>, <span class="st">"14px &amp; 12px"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>      <span class="fu">bsPopover</span><span class="op">(</span><span class="st">"14px"</span>, <span class="st">"12"</span>, titlesize <span class="op">=</span> <span class="st">"14px"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span><span class="st">""</span>, <span class="st">"20px &amp; 9px"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>      <span class="fu">bsPopover</span><span class="op">(</span><span class="st">"20px"</span>, <span class="st">"9"</span>, titlesize <span class="op">=</span> <span class="st">"20px"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/column.html" class="external-link">column</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span><span class="st">""</span>, <span class="st">"weight 100 &amp; 800"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>      <span class="fu">bsPopover</span><span class="op">(</span><span class="st">"weight 100"</span>, <span class="st">"800"</span>, titleweight <span class="op">=</span>  <span class="st">"100"</span>, contentweight <span class="op">=</span> <span class="st">"800"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span><span class="st">""</span>, <span class="st">"weight 400 &amp; 600"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>      <span class="fu">bsPopover</span><span class="op">(</span><span class="st">"weight 400"</span>, <span class="st">"600"</span>, titleweight <span class="op">=</span>  <span class="st">"400"</span>, contentweight <span class="op">=</span> <span class="st">"600"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span><span class="st">""</span>, <span class="st">"weight 600 &amp; 400"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>      <span class="fu">bsPopover</span><span class="op">(</span><span class="st">"weight 600"</span>, <span class="st">"400"</span>, titleweight <span class="op">=</span>  <span class="st">"600"</span>, contentweight <span class="op">=</span> <span class="st">"400"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span><span class="st">""</span>, <span class="st">"weight 900 &amp; 200"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>      <span class="fu">bsPopover</span><span class="op">(</span><span class="st">"weight 900"</span>, <span class="st">"200"</span>, titleweight <span class="op">=</span>  <span class="st">"900"</span>, contentweight <span class="op">=</span> <span class="st">"200"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/column.html" class="external-link">column</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span><span class="st">""</span>, <span class="st">"opacity 0.2"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>      <span class="fu">bsPopover</span><span class="op">(</span><span class="st">"opacity 0.2"</span>, opacity <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span><span class="st">""</span>, <span class="st">"opacity 0.5"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>      <span class="fu">bsPopover</span><span class="op">(</span><span class="st">"opacity 0.5"</span>, opacity <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span><span class="st">""</span>, <span class="st">"opacity 0.8"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>      <span class="fu">bsPopover</span><span class="op">(</span><span class="st">"opacity 0.8"</span>, opacity <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span><span class="st">""</span>, <span class="st">"opacity 1"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>      <span class="fu">bsPopover</span><span class="op">(</span><span class="st">"opacity 1"</span>, opacity <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/column.html" class="external-link">column</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span><span class="st">"f1"</span>, <span class="st">"allow html: 'abc&lt;span class='text-danger'&gt;danger&lt;/span&gt;'"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>      <span class="fu">bsPopover</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/HTML.html" class="external-link">HTML</a></span><span class="op">(</span><span class="st">"abc&lt;span class='text-danger'&gt;danger&lt;/span&gt;"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                html <span class="op">=</span> <span class="cn">TRUE</span>, bgcolor <span class="op">=</span> <span class="st">"#0275d8"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span><span class="st">"f2"</span>, <span class="st">"allow html: '&lt;s&gt;del content&lt;/s&gt;'"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>      <span class="fu">bsPopover</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/HTML.html" class="external-link">HTML</a></span><span class="op">(</span><span class="st">"&lt;s&gt;del content&lt;/s&gt;"</span><span class="op">)</span>, html <span class="op">=</span> <span class="cn">TRUE</span>, bgcolor <span class="op">=</span> <span class="st">"#d9534f"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">server</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span>, <span class="va">session</span><span class="op">)</span> <span class="op">{</span><span class="op">}</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/shinyApp.html" class="external-link">shinyApp</a></span><span class="op">(</span><span class="va">ui</span>, <span class="va">server</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span><span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.rstudio.com/" class="external-link">shiny</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://magrittr.tidyverse.org" class="external-link">magrittr</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/fluidPage.html" class="external-link">fluidPage</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/column.html" class="external-link">column</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span><span class="st">""</span>, <span class="st">"primary"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>      <span class="fu">bsPop</span><span class="op">(</span><span class="st">"primary"</span>, <span class="st">"primary"</span>, status <span class="op">=</span> <span class="st">"primary"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span><span class="st">""</span>, <span class="st">"info"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>      <span class="fu">bsPop</span><span class="op">(</span><span class="st">"info"</span>, <span class="st">"info"</span>, status <span class="op">=</span> <span class="st">"info"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span><span class="st">""</span>, <span class="st">"success"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>      <span class="fu">bsPop</span><span class="op">(</span><span class="st">"success"</span>, <span class="st">"success"</span>, status <span class="op">=</span> <span class="st">"success"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span><span class="st">""</span>, <span class="st">"warning"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>      <span class="fu">bsPop</span><span class="op">(</span><span class="st">"warning"</span>, <span class="st">"warning"</span>, status <span class="op">=</span> <span class="st">"warning"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span><span class="st">""</span>, <span class="st">"danger"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>      <span class="fu">bsPop</span><span class="op">(</span><span class="st">"danger"</span>, <span class="st">"danger"</span>, status <span class="op">=</span> <span class="st">"danger"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">server</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span>, <span class="va">session</span><span class="op">)</span> <span class="op">{</span><span class="op">}</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/shinyApp.html" class="external-link">shinyApp</a></span><span class="op">(</span><span class="va">ui</span>, <span class="va">server</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -257,7 +288,7 @@ to set, one of "primary", "info", "success", "warning", "danger"</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

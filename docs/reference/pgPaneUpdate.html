@@ -19,7 +19,7 @@ A overall progress is automatically calculated on the bottom."><!-- mathjax --><
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">spsComps</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.1.99</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.1</span>
       </span>
     </div>
 
@@ -57,17 +57,17 @@ Use pgPaneUI on UI side and use <code>pgPaneUpdate</code> to update it.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">pgPaneUI</span><span class="op">(</span>
-  <span class="va">pane_id</span>,
-  <span class="va">titles</span>,
-  <span class="va">pg_ids</span>,
-  title_main <span class="op">=</span> <span class="cn">NULL</span>,
-  opened <span class="op">=</span> <span class="cn">FALSE</span>,
-  top <span class="op">=</span> <span class="st">"3%"</span>,
-  right <span class="op">=</span> <span class="st">"2%"</span>
-<span class="op">)</span>
-
-<span class="fu">pgPaneUpdate</span><span class="op">(</span><span class="va">pane_id</span>, <span class="va">pg_id</span>, <span class="va">value</span>, session <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/domains.html" class="external-link">getDefaultReactiveDomain</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">pgPaneUI</span><span class="op">(</span></span>
+<span>  <span class="va">pane_id</span>,</span>
+<span>  <span class="va">titles</span>,</span>
+<span>  <span class="va">pg_ids</span>,</span>
+<span>  title_main <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  opened <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  top <span class="op">=</span> <span class="st">"3%"</span>,</span>
+<span>  right <span class="op">=</span> <span class="st">"2%"</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">pgPaneUpdate</span><span class="op">(</span><span class="va">pane_id</span>, <span class="va">pg_id</span>, <span class="va">value</span>, session <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/domains.html" class="external-link">getDefaultReactiveDomain</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -75,76 +75,97 @@ Use pgPaneUI on UI side and use <code>pgPaneUpdate</code> to update it.</p>
     <dl><dt>pane_id</dt>
 <dd><p>Progress panel main ID, use <code>ns</code> wrap it on <code>pgPaneUI</code> but not
 on <code>pgPaneUpdate</code> if using shiny module</p></dd>
+
+
 <dt>titles</dt>
 <dd><p>labels to display for each progress, must have the same length
 as <code>pg_ids</code></p></dd>
+
+
 <dt>pg_ids</dt>
 <dd><p>a character vector of IDs for each progress. Don't forget
 to use <code>ns</code> wrap each ID.</p></dd>
+
+
 <dt>title_main</dt>
 <dd><p>If not specified and pane_id contains 'plot', title will be
 'Plot Prepare'; has 'df' will be 'Data Prepare', if neither will be
 "Progress"</p></dd>
+
+
 <dt>opened</dt>
 <dd><p>bool, if this panel is opened at start</p></dd>
+
+
 <dt>top</dt>
 <dd><p>css style off set to the current windown top</p></dd>
+
+
 <dt>right</dt>
 <dd><p>css style off set to the current windown right</p></dd>
+
+
 <dt>pg_id</dt>
 <dd><p>a character string of ID indicating which progress within this
 panel you want to update.
 Do not use <code>ns(pg_id)</code> to wrap it on server</p></dd>
+
+
 <dt>value</dt>
 <dd><p>0-100 number to update the progress you use <code>pg_id</code> to
 choose</p></dd>
+
+
 <dt>session</dt>
 <dd><p>current shiny session</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>returns HTML elements</p>
+    
+
+<p>returns HTML elements</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span>
-<span class="r-in">    <span class="co"># try to slide c under 0</span></span>
-<span class="r-in">    <span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/fluidPage.html" class="external-link">fluidPage</a></span><span class="op">(</span></span>
-<span class="r-in">        <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">h4</a></span><span class="op">(</span><span class="st">"Use your mouse to drag it"</span><span class="op">)</span>,</span>
-<span class="r-in">        <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"a"</span><span class="op">)</span>,</span>
-<span class="r-in">        <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span><span class="st">"b"</span>, <span class="st">"b"</span><span class="op">)</span>,</span>
-<span class="r-in">        <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/sliderInput.html" class="external-link">sliderInput</a></span><span class="op">(</span><span class="st">"c"</span>, min <span class="op">=</span> <span class="op">-</span><span class="fl">100</span>,</span>
-<span class="r-in">                    max <span class="op">=</span> <span class="fl">100</span>, value <span class="op">=</span> <span class="fl">0</span>,</span>
-<span class="r-in">                    label <span class="op">=</span> <span class="st">"c"</span><span class="op">)</span>,</span>
-<span class="r-in">        <span class="fu">pgPaneUI</span><span class="op">(</span></span>
-<span class="r-in">            pane_id <span class="op">=</span> <span class="st">"thispg"</span>,</span>
-<span class="r-in">            titles <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"this a"</span>, <span class="st">"this b"</span>, <span class="st">" this c"</span><span class="op">)</span>,</span>
-<span class="r-in">            pg_ids <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span><span class="op">)</span>,</span>
-<span class="r-in">            title_main <span class="op">=</span> <span class="st">"Example Progress"</span>,</span>
-<span class="r-in">            opened <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span class="r-in">            top <span class="op">=</span> <span class="st">"30%"</span>,</span>
-<span class="r-in">            right <span class="op">=</span> <span class="st">"50%"</span></span>
-<span class="r-in">        <span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in">    <span class="op">)</span></span>
-<span class="r-in">    <span class="va">server</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span>, <span class="va">session</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">        <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">a</span>, <span class="op">{</span></span>
-<span class="r-in">            <span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span><span class="op">{</span></span>
-<span class="r-in">                <span class="fu">pgPaneUpdate</span><span class="op">(</span><span class="st">"thispg"</span>, <span class="st">"a"</span>, <span class="va">i</span><span class="op">*</span><span class="fl">10</span><span class="op">)</span></span>
-<span class="r-in">                <span class="fu"><a href="https://rdrr.io/r/base/Sys.sleep.html" class="external-link">Sys.sleep</a></span><span class="op">(</span><span class="fl">0.3</span><span class="op">)</span></span>
-<span class="r-in">            <span class="op">}</span></span>
-<span class="r-in">        <span class="op">}</span><span class="op">)</span></span>
-<span class="r-in">        <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">b</span>, <span class="op">{</span></span>
-<span class="r-in">            <span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span><span class="op">{</span></span>
-<span class="r-in">                <span class="fu">pgPaneUpdate</span><span class="op">(</span><span class="st">"thispg"</span>, <span class="st">"b"</span>, <span class="va">i</span><span class="op">*</span><span class="fl">10</span><span class="op">)</span></span>
-<span class="r-in">                <span class="fu"><a href="https://rdrr.io/r/base/Sys.sleep.html" class="external-link">Sys.sleep</a></span><span class="op">(</span><span class="fl">0.3</span><span class="op">)</span></span>
-<span class="r-in">            <span class="op">}</span></span>
-<span class="r-in">        <span class="op">}</span><span class="op">)</span></span>
-<span class="r-in">        <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">c</span>, <span class="fu">pgPaneUpdate</span><span class="op">(</span><span class="st">"thispg"</span>, <span class="st">"c"</span>, <span class="va">input</span><span class="op">$</span><span class="va">c</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in">    <span class="op">}</span></span>
-<span class="r-in">    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/shinyApp.html" class="external-link">shinyApp</a></span><span class="op">(</span><span class="va">ui</span>, <span class="va">server</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span></span>
+<span class="r-in"><span>    <span class="co"># try to slide c under 0</span></span></span>
+<span class="r-in"><span>    <span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/fluidPage.html" class="external-link">fluidPage</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>        <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">h4</a></span><span class="op">(</span><span class="st">"Use your mouse to drag it"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>        <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"a"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>        <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span><span class="st">"b"</span>, <span class="st">"b"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>        <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/sliderInput.html" class="external-link">sliderInput</a></span><span class="op">(</span><span class="st">"c"</span>, min <span class="op">=</span> <span class="op">-</span><span class="fl">100</span>,</span></span>
+<span class="r-in"><span>                    max <span class="op">=</span> <span class="fl">100</span>, value <span class="op">=</span> <span class="fl">0</span>,</span></span>
+<span class="r-in"><span>                    label <span class="op">=</span> <span class="st">"c"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>        <span class="fu">pgPaneUI</span><span class="op">(</span></span></span>
+<span class="r-in"><span>            pane_id <span class="op">=</span> <span class="st">"thispg"</span>,</span></span>
+<span class="r-in"><span>            titles <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"this a"</span>, <span class="st">"this b"</span>, <span class="st">" this c"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>            pg_ids <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>            title_main <span class="op">=</span> <span class="st">"Example Progress"</span>,</span></span>
+<span class="r-in"><span>            opened <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
+<span class="r-in"><span>            top <span class="op">=</span> <span class="st">"30%"</span>,</span></span>
+<span class="r-in"><span>            right <span class="op">=</span> <span class="st">"50%"</span></span></span>
+<span class="r-in"><span>        <span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>    <span class="op">)</span></span></span>
+<span class="r-in"><span>    <span class="va">server</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span>, <span class="va">session</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>        <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">a</span>, <span class="op">{</span></span></span>
+<span class="r-in"><span>            <span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span><span class="op">{</span></span></span>
+<span class="r-in"><span>                <span class="fu">pgPaneUpdate</span><span class="op">(</span><span class="st">"thispg"</span>, <span class="st">"a"</span>, <span class="va">i</span><span class="op">*</span><span class="fl">10</span><span class="op">)</span></span></span>
+<span class="r-in"><span>                <span class="fu"><a href="https://rdrr.io/r/base/Sys.sleep.html" class="external-link">Sys.sleep</a></span><span class="op">(</span><span class="fl">0.3</span><span class="op">)</span></span></span>
+<span class="r-in"><span>            <span class="op">}</span></span></span>
+<span class="r-in"><span>        <span class="op">}</span><span class="op">)</span></span></span>
+<span class="r-in"><span>        <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">b</span>, <span class="op">{</span></span></span>
+<span class="r-in"><span>            <span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span><span class="op">{</span></span></span>
+<span class="r-in"><span>                <span class="fu">pgPaneUpdate</span><span class="op">(</span><span class="st">"thispg"</span>, <span class="st">"b"</span>, <span class="va">i</span><span class="op">*</span><span class="fl">10</span><span class="op">)</span></span></span>
+<span class="r-in"><span>                <span class="fu"><a href="https://rdrr.io/r/base/Sys.sleep.html" class="external-link">Sys.sleep</a></span><span class="op">(</span><span class="fl">0.3</span><span class="op">)</span></span></span>
+<span class="r-in"><span>            <span class="op">}</span></span></span>
+<span class="r-in"><span>        <span class="op">}</span><span class="op">)</span></span></span>
+<span class="r-in"><span>        <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">c</span>, <span class="fu">pgPaneUpdate</span><span class="op">(</span><span class="st">"thispg"</span>, <span class="st">"c"</span>, <span class="va">input</span><span class="op">$</span><span class="va">c</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    <span class="op">}</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/shinyApp.html" class="external-link">shinyApp</a></span><span class="op">(</span><span class="va">ui</span>, <span class="va">server</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -159,7 +180,7 @@ choose</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

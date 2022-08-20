@@ -19,7 +19,7 @@ generates a panel of hex logos"><!-- mathjax --><script src="https://cdnjs.cloud
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">spsComps</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.1.99</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.1</span>
       </span>
     </div>
 
@@ -57,75 +57,108 @@ generates a panel of hex logos</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">hexLogo</span><span class="op">(</span>
-  <span class="va">id</span>,
-  title <span class="op">=</span> <span class="st">""</span>,
-  <span class="va">hex_img</span>,
-  hex_link <span class="op">=</span> <span class="st">""</span>,
-  footer <span class="op">=</span> <span class="st">""</span>,
-  footer_link <span class="op">=</span> <span class="st">""</span>,
-  x <span class="op">=</span> <span class="st">"-10"</span>,
-  y <span class="op">=</span> <span class="st">"-20"</span>,
-  target_blank <span class="op">=</span> <span class="cn">FALSE</span>
-<span class="op">)</span>
-
-<span class="fu">hexPanel</span><span class="op">(</span>
-  <span class="va">id</span>,
-  <span class="va">title</span>,
-  <span class="va">hex_imgs</span>,
-  hex_links <span class="op">=</span> <span class="cn">NULL</span>,
-  hex_titles <span class="op">=</span> <span class="cn">NULL</span>,
-  footers <span class="op">=</span> <span class="cn">NULL</span>,
-  footer_links <span class="op">=</span> <span class="cn">NULL</span>,
-  xs <span class="op">=</span> <span class="cn">NULL</span>,
-  ys <span class="op">=</span> <span class="cn">NULL</span>,
-  target_blank <span class="op">=</span> <span class="cn">FALSE</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">hexLogo</span><span class="op">(</span></span>
+<span>  <span class="va">id</span>,</span>
+<span>  title <span class="op">=</span> <span class="st">""</span>,</span>
+<span>  <span class="va">hex_img</span>,</span>
+<span>  hex_link <span class="op">=</span> <span class="st">""</span>,</span>
+<span>  footer <span class="op">=</span> <span class="st">""</span>,</span>
+<span>  footer_link <span class="op">=</span> <span class="st">""</span>,</span>
+<span>  x <span class="op">=</span> <span class="st">"-10"</span>,</span>
+<span>  y <span class="op">=</span> <span class="st">"-20"</span>,</span>
+<span>  target_blank <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">hexPanel</span><span class="op">(</span></span>
+<span>  <span class="va">id</span>,</span>
+<span>  <span class="va">title</span>,</span>
+<span>  <span class="va">hex_imgs</span>,</span>
+<span>  hex_links <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  hex_titles <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  footers <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  footer_links <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  xs <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  ys <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  target_blank <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>id</dt>
 <dd><p>input ID</p></dd>
+
+
 <dt>title</dt>
 <dd><p>title of the logo, display on top of logo or title of logo panel
 displayed on the left</p></dd>
+
+
 <dt>hex_img</dt>
 <dd><p>single value of <code>hex_imgs</code></p></dd>
+
+
 <dt>hex_link</dt>
 <dd><p>single value of <code>hex_links</code></p></dd>
+
+
 <dt>footer</dt>
 <dd><p>single value of <code>footers</code></p></dd>
+
+
 <dt>footer_link</dt>
 <dd><p>single value of <code>footer_links</code></p></dd>
+
+
 <dt>x</dt>
 <dd><p>number, X offset, e.g. "-10" instead of -10L</p></dd>
+
+
 <dt>y</dt>
 <dd><p>number, Y offset</p></dd>
+
+
 <dt>target_blank</dt>
 <dd><p>bool, whether to add <code>target="_blank"</code> to the link?</p></dd>
+
+
 <dt>hex_imgs</dt>
 <dd><p>a character vector of logo image source, can be online or
 local, see details</p></dd>
+
+
 <dt>hex_links</dt>
 <dd><p>a character vector of links attached to each logo, if not
 <code>NULL</code>, must be the same length as <code>hex_imgs</code></p></dd>
+
+
 <dt>hex_titles</dt>
 <dd><p>similar to <code>hex_links</code>, titles of each logo</p></dd>
+
+
 <dt>footers</dt>
 <dd><p>a character vector of footer attached to each logo</p></dd>
+
+
 <dt>footer_links</dt>
 <dd><p>a character vector of footer links, if not <code>NULL</code>,
 must be the same length as <code>footers</code></p></dd>
+
+
 <dt>xs</dt>
 <dd><p>a character vector X coordinate offset value for each logo image,
 default -10, mist be the same length as <code>hex_imgs</code></p></dd>
+
+
 <dt>ys</dt>
 <dd><p>Y coordinates offset, must be the same length as <code>xs</code>, default -20</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>HTML elements, tagList</p>
+    
+
+<p>HTML elements, tagList</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -147,58 +180,58 @@ occupy space in the vector. e.g. I have 3 logos, but I only want to add
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span>
-<span class="r-in">    <span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/fluidPage.html" class="external-link">fluidPage</a></span><span class="op">(</span></span>
-<span class="r-in">        <span class="fu">hexLogo</span><span class="op">(</span></span>
-<span class="r-in">            <span class="st">"logo"</span>, <span class="st">"Logo"</span>,</span>
-<span class="r-in">            hex_img <span class="op">=</span> <span class="st">"https://live.staticflickr.com/7875/46106952034_954b8775fa_b.jpg"</span>,</span>
-<span class="r-in">            hex_link <span class="op">=</span> <span class="st">"https://www.google.com"</span>,</span>
-<span class="r-in">            footer <span class="op">=</span> <span class="st">"Footer"</span>,</span>
-<span class="r-in">            footer_link <span class="op">=</span> <span class="st">"https://www.google.com"</span></span>
-<span class="r-in">        <span class="op">)</span>,</span>
-<span class="r-in">        <span class="fu">hexLogo</span><span class="op">(</span></span>
-<span class="r-in">            <span class="st">"x"</span>, <span class="st">"Change X offset"</span>,</span>
-<span class="r-in">            hex_img <span class="op">=</span> <span class="st">"https://live.staticflickr.com/7875/46106952034_954b8775fa_b.jpg"</span>,</span>
-<span class="r-in">            x <span class="op">=</span> <span class="st">"40"</span></span>
-<span class="r-in">        <span class="op">)</span>,</span>
-<span class="r-in">        <span class="fu">hexLogo</span><span class="op">(</span></span>
-<span class="r-in">            <span class="st">"y"</span>, <span class="st">"Change Y offset"</span>,</span>
-<span class="r-in">            hex_img <span class="op">=</span> <span class="st">"https://live.staticflickr.com/7875/46106952034_954b8775fa_b.jpg"</span>,</span>
-<span class="r-in">            y <span class="op">=</span> <span class="st">"-60"</span></span>
-<span class="r-in">        <span class="op">)</span>,</span>
-<span class="r-in">        <span class="fu">hexPanel</span><span class="op">(</span></span>
-<span class="r-in">            <span class="st">"demo1"</span>, <span class="st">"basic panel:"</span> ,</span>
-<span class="r-in">            <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"https://live.staticflickr.com/7875/46106952034_954b8775fa_b.jpg"</span>, <span class="fl">2</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in">        <span class="op">)</span>,</span>
-<span class="r-in">        <span class="fu">hexPanel</span><span class="op">(</span></span>
-<span class="r-in">            <span class="st">"demo2"</span>, <span class="st">"panel with links:"</span> ,</span>
-<span class="r-in">            <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"https://d33wubrfki0l68.cloudfront.net/"</span>,</span>
-<span class="r-in">              <span class="st">"2c6239d311be6d037c251c71c3902792f8c4ddd2/12f67/css/images/hex/ggplot2.png"</span><span class="op">)</span>,</span>
-<span class="r-in">              <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"https://d33wubrfki0l68.cloudfront.net/"</span>,</span>
-<span class="r-in">              <span class="st">"621a9c8c5d7b47c4b6d72e8f01f28d14310e8370/193fc/css/images/hex/dplyr.png"</span><span class="op">)</span></span>
-<span class="r-in">            <span class="op">)</span>,</span>
-<span class="r-in">            <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"https://ggplot2.tidyverse.org/"</span>, <span class="st">"https://dplyr.tidyverse.org/"</span><span class="op">)</span>,</span>
-<span class="r-in">            <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ggplot2"</span>, <span class="st">"dplyr"</span><span class="op">)</span></span>
-<span class="r-in">        <span class="op">)</span>,</span>
-<span class="r-in">        <span class="fu">hexPanel</span><span class="op">(</span></span>
-<span class="r-in">            <span class="st">"demo3"</span>, <span class="st">"footer with links:"</span> ,</span>
-<span class="r-in">            <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"https://live.staticflickr.com/7875/46106952034_954b8775fa_b.jpg"</span>, <span class="fl">2</span><span class="op">)</span>,</span>
-<span class="r-in">            footers <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"hex1"</span>, <span class="st">"hex2"</span><span class="op">)</span>,</span>
-<span class="r-in">            footer_links <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"https://www.google.com"</span>, <span class="fl">2</span><span class="op">)</span></span>
-<span class="r-in">        <span class="op">)</span>,</span>
-<span class="r-in">        <span class="fu">hexPanel</span><span class="op">(</span></span>
-<span class="r-in">            <span class="st">"demo4"</span>, <span class="st">"panel offsets"</span> ,</span>
-<span class="r-in">            hex_imgs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"https://live.staticflickr.com/7875/46106952034_954b8775fa_b.jpg"</span>, <span class="fl">4</span><span class="op">)</span>,</span>
-<span class="r-in">            footers <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"hex"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">)</span>,</span>
-<span class="r-in">            ys <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">20</span>, <span class="op">-</span><span class="fl">50</span>, by <span class="op">=</span> <span class="op">-</span><span class="fl">10</span><span class="op">)</span>,</span>
-<span class="r-in">            xs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">20</span>, <span class="fl">50</span>, by <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
-<span class="r-in">        <span class="op">)</span></span>
-<span class="r-in">    <span class="op">)</span></span>
-<span class="r-in">    <span class="va">server</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span>, <span class="va">session</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">    <span class="op">}</span></span>
-<span class="r-in">    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/shinyApp.html" class="external-link">shinyApp</a></span><span class="op">(</span><span class="va">ui</span>, <span class="va">server</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span></span>
+<span class="r-in"><span>    <span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/fluidPage.html" class="external-link">fluidPage</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>        <span class="fu">hexLogo</span><span class="op">(</span></span></span>
+<span class="r-in"><span>            <span class="st">"logo"</span>, <span class="st">"Logo"</span>,</span></span>
+<span class="r-in"><span>            hex_img <span class="op">=</span> <span class="st">"https://live.staticflickr.com/7875/46106952034_954b8775fa_b.jpg"</span>,</span></span>
+<span class="r-in"><span>            hex_link <span class="op">=</span> <span class="st">"https://www.google.com"</span>,</span></span>
+<span class="r-in"><span>            footer <span class="op">=</span> <span class="st">"Footer"</span>,</span></span>
+<span class="r-in"><span>            footer_link <span class="op">=</span> <span class="st">"https://www.google.com"</span></span></span>
+<span class="r-in"><span>        <span class="op">)</span>,</span></span>
+<span class="r-in"><span>        <span class="fu">hexLogo</span><span class="op">(</span></span></span>
+<span class="r-in"><span>            <span class="st">"x"</span>, <span class="st">"Change X offset"</span>,</span></span>
+<span class="r-in"><span>            hex_img <span class="op">=</span> <span class="st">"https://live.staticflickr.com/7875/46106952034_954b8775fa_b.jpg"</span>,</span></span>
+<span class="r-in"><span>            x <span class="op">=</span> <span class="st">"40"</span></span></span>
+<span class="r-in"><span>        <span class="op">)</span>,</span></span>
+<span class="r-in"><span>        <span class="fu">hexLogo</span><span class="op">(</span></span></span>
+<span class="r-in"><span>            <span class="st">"y"</span>, <span class="st">"Change Y offset"</span>,</span></span>
+<span class="r-in"><span>            hex_img <span class="op">=</span> <span class="st">"https://live.staticflickr.com/7875/46106952034_954b8775fa_b.jpg"</span>,</span></span>
+<span class="r-in"><span>            y <span class="op">=</span> <span class="st">"-60"</span></span></span>
+<span class="r-in"><span>        <span class="op">)</span>,</span></span>
+<span class="r-in"><span>        <span class="fu">hexPanel</span><span class="op">(</span></span></span>
+<span class="r-in"><span>            <span class="st">"demo1"</span>, <span class="st">"basic panel:"</span> ,</span></span>
+<span class="r-in"><span>            <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"https://live.staticflickr.com/7875/46106952034_954b8775fa_b.jpg"</span>, <span class="fl">2</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>        <span class="op">)</span>,</span></span>
+<span class="r-in"><span>        <span class="fu">hexPanel</span><span class="op">(</span></span></span>
+<span class="r-in"><span>            <span class="st">"demo2"</span>, <span class="st">"panel with links:"</span> ,</span></span>
+<span class="r-in"><span>            <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"https://d33wubrfki0l68.cloudfront.net/"</span>,</span></span>
+<span class="r-in"><span>              <span class="st">"2c6239d311be6d037c251c71c3902792f8c4ddd2/12f67/css/images/hex/ggplot2.png"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>              <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"https://d33wubrfki0l68.cloudfront.net/"</span>,</span></span>
+<span class="r-in"><span>              <span class="st">"621a9c8c5d7b47c4b6d72e8f01f28d14310e8370/193fc/css/images/hex/dplyr.png"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>            <span class="op">)</span>,</span></span>
+<span class="r-in"><span>            <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"https://ggplot2.tidyverse.org/"</span>, <span class="st">"https://dplyr.tidyverse.org/"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>            <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ggplot2"</span>, <span class="st">"dplyr"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>        <span class="op">)</span>,</span></span>
+<span class="r-in"><span>        <span class="fu">hexPanel</span><span class="op">(</span></span></span>
+<span class="r-in"><span>            <span class="st">"demo3"</span>, <span class="st">"footer with links:"</span> ,</span></span>
+<span class="r-in"><span>            <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"https://live.staticflickr.com/7875/46106952034_954b8775fa_b.jpg"</span>, <span class="fl">2</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>            footers <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"hex1"</span>, <span class="st">"hex2"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>            footer_links <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"https://www.google.com"</span>, <span class="fl">2</span><span class="op">)</span></span></span>
+<span class="r-in"><span>        <span class="op">)</span>,</span></span>
+<span class="r-in"><span>        <span class="fu">hexPanel</span><span class="op">(</span></span></span>
+<span class="r-in"><span>            <span class="st">"demo4"</span>, <span class="st">"panel offsets"</span> ,</span></span>
+<span class="r-in"><span>            hex_imgs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"https://live.staticflickr.com/7875/46106952034_954b8775fa_b.jpg"</span>, <span class="fl">4</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>            footers <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"hex"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>            ys <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">20</span>, <span class="op">-</span><span class="fl">50</span>, by <span class="op">=</span> <span class="op">-</span><span class="fl">10</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>            xs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">20</span>, <span class="fl">50</span>, by <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></span>
+<span class="r-in"><span>        <span class="op">)</span></span></span>
+<span class="r-in"><span>    <span class="op">)</span></span></span>
+<span class="r-in"><span>    <span class="va">server</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span>, <span class="va">session</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>    <span class="op">}</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/shinyApp.html" class="external-link">shinyApp</a></span><span class="op">(</span><span class="va">ui</span>, <span class="va">server</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -213,7 +246,7 @@ occupy space in the vector. e.g. I have 3 logos, but I only want to add
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

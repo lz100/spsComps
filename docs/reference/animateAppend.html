@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">spsComps</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.1.99</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.1</span>
       </span>
     </div>
 
@@ -53,16 +53,16 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">animateAppend</span><span class="op">(</span><span class="va">element</span>, <span class="va">animation</span>, speed <span class="op">=</span> <span class="cn">NULL</span>, hover <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-
-<span class="fu">animateAppendNested</span><span class="op">(</span>
-  <span class="va">element</span>,
-  <span class="va">animation</span>,
-  speed <span class="op">=</span> <span class="cn">NULL</span>,
-  hover <span class="op">=</span> <span class="cn">FALSE</span>,
-  display <span class="op">=</span> <span class="st">"inline-block"</span>,
-  <span class="va">...</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">animateAppend</span><span class="op">(</span><span class="va">element</span>, <span class="va">animation</span>, speed <span class="op">=</span> <span class="cn">NULL</span>, hover <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">animateAppendNested</span><span class="op">(</span></span>
+<span>  <span class="va">element</span>,</span>
+<span>  <span class="va">animation</span>,</span>
+<span>  speed <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  hover <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  display <span class="op">=</span> <span class="st">"inline-block"</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -70,25 +70,38 @@
     <dl><dt>element</dt>
 <dd><p>the shiny element to append, must have "shiny.tag" class for
 <code>animateAppend</code> and can be either "shiny.tag" or "shiny.tag.list" for <code>animateAppendNested</code>.</p></dd>
+
+
 <dt>animation</dt>
 <dd><p>what kind of animation you want, one of "wrench", "ring",
 "horizontal", "horizontal-reverse", "vertical", "flash", "bounce", "bounce-reverse",
 "spin", "spin-reverse", "float", "pulse", "shake", "tada", "passing", "passing-reverse",
 "burst", "falling", "falling-reverse", "rising"s
 See our online demo for details.</p></dd>
+
+
 <dt>speed</dt>
 <dd><p>string, one of "fast", "slow"</p></dd>
+
+
 <dt>hover</dt>
 <dd><p>bool, trigger animation on hover?</p></dd>
+
+
 <dt>display</dt>
 <dd><p>string, CSS display method for the out-most wrapper, one of the v
 alid css display method, like "block", "inline", "flex", default is "inline-block".</p></dd>
+
+
 <dt>...</dt>
 <dd><p>other attributes add to the wrapper, for <code>animateAppendNested</code> only</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>returns a Shiny element</p>
+    
+
+<p>returns a Shiny element</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -116,32 +129,32 @@ fix the issues. It is <strong>safer</strong> to use <code>animateAppend</code>.<
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span>
-<span class="r-in">  <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.rstudio.com/" class="external-link">shiny</a></span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in">  <span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/fluidPage.html" class="external-link">fluidPage</a></span><span class="op">(</span></span>
-<span class="r-in">    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/icon.html" class="external-link">icon</a></span><span class="op">(</span><span class="st">"home"</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span class="r-in">      <span class="fu">animateAppend</span><span class="op">(</span><span class="st">"ring"</span><span class="op">)</span>,</span>
-<span class="r-in">    <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">h2</a></span><span class="op">(</span><span class="st">"Append animation"</span>, class <span class="op">=</span> <span class="st">"text-primary"</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span class="r-in">      <span class="fu">animateAppend</span><span class="op">(</span><span class="st">"pulse"</span><span class="op">)</span>,</span>
-<span class="r-in">    <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span class="r-in">    <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">h2</a></span><span class="op">(</span><span class="st">"Nested animations"</span>, class <span class="op">=</span> <span class="st">"text-primary"</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span class="r-in">      <span class="fu">animateAppendNested</span><span class="op">(</span><span class="st">"ring"</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span class="r-in">      <span class="fu">animateAppendNested</span><span class="op">(</span><span class="st">"pulse"</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span class="r-in">      <span class="fu">animateAppendNested</span><span class="op">(</span><span class="st">"passing"</span><span class="op">)</span>,</span>
-<span class="r-in">    <span class="va">tags</span><span class="op">$</span><span class="fu">span</span><span class="op">(</span><span class="st">"Other things"</span><span class="op">)</span>,</span>
-<span class="r-in">    <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">h2</a></span><span class="op">(</span><span class="st">"Nested animations display changed"</span>, class <span class="op">=</span> <span class="st">"text-primary"</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span class="r-in">      <span class="fu">animateAppendNested</span><span class="op">(</span><span class="st">"ring"</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span class="r-in">      <span class="fu">animateAppendNested</span><span class="op">(</span><span class="st">"pulse"</span>, display <span class="op">=</span> <span class="st">"block"</span>, style <span class="op">=</span> <span class="st">"width: 30%"</span><span class="op">)</span>,</span>
-<span class="r-in">    <span class="va">tags</span><span class="op">$</span><span class="fu">span</span><span class="op">(</span><span class="st">"Other things"</span><span class="op">)</span></span>
-<span class="r-in">  <span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in">  <span class="va">server</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span>, <span class="va">session</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"></span>
-<span class="r-in">  <span class="op">}</span></span>
-<span class="r-in"></span>
-<span class="r-in">  <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/shinyApp.html" class="external-link">shinyApp</a></span><span class="op">(</span><span class="va">ui</span>, <span class="va">server</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.rstudio.com/" class="external-link">shiny</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/fluidPage.html" class="external-link">fluidPage</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/icon.html" class="external-link">icon</a></span><span class="op">(</span><span class="st">"home"</span><span class="op">)</span> <span class="op">%&gt;%</span></span></span>
+<span class="r-in"><span>      <span class="fu">animateAppend</span><span class="op">(</span><span class="st">"ring"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">h2</a></span><span class="op">(</span><span class="st">"Append animation"</span>, class <span class="op">=</span> <span class="st">"text-primary"</span><span class="op">)</span> <span class="op">%&gt;%</span></span></span>
+<span class="r-in"><span>      <span class="fu">animateAppend</span><span class="op">(</span><span class="st">"pulse"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">h2</a></span><span class="op">(</span><span class="st">"Nested animations"</span>, class <span class="op">=</span> <span class="st">"text-primary"</span><span class="op">)</span> <span class="op">%&gt;%</span></span></span>
+<span class="r-in"><span>      <span class="fu">animateAppendNested</span><span class="op">(</span><span class="st">"ring"</span><span class="op">)</span> <span class="op">%&gt;%</span></span></span>
+<span class="r-in"><span>      <span class="fu">animateAppendNested</span><span class="op">(</span><span class="st">"pulse"</span><span class="op">)</span> <span class="op">%&gt;%</span></span></span>
+<span class="r-in"><span>      <span class="fu">animateAppendNested</span><span class="op">(</span><span class="st">"passing"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    <span class="va">tags</span><span class="op">$</span><span class="fu">span</span><span class="op">(</span><span class="st">"Other things"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">h2</a></span><span class="op">(</span><span class="st">"Nested animations display changed"</span>, class <span class="op">=</span> <span class="st">"text-primary"</span><span class="op">)</span> <span class="op">%&gt;%</span></span></span>
+<span class="r-in"><span>      <span class="fu">animateAppendNested</span><span class="op">(</span><span class="st">"ring"</span><span class="op">)</span> <span class="op">%&gt;%</span></span></span>
+<span class="r-in"><span>      <span class="fu">animateAppendNested</span><span class="op">(</span><span class="st">"pulse"</span>, display <span class="op">=</span> <span class="st">"block"</span>, style <span class="op">=</span> <span class="st">"width: 30%"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    <span class="va">tags</span><span class="op">$</span><span class="fu">span</span><span class="op">(</span><span class="st">"Other things"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="va">server</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span>, <span class="va">session</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/shinyApp.html" class="external-link">shinyApp</a></span><span class="op">(</span><span class="va">ui</span>, <span class="va">server</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -156,7 +169,7 @@ fix the issues. It is <strong>safer</strong> to use <code>animateAppend</code>.<
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>
