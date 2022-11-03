@@ -23,7 +23,7 @@ details."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/ma
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">spsComps</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.99</span>
       </span>
     </div>
 
@@ -113,7 +113,7 @@ for icons and other elements, like <a href="animateUI.html">animateServer</a>. j
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># list all options</span></span></span>
 <span class="r-in"><span><span class="fu">spsDepend</span><span class="op">(</span><span class="st">""</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span><span style="color: #FFAF00; font-weight: bold;">[WARNING] 2022-08-20 07:25:30 Dependency "" not found.</span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span><span style="color: #FFAF00; font-weight: bold;">[WARNING] 2022-11-03 07:27:27 Dependency "" not found.</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> - basic: spsComps basic css and js</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> - css_loading: for css loaders</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> - update_pg: spsComps [pgPaneUpdate] function required, js and css</span>
@@ -131,7 +131,7 @@ for icons and other elements, like <a href="animateUI.html">animateServer</a>. j
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> List of 10</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ name      : chr "spsComps-js"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ version   : chr "0.3.2.1"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ version   : chr "0.3.2.99"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ src       :List of 2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ href: chr "spsComps"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ file: chr "assets"</span>
@@ -147,7 +147,7 @@ for icons and other elements, like <a href="animateUI.html">animateServer</a>. j
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[2]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> List of 10</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ name      : chr "spsComps-css"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ version   : chr "0.3.2.1"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ version   : chr "0.3.2.99"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ src       :List of 2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ href: chr "spsComps"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ file: chr "assets"</span>
@@ -161,13 +161,10 @@ for icons and other elements, like <a href="animateUI.html">animateServer</a>. j
 <span class="r-out co"><span class="r-pr">#&gt;</span>  - attr(*, "class")= chr "html_dependency"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="fu">spsDepend</span><span class="op">(</span><span class="st">"font-awesome"</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> The `name` provided ('home') is deprecated in Font Awesome 6:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> * please consider using 'house' or 'fas fa-house' instead</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> * use the `verify_fa = FALSE` to deactivate these messages</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> List of 10</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ name      : chr "font-awesome"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ version   : chr "6.1.1"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ version   : chr "6.2.0"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ src       :List of 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ file: chr "fontawesome"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ meta      : NULL</span>
@@ -184,7 +181,7 @@ for icons and other elements, like <a href="animateUI.html">animateServer</a>. j
 <span class="r-in"><span>    <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.rstudio.com/" class="external-link">shiny</a></span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span>    <span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/fluidPage.html" class="external-link">fluidPage</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>      <span class="va">tags</span><span class="op">$</span><span class="fu">i</span><span class="op">(</span>class <span class="op">=</span> <span class="st">"fa fa-home"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>      <span class="va">tags</span><span class="op">$</span><span class="fu">i</span><span class="op">(</span>class <span class="op">=</span> <span class="st">"fa fa-house"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>      <span class="fu">spsDepend</span><span class="op">(</span><span class="st">"font-awesome"</span><span class="op">)</span></span></span>
 <span class="r-in"><span>    <span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
