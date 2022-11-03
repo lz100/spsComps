@@ -47,7 +47,7 @@ if(interactive()){
         textInputGroup("id2", "right", right_text = "b"),
         textInputGroup("id3", "both", left_text = "$", right_text = ".00"),
         textInputGroup("id4", "none"),
-        textInputGroup("id5", "icon", left_text = icon("home")),
+        textInputGroup("id5", "icon", left_text = icon("house")),
     )
 
     server <- function(input, output, session) {

@@ -59,7 +59,7 @@ if(interactive()){
       textButton(
         textId = "tbtn-icon",
         label = "change icon and color",
-        btn_icon = icon("home"),
+        btn_icon = icon("house"),
         class = "btn-warning" # pass to the button
       ),
       textButton(

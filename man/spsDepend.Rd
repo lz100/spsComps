@@ -56,7 +56,7 @@ if(interactive()){
     library(shiny)
 
     ui <- fluidPage(
-      tags$i(class = "fa fa-home"),
+      tags$i(class = "fa fa-house"),
       spsDepend("font-awesome")
     )
 

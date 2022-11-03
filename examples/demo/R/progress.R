@@ -97,7 +97,7 @@ uiProgress <- function(id) {
             ns("timeline"),
             up_labels = c("2000", "2001", "2003", "2004", "2005", "2006"),
             down_labels = c("step 1", "step 2", "step 3", "step 4", "step 5", "step 6"),
-            icons = list(icon("table"), icon("cog"), icon("cog"), icon("cog"), icon("cog"), icon("cog")),
+            icons = list(icon("table"), icon("gear"), icon("gear"), icon("gear"), icon("gear"), icon("gear")),
             completes = c(FALSE, TRUE, FALSE, FALSE, FALSE, FALSE)
           ),
           actionButton(ns("timeline_finish"), "complete step 1"),
@@ -115,7 +115,7 @@ uiProgress <- function(id) {
                            "b",
                            up_labels = c("2000", "2001"),
                            down_labels = c("step 1", "step 2"),
-                           icons = list(icon("table"), icon("cog")),
+                           icons = list(icon("table"), icon("gear")),
                            completes = c(FALSE, TRUE)
                        )
                 ),

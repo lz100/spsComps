@@ -43,7 +43,7 @@ if(interactive()){
         h1("Scroll the page..."),
         lapply(1: 100, function(x) br()),
         spsGoTop("default"),
-        spsGoTop("mid", right = "50\%",  bottom= "50\%", icon = icon("home"), color = "red"),
+        spsGoTop("mid", right = "50\%",  bottom= "50\%", icon = icon("house"), color = "red"),
         spsGoTop("up", right = "95\%",  bottom= "95\%", icon = icon("arrow-up"), color = "green")
     )
 

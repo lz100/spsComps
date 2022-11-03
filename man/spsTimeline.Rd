@@ -64,7 +64,7 @@ if(interactive()){
                    "b",
                    up_labels = c("2000", "2001"),
                    down_labels = c("step 1", "step 2"),
-                   icons = list(icon("table"), icon("cog")),
+                   icons = list(icon("table"), icon("gear")),
                    completes = c(FALSE, TRUE)
                )
         ),

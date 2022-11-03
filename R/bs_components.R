@@ -115,7 +115,7 @@ tabTitle <- spsTitle
 #' @param opacity numeric, a number larger than 0 smaller than 1
 #'
 #' @export
-#' @return HTML <hr> element
+#' @return HTML `<hr>` element
 #' @details
 #' Read more about type here: https://www.w3schools.com/css/css_border.asp
 #' @examples

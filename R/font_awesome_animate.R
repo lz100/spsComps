@@ -25,10 +25,10 @@
 #'   ui <- fluidPage(
 #'     style = "text-align: center;",
 #'     tags$label("same as original icon function"), br(),
-#'     animateIcon("home"),  br(),
+#'     animateIcon("house"),  br(),
 #'     tags$label("Change animation and color"), br(),
 #'     animateIcon(
-#'       name = "home", animation = "horizontal", speed = "slow", color ="red"
+#'       name = "house", animation = "horizontal", speed = "slow", color ="red"
 #'     ), br(),
 #'     tags$label("work in a button"), br(),
 #'     actionButton(
@@ -39,15 +39,15 @@
 #'       name = "wrench", animation = "wrench", hover = TRUE, color ="green"
 #'     ), br(),
 #'     tags$label("change size"), br(),
-#'     animateIcon("home"),
-#'     animateIcon("home", size = "xs"),
-#'     animateIcon("home", size = "sm"),
-#'     animateIcon("home", size = "lg"),
-#'     animateIcon("home", size = "2x"),
-#'     animateIcon("home", size = "3x"),
-#'     animateIcon("home", size = "5x"),
-#'     animateIcon("home", size = "7x"),
-#'     animateIcon("home", size = "10x")
+#'     animateIcon("house"),
+#'     animateIcon("house", size = "xs"),
+#'     animateIcon("house", size = "sm"),
+#'     animateIcon("house", size = "lg"),
+#'     animateIcon("house", size = "2x"),
+#'     animateIcon("house", size = "3x"),
+#'     animateIcon("house", size = "5x"),
+#'     animateIcon("house", size = "7x"),
+#'     animateIcon("house", size = "10x")
 #'   )
 #'
 #'   server <- function(input, output, session) {
@@ -307,7 +307,7 @@ animationRemove <- function(
 #'   library(shiny)
 #'
 #'   ui <- fluidPage(
-#'     icon("home") %>%
+#'     icon("house") %>%
 #'       animateAppend("ring"),
 #'     h2("Append animation", class = "text-primary") %>%
 #'       animateAppend("pulse"),

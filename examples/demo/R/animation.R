@@ -168,7 +168,7 @@ uiAnimation <- function(id) {
           actionButton(ns("btn3"), "animate itself"),
           actionButton(ns("btn4"), "stop animation"), br(),
           tags$label("Remove animation that was added from UI"), br(),
-          animateIcon("home", id = ns("icon-home"), "burst", color = "red"),
+          animateIcon("house", id = ns("icon-home"), "burst", color = "red"),
           actionButton(ns("btn5"), "<-stop left"), br(),
           tags$label("advanced selector in for complex group"), br(),
           sliderInput(
@@ -194,7 +194,7 @@ uiAnimation <- function(id) {
               tags$label("use a button to control"), br(),
               actionButton("btn3", "animate itself"),
               actionButton("btn4", "stop animation"), br(),
-              animateIcon("home", id = ns("icon-home"), "burst", color = "red"),
+              animateIcon("house", id = ns("icon-home"), "burst", color = "red"),
               actionButton("btn5", "<-stop left"), br(),
               tags$label("advanced selector in for complex group"), br(),
               sliderInput(
@@ -303,7 +303,7 @@ uiAnimation <- function(id) {
             tags$code("animateAppend"),
             tags$span(": add animations with pipe"), br(),
           ),
-          icon("home") %>%
+          icon("house") %>%
             animateAppend("ring"),
           br(),
           h2("Append animation", class = "text-primary") %>%
@@ -313,7 +313,7 @@ uiAnimation <- function(id) {
             ns("code_animateAppend"),
             show_span = TRUE,
             '
-            icon("home") %>%
+            icon("house") %>%
               animateAppend("ring"),
             br(),
             h2("Append animation", class = "text-primary") %>%
@@ -361,10 +361,10 @@ uiAnimation <- function(id) {
             div(
               style = "text-align: center;",
               tags$label("same as original icon function"), br(),
-              animateIcon("home"),  br(),
+              animateIcon("house"),  br(),
               tags$label("Change animation and color"), br(),
               animateIcon(
-                name = "home", animation = "horizontal", speed = "slow", color ="red"
+                name = "house", animation = "horizontal", speed = "slow", color ="red"
               ), br(),
               tags$label("work in a button"), br(),
               actionButton(
@@ -375,15 +375,15 @@ uiAnimation <- function(id) {
                 name = "wrench", animation = "wrench", hover = TRUE, color ="green"
               ), br(),
               tags$label("change size"), br(),
-              animateIcon("home"),
-              animateIcon("home", size = "xs"),
-              animateIcon("home", size = "sm"),
-              animateIcon("home", size = "lg"),
-              animateIcon("home", size = "2x"),
-              animateIcon("home", size = "3x"),
-              animateIcon("home", size = "5x"),
-              animateIcon("home", size = "7x"),
-              animateIcon("home", size = "10x")
+              animateIcon("house"),
+              animateIcon("house", size = "xs"),
+              animateIcon("house", size = "sm"),
+              animateIcon("house", size = "lg"),
+              animateIcon("house", size = "2x"),
+              animateIcon("house", size = "3x"),
+              animateIcon("house", size = "5x"),
+              animateIcon("house", size = "7x"),
+              animateIcon("house", size = "10x")
             ),
             spsCodeBtn(
               ns("code_animateIcon"),
@@ -394,10 +394,10 @@ uiAnimation <- function(id) {
               ui <- fluidPage(
                 style = "text-align: center;",
                 tags$label("same as original icon function"), br(),
-                animateIcon("home"),  br(),
+                animateIcon("house"),  br(),
                 tags$label("Change animation and color"), br(),
                 animateIcon(
-                  name = "home", animation = "horizontal", speed = "slow", color ="red"
+                  name = "house", animation = "horizontal", speed = "slow", color ="red"
                 ), br(),
                 tags$label("work in a button"), br(),
                 actionButton(
@@ -408,15 +408,15 @@ uiAnimation <- function(id) {
                   name = "wrench", animation = "wrench", hover = TRUE, color ="green"
                 ), br(),
                 tags$label("change size"), br(),
-                animateIcon("home"),
-                animateIcon("home", size = "xs"),
-                animateIcon("home", size = "sm"),
-                animateIcon("home", size = "lg"),
-                animateIcon("home", size = "2x"),
-                animateIcon("home", size = "3x"),
-                animateIcon("home", size = "5x"),
-                animateIcon("home", size = "7x"),
-                animateIcon("home", size = "10x")
+                animateIcon("house"),
+                animateIcon("house", size = "xs"),
+                animateIcon("house", size = "sm"),
+                animateIcon("house", size = "lg"),
+                animateIcon("house", size = "2x"),
+                animateIcon("house", size = "3x"),
+                animateIcon("house", size = "5x"),
+                animateIcon("house", size = "7x"),
+                animateIcon("house", size = "10x")
               )
 
               server <- function(input, output, session) {
@@ -460,7 +460,7 @@ serverAnimation <- function(id) {
         animationRemove("btn3")
       })
       observeEvent(input$btn5, {
-        animationRemove("icon-home")
+        animationRemove("icon-house")
       })
     }
   )

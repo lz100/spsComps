@@ -18,4 +18,4 @@ font-size: 2rem;
 
 <p class="home-text">Go to the&nbsp;[Reference](reference/index.html)&nbsp;to see functions exported from this package.</p>
 
-<a href="https://systempipe.org/sps/" class="home-text"><i class="fa fa-home"></i>Back to SPS Home</a>
+<a href="https://systempipe.org/sps/" class="home-text"><i class="fa fa-house"></i>Back to SPS Home</a>

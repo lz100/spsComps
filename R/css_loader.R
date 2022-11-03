@@ -233,7 +233,7 @@ cssLoader <- function(
 #'            style = "background-color: #eee",
 #'            h5("Here is some text 12345"),
 #'            tags$hr(),
-#'            icon("home"),
+#'            icon("house"),
 #'            p("blablablablablablablablablablablablablablablablablablablabla"),
 #'            p("blablablablablablablablablablablablablablablablablablablabla"),
 #'            p("blablablablablablablablablablablablablablablablablablablabla"),

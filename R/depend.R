@@ -42,7 +42,7 @@
 #'     library(shiny)
 #'
 #'     ui <- fluidPage(
-#'       tags$i(class = "fa fa-home"),
+#'       tags$i(class = "fa fa-house"),
 #'       spsDepend("font-awesome")
 #'     )
 #'
@@ -115,7 +115,7 @@ spsDepend <- function(dep="", js = TRUE, css = TRUE, listing = TRUE) {
                 script = "js/sps_update_timeline.js",
                 all_files = FALSE
             ),
-            "font-awesome" = htmltools::findDependencies(icon("home")),
+            "font-awesome" = htmltools::findDependencies(icon("house")),
             "toastr" = {
                 js_file <- htmltools::htmlDependency(
                     name = "toastr-js",

@@ -189,7 +189,7 @@ uiButtons <- function(id) {
             ')
           ),
           spsGoTop(ns("default")),
-          spsGoTop(ns("mid"), right = "50%",  bottom= "50%", icon = icon("home"), color = "red"),
+          spsGoTop(ns("mid"), right = "50%",  bottom= "50%", icon = icon("house"), color = "red"),
           spsGoTop(ns("up"), right = "75%",  bottom= "90%", icon = icon("arrow-up"), color = "green"),
           spsCodeBtn(
             ns("code_spsGoTop"),
@@ -201,7 +201,7 @@ uiButtons <- function(id) {
                 h1("Scroll the page..."),
                 lapply(1: 100, function(x) br()),
                 spsGoTop("default"),
-                spsGoTop("mid", right = "50%",  bottom= "50%", icon = icon("home"), color = "red"),
+                spsGoTop("mid", right = "50%",  bottom= "50%", icon = icon("house"), color = "red"),
                 spsGoTop("up", right = "95%",  bottom= "95%", icon = icon("arrow-up"), color = "green")
             )
 

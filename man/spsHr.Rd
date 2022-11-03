@@ -27,7 +27,7 @@ specify a valid CSS color here. If this is provided \code{status} will be ignore
 \item{opacity}{numeric, a number larger than 0 smaller than 1}
 }
 \value{
-HTML <hr> element
+HTML \verb{<hr>} element
 }
 \description{
 Create a horizontal line of your choice

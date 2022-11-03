@@ -63,7 +63,7 @@ if (interactive()){
   library(shiny)
 
   ui <- fluidPage(
-    icon("home") \%>\%
+    icon("house") \%>\%
       animateAppend("ring"),
     h2("Append animation", class = "text-primary") \%>\%
       animateAppend("pulse"),

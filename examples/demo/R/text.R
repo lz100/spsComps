@@ -98,7 +98,7 @@ uiText <- function(id) {
             textInputGroup(ns("id2"), "right", right_text = "b"),
             textInputGroup(ns("id3"), "both", left_text = "$", right_text = ".00"),
             textInputGroup(ns("id4"), "none"),
-            textInputGroup(ns("id5"), "icon", left_text = icon("home")),
+            textInputGroup(ns("id5"), "icon", left_text = icon("house")),
             spsCodeBtn(
               ns("code_text_group"),
               show_span = TRUE,
@@ -107,7 +107,7 @@ uiText <- function(id) {
               textInputGroup("id2", "right", right_text = "b"),
               textInputGroup("id3", "both", left_text = "$", right_text = ".00"),
               textInputGroup("id4", "none"),
-              textInputGroup("id5", "icon", left_text = icon("home"))
+              textInputGroup("id5", "icon", left_text = icon("house"))
               '
             )
         ),
@@ -124,7 +124,7 @@ uiText <- function(id) {
           textButton(
             textId = "tbtn-icon",
             label = "change icon and color",
-            btn_icon = icon("home"),
+            btn_icon = icon("house"),
             class = "btn-warning" # pass to the button
           ),
           textButton(
@@ -152,7 +152,7 @@ uiText <- function(id) {
                   textButton(
                     textId = "tbtn-icon",
                     label = "change icon and color",
-                    btn_icon = icon("home"),
+                    btn_icon = icon("house"),
                     class = "btn-warning" # pass to the button
                   ),
                   textButton(

@@ -1,3 +1,9 @@
+# spsComps 0.3.2.99 Dev
+
+## Bug Fix
+
+-   Fix all font awesome missing icon names due to Font Awesome upgrade to 6.0.
+
 # spsComps 0.3.2.1
 
 ## Minor
