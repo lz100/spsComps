@@ -32,9 +32,9 @@ gallery(
 \item{title_color}{Title color}
 
 \item{image_frame_size}{integer, 1-12, this controls width. How large is each
-image. 12 is the whole width of the screen and 1 is 1/12 of the screen. Consider
-numbers than can fully divide 12, like 1, 2, 3, 4, 6 or 12 (if you want only 1 image
-per row).}
+image. 12 is the whole width of the parent container and 1 is 1/12 of the container. Consider
+numbers that can be fully divided by 12, like 1 (12 per row), 2 (6 per row),
+3 (4 per row), 4 (3 per row), 6 (1 per row)or 12 (if you want only 1 image per row).}
 
 \item{enlarge}{bool,  when click on the image, enlarge
 it? If enlarge is enabled, click the photo will enlarge instead of jump to the link.

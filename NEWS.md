@@ -1,5 +1,9 @@
 # spsComps 0.3.2.99 Dev
 
+## Minor
+
+-   Change the way to append gallery enlargement modal. Now uses JS to append the container to end of body instead within the element, so issues like #4 would not happen.
+
 ## Bug Fix
 
 -   Fix all font awesome missing icon names due to Font Awesome upgrade to 6.0.
