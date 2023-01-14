@@ -106,9 +106,9 @@ Similar to hrefs, for the texts, use "" to  occupy space'><!-- mathjax --><scrip
 
 <dt>image_frame_size</dt>
 <dd><p>integer, 1-12, this controls width. How large is each
-image. 12 is the whole width of the screen and 1 is 1/12 of the screen. Consider
-numbers than can fully divide 12, like 1, 2, 3, 4, 6 or 12 (if you want only 1 image
-per row).</p></dd>
+image. 12 is the whole width of the parent container and 1 is 1/12 of the container. Consider
+numbers that can be fully divided by 12, like 1 (12 per row), 2 (6 per row),
+3 (4 per row), 4 (3 per row), 6 (1 per row)or 12 (if you want only 1 image per row).</p></dd>
 
 
 <dt>enlarge</dt>
@@ -166,8 +166,8 @@ image to close the full screen view.</p>
 <span class="r-in"><span>              <span class="st">"https://github.com/lz100/spsComps/blob/master/img/5.jpg?raw=true"</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.rstudio.com/" class="external-link">shiny</a></span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/fluidPage.html" class="external-link">fluidPage</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/column.html" class="external-link">column</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/fluidPage.html" class="external-link">fluidPage</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/column.html" class="external-link">column</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>      <span class="fl">6</span>,</span></span>
 <span class="r-in"><span>      <span class="fu">gallery</span><span class="op">(</span>texts <span class="op">=</span> <span class="va">texts</span>, hrefs <span class="op">=</span> <span class="va">hrefs</span>, images <span class="op">=</span> <span class="va">images</span>, title <span class="op">=</span> <span class="st">"Default gallery"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>      <span class="fu"><a href="spsHr.html">spsHr</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
@@ -189,7 +189,7 @@ image to close the full screen view.</p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span>  <span class="op">}</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/shinyApp.html" class="external-link">shinyApp</a></span><span class="op">(</span><span class="va">ui</span>, <span class="va">server</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/shinyApp.html" class="external-link">shinyApp</a></span><span class="op">(</span><span class="va">ui</span>, <span class="va">server</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
@@ -205,7 +205,7 @@ image to close the full screen view.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>
