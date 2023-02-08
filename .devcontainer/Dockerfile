@@ -6,7 +6,6 @@ FROM ghcr.io/rocker-org/devcontainer/tidyverse:${VARIANT}
 RUN install2.r --error --skipinstalled -n -1 \
         shiny \
         markdown \
-        ottr \
         assertthat \ 
         glue \
         shinytoastr \
@@ -15,6 +14,10 @@ RUN install2.r --error --skipinstalled -n -1 \
         testthat \
         shinyjqui \
         spsUtil \
+        devtools \
+        shinyjs \
+        shinydashboard \
+        shinyWidgets \
     && rm -rf /tmp/downloaded_packages \
     && R -q -e 'remotes::install_github("https://github.com/dcomtois/summarytools/tree/0-8-9")'
 
