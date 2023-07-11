@@ -19,7 +19,7 @@ hidden element will show up to display your code."><!-- mathjax --><script src="
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">spsComps</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.99</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.3.0</span>
       </span>
     </div>
 
@@ -66,7 +66,7 @@ hidden element will show up to display your code.</p>
 <span>  show_span <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  tool_tip <span class="op">=</span> <span class="st">"Show Code"</span>,</span>
 <span>  placement <span class="op">=</span> <span class="st">"bottom"</span>,</span>
-<span>  btn_icon <span class="op">=</span> <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/icon.html" class="external-link">icon</a></span><span class="op">(</span><span class="st">"code"</span><span class="op">)</span>,</span>
+<span>  btn_icon <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/icon.html" class="external-link">icon</a></span><span class="op">(</span><span class="st">"code"</span><span class="op">)</span>,</span>
 <span>  display <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"modal"</span>, <span class="st">"collapse"</span><span class="op">)</span>,</span>
 <span>  size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"large"</span>, <span class="st">"medium"</span>, <span class="st">"small"</span><span class="op">)</span>,</span>
 <span>  color <span class="op">=</span> <span class="st">"black"</span>,</span>
@@ -112,7 +112,7 @@ left of the button? The span text will use text from <code>tool_tip</code></p></
 
 
 <dt>btn_icon</dt>
-<dd><p>icon, <code><a href="https://shiny.rstudio.com/reference/shiny/latest/icon.html" class="external-link">shiny::icon()</a></code>, icon of the button</p></dd>
+<dd><p>icon, <code><a href="https://rdrr.io/pkg/shiny/man/icon.html" class="external-link">shiny::icon()</a></code>, icon of the button</p></dd>
 
 
 <dt>display</dt>
@@ -132,7 +132,7 @@ left of the button? The span text will use text from <code>tool_tip</code></p></
 
 
 <dt>...</dt>
-<dd><p>other args pass to the <a href="https://shiny.rstudio.com/reference/shiny/latest/actionButton.html" class="external-link">shiny::actionButton</a></p></dd>
+<dd><p>other args pass to the <a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">shiny::actionButton</a></p></dd>
 
 </dl></div>
     <div id="value">
@@ -154,7 +154,7 @@ examples.</p></li>
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span></span>
-<span class="r-in"><span>  <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.rstudio.com/" class="external-link">shiny</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.posit.co/" class="external-link">shiny</a></span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="va">my_code</span> <span class="op">&lt;-</span></span></span>
 <span class="r-in"><span>    <span class="st">'</span></span></span>
 <span class="r-in"><span><span class="st">    # load package and data</span></span></span>
@@ -184,30 +184,30 @@ examples.</p></li>
 <span class="r-in"><span><span class="st">    &lt;/body&gt;</span></span></span>
 <span class="r-in"><span><span class="st">    &lt;/html&gt;</span></span></span>
 <span class="r-in"><span><span class="st">    '</span></span></span>
-<span class="r-in"><span>  <span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/fluidPage.html" class="external-link">fluidPage</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>    <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/fluidPage.html" class="external-link">fluidRow</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>      <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/column.html" class="external-link">column</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/fluidPage.html" class="external-link">fluidPage</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/fluidPage.html" class="external-link">fluidRow</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>      <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/column.html" class="external-link">column</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>        <span class="fl">6</span>,</span></span>
 <span class="r-in"><span>        <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">h3</a></span><span class="op">(</span><span class="st">"Display by modal"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>        <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/column.html" class="external-link">column</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>        <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/column.html" class="external-link">column</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>          <span class="fl">6</span>, <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">h4</a></span><span class="op">(</span><span class="st">"default"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>          <span class="fu">spsCodeBtn</span><span class="op">(</span>id <span class="op">=</span> <span class="st">"a"</span>, <span class="va">my_code</span><span class="op">)</span></span></span>
 <span class="r-in"><span>        <span class="op">)</span>,</span></span>
-<span class="r-in"><span>        <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/column.html" class="external-link">column</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>        <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/column.html" class="external-link">column</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>          <span class="fl">6</span>, <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">h4</a></span><span class="op">(</span><span class="st">"change color and shape"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>          <span class="fu">spsCodeBtn</span><span class="op">(</span></span></span>
 <span class="r-in"><span>            id <span class="op">=</span> <span class="st">"b"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">my_code</span>, <span class="va">my_code</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>            color <span class="op">=</span> <span class="st">"red"</span>, shape <span class="op">=</span> <span class="st">"circular"</span><span class="op">)</span></span></span>
 <span class="r-in"><span>        <span class="op">)</span></span></span>
 <span class="r-in"><span>      <span class="op">)</span>,</span></span>
-<span class="r-in"><span>      <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/column.html" class="external-link">column</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>      <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/column.html" class="external-link">column</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>        <span class="fl">6</span>,</span></span>
 <span class="r-in"><span>        <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">h3</a></span><span class="op">(</span><span class="st">"Display by collapse"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>        <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/column.html" class="external-link">column</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>        <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/column.html" class="external-link">column</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>          <span class="fl">6</span>, <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">h4</a></span><span class="op">(</span><span class="st">"collapse"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>          <span class="fu">spsCodeBtn</span><span class="op">(</span>id <span class="op">=</span> <span class="st">"c"</span>, <span class="va">my_code</span>, display <span class="op">=</span> <span class="st">"collapse"</span><span class="op">)</span></span></span>
 <span class="r-in"><span>        <span class="op">)</span>,</span></span>
-<span class="r-in"><span>        <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/column.html" class="external-link">column</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>        <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/column.html" class="external-link">column</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>          <span class="fl">6</span>, <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">h4</a></span><span class="op">(</span><span class="st">"different programming language"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>          <span class="fu">spsCodeBtn</span><span class="op">(</span></span></span>
 <span class="r-in"><span>            id <span class="op">=</span> <span class="st">"d"</span>, <span class="va">html_code</span>,</span></span>
@@ -215,8 +215,8 @@ examples.</p></li>
 <span class="r-in"><span>        <span class="op">)</span></span></span>
 <span class="r-in"><span>      <span class="op">)</span></span></span>
 <span class="r-in"><span>    <span class="op">)</span>,</span></span>
-<span class="r-in"><span>    <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/fluidPage.html" class="external-link">fluidRow</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>      <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/column.html" class="external-link">column</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/fluidPage.html" class="external-link">fluidRow</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>      <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/column.html" class="external-link">column</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>        <span class="fl">6</span>,</span></span>
 <span class="r-in"><span>        <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">h3</a></span><span class="op">(</span><span class="st">"Update code"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>        <span class="fu">spsCodeBtn</span><span class="op">(</span></span></span>
@@ -224,20 +224,20 @@ examples.</p></li>
 <span class="r-in"><span>          <span class="st">"# No code here"</span>,</span></span>
 <span class="r-in"><span>          display <span class="op">=</span> <span class="st">"collapse"</span></span></span>
 <span class="r-in"><span>        <span class="op">)</span>,</span></span>
-<span class="r-in"><span>        <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span><span class="st">"update"</span>, <span class="st">"change code in the left `spsCodeBtn`"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>        <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span><span class="st">"changeback"</span>, <span class="st">"change it back"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>        <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span><span class="st">"update"</span>, <span class="st">"change code in the left `spsCodeBtn`"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>        <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span><span class="st">"changeback"</span>, <span class="st">"change it back"</span><span class="op">)</span></span></span>
 <span class="r-in"><span>      <span class="op">)</span></span></span>
 <span class="r-in"><span>    <span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span>  <span class="va">server</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span>, <span class="va">session</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span>    <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">update</span>, <span class="op">{</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">update</span>, <span class="op">{</span></span></span>
 <span class="r-in"><span>      <span class="fu">shinyAce</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/shinyAce/man/updateAceEditor.html" class="external-link">updateAceEditor</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>        <span class="va">session</span>, editorId <span class="op">=</span> <span class="st">"update-code-ace"</span>,</span></span>
 <span class="r-in"><span>        value <span class="op">=</span> <span class="st">"# code has changed!\n 1+1"</span></span></span>
 <span class="r-in"><span>      <span class="op">)</span></span></span>
 <span class="r-in"><span>    <span class="op">}</span><span class="op">)</span></span></span>
-<span class="r-in"><span>    <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">changeback</span>, <span class="op">{</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">changeback</span>, <span class="op">{</span></span></span>
 <span class="r-in"><span>      <span class="fu">shinyAce</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/shinyAce/man/updateAceEditor.html" class="external-link">updateAceEditor</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>        <span class="va">session</span>, editorId <span class="op">=</span> <span class="st">"update-code-ace"</span>,</span></span>
 <span class="r-in"><span>        value <span class="op">=</span> <span class="st">"# No code here"</span></span></span>
@@ -245,7 +245,7 @@ examples.</p></li>
 <span class="r-in"><span>    <span class="op">}</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="op">}</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/shinyApp.html" class="external-link">shinyApp</a></span><span class="op">(</span><span class="va">ui</span>, <span class="va">server</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/shinyApp.html" class="external-link">shinyApp</a></span><span class="op">(</span><span class="va">ui</span>, <span class="va">server</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>

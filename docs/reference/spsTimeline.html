@@ -18,7 +18,7 @@ use updateSpsTimeline on server to update it."><!-- mathjax --><script src="http
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">spsComps</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.99</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.3.0</span>
       </span>
     </div>
 
@@ -132,33 +132,33 @@ length.</p>
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span></span>
-<span class="r-in"><span>    <span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/fluidPage.html" class="external-link">fluidPage</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>        <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/column.html" class="external-link">column</a></span><span class="op">(</span><span class="fl">6</span>,</span></span>
+<span class="r-in"><span>    <span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/fluidPage.html" class="external-link">fluidPage</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>        <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/column.html" class="external-link">column</a></span><span class="op">(</span><span class="fl">6</span>,</span></span>
 <span class="r-in"><span>               <span class="fu">spsTimeline</span><span class="op">(</span></span></span>
 <span class="r-in"><span>                   <span class="st">"b"</span>,</span></span>
 <span class="r-in"><span>                   up_labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2000"</span>, <span class="st">"2001"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>                   down_labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"step 1"</span>, <span class="st">"step 2"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>                   icons <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/icon.html" class="external-link">icon</a></span><span class="op">(</span><span class="st">"table"</span><span class="op">)</span>, <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/icon.html" class="external-link">icon</a></span><span class="op">(</span><span class="st">"gear"</span><span class="op">)</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                   icons <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/icon.html" class="external-link">icon</a></span><span class="op">(</span><span class="st">"table"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/icon.html" class="external-link">icon</a></span><span class="op">(</span><span class="st">"gear"</span><span class="op">)</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>                   completes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">FALSE</span>, <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-in"><span>               <span class="op">)</span></span></span>
 <span class="r-in"><span>        <span class="op">)</span>,</span></span>
-<span class="r-in"><span>        <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/column.html" class="external-link">column</a></span><span class="op">(</span><span class="fl">6</span>,</span></span>
-<span class="r-in"><span>               <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"complete step 1"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>               <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span><span class="st">"c"</span>, <span class="st">"uncomplete step 1"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span>        <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/column.html" class="external-link">column</a></span><span class="op">(</span><span class="fl">6</span>,</span></span>
+<span class="r-in"><span>               <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"complete step 1"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>               <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span><span class="st">"c"</span>, <span class="st">"uncomplete step 1"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span>    <span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span>    <span class="va">server</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span>, <span class="va">session</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span>        <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">a</span>, <span class="op">{</span></span></span>
+<span class="r-in"><span>        <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">a</span>, <span class="op">{</span></span></span>
 <span class="r-in"><span>            <span class="fu">updateSpsTimeline</span><span class="op">(</span><span class="va">session</span>, <span class="st">"b"</span>, <span class="fl">1</span>, up_label <span class="op">=</span> <span class="st">"0000"</span>, down_label <span class="op">=</span> <span class="st">"Finish"</span><span class="op">)</span></span></span>
 <span class="r-in"><span>        <span class="op">}</span><span class="op">)</span></span></span>
-<span class="r-in"><span>        <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">c</span>, <span class="op">{</span></span></span>
+<span class="r-in"><span>        <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">c</span>, <span class="op">{</span></span></span>
 <span class="r-in"><span>            <span class="fu">updateSpsTimeline</span><span class="op">(</span><span class="va">session</span>, <span class="st">"b"</span>, <span class="fl">1</span>, complete <span class="op">=</span> <span class="cn">FALSE</span>,</span></span>
 <span class="r-in"><span>                              up_label <span class="op">=</span> <span class="st">"9999"</span>, down_label <span class="op">=</span> <span class="st">"Step 1"</span><span class="op">)</span></span></span>
 <span class="r-in"><span>        <span class="op">}</span><span class="op">)</span></span></span>
 <span class="r-in"><span>    <span class="op">}</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span>    <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/shinyApp.html" class="external-link">shinyApp</a></span><span class="op">(</span><span class="va">ui</span>, <span class="va">server</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/shinyApp.html" class="external-link">shinyApp</a></span><span class="op">(</span><span class="va">ui</span>, <span class="va">server</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
