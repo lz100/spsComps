@@ -684,38 +684,57 @@ $(function(){
 
 function bsPopover(
   popid, placement, title, content, bgcolor, titlecolor, contentcolor,
-  titlesize, contentsize, trigger, titleweight, contentweight, opacity, html
+  titlesize, contentsize, trigger, titleweight, contentweight, opacity, html,
+  clickInside
   ) {
-  $(`[data-popoverid="${popid}"]`)
+  let pop = $(`[data-popoverid="${popid}"]`)
     .popover({
-        placement: placement,
-        title: title,
-        content: content,
-        trigger: trigger,
-        html: html,
-        container: 'body'
-      })
-    .on('inserted.bs.popover', function(){
-      var pop = $(`#${$(this).attr("aria-describedby")}`);
-      pop.css({
-        opacity: opacity,
-        borderColor: bgcolor,
-        padding: 0,
+      animation: !clickInside,
+      placement: placement,
+      title: title,
+      content: content,
+      trigger: trigger,
+      html: html,
+      container: 'body'
+    });
+
+  pop.on('inserted.bs.popover', function(){
+    var pop = $(`#${$(this).attr("aria-describedby")}`);
+    pop.css({
+      opacity: opacity,
+      borderColor: bgcolor,
+      padding: 0,
+    });
+    pop.find('.popover-title').css({
+      backgroundColor: bgcolor,
+      opacity: 0.8,
+      fontSize: titlesize,
+      color: titlecolor,
+      fontWeight: titleweight
+    });
+    pop.find('.arrow').css(`border-${placement}-color`, bgcolor);
+    pop.find('.popover-content').css({
+      fontSize: contentsize,
+      color: contentcolor,
+      fontWeight: contentweight
+    });
+  });
+
+  if (clickInside) {
+    pop.on("mouseenter", function() {
+      let _this = this;
+      $(this).popover("show");
+      $(".popover").on("mouseleave", function() {
+        $(_this).popover('hide');
       });
-      pop.find('.popover-title').css({
-        backgroundColor: bgcolor,
-        opacity: 0.8,
-        fontSize: titlesize,
-        color: titlecolor,
-        fontWeight: titleweight
-      });
-      pop.find('.arrow').css(`border-${placement}-color`, bgcolor);
-      pop.find('.popover-content').css({
-        fontSize: contentsize,
-        color: contentcolor,
-        fontWeight: contentweight
-      });
-  })
+    })
+    .on("mouseleave", function() {
+      let _this = this;
+      setTimeout(function() {
+        if (!$(".popover:hover").length) {$(_this).popover("hide");}
+      }, 300);
+    });
+  }
 }
 
 
@@ -723,20 +742,23 @@ function bsPopover(
 function bsTooltip(
   tipid, placement, title, bgcolor,
   textcolor, fontsize, trigger,
-  fontweight, opacity, html
+  fontweight, opacity, html,
+  clickInside
   ) {
   $(function(){
-    $(`[data-tipid="${tipid}"]`)
+    let pop = $(`[data-tipid="${tipid}"]`)
     .tooltip({
+        animation: !clickInside,
         placement: placement,
         title: title,
         trigger: trigger,
         html: html,
         container: 'body'
-      })
-    .on('inserted.bs.tooltip', function(){
+    });
+
+    pop.on('inserted.bs.tooltip', function(){
       var tip = $(`#${$(this).attr("aria-describedby")}`);
-      tip.css('opacity', opacity)
+      tip.css('opacity', opacity);
       tip.find('.tooltip-arrow').css(`border-${placement}-color`, bgcolor);
       tip.find('.tooltip-inner').css({
         backgroundColor: bgcolor,
@@ -745,5 +767,21 @@ function bsTooltip(
         fontWeight: fontweight
       });
     });
+
+    if (clickInside) {
+      pop.on("mouseenter", function() {
+        let _this = this;
+        $(this).tooltip("show");
+        $(".tooltip").on("mouseleave", function() {
+          $(_this).tooltip('hide');
+        });
+      })
+      .on("mouseleave", function() {
+        let _this = this;
+        setTimeout(function() {
+          if (!$(".tooltip:hover").length) {$(_this).tooltip("hide");}
+        }, 300);
+      });
+    }
   });
 }

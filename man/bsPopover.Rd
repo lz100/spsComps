@@ -20,7 +20,8 @@ bsPopover(
   contentweight = "400",
   opacity = 1,
   html = FALSE,
-  trigger = "hover focus"
+  trigger = "hover",
+  click_inside = FALSE
 )
 
 bsHoverPopover(
@@ -37,7 +38,8 @@ bsHoverPopover(
   contentweight = "400",
   opacity = 1,
   html = FALSE,
-  trigger = "hover focus"
+  trigger = "hover",
+  click_inside = FALSE
 )
 
 bsPop(
@@ -52,7 +54,8 @@ bsPop(
   contentweight = "400",
   opacity = 1,
   html = TRUE,
-  trigger = "hover focus"
+  trigger = "hover",
+  click_inside = FALSE
 )
 }
 \arguments{
@@ -86,6 +89,9 @@ tooltip}
 \item{trigger}{string, how to trigger the tooltip, one or combination of
 click | hover | focus | manual.}
 
+\item{click_inside}{bool, default is \code{FALSE}, whether to allow users to
+click content inside the message. See details.}
+
 \item{status}{string, used only for wrapper \link{bsPop}, see details}
 }
 \value{
@@ -101,6 +107,20 @@ color, font size, background color, and more for each individual popover.
 \item For font weight, see: https://www.w3schools.com/cssref/pr_font_weight.asp
 \item \link{bsHoverPopover} is the old name but we still keep it for backward compatibility.
 }
+\subsection{Click inside the message}{
+
+Sometimes developers want to add links for users to click.
+By default, the message will be gone once mouse leaves the element, but with
+this option to be \code{TRUE}, when users move the mouse inside, the message
+element will not be gone, so users can click on the links or other content.
+
+Once this option is used, the triggering method is set to \code{"manual"} and
+animation will be removed. This is related to the Javascript method used
+behind, some compromises have to be made.
+
+When adding the links, you may also want to turn \code{html = TRUE} in combined.
+}
+
 \subsection{Convenient wrapper function}{
 
 \link{bsPop} is the convenient function for \link{bsPopover}, which has the background
@@ -165,7 +185,13 @@ if(interactive()){
       bsPopover(HTML("abc<span class='text-danger'>danger</span>"),
                 html = TRUE, bgcolor = "#0275d8"),
     actionButton("f2", "allow html: '<s>del content</s>'") \%>\%
-      bsPopover(HTML("<s>del content</s>"), html = TRUE, bgcolor = "#d9534f")
+      bsPopover(HTML("<s>del content</s>"), html = TRUE, bgcolor = "#d9534f"),
+    actionButton("", "Clickable with links") \%>\%
+      bsPopover(
+         title = "Clickable with links",
+         content = "<div>This message has a <a href='https://google.com'>link</a></div>", "bottom",
+         html = TRUE, click_inside = TRUE, bgcolor = "orange"
+       )
   )
   server <- function(input, output, session) {}
   shinyApp(ui, server)

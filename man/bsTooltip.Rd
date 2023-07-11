@@ -15,7 +15,8 @@ bsTooltip(
   fontweight = "400",
   opacity = 1,
   html = FALSE,
-  trigger = "hover focus"
+  trigger = "hover",
+  click_inside = FALSE
 )
 
 bsTip(
@@ -27,7 +28,8 @@ bsTip(
   fontweight = "400",
   opacity = 1,
   html = FALSE,
-  trigger = "hover focus"
+  trigger = "hover",
+  click_inside = FALSE
 )
 }
 \arguments{
@@ -55,6 +57,9 @@ click | hover | focus | manual.}
 
 \item{trigger}{string, how to trigger the tooltip, one or combination of}
 
+\item{click_inside}{bool, default is \code{FALSE}, whether to allow users to
+click content inside the message. See details.}
+
 \item{status}{string, used only for wrapper \link{bsTip}, see details}
 }
 \value{
@@ -66,6 +71,20 @@ color, font size, background color, trigger event for each individual tooltip.
 }
 \details{
 For trigger methods read: https://getbootstrap.com/docs/3.3/javascript/#tooltips-options.
+\subsection{Click inside the message}{
+
+Sometimes developers want to add links for users to click.
+By default, the message will be gone once mouse leaves the element, but with
+this option to be \code{TRUE}, when users move the mouse inside, the message
+element will not be gone, so users can click on the links or other content.
+
+Once this option is used, the triggering method is set to \code{"manual"} and
+animation will be removed. This is related to the Javascript method used
+behind, some compromises have to be made.
+
+When adding the links, you may also want to turn \code{html = TRUE} in combined.
+}
+
 \subsection{Convenient wrapper function}{
 
 \link{bsTip} is the convenient function for \link{bsTooltip}, which has the background
@@ -106,7 +125,12 @@ if(interactive()){
       bsTooltip(
         "custom tooltip", "bottom",
         "#0275d8", "#eee", "15px"
-      )
+      ),
+    actionButton("", "Clickable with links") \%>\%
+      bsTooltip(
+         "<div>This message has a <a href='https://google.com'>link</a></div>", "bottom",
+         html = TRUE, click_inside = TRUE, bgcolor = "orange"
+       )
   )
   server <- function(input, output, session) {}
   shinyApp(ui, server)

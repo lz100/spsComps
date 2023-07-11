@@ -19,9 +19,23 @@
 #' @param html bool, allow title contain HTML code? like `"<strong>abc</strong>"`
 #'  click | hover | focus | manual.
 #' @param status string, used only for wrapper [bsTip], see details
+#' @param click_inside bool, default is `FALSE`, whether to allow users to
+#' click content inside the message. See details.
 #' @return shiny tag
 #' @details
 #' For trigger methods read: https://getbootstrap.com/docs/3.3/javascript/#tooltips-options.
+#'
+#' #### Click inside the message
+#' Sometimes developers want to add links for users to click.
+#' By default, the message will be gone once mouse leaves the element, but with
+#' this option to be `TRUE`, when users move the mouse inside, the message
+#' element will not be gone, so users can click on the links or other content.
+#'
+#' Once this option is used, the triggering method is set to `"manual"` and
+#' animation will be removed. This is related to the Javascript method used
+#' behind, some compromises have to be made.
+#'
+#' When adding the links, you may also want to turn `html = TRUE` in combined.
 #'
 #' #### Convenient wrapper function
 #' [bsTip] is the convenient function for [bsTooltip], which has the background
@@ -61,7 +75,12 @@
 #'       bsTooltip(
 #'         "custom tooltip", "bottom",
 #'         "#0275d8", "#eee", "15px"
-#'       )
+#'       ),
+#'     actionButton("", "Clickable with links") %>%
+#'       bsTooltip(
+#'          "<div>This message has a <a href='https://google.com'>link</a></div>", "bottom",
+#'          html = TRUE, click_inside = TRUE, bgcolor = "orange"
+#'        )
 #'   )
 #'   server <- function(input, output, session) {}
 #'   shinyApp(ui, server)
@@ -76,7 +95,8 @@ bsTooltip <- function(
   fontweight = "400",
   opacity = 1.0,
   html = FALSE,
-  trigger = "hover focus"){
+  trigger = "hover",
+  click_inside = FALSE){
 
   stopifnot(inherits(tag, "shiny.tag"))
   stopifnot(is.character(title) && length(title) == 1)
@@ -85,12 +105,19 @@ bsTooltip <- function(
   stopifnot(is.character(fontsize) && length(fontsize) == 1)
   stopifnot(is.character(trigger) && length(trigger) == 1)
   stopifnot(is.logical(html) && length(html) == 1)
+  stopifnot(is.logical(click_inside) && length(click_inside) == 1)
   stopifnot(is.character(fontweight) && length(html) == 1)
   stopifnot(is.numeric(opacity) && opacity >= 0 && opacity <=1)
 
   placement <- match.arg(placement, c('top', 'right', 'bottom', 'left'))
   tipid <- paste0("bsTooltip", paste0(sample(seq(0, 9), 8, replace = TRUE), collapse = ""))
   html <- if(html) "true" else "false"
+  # if one wants to click the inside of tip, has to be manually triggered.
+  trigger <- if(click_inside) "manual" else trigger
+
+  click_inside <- if(click_inside) "true" else "false"
+
+
   title <- str_replace_all(title, '\n | \r', ' ') %>% str_replace_all('"', '\\\\"')
 
   tag %>%
@@ -103,7 +130,8 @@ bsTooltip <- function(
       <script>
       bsTooltip(
         "{tipid}", "{placement}", "{title}", "{bgcolor}", "{textcolor}",
-        "{fontsize}", "{trigger}", "{fontweight}", "{opacity}", {html}
+        "{fontsize}", "{trigger}", "{fontweight}", "{opacity}", {html},
+        {click_inside}
       )
       </script>'))
     )
@@ -140,11 +168,12 @@ bsTip <- function(
   fontweight = "400",
   opacity = 1.0,
   html = FALSE,
-  trigger = "hover focus"){
+  trigger = "hover",
+  click_inside = FALSE){
 
   textcolor <- "white"
   bgcolor <- getBsColor(status)
-  bsTooltip(tag, title, placement, bgcolor, textcolor, fontsize, fontweight, opacity, html, trigger)
+  bsTooltip(tag, title, placement, bgcolor, textcolor, fontsize, fontweight, opacity, html, trigger, click_inside)
 }
 
 
@@ -169,6 +198,8 @@ bsTip <- function(
 #' @param titleweight string, CSS valid title font weight unit
 #' @param contentweight string, CSS valid content font weight unit
 #' @param status string, used only for wrapper [bsPop], see details
+#' @param click_inside bool, default is `FALSE`, whether to allow users to
+#' click content inside the message. See details.
 #' @return shiny tag
 #' @details
 #' 1. For trigger methods read: https://getbootstrap.com/docs/3.3/javascript/#tooltips-options.
@@ -176,6 +207,18 @@ bsTip <- function(
 #' 2. For font weight, see: https://www.w3schools.com/cssref/pr_font_weight.asp
 #'
 #' 3. [bsHoverPopover] is the old name but we still keep it for backward compatibility.
+#'
+#' #### Click inside the message
+#' Sometimes developers want to add links for users to click.
+#' By default, the message will be gone once mouse leaves the element, but with
+#' this option to be `TRUE`, when users move the mouse inside, the message
+#' element will not be gone, so users can click on the links or other content.
+#'
+#' Once this option is used, the triggering method is set to `"manual"` and
+#' animation will be removed. This is related to the Javascript method used
+#' behind, some compromises have to be made.
+#'
+#' When adding the links, you may also want to turn `html = TRUE` in combined.
 #'
 #' #### Convenient wrapper function
 #' [bsPop] is the convenient function for [bsPopover], which has the background
@@ -239,7 +282,13 @@ bsTip <- function(
 #'       bsPopover(HTML("abc<span class='text-danger'>danger</span>"),
 #'                 html = TRUE, bgcolor = "#0275d8"),
 #'     actionButton("f2", "allow html: '<s>del content</s>'") %>%
-#'       bsPopover(HTML("<s>del content</s>"), html = TRUE, bgcolor = "#d9534f")
+#'       bsPopover(HTML("<s>del content</s>"), html = TRUE, bgcolor = "#d9534f"),
+#'     actionButton("", "Clickable with links") %>%
+#'       bsPopover(
+#'          title = "Clickable with links",
+#'          content = "<div>This message has a <a href='https://google.com'>link</a></div>", "bottom",
+#'          html = TRUE, click_inside = TRUE, bgcolor = "orange"
+#'        )
 #'   )
 #'   server <- function(input, output, session) {}
 #'   shinyApp(ui, server)
@@ -258,7 +307,8 @@ bsPopover <- function(
   contentweight = "400",
   opacity = 1.0,
   html = FALSE,
-  trigger = "hover focus"){
+  trigger = "hover",
+  click_inside = FALSE){
 
   stopifnot(inherits(tag, "shiny.tag"))
   stopifnot(is.character(title) && length(title) == 1)
@@ -272,11 +322,14 @@ bsPopover <- function(
   stopifnot(is.character(contentweight) && length(contentweight) == 1)
   stopifnot(is.character(trigger) && length(trigger) == 1)
   stopifnot(is.logical(html) && length(html) == 1)
+  stopifnot(is.logical(click_inside) && length(click_inside) == 1)
   stopifnot(is.numeric(opacity) && opacity >= 0 && opacity <=1)
 
   placement <- match.arg(placement, c('top', 'right', 'bottom', 'left'))
   popid <- paste0("bspopover", paste0(sample(seq(0, 9), 8, replace = TRUE), collapse = ""))
   html <- if(html) "true" else "false"
+  trigger <- if(click_inside) "manual" else trigger
+  click_inside <- if(click_inside) "true" else "false"
 
   content <- str_replace_all(content, '\n | \r', ' ') %>%
     str_replace_all('"', '\\\\"')
@@ -294,7 +347,7 @@ bsPopover <- function(
       bsPopover(
         "{popid}", "{placement}", `{title}`, "{content}", "{bgcolor}", "{titlecolor}",
         "{contentcolor}", "{titlesize}", "{contentsize}", "{trigger}", "{titleweight}",
-        "{contentweight}", "{opacity}", {html}
+        "{contentweight}", "{opacity}", {html}, {click_inside}
       )
       </script>'))
     )
@@ -338,14 +391,15 @@ bsPop <- function(
   contentweight = "400",
   opacity = 1.0,
   html = TRUE,
-  trigger = "hover focus"){
+  trigger = "hover",
+  click_inside = FALSE){
 
   titlecolor <- "white"
   bgcolor <- contentcolor <- getBsColor(status)
   bsPopover(
     tag, title, content, placement, bgcolor, titlecolor,
     contentcolor, titlesize, contentsize, titleweight,
-    contentweight, opacity, html, trigger
+    contentweight, opacity, html, trigger, click_inside
   )
 }
 

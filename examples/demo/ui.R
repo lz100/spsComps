@@ -8,13 +8,13 @@ sidebar <- dashboardSidebar(
     menuItem("Welcome", tabName = "welcome", icon = icon("star")),
     menuItem("Animations", tabName = "animation", icon = animateIcon("carrot", "float", color = "orange")),
     menuItem("Loaders", tabName = "loader", icon = animateIcon("spinner", "spin", color = "teal")),
-    menuItem("Tooltip, Popover", tabName = "poptip", icon = animateIcon("info", "rising", color = "#0275d8"), badgeLabel = "0.3 NEW"),
+    menuItem("Tooltip, Popover", tabName = "poptip", icon = animateIcon("info", "rising", color = "#0275d8"), badgeLabel = "0.3 Updates"),
     menuItem("Input Control", tabName = "text", icon = icon("font")),
     menuItem("Image Display", tabName = "images", icon = icon("images")),
     menuItem("Buttons", tabName = "buttons", icon = icon("square")),
     menuItem("Progress control", tabName = "progress", icon = icon("bars-progress")),
     menuItem("Upload components", tabName = "upload_file", icon = icon("file-arrow-up")),
-    menuItem("Server Components", tabName = "server_col", icon = animateIcon("server"), badgeLabel = "0.4 upd"),
+    menuItem("Server Components", tabName = "server_col", icon = animateIcon("server"), badgeLabel = "0.3 upd"),
     menuItem("Misc", tabName = "other", icon = icon("border-all"), badgeLabel = "0.3 Updates")
   )
 )

@@ -106,7 +106,49 @@ uiPoptip <- function(id) {
             server <- function(input, output, session) {}
             shinyApp(ui, server)
             '
-          ), spsHr(),
+          ),
+          spsHr(),
+          h3("Clickable content"),
+          markdown(
+            '
+            Sometimes we want to add clickable content inside the message,
+            for example, the message is too long and we want to have users click
+            on a link and go to other places to continue reading. In this case, the
+            `click_inside` option will be very useful.
+
+            Normally, the message will be gone after mouse leaving the element.
+            When you move mouse over the message, it will be disappeared very fast.
+            This option allow users to click inside the message. However, the
+            triggering mothod of this can only be hover (actually mouse moving
+            events, but you can treat it as "hover").
+
+            To add clickable content, `html = TRUE` option usually is also required.
+            See the example below.
+            '
+          ),
+          actionButton("", "Clickable with links") %>%
+            bsTooltip(
+              "<div>This message has a <a href='https://google.com'>link</a></div>", "bottom",
+              html = TRUE, click_inside = TRUE, bgcolor = "orange"
+            ),
+          br(), br(),
+          spsCodeBtn(
+            ns("code_tooltip_click"),
+            '
+            library(magrittr)
+            ui <- fluidPage(
+              actionButton("", "Clickable with links") %>%
+                bsTooltip(
+                  "<div>This message has a <a href=\'https://google.com\'>link</a></div>", "bottom",
+                  # `html` and `click_inside` should be combined to  create links
+                  html = TRUE, click_inside = TRUE, bgcolor = "orange"
+                )
+            )
+            server <- function(input, output, session) {}
+            shinyApp(ui, server)
+            '
+          ),
+          spsHr(),
           h3("bstip"),
           actionButton("", "primary") %>%
             bsTip("primary", status = "primary"),
@@ -261,7 +303,34 @@ uiPoptip <- function(id) {
             server <- function(input, output, session) {}
             shinyApp(ui, server)
             '
-          ), spsHr(),
+          ),
+          spsHr(),
+          h3("Clickable content"),
+          p("See details of clickable content of bsTooltip on the left."),
+          actionButton("", "Clickable with links") %>%
+            bsPopover(
+              title = "Clickable with links",
+              content = "<div>This message has a <a href='https://google.com'>link</a></div>", "bottom",
+              html = TRUE, click_inside = TRUE, bgcolor = "orange"
+            ),
+          br(), br(),
+          spsCodeBtn(
+            ns("code_popover_click"),
+            '
+            library(magrittr)
+            ui <- fluidPage(
+              actionButton("", "Clickable with links") %>%
+                bsPopover(
+                   title = "Clickable with links",
+                   content = "<div>This message has a <a href=\'https://google.com\'>link</a></div>", "bottom",
+                   html = TRUE, click_inside = TRUE, bgcolor = "orange"
+                 )
+            )
+            server <- function(input, output, session) {}
+            shinyApp(ui, server)
+            '
+          ),
+          spsHr(),
           h3("bsPop"),
           actionButton("", "primary") %>%
             bsPop("primary", "primary", status = "primary"),
