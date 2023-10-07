@@ -22,7 +22,7 @@ Similar to hrefs, for the texts, use "" to  occupy space'><!-- mathjax --><scrip
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">spsComps</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.3.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.3.99</span>
       </span>
     </div>
 
@@ -74,6 +74,7 @@ Similar to hrefs, for the texts, use "" to  occupy space'><!-- mathjax --><scrip
 <span>  enlarge <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  enlarge_method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"inline"</span>, <span class="st">"modal"</span><span class="op">)</span>,</span>
 <span>  target_blank <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  obj_fit <span class="op">=</span> <span class="st">"fill"</span>,</span>
 <span>  style <span class="op">=</span> <span class="st">""</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -125,6 +126,13 @@ display photo in a pop-up modal.</p></dd>
 
 <dt>target_blank</dt>
 <dd><p>bool, whether to add <code>target="_blank"</code> to the link?</p></dd>
+
+
+<dt>obj_fit</dt>
+<dd><p>string, the CSS property "object-fit" of images. This is helpful
+to deal with stretched images. Read more on
+<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit" class="external-link">CSS documents</a>.
+Default is <code>"fill"</code>, and other options are <code>"contain"</code>, <code>"cover"</code>, <code>"none"</code>, <code>"scale-down"</code>.</p></dd>
 
 
 <dt>style</dt>
@@ -180,7 +188,7 @@ image to close the full screen view.</p>
 <span class="r-in"><span>      <span class="fu">gallery</span><span class="op">(</span></span></span>
 <span class="r-in"><span>        texts <span class="op">=</span> <span class="va">texts</span>, hrefs <span class="op">=</span> <span class="va">hrefs</span>, images <span class="op">=</span> <span class="va">images</span>,</span></span>
 <span class="r-in"><span>        enlarge <span class="op">=</span> <span class="cn">TRUE</span>, title <span class="op">=</span> <span class="st">"Modal enlarge"</span>,</span></span>
-<span class="r-in"><span>        enlarge_method <span class="op">=</span> <span class="st">"modal"</span></span></span>
+<span class="r-in"><span>        enlarge_method <span class="op">=</span> <span class="st">"modal"</span>,  obj_fit <span class="op">=</span> <span class="st">"cover"</span></span></span>
 <span class="r-in"><span>      <span class="op">)</span></span></span>
 <span class="r-in"><span>    <span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span></span></span>
