@@ -15,6 +15,7 @@ gallery(
   enlarge = FALSE,
   enlarge_method = c("inline", "modal"),
   target_blank = FALSE,
+  obj_fit = "fill",
   style = ""
 )
 }
@@ -45,6 +46,11 @@ one of "inline" -- within the gallery change the size of photo to 12, "modal" --
 display photo in a pop-up modal.}
 
 \item{target_blank}{bool, whether to add \code{target="_blank"} to the link?}
+
+\item{obj_fit}{string, the CSS property "object-fit" of images. This is helpful
+to deal with stretched images. Read more on
+\href{https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit}{CSS documents}.
+Default is \code{"fill"}, and other options are \code{"contain"}, \code{"cover"}, \code{"none"}, \code{"scale-down"}.}
 
 \item{style}{additional CSS style you want to add to the most outside component "div"}
 }
@@ -100,7 +106,7 @@ if(interactive()){
       gallery(
         texts = texts, hrefs = hrefs, images = images,
         enlarge = TRUE, title = "Modal enlarge",
-        enlarge_method = "modal"
+        enlarge_method = "modal",  obj_fit = "cover"
       )
     )
   )

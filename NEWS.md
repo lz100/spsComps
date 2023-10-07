@@ -1,3 +1,9 @@
+# SpsComps 0.3.3.99
+
+## Minor
+
+-   gallery gets a new parameter obj_fit. This controls the image CSS [object-fit](https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit) property, useful for image resizing, stretching.
+
 # spsComps 0.3.3.0
 
 ## Major

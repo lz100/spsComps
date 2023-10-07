@@ -35,6 +35,10 @@
 #' one of "inline" -- within the gallery change the size of photo to 12, "modal" --
 #' display photo in a pop-up modal.
 #' @param target_blank bool, whether to add `target="_blank"` to the link?
+#' @param obj_fit string, the CSS property "object-fit" of images. This is helpful
+#' to deal with stretched images. Read more on
+#' [CSS documents](https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit).
+#' Default is `"fill"`, and other options are `"contain"`, `"cover"`, `"none"`, `"scale-down"`.
 #' @param style additional CSS style you want to add to the most outside component "div"
 #' @details
 #' #### `modal` enlarge
@@ -72,7 +76,7 @@
 #'       gallery(
 #'         texts = texts, hrefs = hrefs, images = images,
 #'         enlarge = TRUE, title = "Modal enlarge",
-#'         enlarge_method = "modal"
+#'         enlarge_method = "modal",  obj_fit = "cover"
 #'       )
 #'     )
 #'   )
@@ -93,6 +97,7 @@ gallery <- function(texts,
                     enlarge = FALSE,
                     enlarge_method = c("inline", "modal"),
                     target_blank = FALSE,
+                    obj_fit = "fill",
                     style = ""){
 
     if (is.null(Id)) Id <- glue("gallery{sample(1000000:9999999, 1)}")
@@ -100,6 +105,7 @@ gallery <- function(texts,
     assertthat::assert_that(is.character(hrefs))
     assertthat::assert_that(is.character(images))
     stopifnot(is.logical(target_blank) && length(target_blank) == 1)
+    stopifnot(is.character(obj_fit) && length(obj_fit) == 1)
     image_frame_size <- as.integer(image_frame_size)
     stopifnot(image_frame_size > 0 && image_frame_size <=12)
     stopifnot(is.logical(enlarge))
@@ -120,7 +126,7 @@ gallery <- function(texts,
     gallery_div <- if(enlarge && enlarge_method == "inline") {
       HTML(glue('
       <div class="col-sm-{image_frame_size} sps-tab-link inline-enlarge" style="right: 1px;">
-        <img src="{images}" class="img-gallery" height=300 width=400 style="width: 100%;">
+        <img src="{images}" class="img-gallery" height=300 width=400 style="width: 100%; object-fit: {obj_fit};">
         <a {hrefs} {target_text}><p class="text-center h4 {href_hover}">{texts}</p></a>
       </div>
       '))
@@ -130,7 +136,7 @@ gallery <- function(texts,
         <img
           src="{images}" class="img-gallery"
           height=300 width=400
-          style="width: 100%;"
+          style="width: 100%; ; object-fit: {obj_fit};"
           onclick=galEnlarge("#{img_ids}")
         >
         <a {hrefs} {target_text}><p class="text-center h4 {href_hover}">{texts}</p></a>
